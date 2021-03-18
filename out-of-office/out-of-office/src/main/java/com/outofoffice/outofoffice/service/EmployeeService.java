@@ -45,7 +45,7 @@ public class EmployeeService {
 		return employeeForDelete.get().getId();
 	}
 	
-	public List<Employee> getEmployeesByName(String name) {
-		return employeeRepository.getAllEmployeesWithGivenName(name);
+	public List<Employee> getEmployeesByName(String jmbg) {
+		return employeeRepository.getAllEmployeesWithGivenName(jmbg);
 	}
 }

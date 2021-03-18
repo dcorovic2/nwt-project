@@ -1,4 +1,4 @@
-package com.outofoffice.outofoffice.model;
+package com.outofoffice.notificationsservice.model;
 
 import java.sql.Date;
 
@@ -21,6 +21,9 @@ public class Employee {
 //  @SequenceGenerator(name = "employee_seq_generator", sequenceName = "seq_employee", allocationSize = 1)
 	private Long id;
 	
+	@Column(name="name")
+	private String name;
+
 	@Column(name="allowance")
 	private String allowance;
 

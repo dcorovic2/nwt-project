@@ -62,8 +62,8 @@ public class EmployeeController {
 	
 	@ApiOperation(value="Find Employee")
 	@GetMapping(value = "/employee")
-	public ResponseEntity<List<Employee>> getEmployee(@RequestParam(name="name", required = true) String name) throws Exception{
-	List<Employee> employees = employeeService.getEmployeesByName(name);
+	public ResponseEntity<List<Employee>> getEmployee(@RequestParam(name="jmbg", required = true) String jmbg) throws Exception{
+	List<Employee> employees = employeeService.getEmployeesByName(jmbg);
 	return new ResponseEntity<List<Employee>>(employees, HttpStatus.OK);
 		
 	}
