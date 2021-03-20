@@ -1,13 +1,20 @@
 package com.outofoffice.notificationsservice.model;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
 
 import lombok.Data;
 
@@ -17,9 +24,8 @@ import lombok.Data;
 public class Employee {
     
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//  @SequenceGenerator(name = "employee_seq_generator", sequenceName = "seq_employee", allocationSize = 1)
-	private Long id;
+    @GeneratedValue(generator = "EmployeeIdGenerator",strategy = GenerationType.AUTO)
+    private Long id;
 	
 	@Column(name="name")
 	private String name;
@@ -59,4 +65,9 @@ public class Employee {
 	
 	public Employee() {};
 	
+	@ManyToMany(mappedBy = "employees")
+    private List<Holiday> holidays = new ArrayList<>();
+	
+	@ManyToMany(mappedBy = "employees")
+    private List<Notification> notifications = new ArrayList<>(); 
 }
