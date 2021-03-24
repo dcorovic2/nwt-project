@@ -35,7 +35,11 @@ public class NotificationsType {
 	
 	public NotificationsType() {};
 	
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "notifications_type")
-	private List<Notification> notifications;
+	public NotificationsType(String code,String displayName,String name) {
+      this.code = code;
+      this.displayName = displayName;
+      this.name = name;
+	}
+	
 
 }

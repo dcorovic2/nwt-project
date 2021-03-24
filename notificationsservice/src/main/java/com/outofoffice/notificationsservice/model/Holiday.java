@@ -7,6 +7,7 @@ import java.util.UUID;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -37,10 +38,15 @@ public class Holiday {
 	@Column(name="type")
 	private String type;
 	
-	@Column(name="employe_id")
-	private Long employeeId;
 	
-	@ManyToMany(cascade = CascadeType.ALL)
+	public Holiday(String displayName, String name, String type, List<Employee> employees) {
+		this.displayName = displayName;
+		this.name = name; 
+		this.type = type;
+		this.employees = employees;
+	}
+	
+	@ManyToMany()
 	@JoinTable(name = "holiday_employee",
 	        joinColumns = @JoinColumn(name = "holiday_id"),
 	        inverseJoinColumns = @JoinColumn(name = "employee_id")
