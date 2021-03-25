@@ -1,12 +1,20 @@
 package com.outofoffice.outofoffice.model;
 
 import java.sql.Date;
+import java.time.OffsetDateTime;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -24,22 +32,17 @@ public class Employee {
 	@Column(name="allowance")
 	private String allowance;
 
-	@Column(name="company_id")
-	private Integer companyId;
-
-	@Column(name="department_id")
-	private Integer departmentId;
-
 	@Column(name="email")
 	private String email;
 
+	@NotEmpty
 	@Column(name="firstname_last_name")
 	private String firstnameLastName;
 
 	@Column(name="hire_date")
-	private Date hireDate;
+	private OffsetDateTime hireDate;
 	
-	@Column(name="jmbg")
+	@Column(name="jmbg",unique = true)
 	private String jmbg;
 
 	@Column(name="job_role")
@@ -51,9 +54,16 @@ public class Employee {
 	@Column(name="remaining_days")
 	private Integer remainingDays;
 	
-	@Column(name="role_id")
-	private Integer roleId;
-	
 	public Employee() {};
 	
+	@ManyToOne//(fetch = FetchType.LAZY)
+	@JoinColumn(name = "department_id", referencedColumnName = "id")
+	private Department department;
+	
+	@ManyToOne//(fetch = FetchType.LAZY)
+	@JoinColumn(name = "role_id", referencedColumnName = "id")
+	private Role role;
+	
+//	@OneToOne(mappedBy = "employee", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//	private Auth auth;
 }

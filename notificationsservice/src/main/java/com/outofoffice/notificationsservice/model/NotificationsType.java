@@ -35,7 +35,7 @@ public class NotificationsType {
 	
 	public NotificationsType() {};
 	
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "notifications_type")
-	private List<Notification> notifications;
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "notifications_type")
+//	private List<Notification> notifications;
 
 }

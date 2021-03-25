@@ -4,7 +4,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+
 
 import lombok.Data;
 
@@ -20,7 +24,7 @@ public class Department {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name="code")
+	@Column(name="code", unique = true)
 	private String code;
 
 	@Column(name="display_name")
@@ -34,5 +38,12 @@ public class Department {
 	
 	public Department() {}
 
+	public Department(String code, String displayName, Integer empAllowedNum, String name) {
+		super();
+		this.code = code;
+		this.displayName = displayName;
+		this.empAllowedNum = empAllowedNum;
+		this.name = name;
+	}
 
 }

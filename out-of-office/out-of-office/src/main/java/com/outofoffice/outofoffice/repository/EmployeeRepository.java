@@ -19,12 +19,12 @@ public class EmployeeRepository extends SimpleJpaRepository<Employee, Long> {
 	}
 	
 	
-	public List<Employee> getAllEmployeesWithGivenName(String jmbg) {
-		final List<Employee> employees = entityManager.createQuery("SELECT emp FROM Employee emp"
+	public Employee getEmployeeByJmbg(String jmbg) {
+		final Employee employee = entityManager.createQuery("SELECT emp FROM Employee emp"
 				+ " WHERE emp.jmbg = :jmbg", Employee.class)
 				.setParameter("jmbg", jmbg)
-				.getResultList();
-		return employees;
+				.getSingleResult();
+		return employee;
 		
 	}
 

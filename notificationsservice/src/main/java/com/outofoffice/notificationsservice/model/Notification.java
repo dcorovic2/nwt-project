@@ -47,14 +47,10 @@ public class Notification {
 	
 	public Notification() {};
 	
-	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "notification_employee",
-	        joinColumns = @JoinColumn(name = "notification_id"),
-	        inverseJoinColumns = @JoinColumn(name = "employee_id")
-	    )
-	private List<Employee> employees = new ArrayList<>();
+	@ManyToMany(mappedBy = "notifications")
+	private List<Employee> employees;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "notifications_type_id")
+	@ManyToOne//(fetch = FetchType.LAZY)
+	@JoinColumn(name = "notifications_type_id", referencedColumnName = "id")
 	private NotificationsType notifications_type;
 }

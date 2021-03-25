@@ -11,6 +11,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
@@ -66,8 +68,11 @@ public class Employee {
 	public Employee() {};
 	
 	@ManyToMany(mappedBy = "employees")
-    private List<Holiday> holidays = new ArrayList<>();
+    private List<Holiday> holidays;
 	
-	@ManyToMany(mappedBy = "employees")
-    private List<Notification> notifications = new ArrayList<>(); 
+	@ManyToMany
+	@JoinTable(name = "notification_employee",
+	        joinColumns = @JoinColumn(name = "employee_id"),
+	        inverseJoinColumns = @JoinColumn(name = "notification_id"))
+    private List<Notification> notifications;
 }
