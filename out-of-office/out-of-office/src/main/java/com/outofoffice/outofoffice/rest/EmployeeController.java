@@ -3,6 +3,8 @@ package com.outofoffice.outofoffice.rest;
 import java.net.http.HttpResponse;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -45,7 +47,7 @@ public class EmployeeController {
 
 	@ApiOperation(value = "Insert one employee", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@PostMapping(value = "/employee")
-	public ResponseEntity<Employee> insertEmployee(@RequestBody EmployeeRequest requestEmployee) {
+	public ResponseEntity<Employee> insertEmployee(@Valid @RequestBody EmployeeRequest requestEmployee) {
 		Employee employee = employeeService.insertEmployee(requestEmployee);
 		return new ResponseEntity<Employee>(employee, HttpStatus.CREATED);
 

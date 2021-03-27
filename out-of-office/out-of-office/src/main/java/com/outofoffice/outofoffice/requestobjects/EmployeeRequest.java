@@ -1,13 +1,19 @@
 package com.outofoffice.outofoffice.requestobjects;
 import java.time.OffsetDateTime;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 import lombok.Data;
 
 @Data
 public class EmployeeRequest {
 	
 	public String allowance;
+	@Email
 	public String email;
+	@NotNull
 	public String firstnameLastName;
 	public OffsetDateTime hireDate;
 	public String jmbg;

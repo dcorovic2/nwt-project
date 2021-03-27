@@ -46,15 +46,9 @@ public class LoginController {
 	}
 	@ApiOperation(value = "Delete Auth Data", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@DeleteMapping(value = "/deleteAuth")
-	@ExceptionHandler(RuntimeException.class)
-	public ResponseEntity<?> deleteAuth(@RequestParam(name = "employee_id", required = true) Long employee_id)
-			throws RuntimeException {
-		try {
+	public ResponseEntity<?> deleteAuth(@RequestParam(name = "employee_id", required = true) Long employee_id){
 			Long deletedAuth = loginService.deleteAuth(employee_id);
 			return new ResponseEntity<Long>(deletedAuth, HttpStatus.OK);
-		} catch (RuntimeException e) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-		}
 
 	}
 	@ApiOperation(value="Change Employee auth data based on id",consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE )

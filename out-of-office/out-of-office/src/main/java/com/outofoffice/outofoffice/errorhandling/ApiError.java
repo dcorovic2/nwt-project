@@ -1,5 +1,6 @@
 package com.outofoffice.outofoffice.errorhandling;
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -12,10 +13,7 @@ public class ApiError {
 	    private String message;
 	    private String error;
 	    private OffsetDateTime timestamp;
-
-	    public ApiError() {
-	        super();
-	    }
+	    List<String>errors = new ArrayList<String>();
 
 	    public ApiError(final HttpStatus status, final String message, final String error,OffsetDateTime timestamp) {
 	        super();
@@ -25,11 +23,4 @@ public class ApiError {
 	        this.timestamp = timestamp;
 	    }
 
-//	    public ApiError(final HttpStatus status, final String message, final String error,OffsetDateTime timestamp) {
-//	        super();
-//	        this.status = status;
-//	        this.message = message;
-//	        this.timestamp= timestamp; 
-//	        error = error;
-//	    }
 }

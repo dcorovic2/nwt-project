@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
 
 import lombok.Data;
 
@@ -24,7 +25,8 @@ public class Auth {
 
 	@Column(name="username",unique = true)
 	private String username;
-
+    
+	@Max(value = 21, message="Password can't be longer then 20")
 	@Column(name="password")
 	private String password;
 	

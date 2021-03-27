@@ -56,15 +56,9 @@ public class DepartmentController {
 	
 	@ApiOperation(value = "Delete Department", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@DeleteMapping(value = "/deleteDepartment")
-	@ExceptionHandler(RuntimeException.class)
-	public ResponseEntity<?> deleteDepartment(@RequestParam(name = "department_id", required = true) Long department_id)
-			throws RuntimeException {
-		try {
+	public ResponseEntity<?> deleteDepartment(@RequestParam(name = "department_id", required = true) Long department_id) {
 			Long deletedDepartment = departmentService.deleteDepartment(department_id);
 			return new ResponseEntity<Long>(deletedDepartment, HttpStatus.OK);
-		} catch (RuntimeException e) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-		}
 	}
 	@ApiOperation(value="Change Department data based on id",consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE )
 	@PutMapping(value="/changeDepartment/{id}")

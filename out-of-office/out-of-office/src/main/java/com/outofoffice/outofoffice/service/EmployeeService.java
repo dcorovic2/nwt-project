@@ -62,7 +62,6 @@ public class EmployeeService {
 	}
 
 	public Employee insertEmployee(EmployeeRequest employeeReq) {
-			this.validateParams(employeeReq);
 			Department department = departmentService.getById(employeeReq.getDepartmentId());
 			Role role = roleService.getById(employeeReq.getRoleId());
 			Employee employee = new Employee();
@@ -78,28 +77,6 @@ public class EmployeeService {
 			employee.setRemainingDays(employeeReq.getRemainingDays());
 			return employeeRepository.save(employee);
 	}
-
-	public void validateParams(EmployeeRequest employeeReq) {
-//		if (employeeReq.getFirstnameLastName() == null) {
-//			throw new NotValidParamException("Employee name", "It can't be empty");
-//		}
-//		if (!(employeeReq.getFirstnameLastName() instanceof String)) {
-//			throw new NotValidParamException("Employee name", "It should be string.");
-//		}
-//		if (!(employeeReq.getHireDate() instanceof OffsetDateTime)) {
-//			throw new NotValidParamException("Hire date", "It should be date.");
-//		}
-		if (!employeeReq.getJmbg().matches("[0-9]+") || employeeReq.getJmbg().length()!=13) {
-			throw new NotValidParamException("Employee jmbg", "It should be string.");
-		}
-		if (!(employeeReq.getJobRole() instanceof String)) {
-			throw new NotValidParamException("Employee job role", "It should be string.");
-		}
-		if (!(employeeReq.getPhoneNumber() instanceof String)) {
-			throw new NotValidParamException("Employee phone number", "It should be string.");
-		}
-	}
-
 	public Employee updateEmployeeDepartment(EmployeeDepartmentChange employee) {
 		try {
 			Employee updated_employee = this.getEmployeeByJmbg(employee.getEmployee_jmbg());
