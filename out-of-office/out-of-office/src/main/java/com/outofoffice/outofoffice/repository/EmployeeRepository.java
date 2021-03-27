@@ -12,18 +12,19 @@ import com.outofoffice.outofoffice.model.Employee;
 @Repository
 public class EmployeeRepository extends SimpleJpaRepository<Employee, Long> {
     private final EntityManager entityManager;
+    
 	public EmployeeRepository(EntityManager entityManager) {
 		super(Employee.class, entityManager);
 		this.entityManager = entityManager;
 	}
 	
 	
-	public List<Employee> getAllEmployeesWithGivenName(String name) {
-		final List<Employee> employees = entityManager.createQuery("SELECT emp FROM Employee emp"
-				+ " WHERE emp.name = :name", Employee.class)
-				.setParameter("name", name)
-				.getResultList();
-		return employees;
+	public Employee getEmployeeByJmbg(String jmbg) {
+		final Employee employee = entityManager.createQuery("SELECT emp FROM Employee emp"
+				+ " WHERE emp.jmbg = :jmbg", Employee.class)
+				.setParameter("jmbg", jmbg)
+				.getSingleResult();
+		return employee;
 		
 	}
 
