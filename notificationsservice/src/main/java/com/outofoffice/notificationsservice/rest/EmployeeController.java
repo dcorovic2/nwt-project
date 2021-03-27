@@ -46,13 +46,13 @@ public class EmployeeController {
 		return employeeService.getEmployeeById(employeeId);
 	}
 	
-	@PatchMapping(value = "/employees/update/{id}")
+	@PatchMapping(value = "/employees/{id}")
 	public ResponseEntity<?> updateEmployee(@RequestBody EmployeeRequest requestEmployee, @PathVariable Long id) {
 		return employeeService.updateEmployee(requestEmployee, id);
 	}
 	
 	@ApiOperation(value = "Delete Notification", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	@DeleteMapping(value = "/employees/delete/{employeeId}")
+	@DeleteMapping(value = "/employees/{employeeId}")
 	public ResponseEntity<?> deleteEmployee(@PathVariable Long employeeId){
 		return employeeService.deleteEmployee(employeeId);
 	}

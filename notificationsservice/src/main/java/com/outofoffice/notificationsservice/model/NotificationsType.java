@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -24,6 +25,7 @@ public class NotificationsType {
     @GeneratedValue(generator = "Notifications_typeIdGenerator",strategy = GenerationType.AUTO)
     private Long id;
 	
+	@Size(min=1, max=1, message = "Invalid code input")
 	@Column(name="code")
 	private String code;
 

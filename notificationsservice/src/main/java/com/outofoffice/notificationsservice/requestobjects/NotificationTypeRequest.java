@@ -3,12 +3,10 @@ package com.outofoffice.notificationsservice.requestobjects;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.hibernate.validator.constraints.Range;
 
 public class NotificationTypeRequest {
 
-	@NotNull
-	@Size(min=1, max=15)
+	@Size(min=1, max=1, message = "Invalid code input")
 	private String code;
 	
 	@NotNull(message = "Display name can not be empty")

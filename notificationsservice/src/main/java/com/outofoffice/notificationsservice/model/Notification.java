@@ -39,7 +39,7 @@ public class Notification {
     private Long id;
 	
 	@JsonFormat(pattern="yyyy-MM-dd",timezone = "UTC")
-    @Column(name = "create_date")
+    @Column(name = "createDate")
     private OffsetDateTime createDate;
 
 	@Column(name="department_id")
@@ -48,13 +48,17 @@ public class Notification {
 	@Column(name="text")
 	private String text;
 	
+	@Column(name="dismiss")
+	private int dismiss;
+	
 	public Notification() {};
 
-	public Notification(OffsetDateTime create_date, int departmentId, String text,NotificationsType notificationsTypeId, List<Employee> employees) {
+	public Notification(OffsetDateTime create_date, int departmentId, String text,NotificationsType notificationsTypeId, List<Employee> employees, int dismiss) {
 	        this.createDate = create_date;
 	        this.departmentId = departmentId;
             this.notifications_type = notificationsTypeId;
 	        this.text = text;
+	        this.dismiss = dismiss;
 	        this.employees = employees;
 	}
 

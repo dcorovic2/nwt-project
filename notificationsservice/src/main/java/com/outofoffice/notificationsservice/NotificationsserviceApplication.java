@@ -1,6 +1,8 @@
 package com.outofoffice.notificationsservice;
 
+import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,10 +32,14 @@ public class NotificationsserviceApplication {
 	@Bean
 	public CommandLineRunner addingNotifications(NotificationsRepository notificationsRepository, NotificationsTypeRepository notificationsTypeRepository, EmployeeRepository employeeRepository, HolidayRepository holidayRepository){
 		return (args -> {
-			NotificationsType notificationtype1 = new NotificationsType("kod1","Nudza","displayNudza");
+			NotificationsType notificationtype1 = new NotificationsType("A","LR is approved","display message");
 			notificationsTypeRepository.save(notificationtype1);
-			NotificationsType notificationtype2 = new NotificationsType("kod2","Dalila","displayDalila");
+			NotificationsType notificationtype2 = new NotificationsType("R","LR is rejected","display message");
 			notificationsTypeRepository.save(notificationtype2);
+			NotificationsType notificationtype3 = new NotificationsType("P","LR is pending","display message");
+			notificationsTypeRepository.save(notificationtype3);
+			NotificationsType notificationtype4 = new NotificationsType("R","LR is rejected","display message");
+			notificationsTypeRepository.save(notificationtype4);
 			
 			Employee employee1 = new Employee(20,5,"test@gmail.com","Neko Nekić");
 			List<Employee> employees1 = new ArrayList<>();
@@ -61,10 +67,25 @@ public class NotificationsserviceApplication {
 			employeeRepository.save(employee5);
 			
 			OffsetDateTime date = OffsetDateTime.now();
-			Notification notification1 = new Notification(date,1,"test1",notificationtype2,employees1);
+			OffsetDateTime date2 = OffsetDateTime.of(LocalDateTime.of(2017, 05, 12, 05, 45), ZoneOffset.ofHoursMinutes(6, 30));
+			Notification notification1 = new Notification(date,1,"Rejected leave request",notificationtype2,employees1,1);
 			notificationsRepository.save(notification1);
-			Notification notification2 = new Notification(date,1,"test1",notificationtype1,employees4);
+			Notification notification2 = new Notification(date2,21,"Approved leave request",notificationtype1,employees4,0);
 			notificationsRepository.save(notification2);
+			Notification notification3 = new Notification(date,1,"New leave reqest created",notificationtype3,employees1,1);
+			notificationsRepository.save(notification3);
+			Notification notification4 = new Notification(date,21,"Rejected leave request",notificationtype1,employees4,0);
+			notificationsRepository.save(notification4);
+			Notification notification5 = new Notification(date,1,"Rejected leave request",notificationtype2,employees4,0);
+			notificationsRepository.save(notification5);
+			Notification notification6 = new Notification(date2,21,"Approved leave request",notificationtype1,employees4,0);
+			notificationsRepository.save(notification6);
+			Notification notification7 = new Notification(date,1,"New leave reqest created",notificationtype3,employees4,1);
+			notificationsRepository.save(notification7);
+			Notification notification8 = new Notification(date,21,"Rejected leave request",notificationtype1,employees4,0);
+			notificationsRepository.save(notification8);
+			Notification notification9 = new Notification(date,1,"New leave reqest created",notificationtype3,employees4,1);
+			notificationsRepository.save(notification9);
 			
 			Holiday holiday1 = new Holiday("Nova godina","Nova godina","državni praznik",employees2);
 			Holiday holiday2 = new Holiday("Nova godina","Nova godina","državni praznik",employees3);

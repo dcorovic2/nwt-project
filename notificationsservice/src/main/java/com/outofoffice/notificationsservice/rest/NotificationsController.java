@@ -1,25 +1,24 @@
 package com.outofoffice.notificationsservice.rest;
 
 import java.util.List;
-import java.util.UUID;
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.outofoffice.notificationsservice.service.NotificationService;
@@ -28,6 +27,7 @@ import com.outofoffice.notificationsservice.requestobjects.NotificationRequest;
 import io.swagger.annotations.ApiOperation;
 
 @RestController
+@Validated
 @RequestMapping(value = "/")
 public class NotificationsController {
 
@@ -44,13 +44,9 @@ public class NotificationsController {
 //
 //	}
 
-	@PostMapping(value = "/notification/create/{employeeId}/{notificationTypeId}")
-	public ResponseEntity<?> insertNotification(
-			@RequestBody @Valid NotificationRequest requestNotification,
-			@PathVariable @NotBlank Long employeeId, @PathVariable @NotBlank Long notificationTypeId, Errors errors) {
-		if (errors.hasErrors()) {
-			return new ResponseEntity<>(new Error("Invalid data input!"), HttpStatus.INTERNAL_SERVER_ERROR);
-		}
+	@PostMapping(value = "/notification/{employeeId}/{notificationTypeId}")
+	public ResponseEntity<?> insertNotification(@Valid @RequestBody NotificationRequest requestNotification,
+			@PathVariable Long employeeId, @PathVariable Long notificationTypeId, Errors errors) {
 		return notificationService.insertNotification(requestNotification, employeeId, notificationTypeId);
 	}
 
@@ -65,19 +61,20 @@ public class NotificationsController {
 		return notificationService.getNotificationById(notificationId);
 	}
 
-//	@GetMapping("/notifications/{employeeId}")
-//	public ResponseEntity<?> getNotificationByEmployeeId(@PathVariable long employeeId){
-//		  return  notificationService.getNotificationByEmployeeId(employeeId);
-//	}
+	@GetMapping("/notifications/{employeeId}")
+	public ResponseEntity<?> getNotificationByEmployeeId(@PathVariable long employeeId) {
+		return notificationService.getLastNotificationsByEmployeeId(employeeId, 0);
+	}
 
-	@PatchMapping(value = "/notifications/update/{notificationId}")
-	public ResponseEntity<?> updateNotification(@RequestBody NotificationRequest requestNotification,
+	@PatchMapping(value = "/notifications/{notificationId}")
+	public ResponseEntity<?> updateNotification(
+			 @Min(value = 0, message = "Dismiss must be between 0 or 1") @Max(value = 1, message = "Dismiss must be between 0 or 1") @RequestParam int dismiss,
 			@PathVariable long notificationId) {
-		return notificationService.updateNotification(requestNotification, notificationId);
+		return notificationService.updateNotification(dismiss, notificationId);
 	}
 
 	@ApiOperation(value = "Delete Notification", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	@DeleteMapping(value = "/notifications/delete/{notificationsId}")
+	@DeleteMapping(value = "/notifications/{notificationsId}")
 	public ResponseEntity<?> deleteNotification(@PathVariable Long notificationsId) {
 		return notificationService.deleteNotification(notificationsId);
 	}
