@@ -4,6 +4,8 @@ import org.hibernate.type.OffsetDateTimeType;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.Bean;
 
 import com.outofoffice.outofoffice.model.Auth;
@@ -18,9 +20,9 @@ import com.outofoffice.outofoffice.service.LoginService;
 
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
-import java.util.List;
 
 @SpringBootApplication
+@EnableDiscoveryClient
 public class OutOfOfficeApplication {
 
 	public static void main(String[] args) {

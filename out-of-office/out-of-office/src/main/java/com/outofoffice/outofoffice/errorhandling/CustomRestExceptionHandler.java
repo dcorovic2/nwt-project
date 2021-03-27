@@ -54,17 +54,17 @@ public class CustomRestExceptionHandler extends ResponseEntityExceptionHandler {
 		return new ResponseEntity<>(apierror, HttpStatus.NOT_FOUND);
 	}
 
-	@Override
-	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
-			HttpHeaders headers, HttpStatus status, WebRequest request) {
-		List<String> details = new ArrayList<>();
-		for (ObjectError error : ex.getBindingResult().getAllErrors()) {
-			details.add(error.getDefaultMessage());
-		}
-		ApiError error = new ApiError(HttpStatus.BAD_REQUEST, ex.getFieldError().getDefaultMessage(), "Proradi pls",
-				OffsetDateTime.now());
-		return new ResponseEntity(error, HttpStatus.BAD_REQUEST);
-	}
+//	@Override
+//	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
+//			HttpHeaders headers, HttpStatus status, WebRequest request) {
+//		List<String> details = new ArrayList<>();
+//		for (ObjectError error : ex.getBindingResult().getAllErrors()) {
+//			details.add(error.getDefaultMessage());
+//		}
+//		ApiError error = new ApiError(HttpStatus.BAD_REQUEST, ex.getFieldError().getDefaultMessage(), "Proradi pls",
+//				OffsetDateTime.now());
+//		return new ResponseEntity(error, HttpStatus.BAD_REQUEST);
+//	}
 
 	@ExceptionHandler({ ConstraintViolationException.class })
 	public ResponseEntity<Object> handleConstraintViolation(ConstraintViolationException ex, WebRequest request) {
