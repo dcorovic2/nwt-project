@@ -36,7 +36,7 @@ public class Employee {
 //  @SequenceGenerator(name = "employee_seq_generator", sequenceName = "seq_employee", allocationSize = 1)
 	private Long id;
 	
-	@Min(value=21, message="Allowance must be set to minimum 21 dayss")
+	//@Min(value=21, message="Allowance must be set to minimum 21 dayss")
 	@Column(name="allowance")
 	private String allowance;
 	
@@ -62,7 +62,7 @@ public class Employee {
 	@Column(name="phone_number")
 	private String phoneNumber;
 
-    @Min(value=0, message="Can't update remaining days to value less than 0")
+   // @Min(value=0, message="Can't update remaining days to value less than 0")
 	@Column(name="remaining_days")
 	private Integer remainingDays;
 	

@@ -48,15 +48,15 @@ public class DepartmentController {
 	return new ResponseEntity<Department>(insertedDepartment, HttpStatus.CREATED);
 	}
 	@ApiOperation(value = "Get all departments", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	@GetMapping(value="/getDepartment")
+	@GetMapping(value="/getAllDepartments")
 	public ResponseEntity<List<Department>> getDepartments() {
 	List<Department> allDepartments = departmentService.getAll();
 	return new ResponseEntity<List<Department>>(allDepartments , HttpStatus.CREATED);
 	}
 	
 	@ApiOperation(value = "Delete Department", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	@DeleteMapping(value = "/deleteDepartment")
-	public ResponseEntity<?> deleteDepartment(@RequestParam(name = "department_id", required = true) Long department_id) {
+	@DeleteMapping(value = "/deleteDepartment/{id}")
+	public ResponseEntity<?> deleteDepartment(@PathVariable(value = "id") Long department_id) {
 			Long deletedDepartment = departmentService.deleteDepartment(department_id);
 			return new ResponseEntity<Long>(deletedDepartment, HttpStatus.OK);
 	}

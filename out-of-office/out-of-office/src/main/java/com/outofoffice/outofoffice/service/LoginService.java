@@ -56,13 +56,10 @@ public class LoginService {
 
 	public Long deleteAuth(Long employee_id) {
 		String id_string = employee_id + "";
-		try {
 			Auth authForDelete = authRepository.findByEmployeeId(employee_id);
 			authRepository.delete(authForDelete);
 			return authForDelete.getId();
-		} catch (Exception e) {
-			throw new NotFoundException("", "Auth data", "employee_id", id_string);
-		}
+
 	}
 
 	public Auth updateAuth(LoginRequest loginRequest, Long id) {

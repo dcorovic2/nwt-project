@@ -33,7 +33,7 @@ public class LoginController {
 		this.loginService = loginService;
 	}
 	@ApiOperation(value = "Insert New Auth Data", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	@PostMapping(value = "/login")
+	@PostMapping(value = "/register")
 	public ResponseEntity<Auth> insertLogin(@RequestBody LoginRequest login) {
 	Auth insertedLogin = loginService.insertLogin(login);
 	return new ResponseEntity<Auth>(insertedLogin, HttpStatus.CREATED);
@@ -45,8 +45,8 @@ public class LoginController {
 	return new ResponseEntity<List<Auth>>(allDepartments , HttpStatus.CREATED);
 	}
 	@ApiOperation(value = "Delete Auth Data", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	@DeleteMapping(value = "/deleteAuth")
-	public ResponseEntity<?> deleteAuth(@RequestParam(name = "employee_id", required = true) Long employee_id){
+	@DeleteMapping(value = "/deleteAuth/{id}")
+	public ResponseEntity<?> deleteAuth(@PathVariable(value = "id") Long employee_id){
 			Long deletedAuth = loginService.deleteAuth(employee_id);
 			return new ResponseEntity<Long>(deletedAuth, HttpStatus.OK);
 

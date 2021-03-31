@@ -38,7 +38,6 @@ public class EmployeeService {
 	private final AuthRepository authRepository;
 	private final DepartmentRepository departmentRepository;
 
-
 	public EmployeeService(EmployeeRepository employeeRepository, DepartmentRepository departmentRepository,
 			RoleRepository roleRepository, AuthRepository authRepository) {
 		this.employeeRepository = employeeRepository;
@@ -49,16 +48,16 @@ public class EmployeeService {
 	}
 
 	public List<Employee> insertBulkEmployees(List<EmployeeRequest> employees) {
-		try {
+		//try {
 			List<Employee> insertedEmployees = new ArrayList<Employee>();
 			employees.forEach(employee -> {
 				insertedEmployees.add(insertEmployee(employee));
 			});
 
 			return insertedEmployees;
-		} catch (Exception e) {
-			throw new NotSucesfullException();
-		}
+		//} catch (Exception e) {
+//			throw new NotSucesfullException();
+//		}
 	}
 
 	public Employee insertEmployee(EmployeeRequest employeeReq) {
@@ -78,21 +77,17 @@ public class EmployeeService {
 			return employeeRepository.save(employee);
 	}
 	public Employee updateEmployeeDepartment(EmployeeDepartmentChange employee) {
-		try {
 			Employee updated_employee = this.getEmployeeByJmbg(employee.getEmployee_jmbg());
 			Department new_department = this.departmentService.getByCode(employee.getDepartment_code());
 			updated_employee.setDepartment(new_department);
 			return employeeRepository.save(updated_employee);
-		} catch (Exception e) {
-			throw new NotSucesfullException();
-		}
 	}
 
 	public Employee updateEmployee(EmployeeRequest employee, Long id) {
-		try {
 			String id_string = id + "";
 			Employee updated_employee = this.employeeRepository.findById(id)
 					.orElseThrow(() -> new NotFoundException(id_string, "Employee", "id", ""));
+	try {
 			updated_employee.setAllowance(employee.getAllowance());
 			updated_employee.setEmail(employee.getEmail());
 			updated_employee.setFirstnameLastName(employee.getFirstnameLastName());
@@ -113,10 +108,8 @@ public class EmployeeService {
 			String id_string = id + "";
 			Auth authForDelete = authRepository.findByEmployeeId(id);
 			authRepository.delete(authForDelete);
-			Employee employeeForDelete = this.employeeRepository.findById(id)
-					.orElseThrow(() -> new NotFoundException(id_string, "Employee", "id", ""));
-			if (employeeForDelete != null)
-				employeeRepository.delete(employeeForDelete);
+			Employee employeeForDelete = this.employeeRepository.findById(id).get();
+			employeeRepository.delete(employeeForDelete);
 			return employeeForDelete.getId();
 	}
 

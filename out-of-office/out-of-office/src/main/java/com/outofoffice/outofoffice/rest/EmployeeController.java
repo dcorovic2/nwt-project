@@ -37,13 +37,13 @@ public class EmployeeController {
 		this.employeeService = employeeService;
 	}
 
-	@ApiOperation(value = "Insert multiple employees", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	@PostMapping(value = "/bulkEmployeeCreate")
-	public ResponseEntity<List<Employee>> bulkInsert(@RequestBody List<EmployeeRequest> requestEmployees) {
-		List<Employee> employees = employeeService.insertBulkEmployees(requestEmployees);
-		return new ResponseEntity<List<Employee>>(employees, HttpStatus.CREATED);
-
-	}
+//	@ApiOperation(value = "Insert multiple employees", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+//	@PostMapping(value = "/bulkEmployeeCreate")
+//	public ResponseEntity<List<Employee>> bulkInsert(@RequestBody List<EmployeeRequest> requestEmployees) {
+//		List<Employee> employees = employeeService.insertBulkEmployees(requestEmployees);
+//		return new ResponseEntity<List<Employee>>(employees, HttpStatus.CREATED);
+//
+//	}
 
 	@ApiOperation(value = "Insert one employee", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@PostMapping(value = "/employee")

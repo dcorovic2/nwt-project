@@ -26,11 +26,10 @@ public class Auth {
 	@Column(name="username",unique = true)
 	private String username;
     
-	@Max(value = 21, message="Password can't be longer then 20")
 	@Column(name="password")
 	private String password;
 	
-	@OneToOne//(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToOne
 	@JoinColumn(name="employee_id",referencedColumnName = "id")
 	private Employee employee;
 	

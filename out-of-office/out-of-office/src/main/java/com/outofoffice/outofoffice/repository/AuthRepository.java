@@ -21,14 +21,14 @@ public class AuthRepository  extends SimpleJpaRepository<Auth, Long> {
 	
 	public Auth findByEmployeeId(Long employee_id) {
 		String id_string = employee_id + "";
-//		try {
+		try {
 			 Auth authData = entityManager.createQuery("SELECT aut FROM Auth aut"
 					+ " WHERE aut.employee.id = :employee_id", Auth.class)
 					.setParameter("employee_id", employee_id)
 					.getSingleResult();
 			return authData;
-//		} catch (Exception e) {
-//			throw  new NotFoundException(id_string,"Employee", "id", "");
-//		}
+		} catch (Exception e) {
+			throw  new NotFoundException(id_string,"Employee", "id", "");
+		}
 	}
 }
