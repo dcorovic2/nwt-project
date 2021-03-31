@@ -69,12 +69,15 @@ public class NotificationService {
 
 	}
 
-	public ResponseEntity<?> getLastNotificationsByEmployeeId(long employeeID,int dismiss) {
-        	List<Notification> notificationlist = notificationRepository.findByEmployeesIdAndDismissOrderByCreateDateDesc(employeeID, dismiss);
-        	System.out.println(notificationlist);
-        	return new ResponseEntity<>(notificationlist, HttpStatus.OK);
-       
-    }
+	public ResponseEntity<?> getLastNotificationsByEmployeeId(long employeeID, int dismiss) {
+		List<Notification> notificationlist = notificationRepository
+				.findByEmployeesIdAndDismissOrderByCreateDateDesc(employeeID, dismiss);
+		if (notificationlist.isEmpty())
+			throw new NoDataException();
+		else
+			return new ResponseEntity<>(notificationlist, HttpStatus.OK);
+
+	}
 
 	public ResponseEntity<?> updateNotification(int dismiss, long id) {
 		String id_string = id + " ";

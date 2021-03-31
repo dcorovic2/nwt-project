@@ -31,18 +31,18 @@ public class CustomRestExceptionHandler extends ResponseEntityExceptionHandler {
 		return new ResponseEntity<>(apierror, HttpStatus.NOT_FOUND);
 	}
 
-	@ExceptionHandler(NotValidParamException.class)
-	public ResponseEntity<Object> handleNotValidParams(NotValidParamException ex, WebRequest request) {
-		ApiError apierror = new ApiError(HttpStatus.BAD_REQUEST, ex.getMessage(), "Validation", OffsetDateTime.now());
-		return new ResponseEntity<>(apierror, HttpStatus.NOT_FOUND);
-	}
+//	@ExceptionHandler(NotValidParamException.class)
+//	public ResponseEntity<Object> handleNotValidParams(NotValidParamException ex, WebRequest request) {
+//		ApiError apierror = new ApiError(HttpStatus.BAD_REQUEST, ex.getMessage(), "Validation", OffsetDateTime.now());
+//		return new ResponseEntity<>(apierror, HttpStatus.NOT_FOUND);
+//	}
 
-	@ExceptionHandler(NotSucesfullException.class)
-	public ResponseEntity<Object> handleNotSuccesful(NotSucesfullException ex, WebRequest request) {
-		ApiError apierror = new ApiError(HttpStatus.NOT_FOUND, ex.getMessage(), "Something went wrong",
-				OffsetDateTime.now());
-		return new ResponseEntity<>(apierror, HttpStatus.NOT_FOUND);
-	}
+//	@ExceptionHandler(NotSucesfullException.class)
+//	public ResponseEntity<Object> handleNotSuccesful(NotSucesfullException ex, WebRequest request) {
+//		ApiError apierror = new ApiError(HttpStatus.NOT_FOUND, ex.getMessage(), "Something went wrong",
+//				OffsetDateTime.now());
+//		return new ResponseEntity<>(apierror, HttpStatus.NOT_FOUND);
+//	}
 
 	@ExceptionHandler(NoDataException.class)
 	public ResponseEntity<Object> handleNoData(NoDataException ex, WebRequest request) {

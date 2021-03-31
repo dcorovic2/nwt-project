@@ -68,7 +68,8 @@ public class NotificationsController {
 
 	@PatchMapping(value = "/notifications/{notificationId}")
 	public ResponseEntity<?> updateNotification(
-			 @Min(value = 0, message = "Dismiss must be between 0 or 1") @Max(value = 1, message = "Dismiss must be between 0 or 1") @RequestParam int dismiss,
+			 @Min(value = 0, message = "Dismiss must be between 0 or 1") @Max(value = 1, message = "Dismiss must be between 0 or 1") 
+			 @RequestParam int dismiss,
 			@PathVariable long notificationId) {
 		return notificationService.updateNotification(dismiss, notificationId);
 	}

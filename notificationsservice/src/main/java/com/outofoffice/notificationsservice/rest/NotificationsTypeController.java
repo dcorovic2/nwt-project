@@ -48,10 +48,7 @@ public class NotificationsTypeController {
 	@PatchMapping(value = "/notification_type/{notification_typeId}")
 	public ResponseEntity<?> updateNotification_type(
 			@Validated @RequestBody NotificationTypeRequest requestNotification,
-			@RequestParam Long notification_typeId, Errors errors) {
-		if (errors.hasErrors()) {
-			return new ResponseEntity<>(new Error("Invalid data input!"), HttpStatus.INTERNAL_SERVER_ERROR);
-		}
+			@PathVariable Long notification_typeId, Errors errors) {
 		return notificationsTypeService.updateNotification_type(requestNotification, notification_typeId);
 	}
 
