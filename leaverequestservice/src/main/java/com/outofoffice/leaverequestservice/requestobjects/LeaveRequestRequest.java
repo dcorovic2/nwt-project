@@ -31,10 +31,6 @@ public class LeaveRequestRequest {
 		private String comment;
 		
 		@Range(min=1, message="Days Number can not 0")
-		/*@Min(value = 1,
-	            message = "Department ID must be between 1 to 20")
-		@Max(value = 20,
-	            message = "Department ID must be between 1 to 20")*/
 		private int daysNum;
 		
 		private int employeeId;
@@ -42,32 +38,19 @@ public class LeaveRequestRequest {
 		@NotNull(message="Start Date can not be null")
 		private OffsetDateTime startDate;
 		
-		@NotNull(message="Type can not be null")
 		private int typeId;
 		
 		public LeaveRequestRequest() {}
 
-		public LeaveRequestRequest(String comment, int daysNum, int employeeId, OffsetDateTime starDate, OffsetDateTime endDate,
-				int statusId, int typeId, int notificationId) {
+		public LeaveRequestRequest(String comment, int daysNum, int employeeId, OffsetDateTime starDate, int typeId) {
 			super();
 			//this.id = id;
 			this.comment = comment;
 			this.daysNum = daysNum;
 			this.employeeId = employeeId;
-			//this.endDate = endDate;
 			this.startDate = startDate;
-			//this.statusId = statusId;
 			this.typeId = typeId;
-			//this.notificationId = notificationId;
 		}
-		/*public int getNotificationId() {
-			return notificationId;
-		}
-
-		public void setNotificationId(int notificationId) {
-			this.notificationId = notificationId;
-		}*/
-
 		public String getComment() {
 			return comment;
 		}
@@ -86,24 +69,12 @@ public class LeaveRequestRequest {
 		public void setEmployeeId(int employeeId) {
 			this.employeeId = employeeId;
 		}
-		/*public OffsetDateTime getEndDate() {
-			return endDate;
-		}
-		public void setEndDate(OffsetDateTime endDate) {
-			this.endDate = endDate;
-		}*/
 		public OffsetDateTime getStartDate() {
 			return startDate;
 		}
 		public void setStartDate(OffsetDateTime startDate) {
 			this.startDate = startDate;
 		}
-		/*public int getStatusId() {
-			return statusId;
-		}
-		public void setStatusId(int statusId) {
-			this.statusId = statusId;
-		}*/
 		public int getTypeId() {
 			return typeId;
 		}

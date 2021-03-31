@@ -9,11 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.outofoffice.leaverequestservice.model.LeaveRequest;
 import com.outofoffice.leaverequestservice.requestobjects.LeaveRequestRequest;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -51,9 +54,17 @@ class LeaveRequestControllerTest {
 		ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
 		validator = factory.getValidator();
 	}
+	
+	public static String asJsonString(final Object obj) {
+	    try {
+	        return new ObjectMapper().writeValueAsString(obj);
+	    } catch (Exception e) {
+	        throw new RuntimeException(e);
+	    }
+	}
 
 	@Test
-	public void testGoodInsert() {
+	public void testGoodInsertRequest() {
 		LeaveRequestRequest leaveRequest = new LeaveRequestRequest();
 		leaveRequest.setComment("string");
 		leaveRequest.setDaysNum(10);
@@ -64,7 +75,7 @@ class LeaveRequestControllerTest {
 		assertTrue(violations.isEmpty());
 	}
 	@Test
-	public void testBadInsert() {
+	public void testBadInsertRequest() {
 		LeaveRequestRequest leaveRequest = new LeaveRequestRequest();
 		leaveRequest.setComment("st");
 		leaveRequest.setDaysNum(0);
@@ -75,15 +86,31 @@ class LeaveRequestControllerTest {
 		assertFalse(violations.isEmpty());
 	}
 	@Test
-	public void testWrongStartDate() {
-		LeaveRequestRequest leaveRequest = new LeaveRequestRequest();
-		leaveRequest.setComment("test");
-		leaveRequest.setDaysNum(10);
-		leaveRequest.setEmployeeId(2);
-		leaveRequest.setStartDate(null);
-		leaveRequest.setTypeId(1);
-		Set<ConstraintViolation<LeaveRequestRequest>> violations = validator.validate(leaveRequest);
-		assertFalse(violations.isEmpty());
+	public void testBadDaysInsert() throws Exception {
+		mockMvc.perform(MockMvcRequestBuilders.post("/request")
+				.content(asJsonString(new LeaveRequestRequest("comment", 0, 1, null, 1)))
+				.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isNotFound());
+	}
+	@Test
+	public void testWrongStartDate() throws Exception {
+		mockMvc.perform(MockMvcRequestBuilders.post("/request")
+				.content(asJsonString(new LeaveRequestRequest("comment", 10, 1, null, 1)))
+				.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isNotFound());
+	}
+	@Test
+	public void testBadCommentInsert() throws Exception {
+		mockMvc.perform(MockMvcRequestBuilders.post("/request")
+				.content(asJsonString(new LeaveRequestRequest("co", 10, 1, OffsetDateTime.now(), 1)))
+				.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isNotFound());
+	}
+	public void testGoodInsert() throws Exception {
+		mockMvc.perform(MockMvcRequestBuilders.post("/request")
+				.content(asJsonString(new LeaveRequestRequest("comment", 10, 1, OffsetDateTime.now(), 1)))
+				.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isCreated());
 	}
 	@Test
 	public void testBadDeleteRequest() throws Exception {
