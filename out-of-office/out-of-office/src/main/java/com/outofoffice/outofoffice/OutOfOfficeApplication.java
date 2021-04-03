@@ -36,13 +36,7 @@ public class OutOfOfficeApplication {
 		SpringApplication.run(OutOfOfficeApplication.class, args);
 		
 	}
-//	@Autowired
-//	private JdbcTemplate jdbc;
 	
-//	@Bean
-//	public void before() throws ScriptException, SQLException{
-//		ScriptUtils.executeSqlScript(jdbc.getDataSource().getConnection(), new ClassPathResource("/insert.sql"));
-//	}
 //	@Bean
 //	public CommandLineRunner departmentInitial(DepartmentRepository departmentReposiotry) {
 //		return (args -> {
