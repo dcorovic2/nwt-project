@@ -7,7 +7,9 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
+import org.springframework.web.client.RestTemplate;
 
 import com.outofoffice.leaverequestservice.repository.LeaveRequestRepository;
 import com.outofoffice.leaverequestservice.repository.LeaveTypeRepository;
@@ -26,7 +28,11 @@ public class LeaveRequestServiceApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(LeaveRequestServiceApplication.class, args); 
 	}
-	
+	@Bean
+	@LoadBalanced
+	public RestTemplate getRestTemplate() {
+	    return new RestTemplate();
+	} 
 	@Bean
 	public CommandLineRunner addingNotifications(LeaveRequestRepository leaveRequestRepository, LeaveTypeRepository leaveTypeRepository,
 			LeaveStatusRepository leaveStatusRepository, NotificationsTypeRepository notificationsTypeRepository){
@@ -57,9 +63,9 @@ public class LeaveRequestServiceApplication {
 			OffsetDateTime date1 = OffsetDateTime.now();
 			
 			
-			LeaveRequest request1 = new LeaveRequest("comment1", 10, 1, date1, date1.plusDays(10), leavetype1, leavestatus1, notification1);
-			LeaveRequest request2 = new LeaveRequest("comment2", 20, 4, date1, date1.plusDays(20), leavetype1, leavestatus1, notification1);
-			LeaveRequest request3 = new LeaveRequest("comment3", 14, 6, date1, date1.plusDays(14), leavetype1, leavestatus1, notification1);
+			LeaveRequest request1 = new LeaveRequest("comment1", 10, 1L, date1, date1.plusDays(10), leavetype1, leavestatus1, notification1);
+			LeaveRequest request2 = new LeaveRequest("comment2", 20, 4L, date1, date1.plusDays(20), leavetype1, leavestatus1, notification1);
+			LeaveRequest request3 = new LeaveRequest("comment3", 14, 6L, date1, date1.plusDays(14), leavetype1, leavestatus1, notification1);
 			leaveRequestRepository.save(request1);
 			leaveRequestRepository.save(request2);
 			leaveRequestRepository.save(request3);

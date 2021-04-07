@@ -31,7 +31,7 @@ public class LeaveRequest {
 	private String comment;
 
 	@Column(name="employee_id")
-	private int employeeId;
+	private Long employeeId;
 	
 	@Column(name="days_num")
 	private int daysNum;
@@ -46,7 +46,7 @@ public class LeaveRequest {
 	
 	public LeaveRequest() {};
 
-	public LeaveRequest(String comment, int daysNum, int employeeId, OffsetDateTime startDate, OffsetDateTime endDate,
+	public LeaveRequest(String comment, int daysNum, Long employeeId, OffsetDateTime startDate, OffsetDateTime endDate,
 			LeaveType leave_type, LeaveStatus leave_status, NotificationsType notifications_type) {
 		super();
 		//this.id = id;
