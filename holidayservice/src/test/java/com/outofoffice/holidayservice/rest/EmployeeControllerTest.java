@@ -37,9 +37,7 @@ class EmployeeControllerTest {
 	public void invalidNameError() throws Exception {
 		
 		EmployeeRequest employee = new EmployeeRequest();
-		employee.setAllowance(2);
 		employee.setFirstnameLastName("D.C.");
-		employee.setRemainingDays(20);
 
 		this.mockMvc.perform(MockMvcRequestBuilders.post("/employee")
 				    .contentType("application/json")
@@ -51,9 +49,7 @@ class EmployeeControllerTest {
 	public void postEmployee() throws Exception {
 		
 		EmployeeRequest employee = new EmployeeRequest();
-		employee.setAllowance(2);
 		employee.setFirstnameLastName("Dalila C.");
-		employee.setRemainingDays(20);
 
 		this.mockMvc.perform(MockMvcRequestBuilders
 					.post("/employee")
@@ -65,7 +61,7 @@ class EmployeeControllerTest {
 	@Test
 	public void patchEmployee() throws Exception {
 		
-		EmployeeRequest employee = new EmployeeRequest(5, "Dalila C.", 25);
+		EmployeeRequest employee = new EmployeeRequest("Dalila C.");
 
 		this.mockMvc.perform(MockMvcRequestBuilders
 					.patch("/employee/{id}", "1")
@@ -78,9 +74,7 @@ class EmployeeControllerTest {
 	public void patchEmployeeFail() throws Exception {
 		
 		EmployeeRequest employee = new EmployeeRequest();
-		employee.setAllowance(5);
 		employee.setFirstnameLastName("Dalila C.");
-		employee.setRemainingDays(25);
 
 		this.mockMvc.perform(MockMvcRequestBuilders
 					.patch("/employee/{id}", "25")

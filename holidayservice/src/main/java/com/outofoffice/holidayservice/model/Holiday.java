@@ -35,6 +35,7 @@ public class Holiday {
     @Column(name = "end_date")
     private LocalDate endDate;
 	
+    
 	public Holiday() {}
 	
 	public Holiday(LocalDate startDate, LocalDate endDate, List<Employee> employees, HolidayType holidayType) {

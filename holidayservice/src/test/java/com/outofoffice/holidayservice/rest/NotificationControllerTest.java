@@ -46,7 +46,7 @@ class NotificationControllerTest {
 	@Test
 	void postNotification() throws Exception {
 		
-		Employee employee = new Employee(20, "Dalila Corovic", 10);
+		Employee employee = new Employee("Dalila Corovic");
 		List<Employee> listEmployees = new ArrayList<>();
 		listEmployees.add(employee);
 

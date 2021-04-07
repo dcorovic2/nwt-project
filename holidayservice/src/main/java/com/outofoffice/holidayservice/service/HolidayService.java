@@ -1,5 +1,7 @@
 package com.outofoffice.holidayservice.service;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -89,6 +91,39 @@ public class HolidayService {
 		}
 			
 		return new ResponseEntity<>(returnList, HttpStatus.OK);
+	}
+
+	public ResponseEntity<?> insertDefaultHoliday(HolidayRequest holiday, long holidayTypeID, Object object) {
+		String idStringNotification = holidayTypeID + "";
+		
+		HolidayType holidayType = holidayTypeRepository.findById(holidayTypeID)
+				.orElseThrow(() -> new NotFoundException(idStringNotification, "HoldayType", "ID", ""));
+		
+		
+	
+		//Holiday holiday2 = new Holiday(holiday.getStartDate(), holiday.getEndDate(), listEmployee, holidayType);
+		//Holiday newholiday = holidayRepository.save(holiday2);
+		
+		//return new ResponseEntity<>(newholiday, HttpStatus.OK);
+		
+		return null;
+	}
+
+	public ResponseEntity<?> getDaysNumOfHoliday(LocalDate startDate, int daysNum) {
+		LocalDate endDate = startDate.plusDays(daysNum);
+		
+		List<Holiday> holidays = holidayRepository.findAll();
+		
+		int returnDaysNum = 0;
+		
+		for(Holiday x: holidays) {
+			if(x.getStartDate().isAfter(startDate) && x.getStartDate().isBefore(endDate)) {
+				returnDaysNum += ChronoUnit.DAYS.between(x.getEndDate(), x.getStartDate());
+			}
+				
+		}
+		
+		return new ResponseEntity<>(returnDaysNum, HttpStatus.OK);
 	}
 
 }

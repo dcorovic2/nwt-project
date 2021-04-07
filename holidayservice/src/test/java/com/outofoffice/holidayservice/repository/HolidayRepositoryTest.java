@@ -42,7 +42,7 @@ class HolidayRepositoryTest {
     	HolidayType holidayType = new HolidayType("code1", "Godisnji odmor", "godisnji", "Godisnji odmor");	
     	holidayTypeRepository.save(holidayType);
     	
-		Employee employee = new Employee(20, "Dalila Corovic", 10);
+		Employee employee = new Employee("Dalila Corovic");
 		employeeRepository.save(employee);
 		
 		List<Employee> listEmployees  = new ArrayList<>();
