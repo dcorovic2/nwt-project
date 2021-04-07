@@ -47,11 +47,12 @@ public class LeaveRequestController {
 		if (errors.hasErrors()) {
 			throw new NotValidParamException(errors.getFieldError().getDefaultMessage());
 		}
-		final String uri = "http://employee-service/employee/" + requestRequest.getEmployeeId();
-		//final String uri = "http://localhost:8082/employee/" + id;
+		final String uri = "http://employee-service/employee/" + requestRequest.getEmployeeId() + "/" + requestRequest.getDaysNum();
 		LeaveRequestResponse response = new LeaveRequestResponse();
 	    response = restTemplate.getForObject(uri, LeaveRequestResponse.class);
+	    System.out.println(response);
 		return LeaveRequestService.insertRequest(requestRequest, response);
+	
 	}
 	
 	@PatchMapping(value = "/request")

@@ -1,6 +1,7 @@
 package com.outofoffice.leaverequestservice;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.time.OffsetDateTime;
 
 import org.springframework.boot.CommandLineRunner;
@@ -60,7 +61,7 @@ public class LeaveRequestServiceApplication {
 			NotificationsType notification3 = new NotificationsType("R","Reject","Rejected Request");
 			notificationsTypeRepository.save(notification3);
 			
-			OffsetDateTime date1 = OffsetDateTime.now();
+			LocalDate date1 = LocalDate.now();
 			
 			
 			LeaveRequest request1 = new LeaveRequest("comment1", 10, 1L, date1, date1.plusDays(10), leavetype1, leavestatus1, notification1);

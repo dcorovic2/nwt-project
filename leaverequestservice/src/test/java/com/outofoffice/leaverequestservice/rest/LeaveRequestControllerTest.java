@@ -69,7 +69,7 @@ class LeaveRequestControllerTest {
 		leaveRequest.setComment("string");
 		leaveRequest.setDaysNum(10);
 		leaveRequest.setEmployeeId(2L);
-		leaveRequest.setStartDate(OffsetDateTime.now());
+		leaveRequest.setStartDate(LocalDate.now());
 		leaveRequest.setTypeId(2);
 		Set<ConstraintViolation<LeaveRequestRequest>> violations = validator.validate(leaveRequest);
 		assertTrue(violations.isEmpty());
@@ -80,7 +80,7 @@ class LeaveRequestControllerTest {
 		leaveRequest.setComment("st");
 		leaveRequest.setDaysNum(0);
 		leaveRequest.setEmployeeId(2L);
-		leaveRequest.setStartDate(OffsetDateTime.now());
+		leaveRequest.setStartDate(LocalDate.now());
 		leaveRequest.setTypeId(2);
 		Set<ConstraintViolation<LeaveRequestRequest>> violations = validator.validate(leaveRequest);
 		assertFalse(violations.isEmpty());
@@ -102,13 +102,13 @@ class LeaveRequestControllerTest {
 	@Test
 	public void testBadCommentInsert() throws Exception {
 		mockMvc.perform(MockMvcRequestBuilders.post("/request")
-				.content(asJsonString(new LeaveRequestRequest("co", 10, 1L, OffsetDateTime.now(), 1)))
+				.content(asJsonString(new LeaveRequestRequest("co", 10, 1L, LocalDate.now(), 1)))
 				.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isNotFound());
 	}
 	public void testGoodInsert() throws Exception {
 		mockMvc.perform(MockMvcRequestBuilders.post("/request")
-				.content(asJsonString(new LeaveRequestRequest("comment", 10, 1L, OffsetDateTime.now(), 1)))
+				.content(asJsonString(new LeaveRequestRequest("comment", 10, 1L, LocalDate.now(), 1)))
 				.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isCreated());
 	}

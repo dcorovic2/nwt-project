@@ -1,5 +1,6 @@
 package com.outofoffice.leaverequestservice.service;
 
+import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -39,12 +40,41 @@ public class LeaveRequestService {
 	}
 
 	public ResponseEntity<?> insertRequest(LeaveRequestRequest req, LeaveRequestResponse response) {
+		if(!response.allowance) {
+			throw new NotValidParamException("You do not have " + req.getDaysNum() + " days allowed for leave!");
+		}
+		LocalDate end = req.getStartDate();
+		end = end.plusDays(req.getDaysNum());
+		List<LeaveRequest> requestList = leaveRequestRepository.findAll();
+		List<Long> employeeList = response.getEmployee_ids();
+		int x = 1;
+		for(Long e : employeeList) {
+			for(LeaveRequest r : requestList) {
+				if(r.getEmployeeId() == e) {
+					if(r.getStartDate().isBefore(req.getStartDate()) && r.getEndDate().isAfter(req.getStartDate())) {
+						x++;
+						break;
+					}
+					if(r.getStartDate().isEqual(req.getStartDate())) {
+						x++;
+						break;
+					}
+					if(r.getStartDate().isAfter(req.getStartDate()) && r.getEndDate().isBefore(end)) {
+						x++;
+						break;
+					}
+				}
+			}
+		}
+	    //System.out.println("Brojac poslije prolaska:" + x);
+		if(x > response.getDepartmentallowance()) {
+			throw new NotValidParamException("Too many employees from your department took leave at the same time!");
+		}
+		
 		LeaveStatus statusId = LeaveStatusService.getById(1);
 		LeaveType typeId = LeaveTypeService.getById(req.getTypeId());
 		NotificationsType notification = NotificationsTypeService.getById(1);
 
-		OffsetDateTime end = req.getStartDate();
-		end = end.plusDays(req.getDaysNum());
 
 		LeaveRequest request = new LeaveRequest(req.getComment(), req.getDaysNum(), req.getEmployeeId(),
 				req.getStartDate(), end, typeId, statusId, notification);
@@ -61,7 +91,7 @@ public class LeaveRequestService {
 		request = leaveRequestRepository.findById(id)
 				.orElseThrow(() -> new NotFoundException(id_request, "Leave Request", "ID", ""));
 
-		OffsetDateTime end = req.getStartDate();
+		LocalDate end = req.getStartDate();
 		end = end.plusDays(req.getDaysNum());
 
 		request.setComment(req.getComment());
