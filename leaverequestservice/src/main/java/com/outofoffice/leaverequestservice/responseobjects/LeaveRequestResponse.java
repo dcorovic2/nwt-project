@@ -17,4 +17,5 @@ public class LeaveRequestResponse {
 		this.allowance = allowance;
 		this.departmentallowance = departmentallowance;
 	}
+	
 }

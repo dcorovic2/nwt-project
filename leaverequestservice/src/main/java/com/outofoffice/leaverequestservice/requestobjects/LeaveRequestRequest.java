@@ -1,5 +1,6 @@
 package com.outofoffice.leaverequestservice.requestobjects;
 
+import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.util.Date;
 
@@ -36,13 +37,13 @@ public class LeaveRequestRequest {
 		private Long employeeId;
 		
 		@NotNull(message="Start Date can not be null")
-		private OffsetDateTime startDate;
+		private LocalDate startDate;
 		
 		private int typeId;
 		
 		public LeaveRequestRequest() {}
 
-		public LeaveRequestRequest(String comment, int daysNum, Long employeeId, OffsetDateTime starDate, int typeId) {
+		public LeaveRequestRequest(String comment, int daysNum, Long employeeId, LocalDate starDate, int typeId) {
 			super();
 			//this.id = id;
 			this.comment = comment;
@@ -69,10 +70,10 @@ public class LeaveRequestRequest {
 		public void setEmployeeId(Long employeeId) {
 			this.employeeId = employeeId;
 		}
-		public OffsetDateTime getStartDate() {
+		public LocalDate getStartDate() {
 			return startDate;
 		}
-		public void setStartDate(OffsetDateTime startDate) {
+		public void setStartDate(LocalDate startDate) {
 			this.startDate = startDate;
 		}
 		public int getTypeId() {

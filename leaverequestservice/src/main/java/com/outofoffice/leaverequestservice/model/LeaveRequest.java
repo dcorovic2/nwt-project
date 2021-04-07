@@ -1,5 +1,6 @@
 package com.outofoffice.leaverequestservice.model;
 
+import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.util.Date;
 
@@ -38,15 +39,15 @@ public class LeaveRequest {
 	
 	//@JsonFormat(pattern="dd.mm.yyyy",timezone = "UTC")
     @Column(name = "start_date")
-    private OffsetDateTime startDate;
+    private LocalDate startDate;
 	
 	//@JsonFormat(pattern="dd.mm.yyyy",timezone = "UTC")
     @Column(name = "end_date")
-    private OffsetDateTime endDate;
+    private LocalDate endDate;
 	
 	public LeaveRequest() {};
 
-	public LeaveRequest(String comment, int daysNum, Long employeeId, OffsetDateTime startDate, OffsetDateTime endDate,
+	public LeaveRequest(String comment, int daysNum, Long employeeId, LocalDate startDate, LocalDate endDate,
 			LeaveType leave_type, LeaveStatus leave_status, NotificationsType notifications_type) {
 		super();
 		//this.id = id;
