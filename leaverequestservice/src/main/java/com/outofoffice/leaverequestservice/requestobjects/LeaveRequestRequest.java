@@ -33,7 +33,7 @@ public class LeaveRequestRequest {
 		@Range(min=1, message="Days Number can not 0")
 		private int daysNum;
 		
-		private int employeeId;
+		private Long employeeId;
 		
 		@NotNull(message="Start Date can not be null")
 		private OffsetDateTime startDate;
@@ -42,7 +42,7 @@ public class LeaveRequestRequest {
 		
 		public LeaveRequestRequest() {}
 
-		public LeaveRequestRequest(String comment, int daysNum, int employeeId, OffsetDateTime starDate, int typeId) {
+		public LeaveRequestRequest(String comment, int daysNum, Long employeeId, OffsetDateTime starDate, int typeId) {
 			super();
 			//this.id = id;
 			this.comment = comment;
@@ -63,10 +63,10 @@ public class LeaveRequestRequest {
 		public void setDaysNum(int daysNum) {
 			this.daysNum = daysNum;
 		}
-		public int getEmployeeId() {
+		public Long getEmployeeId() {
 			return employeeId;
 		}
-		public void setEmployeeId(int employeeId) {
+		public void setEmployeeId(Long employeeId) {
 			this.employeeId = employeeId;
 		}
 		public OffsetDateTime getStartDate() {

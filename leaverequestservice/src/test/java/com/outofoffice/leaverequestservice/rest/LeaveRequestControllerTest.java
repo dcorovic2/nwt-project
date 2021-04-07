@@ -68,7 +68,7 @@ class LeaveRequestControllerTest {
 		LeaveRequestRequest leaveRequest = new LeaveRequestRequest();
 		leaveRequest.setComment("string");
 		leaveRequest.setDaysNum(10);
-		leaveRequest.setEmployeeId(2);
+		leaveRequest.setEmployeeId(2L);
 		leaveRequest.setStartDate(OffsetDateTime.now());
 		leaveRequest.setTypeId(2);
 		Set<ConstraintViolation<LeaveRequestRequest>> violations = validator.validate(leaveRequest);
@@ -79,7 +79,7 @@ class LeaveRequestControllerTest {
 		LeaveRequestRequest leaveRequest = new LeaveRequestRequest();
 		leaveRequest.setComment("st");
 		leaveRequest.setDaysNum(0);
-		leaveRequest.setEmployeeId(2);
+		leaveRequest.setEmployeeId(2L);
 		leaveRequest.setStartDate(OffsetDateTime.now());
 		leaveRequest.setTypeId(2);
 		Set<ConstraintViolation<LeaveRequestRequest>> violations = validator.validate(leaveRequest);
@@ -88,27 +88,27 @@ class LeaveRequestControllerTest {
 	@Test
 	public void testBadDaysInsert() throws Exception {
 		mockMvc.perform(MockMvcRequestBuilders.post("/request")
-				.content(asJsonString(new LeaveRequestRequest("comment", 0, 1, null, 1)))
+				.content(asJsonString(new LeaveRequestRequest("comment", 0, 1L, null, 1)))
 				.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isNotFound());
 	}
 	@Test
 	public void testWrongStartDate() throws Exception {
 		mockMvc.perform(MockMvcRequestBuilders.post("/request")
-				.content(asJsonString(new LeaveRequestRequest("comment", 10, 1, null, 1)))
+				.content(asJsonString(new LeaveRequestRequest("comment", 10, 1L, null, 1)))
 				.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isNotFound());
 	}
 	@Test
 	public void testBadCommentInsert() throws Exception {
 		mockMvc.perform(MockMvcRequestBuilders.post("/request")
-				.content(asJsonString(new LeaveRequestRequest("co", 10, 1, OffsetDateTime.now(), 1)))
+				.content(asJsonString(new LeaveRequestRequest("co", 10, 1L, OffsetDateTime.now(), 1)))
 				.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isNotFound());
 	}
 	public void testGoodInsert() throws Exception {
 		mockMvc.perform(MockMvcRequestBuilders.post("/request")
-				.content(asJsonString(new LeaveRequestRequest("comment", 10, 1, OffsetDateTime.now(), 1)))
+				.content(asJsonString(new LeaveRequestRequest("comment", 10, 1L, OffsetDateTime.now(), 1)))
 				.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isCreated());
 	}

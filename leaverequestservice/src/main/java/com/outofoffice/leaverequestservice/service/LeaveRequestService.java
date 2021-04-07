@@ -22,7 +22,7 @@ import com.outofoffice.leaverequestservice.repository.LeaveStatusRepository;
 import com.outofoffice.leaverequestservice.service.LeaveTypeService;
 import com.outofoffice.leaverequestservice.requestobjects.LeaveRequestRequest;
 import com.outofoffice.leaverequestservice.requestobjects.LeaveStatusRequest;
-
+import com.outofoffice.leaverequestservice.responseobjects.LeaveRequestResponse;
 import com.outofoffice.leaverequestservice.error.ErrorMessage;
 import com.outofoffice.leaverequestservice.errorhandling.NoDataException;
 import com.outofoffice.leaverequestservice.errorhandling.NotFoundException;
@@ -38,7 +38,7 @@ public class LeaveRequestService {
 		this.leaveRequestRepository = leaveRequestRepository;
 	}
 
-	public ResponseEntity<?> insertRequest(LeaveRequestRequest req) {
+	public ResponseEntity<?> insertRequest(LeaveRequestRequest req, LeaveRequestResponse response) {
 		LeaveStatus statusId = LeaveStatusService.getById(1);
 		LeaveType typeId = LeaveTypeService.getById(req.getTypeId());
 		NotificationsType notification = NotificationsTypeService.getById(1);

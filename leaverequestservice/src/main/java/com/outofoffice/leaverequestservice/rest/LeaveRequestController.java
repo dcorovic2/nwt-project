@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -18,13 +19,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 import com.outofoffice.leaverequestservice.errorhandling.NotValidParamException;
 import com.outofoffice.leaverequestservice.model.LeaveRequest;
 import com.outofoffice.leaverequestservice.service.LeaveRequestService;
 import com.outofoffice.leaverequestservice.requestobjects.LeaveRequestRequest;
 import com.outofoffice.leaverequestservice.requestobjects.LeaveStatusRequest;
-
+import com.outofoffice.leaverequestservice.responseobjects.LeaveRequestResponse;
 
 import io.swagger.annotations.ApiOperation;
 
@@ -37,13 +39,19 @@ public class LeaveRequestController {
 	public LeaveRequestController(LeaveRequestService LeaveRequestService) {
 		this.LeaveRequestService = LeaveRequestService;
 	}
+	@Autowired
+	RestTemplate restTemplate;  
 	
 	@PostMapping(value = "/request")
 	public ResponseEntity<?> insertRequest(@RequestBody @Valid LeaveRequestRequest requestRequest, Errors errors) {
 		if (errors.hasErrors()) {
 			throw new NotValidParamException(errors.getFieldError().getDefaultMessage());
 		}
-		return LeaveRequestService.insertRequest(requestRequest);
+		final String uri = "http://employee-service/employee/" + requestRequest.getEmployeeId();
+		//final String uri = "http://localhost:8082/employee/" + id;
+		LeaveRequestResponse response = new LeaveRequestResponse();
+	    response = restTemplate.getForObject(uri, LeaveRequestResponse.class);
+		return LeaveRequestService.insertRequest(requestRequest, response);
 	}
 	
 	@PatchMapping(value = "/request")
