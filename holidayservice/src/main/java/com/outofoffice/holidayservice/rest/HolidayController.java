@@ -1,6 +1,7 @@
 package com.outofoffice.holidayservice.rest;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -22,7 +23,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import com.outofoffice.holidayservice.model.Employee;
 import com.outofoffice.holidayservice.requestobjects.HolidayRequest;
+import com.outofoffice.holidayservice.responseobjects.HolidayResponse;
 import com.outofoffice.holidayservice.service.HolidayService;
 
 import io.swagger.annotations.ApiOperation;
@@ -49,7 +52,10 @@ public class HolidayController {
 	public ResponseEntity<?> insertDefaultHoliday(@RequestBody @Validated HolidayRequest requestHoliday, @PathVariable long holidayTypeID, Errors errors) {
 		//pozivanje employee MS
 		
-		return holidayService.insertDefaultHoliday(requestHoliday, holidayTypeID, null);
+		HolidayResponse[] response =  restTemplate.getForObject(uri, HolidayResponse[].class);
+		List<HolidayResponse> sourceList = Arrays.asList(response);
+		
+		return holidayService.insertDefaultHoliday(requestHoliday, holidayTypeID, sourceList);
 	}
 
 	@PatchMapping(value = "/holiday/{holidayId}")
@@ -68,7 +74,12 @@ public class HolidayController {
 	public ResponseEntity<?> getHoliday(@PathVariable long employeeId) {
 		return holidayService.getHolidays(employeeId);
 	}
-	
+//	
+//	@GetMapping(value = "/getlistofemployees/{holidayTypeId}")
+//	public ResponseEntity<?> getAllHolidayEmployeeList(@PathVariable long holidayTypeId) {
+//		return holidayService.getAllEmployees(holidayTypeId);
+//	}
+//	
 	
 	@GetMapping(value = "/holiday/{startDate}/{daysNum}")
 	public ResponseEntity<?> getDaysNumOfHoliday(@PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate startDate, @PathVariable int daysNum) {

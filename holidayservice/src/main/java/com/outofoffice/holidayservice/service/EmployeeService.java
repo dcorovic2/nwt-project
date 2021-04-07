@@ -19,7 +19,7 @@ public class EmployeeService {
 	}
 	
 	public ResponseEntity<?> insertEmployee(EmployeeRequest emp) {
-		Employee employee = new Employee(emp.getFirstnameLastName());
+		Employee employee = new Employee(emp.getId(), emp.getFirstnameLastName());
 		Employee newemp = employeeRepository.save(employee);
 		
 		return new ResponseEntity<>(newemp, HttpStatus.OK);

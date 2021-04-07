@@ -6,7 +6,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
 
 import lombok.Data;
 
@@ -17,7 +16,10 @@ public class Employee {
     
 	@Id
     @GeneratedValue(generator = "EmployeeIdGenerator", strategy = GenerationType.AUTO)
-    private long id;
+	private long interni_id;
+	
+	@Column(name = "employee_id")
+    private Long id;
 	
 	@Column(name = "firstnameLastName")
 	private String firstnameLastName;
@@ -25,8 +27,9 @@ public class Employee {
 	
 	public Employee() {}
 
-	public Employee(String firstnameLastName) {
+	public Employee(Long id, String firstnameLastName) {
 		super();
+		this.id = id;
 		this.firstnameLastName = firstnameLastName;
 	}
 	
