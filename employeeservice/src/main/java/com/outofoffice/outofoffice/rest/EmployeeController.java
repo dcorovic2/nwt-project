@@ -1,10 +1,12 @@
 package com.outofoffice.outofoffice.rest;
 
 import java.net.http.HttpResponse;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -19,10 +21,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 import com.outofoffice.outofoffice.model.Employee;
 import com.outofoffice.outofoffice.requestobjects.EmployeeDepartmentChange;
 import com.outofoffice.outofoffice.requestobjects.EmployeeRequest;
+import com.outofoffice.outofoffice.responseobjects.LeaveRequestResponse;
 import com.outofoffice.outofoffice.service.EmployeeService;
 
 import io.swagger.annotations.ApiOperation;
@@ -32,7 +36,9 @@ import io.swagger.annotations.ApiOperation;
 
 public class EmployeeController {
 	private final EmployeeService employeeService;
-
+	
+	@Autowired
+	RestTemplate restTemplate;  
 	public EmployeeController(EmployeeService employeeService) {
 		this.employeeService = employeeService;
 	}
@@ -88,6 +94,13 @@ public class EmployeeController {
 	public ResponseEntity<Employee> updateEmployee(@PathVariable(value = "id") Long id,  @RequestBody EmployeeRequest employeeRequest){
 		Employee employee = employeeService.updateEmployee(employeeRequest, id);
 		return new ResponseEntity<Employee>(employee, HttpStatus.OK);
+	}
+    
+	@ApiOperation(value="Check if employee can take a vacation based on his id and num days",consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE )
+	@GetMapping(value="/employee/{id}/{days}")
+	public ResponseEntity<LeaveRequestResponse> checkForRequest(@PathVariable(value="id") Long id, @PathVariable(value="days") Long days){
+		LeaveRequestResponse response = employeeService.getEmployeesFromSameDepartment(id, days);
+		return new ResponseEntity<LeaveRequestResponse>(response, HttpStatus.OK);
 	}
 
 }

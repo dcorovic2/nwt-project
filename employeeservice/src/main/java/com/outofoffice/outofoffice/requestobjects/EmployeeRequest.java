@@ -10,7 +10,7 @@ import lombok.Data;
 @Data
 public class EmployeeRequest {
 	
-	public String allowance;
+	public Long allowance;
 	@Email
 	public String email;
 	@NotNull
@@ -23,7 +23,7 @@ public class EmployeeRequest {
 	public Long departmentId; 
 	public Long roleId;
 	
-	public EmployeeRequest(String allowance, String email, String firstnameLastName, OffsetDateTime hireDate, String jmbg,
+	public EmployeeRequest(Long allowance, String email, String firstnameLastName, OffsetDateTime hireDate, String jmbg,
 			String jobRole, String phoneNumber, Integer remainingDays, Long departmentId, Long roleId) {
 		super();
 		this.allowance = allowance;

@@ -29,6 +29,7 @@ import com.outofoffice.outofoffice.repository.EmployeeRepository;
 import com.outofoffice.outofoffice.repository.RoleRepository;
 import com.outofoffice.outofoffice.requestobjects.EmployeeDepartmentChange;
 import com.outofoffice.outofoffice.requestobjects.EmployeeRequest;
+import com.outofoffice.outofoffice.responseobjects.LeaveRequestResponse;
 
 @Service
 public class EmployeeService {
@@ -132,6 +133,15 @@ public class EmployeeService {
 	public Employee getEmployeeById(Long id) {
 		String id_string = id + "";
 		return employeeRepository.findById(id).orElseThrow(() -> new NotFoundException(id_string, "Employee", "id", ""));
+	}
+	
+	public LeaveRequestResponse getEmployeesFromSameDepartment(Long id, Long days) {
+		LeaveRequestResponse response = new LeaveRequestResponse();
+		response.setEmployee_ids(employeeRepository.findByDepartmentId(id));
+		if(days > employeeRepository.findAllowanceByEmployeeId(id)) response.setAllowance(false);
+		else response.setAllowance(true);
+		response.setDepartmentallowance(departmentRepository.findAllowance(employeeRepository.findDepartmentIdByEmployeeId(id)));
+		return response;
 	}
 
 }

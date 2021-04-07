@@ -25,4 +25,12 @@ public class DepartmentRepository extends SimpleJpaRepository<Department, Long>{
 		return department;
 	}
 	
+	public Integer findAllowance(Long id) {
+		Integer allowance = entityManager.createQuery("SELECT dep.empAllowedNum FROM Department dep"
+				+ " WHERE dep.id = :id", Integer.class)
+				.setParameter("id", id)
+				.getSingleResult();
+		return allowance;
+	}
+	
 }
