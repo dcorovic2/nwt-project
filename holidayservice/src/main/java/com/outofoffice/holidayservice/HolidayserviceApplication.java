@@ -46,7 +46,7 @@ public class HolidayserviceApplication {
 			HolidayType holidayType1 = new HolidayType("code1", "Godisnji odmor", "godisnji", "Godisnji odmor");
 			holidayTypeRepository.save(holidayType1);
 			
-			Employee employee = new Employee("Dalila Corovic");
+			Employee employee = new Employee(1, "Dalila Corovic");
 			employeeRepository.save(employee);
 			
 			List<Employee> listEmployees  = new ArrayList<>();

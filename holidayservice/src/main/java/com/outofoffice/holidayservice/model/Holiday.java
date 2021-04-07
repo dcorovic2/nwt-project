@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -46,7 +47,7 @@ public class Holiday {
 		this.holidayType = holidayType;
 	}
 
-	@ManyToMany()
+	@ManyToMany(cascade = {CascadeType.MERGE})
 	@JoinTable(name = "holiday_employee",
 	        joinColumns = @JoinColumn(name = "holiday_id"),
 	        inverseJoinColumns = @JoinColumn(name = "employee_id")

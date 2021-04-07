@@ -58,17 +58,17 @@ class EmployeeControllerTest {
 				    .andExpect(status().isOk());
 	}
 	
-	@Test
-	public void patchEmployee() throws Exception {
-		
-		EmployeeRequest employee = new EmployeeRequest("Dalila C.");
-
-		this.mockMvc.perform(MockMvcRequestBuilders
-					.patch("/employee/{id}", "1")
-				    .contentType("application/json")
-				    .content(objectMapper.writeValueAsString(employee)))
-				    .andExpect(status().isOk());
-	}
+//	@Test
+//	public void patchEmployee() throws Exception {
+//		
+//		EmployeeRequest employee = new EmployeeRequest("Dalila C.");
+//
+//		this.mockMvc.perform(MockMvcRequestBuilders
+//					.patch("/employee/{id}", "1")
+//				    .contentType("application/json")
+//				    .content(objectMapper.writeValueAsString(employee)))
+//				    .andExpect(status().isOk());
+//	}
 	
 	@Test
 	public void patchEmployeeFail() throws Exception {

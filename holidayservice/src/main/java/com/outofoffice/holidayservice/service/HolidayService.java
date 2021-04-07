@@ -17,6 +17,8 @@ import com.outofoffice.holidayservice.repository.EmployeeRepository;
 import com.outofoffice.holidayservice.repository.HolidayRepository;
 import com.outofoffice.holidayservice.repository.HolidayTypeRepository;
 import com.outofoffice.holidayservice.requestobjects.HolidayRequest;
+import com.outofoffice.holidayservice.responseobjects.HolidayResponse;
+import com.outofoffice.holidayservice.responseobjects.NotificationResponse;
 
 @Service
 public class HolidayService {
@@ -93,20 +95,24 @@ public class HolidayService {
 		return new ResponseEntity<>(returnList, HttpStatus.OK);
 	}
 
-	public ResponseEntity<?> insertDefaultHoliday(HolidayRequest holiday, long holidayTypeID, Object object) {
+	public ResponseEntity<?> insertDefaultHoliday(HolidayRequest holiday, long holidayTypeID, List<HolidayResponse> sourceList) {
 		String idStringNotification = holidayTypeID + "";
 		
 		HolidayType holidayType = holidayTypeRepository.findById(holidayTypeID)
 				.orElseThrow(() -> new NotFoundException(idStringNotification, "HoldayType", "ID", ""));
 		
-		
+		List<Employee> employeeList = new ArrayList();
+		for(HolidayResponse x: sourceList) {
+			Employee employee = new Employee(x.getId(), x.getName());
+			Employee newemp = employeeRepository.save(employee);
+			
+			employeeList.add(newemp);
+		}
 	
-		//Holiday holiday2 = new Holiday(holiday.getStartDate(), holiday.getEndDate(), listEmployee, holidayType);
-		//Holiday newholiday = holidayRepository.save(holiday2);
+		Holiday holiday2 = new Holiday(holiday.getStartDate(), holiday.getEndDate(), employeeList, holidayType);
+		Holiday newholiday = holidayRepository.save(holiday2);
 		
-		//return new ResponseEntity<>(newholiday, HttpStatus.OK);
-		
-		return null;
+		return new ResponseEntity<>(newholiday, HttpStatus.OK);
 	}
 
 	public ResponseEntity<?> getDaysNumOfHoliday(LocalDate startDate, int daysNum) {
@@ -125,5 +131,30 @@ public class HolidayService {
 		
 		return new ResponseEntity<>(returnDaysNum, HttpStatus.OK);
 	}
+
+//	public ResponseEntity<?> getAllEmployees(long holidayTypeId) {
+//		List<Holiday> tmpLista = holidayRepository.findAll();
+//		List<Holiday> holiday = new ArrayList(); 
+//		
+//	
+//		for(Holiday x: tmpLista) {
+//			if(x.getHolidayType().getId() == holidayTypeId) {
+//				holiday.add(x);
+//			}
+//		}
+//		
+//		NotificationResponse notificationResponse;
+//		
+//		for(Holiday x: holiday) {
+//			List<Employee> employee = x.getEmployees();
+//			
+//			for(Long emp: employee) {
+//				notificationResponse.getId().add(emp);
+//			}
+//		}
+//		
+//		
+//		return null;
+//	}
 
 }
