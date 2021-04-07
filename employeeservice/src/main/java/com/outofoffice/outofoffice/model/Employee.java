@@ -38,7 +38,7 @@ public class Employee {
 	
 	//@Min(value=21, message="Allowance must be set to minimum 21 dayss")
 	@Column(name="allowance")
-	private String allowance;
+	private Long allowance;
 	
 	@Email(message="Email not valid")
 	@Column(name="email")

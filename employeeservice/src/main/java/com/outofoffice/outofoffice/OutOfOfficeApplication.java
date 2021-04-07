@@ -6,12 +6,14 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.init.ScriptException;
 import org.springframework.jdbc.datasource.init.ScriptUtils;
+import org.springframework.web.client.RestTemplate;
 
 import com.outofoffice.outofoffice.model.Auth;
 import com.outofoffice.outofoffice.model.Department;
@@ -36,6 +38,11 @@ public class OutOfOfficeApplication {
 		SpringApplication.run(OutOfOfficeApplication.class, args);
 		
 	}
+	@Bean
+	@LoadBalanced
+	public RestTemplate getRestTemplate() {
+	    return new RestTemplate();
+	}
 	
 //	@Bean
 //	public CommandLineRunner departmentInitial(DepartmentRepository departmentReposiotry) {
@@ -59,23 +66,23 @@ public class OutOfOfficeApplication {
 //	@Bean
 //	public CommandLineRunner EmployeeInitial(EmployeeService employeeService) {
 //		List<EmployeeRequest> employeeRequests = new ArrayList<EmployeeRequest>();
-//		employeeRequests.add(new EmployeeRequest("21", "email1@gmail.com", "ime prezime", OffsetDateTime.now(), "1597536248569", "jobRole1",
+//		employeeRequests.add(new EmployeeRequest(21L, "email1@gmail.com", "ime prezime", OffsetDateTime.now(), "1597536248569", "jobRole1",
 //				"phoneNumber1", 21, 1L, 2L));
-//		employeeRequests.add(new EmployeeRequest("21", "email2@gmail.com", "ime prezime2", OffsetDateTime.now(), "8523697414562", "jobRole2",
+//		employeeRequests.add(new EmployeeRequest(21L, "email2@gmail.com", "ime prezime2", OffsetDateTime.now(), "8523697414562", "jobRole2",
 //				"phoneNumber2", 21, 2L, 1L));
-//		employeeRequests.add(new EmployeeRequest("21", "email3@gmail.com", "Esma Herenda Boja", OffsetDateTime.now(), "9632514879652", "jobRole3",
+//		employeeRequests.add(new EmployeeRequest(21L, "email3@gmail.com", "Esma Herenda Boja", OffsetDateTime.now(), "9632514879652", "jobRole3",
 //				"phoneNumber3", 21, 3L, 2L));
-//		employeeRequests.add(new EmployeeRequest("21", "email4@gmail.com", "Nudzejma Pozder", OffsetDateTime.now(), "2225558796412", "jobRole4",
+//		employeeRequests.add(new EmployeeRequest(21L, "email4@gmail.com", "Nudzejma Pozder", OffsetDateTime.now(), "2225558796412", "jobRole4",
 //				"phoneNumber4", 21, 4L, 2L));
-//		employeeRequests.add(new EmployeeRequest("21", "email5@gmail.com", "Belmin Divjan", OffsetDateTime.now(), "3336665478965", "jobRole5",
+//		employeeRequests.add(new EmployeeRequest(21L, "email5@gmail.com", "Belmin Divjan", OffsetDateTime.now(), "3336665478965", "jobRole5",
 //				"phoneNumber5", 21, 5L, 2L));
-//		employeeRequests.add(new EmployeeRequest("21", "email6@gmail.com", "Dalila Ćorović", OffsetDateTime.now(), "7539512585264", "jobRole6",
+//		employeeRequests.add(new EmployeeRequest(21L, "email6@gmail.com", "Dalila Ćorović", OffsetDateTime.now(), "7539512585264", "jobRole6",
 //				"phoneNumber6", 21, 3L, 2L));
-//		employeeRequests.add(new EmployeeRequest("21", "email7@gmail.com", "Amina Herenda", OffsetDateTime.now(), "9874563214528", "jobRole7",
+//		employeeRequests.add(new EmployeeRequest(21L, "email7@gmail.com", "Amina Herenda", OffsetDateTime.now(), "9874563214528", "jobRole7",
 //				"phoneNumber7", 21, 2L, 2L));
-//		employeeRequests.add(new EmployeeRequest("21", "email8@gmail.com", "Aida Herenda", OffsetDateTime.now(), "7359684129568", "jobRole8",
+//		employeeRequests.add(new EmployeeRequest(21L, "email8@gmail.com", "Aida Herenda", OffsetDateTime.now(), "7359684129568", "jobRole8",
 //				"phoneNumber8", 21, 1L, 2L));
-//		employeeRequests.add(new EmployeeRequest("21", "email9@gmail.com", "Samir Herenda", OffsetDateTime.now(), "0326508452963", "jobRole9",
+//		employeeRequests.add(new EmployeeRequest(21L, "email9@gmail.com", "Samir Herenda", OffsetDateTime.now(), "0326508452963", "jobRole9",
 //				"phoneNumber9", 21, 2L, 2L));
 //		return (args -> {
 //			employeeService.insertBulkEmployees(employeeRequests);
