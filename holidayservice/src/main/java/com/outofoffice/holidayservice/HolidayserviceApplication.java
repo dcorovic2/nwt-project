@@ -9,7 +9,9 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
+import org.springframework.web.client.RestTemplate;
 
 import com.outofoffice.holidayservice.model.Employee;
 import com.outofoffice.holidayservice.model.Holiday;
@@ -29,6 +31,12 @@ public class HolidayserviceApplication {
 	}
 	
 	@Bean
+	@LoadBalanced
+	public RestTemplate getRestTemplate() {
+	    return new RestTemplate();
+	} 
+	
+	@Bean
 	public CommandLineRunner addingNotifications(HolidayRepository holidayRepository, HolidayTypeRepository holidayTypeRepository, NotificationRepository notificationRepository,
 			EmployeeRepository employeeRepository){
 		return (args -> {
@@ -38,7 +46,7 @@ public class HolidayserviceApplication {
 			HolidayType holidayType1 = new HolidayType("code1", "Godisnji odmor", "godisnji", "Godisnji odmor");
 			holidayTypeRepository.save(holidayType1);
 			
-			Employee employee = new Employee(20, "Dalila Corovic", 10);
+			Employee employee = new Employee("Dalila Corovic");
 			employeeRepository.save(employee);
 			
 			List<Employee> listEmployees  = new ArrayList<>();

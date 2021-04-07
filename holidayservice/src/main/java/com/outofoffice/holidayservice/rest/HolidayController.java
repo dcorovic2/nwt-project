@@ -1,7 +1,12 @@
 package com.outofoffice.holidayservice.rest;
 
+import java.time.LocalDate;
+import java.util.List;
+
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -15,8 +20,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
-import com.outofoffice.holidayservice.errorhandling.NotValidParamException;
 import com.outofoffice.holidayservice.requestobjects.HolidayRequest;
 import com.outofoffice.holidayservice.service.HolidayService;
 
@@ -25,7 +30,11 @@ import io.swagger.annotations.ApiOperation;
 @RestController
 @RequestMapping(value = "/")
 public class HolidayController {
+	@Autowired
+	RestTemplate restTemplate; 
+	
 	private final HolidayService holidayService;
+	final String uri = "http://employee-service/getAllEmployeesNames";
 
 	public HolidayController(HolidayService holidayService) {
 		this.holidayService = holidayService;
@@ -34,6 +43,13 @@ public class HolidayController {
 	@PostMapping(value = "/holiday/{holidayTypeID}/{employeeID}")
 	public ResponseEntity<?> insertHoliday(@RequestBody @Validated HolidayRequest requestHoliday, @PathVariable long holidayTypeID, @PathVariable long employeeID, Errors errors) {
 		return holidayService.insertHoliday(requestHoliday, holidayTypeID, employeeID);
+	}
+	
+	@PostMapping(value = "/defaultHoliday/{holidayTypeID}")
+	public ResponseEntity<?> insertDefaultHoliday(@RequestBody @Validated HolidayRequest requestHoliday, @PathVariable long holidayTypeID, Errors errors) {
+		//pozivanje employee MS
+		
+		return holidayService.insertDefaultHoliday(requestHoliday, holidayTypeID, null);
 	}
 
 	@PatchMapping(value = "/holiday/{holidayId}")
@@ -51,6 +67,12 @@ public class HolidayController {
 	@GetMapping(value = "/holiday/{employeeId}")
 	public ResponseEntity<?> getHoliday(@PathVariable long employeeId) {
 		return holidayService.getHolidays(employeeId);
+	}
+	
+	
+	@GetMapping(value = "/holiday/{startDate}/{daysNum}")
+	public ResponseEntity<?> getDaysNumOfHoliday(@PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate startDate, @PathVariable int daysNum) {
+		return holidayService.getDaysNumOfHoliday(startDate, daysNum);
 	}
 	
 }

@@ -19,7 +19,7 @@ public class EmployeeService {
 	}
 	
 	public ResponseEntity<?> insertEmployee(EmployeeRequest emp) {
-		Employee employee = new Employee(emp.getAllowance(), emp.getFirstnameLastName(), emp.getRemainingDays());
+		Employee employee = new Employee(emp.getFirstnameLastName());
 		Employee newemp = employeeRepository.save(employee);
 		
 		return new ResponseEntity<>(newemp, HttpStatus.OK);
@@ -30,9 +30,7 @@ public class EmployeeService {
 		Employee updatedEmployee =  employeeRepository.findById(id)
 				.orElseThrow(() -> new NotFoundException(id_string, "Employee", "ID", ""));
 			
-		updatedEmployee.setAllowance(employee.getAllowance());
 		updatedEmployee.setFirstnameLastName(employee.getFirstnameLastName());
-		updatedEmployee.setRemainingDays(employee.getRemainingDays());
 	
 		Employee upholy = employeeRepository.save(updatedEmployee);
 		return new ResponseEntity<>(upholy, HttpStatus.OK);

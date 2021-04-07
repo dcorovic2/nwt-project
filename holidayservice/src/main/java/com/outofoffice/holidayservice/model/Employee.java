@@ -19,22 +19,15 @@ public class Employee {
     @GeneratedValue(generator = "EmployeeIdGenerator", strategy = GenerationType.AUTO)
     private long id;
 	
-	@Column(name = "allowance")
-	private int allowance;
-	
 	@Column(name = "firstnameLastName")
 	private String firstnameLastName;
 	
-	@Column(name = "remaining_days")
-	private int remainingDays;
 	
 	public Employee() {}
 
-	public Employee(int allowance, String firstnameLastName, int remainingDays) {
+	public Employee(String firstnameLastName) {
 		super();
-		this.allowance = allowance;
 		this.firstnameLastName = firstnameLastName;
-		this.remainingDays = remainingDays;
 	}
 	
 }
