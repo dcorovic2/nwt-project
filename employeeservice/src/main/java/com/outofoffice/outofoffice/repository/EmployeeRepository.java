@@ -30,7 +30,7 @@ public class EmployeeRepository extends SimpleJpaRepository<Employee, Long> {
 
 	public List<Long> findByDepartmentId(Long employeeID) {
 		final List<Long> ids = entityManager
-				.createQuery("SELECT emp.id FROM Employee emp " + "WHERE emp.department.id = "
+				.createQuery("SELECT emp.id FROM Employee emp WHERE emp.department.id = "
 						+ "(SELECT emp.department.id FROM Employee emp WHERE emp.id = :employeeID)", Long.class)
 				.setParameter("employeeID", employeeID).getResultList();
 		return ids;
@@ -38,7 +38,7 @@ public class EmployeeRepository extends SimpleJpaRepository<Employee, Long> {
 
 	public Long findAllowanceByEmployeeId(Long employeeID) {
 		final Long allowance = entityManager
-				.createQuery("SELECT emp.allowance FROM Employee emp" + " WHERE emp.id = :employeeID", Long.class)
+				.createQuery("SELECT emp.allowance FROM Employee emp WHERE emp.id = :employeeID", Long.class)
 				.setParameter("employeeID", employeeID).getSingleResult();
 		return allowance;
 	}
@@ -51,12 +51,11 @@ public class EmployeeRepository extends SimpleJpaRepository<Employee, Long> {
 	}
 
 	public List<HolidayResponse> findNamesAndIds() {
-		final List<Employee> employees = entityManager
-				.createQuery("SELECT emp FROM Employee emp ", Employee.class)
+		final List<Employee> employees = entityManager.createQuery("SELECT emp FROM Employee emp ", Employee.class)
 				.getResultList();
 		final List<HolidayResponse> names = new ArrayList<>();
-				employees.forEach(employee -> {
-					names.add(new HolidayResponse(employee.getId(), employee.getFirstnameLastName()));
+		employees.forEach(employee -> {
+			names.add(new HolidayResponse(employee.getId(), employee.getFirstnameLastName()));
 		});
 		return names;
 	}

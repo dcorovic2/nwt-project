@@ -6,16 +6,16 @@ import lombok.Data;
 
 @Data
 public class HolidayResponse {
-        String name;
-        Long id;
-     
-        public HolidayResponse() {}
+	String name;
+	Long id;
 
-		public HolidayResponse(Long id, String name) {
-			super();
-			this.id = id;
-			this.name = name;
-		};
-        
-     
+	public HolidayResponse() {
+	}
+
+	public HolidayResponse(Long id, String name) {
+		super();
+		this.id = id;
+		this.name = name;
+	};
+
 }
