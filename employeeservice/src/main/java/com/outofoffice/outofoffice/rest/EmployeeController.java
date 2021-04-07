@@ -2,7 +2,9 @@ package com.outofoffice.outofoffice.rest;
 
 import java.net.http.HttpResponse;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.validation.Valid;
 
@@ -26,6 +28,7 @@ import org.springframework.web.client.RestTemplate;
 import com.outofoffice.outofoffice.model.Employee;
 import com.outofoffice.outofoffice.requestobjects.EmployeeDepartmentChange;
 import com.outofoffice.outofoffice.requestobjects.EmployeeRequest;
+import com.outofoffice.outofoffice.responseobjects.HolidayResponse;
 import com.outofoffice.outofoffice.responseobjects.LeaveRequestResponse;
 import com.outofoffice.outofoffice.service.EmployeeService;
 
@@ -102,5 +105,18 @@ public class EmployeeController {
 		LeaveRequestResponse response = employeeService.getEmployeesFromSameDepartment(id, days);
 		return new ResponseEntity<LeaveRequestResponse>(response, HttpStatus.OK);
 	}
-
+	@ApiOperation(value="Send employees to notification service",consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE )
+	@GetMapping(value="/getAllEmployeesNames")
+	public ResponseEntity<List<HolidayResponse>> getAllNames(){
+		List<HolidayResponse> response = employeeService.getAllEmployeesNames();
+		return new ResponseEntity<List<HolidayResponse>>(response, HttpStatus.OK);
+	}
+	
+	@ApiOperation(value="Send employees to notification service",consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE )
+	@GetMapping(value="/getAllEmployeesNamesMap")
+	public ResponseEntity<Map<Long, String>> getAllNamesMap(){
+		Map<Long, String> response = employeeService.getAllEmployeesNamesMap();
+		return new ResponseEntity<Map<Long, String>>(response, HttpStatus.OK);
+	}
+	
 }

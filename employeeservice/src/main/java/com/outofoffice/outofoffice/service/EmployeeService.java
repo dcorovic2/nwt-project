@@ -5,8 +5,11 @@ import com.outofoffice.outofoffice.errorhandling.NoDataException;
 
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.persistence.Column;
 import javax.validation.constraints.NotEmpty;
@@ -29,6 +32,7 @@ import com.outofoffice.outofoffice.repository.EmployeeRepository;
 import com.outofoffice.outofoffice.repository.RoleRepository;
 import com.outofoffice.outofoffice.requestobjects.EmployeeDepartmentChange;
 import com.outofoffice.outofoffice.requestobjects.EmployeeRequest;
+import com.outofoffice.outofoffice.responseobjects.HolidayResponse;
 import com.outofoffice.outofoffice.responseobjects.LeaveRequestResponse;
 
 @Service
@@ -142,6 +146,18 @@ public class EmployeeService {
 		else response.setAllowance(true);
 		response.setDepartmentallowance(departmentRepository.findAllowance(employeeRepository.findDepartmentIdByEmployeeId(id)));
 		return response;
+	}
+	
+	public List<HolidayResponse> getAllEmployeesNames(){
+		List<HolidayResponse> names = new ArrayList<HolidayResponse>();
+		names = employeeRepository.findNamesAndIds();
+		return names;
+	}
+	
+	public Map<Long, String> getAllEmployeesNamesMap(){
+		Map<Long, String> names = new HashMap<>();
+		names = employeeRepository.findAll().stream().collect(Collectors.toMap(Employee::getId, Employee::getFirstnameLastName));
+		return names;
 	}
 
 }
