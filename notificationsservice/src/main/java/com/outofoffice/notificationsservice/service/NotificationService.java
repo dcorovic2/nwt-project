@@ -2,12 +2,15 @@ package com.outofoffice.notificationsservice.service;
 
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import com.outofoffice.notificationsservice.errorhandling.NoDataException;
 import com.outofoffice.notificationsservice.errorhandling.NotFoundException;
@@ -16,20 +19,29 @@ import com.outofoffice.notificationsservice.model.Employee;
 import com.outofoffice.notificationsservice.model.Notification;
 import com.outofoffice.notificationsservice.model.NotificationsType;
 import com.outofoffice.notificationsservice.repository.NotificationsRepository;
+import com.outofoffice.notificationsservice.repository.NotificationsTypeRepository;
 import com.outofoffice.notificationsservice.requestobjects.NotificationRequest;
+import com.outofoffice.notificationsservice.responseobjects.NotificationResponse;
 
 @Service
 public class NotificationService {
-
+	
+	@Autowired
+	RestTemplate restTemplate; 
+	
+	private String uri = "http://holiday-service/getlistofemployees/";
+	
 	private final NotificationsRepository notificationRepository;
+	private final NotificationsTypeRepository notificationtypeRepository;
 	private final NotificationsTypeService notificationTypeService;
 	private final EmployeeService employeeService;
 
 	public NotificationService(NotificationsRepository NotificationsRepository,
-			NotificationsTypeService notificationTypeService, EmployeeService employeeService) {
+			NotificationsTypeService notificationTypeService, EmployeeService employeeService, NotificationsTypeRepository notificationtypeRepository) {
 		this.notificationRepository = NotificationsRepository;
 		this.notificationTypeService = notificationTypeService;
 		this.employeeService = employeeService;
+		this.notificationtypeRepository = notificationtypeRepository;
 	}
 
 //	public List<Notification> insertBulkNotifications(List<Notification> notifications) {
@@ -95,6 +107,20 @@ public class NotificationService {
 		notificationRepository.delete(notificationForDelete);
 		Long deleteNotif = notificationForDelete.getId();
 		return new ResponseEntity<Long>(deleteNotif, HttpStatus.OK);
+	}
+
+	public ResponseEntity<?> insertNotificationsForHoliday(Long holidayTypeId) {
+		uri = uri + holidayTypeId;
+		NotificationResponse  response =  restTemplate.getForObject(uri, NotificationResponse.class);
+		
+		NotificationsType holidaynotificationtype = new NotificationsType("H",response.getText(),response.getText());
+		notificationtypeRepository.save(holidaynotificationtype);
+		
+		//poslati Esmi listu employee-a --> potrebno da mi vrati objekte employee!!
+		for (long num : response.getId()) {
+		    System.out.println("Employee id " + num);
+		}
+		return null;
 	}
 
 }

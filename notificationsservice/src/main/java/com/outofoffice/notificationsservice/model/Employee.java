@@ -30,9 +30,11 @@ import lombok.Data;
 @Table(name= "employee")
 @Data
 public class Employee {
-    
 	@Id
-    @GeneratedValue(generator = "EmployeeIdGenerator",strategy = GenerationType.AUTO)
+    @GeneratedValue(generator = "EmployeeIdGenerator", strategy = GenerationType.AUTO)
+	private long interni_id;
+	
+	@Column(name = "employee_id")
     private Long id;
 
 	@Column(name="allowance")
@@ -56,10 +58,11 @@ public class Employee {
 	
 	public Employee() {};
 	
-	public Employee(int allowance,int departmentId,String email,String firstnameLastName) {
+	public Employee(int allowance,int departmentId,String email,String firstnameLastName, long id) {
         this.allowance =allowance;
         this.departmentId = departmentId;
         this.email = email;
+        this.id = id;
         this.firstnameLastName = firstnameLastName;
 }
 	

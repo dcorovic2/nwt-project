@@ -29,10 +29,10 @@ public class EmployeeController {
 		this.employeeService = employeeService;
 	}
 	
-	@PostMapping(value = "/employees")
-	public ResponseEntity<?> insertEmployee(@RequestBody EmployeeRequest requestEmployee) {
-		return employeeService.insertEmployee(requestEmployee);
-	}
+//	@PostMapping(value = "/employees")
+//	public ResponseEntity<?> insertEmployee(@RequestBody EmployeeRequest requestEmployee) {
+//		return employeeService.insertEmployee(requestEmployee);
+//	}
 	
 	//getting all employees!!
 	@GetMapping("/employees")
