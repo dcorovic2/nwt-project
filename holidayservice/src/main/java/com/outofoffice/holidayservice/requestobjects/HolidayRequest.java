@@ -6,6 +6,9 @@ import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import lombok.Data;
+
+@Data
 public class HolidayRequest {
 	@NotNull
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -14,19 +17,6 @@ public class HolidayRequest {
 	@NotNull
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate endDate;
-    
-	public LocalDate getStartDate() {
-		return startDate;
-	}
-	public void setStartDate(LocalDate startDate) {
-		this.startDate = startDate;
-	}
-	public LocalDate getEndDate() {
-		return endDate;
-	}
-	public void setEndDate(LocalDate endDate) {
-		this.endDate = endDate;
-	}
 	
 	public HolidayRequest(LocalDate startDate, LocalDate endDate) {
 		super();

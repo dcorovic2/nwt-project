@@ -11,6 +11,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -43,43 +44,47 @@ public class HolidayController {
 		this.holidayService = holidayService;
 	}
 	
-	@PostMapping(value = "/holiday/{holidayTypeID}/{employeeID}")
-	public ResponseEntity<?> insertHoliday(@RequestBody @Validated HolidayRequest requestHoliday, @PathVariable long holidayTypeID, @PathVariable long employeeID, Errors errors) {
-		return holidayService.insertHoliday(requestHoliday, holidayTypeID, employeeID);
+	
+	@ApiOperation(value = "Admin creates a holiday with empty list of employees")
+	@PostMapping(value = "/holiday/{holidayTypeID}")
+	public ResponseEntity<?> insertHoliday(@RequestBody @Validated HolidayRequest requestHoliday, @PathVariable long holidayTypeID, Errors errors) {
+		return holidayService.createHoliday(requestHoliday, holidayTypeID);
 	}
 	
+	@ApiOperation(value = "This holiday applies to all employees")
 	@PostMapping(value = "/defaultHoliday/{holidayTypeID}")
 	public ResponseEntity<?> insertDefaultHoliday(@RequestBody @Validated HolidayRequest requestHoliday, @PathVariable long holidayTypeID, Errors errors) {
-		//pozivanje employee MS
 		
 		HolidayResponse[] response =  restTemplate.getForObject(uri, HolidayResponse[].class);
 		List<HolidayResponse> sourceList = Arrays.asList(response);
 		
 		return holidayService.insertDefaultHoliday(requestHoliday, holidayTypeID, sourceList);
 	}
-
+	
+	@ApiOperation(value = "Update holiday list - the employee chooses a holiday")
+	@PatchMapping(value = "/holiday/{holidayTypeID}/{employeeID}/{firstAndLastName}")
+	public ResponseEntity<?> updateListHoliday(@PathVariable long holidayTypeID, @PathVariable long employeeID, @PathVariable String firstAndLastName) {
+		return holidayService.updateListHoliday(holidayTypeID, employeeID, firstAndLastName);
+	}
+	
+	@ApiOperation(value = "Update holiday list - admin modifies data")
 	@PatchMapping(value = "/holiday/{holidayId}")
 	public ResponseEntity<?> updateHoliday(@RequestBody @Validated HolidayRequest requestHoliday, @PathVariable long holidayId, Errors errors) {
 		return holidayService.updateHoliday(requestHoliday, holidayId);
 	}
 	
-	@ApiOperation(value = "Delete Holiday", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@ApiOperation(value = "Delete holiday using specific holiday id - admin", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@DeleteMapping(value = "/holiday/{holidayId}")
 	public ResponseEntity<?> deleteHoliday(@PathVariable Long holidayId) {
 		return holidayService.deleteHoliday(holidayId);
 	}
 	
-	@ApiOperation(value = "Find all holidays for employee")
-	@GetMapping(value = "/holiday/{employeeId}")
-	public ResponseEntity<?> getHoliday(@PathVariable long employeeId) {
-		return holidayService.getHolidays(employeeId);
+	@ApiOperation(value = "Get list of employees for specific holiday type")
+	@GetMapping(value = "/getlistofemployees/{holidayTypeId}")
+	public ResponseEntity<?> getAllHolidayEmployeeList(@PathVariable long holidayTypeId) {
+		return holidayService.getAllEmployees(holidayTypeId);
 	}
-//	
-//	@GetMapping(value = "/getlistofemployees/{holidayTypeId}")
-//	public ResponseEntity<?> getAllHolidayEmployeeList(@PathVariable long holidayTypeId) {
-//		return holidayService.getAllEmployees(holidayTypeId);
-//	}
-//	
+
 	
 	@GetMapping(value = "/holiday/{startDate}/{daysNum}")
 	public ResponseEntity<?> getDaysNumOfHoliday(@PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate startDate, @PathVariable int daysNum) {
