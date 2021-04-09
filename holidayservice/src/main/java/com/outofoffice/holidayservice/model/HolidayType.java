@@ -24,19 +24,20 @@ public class HolidayType {
 	@Column(name = "display_name")
 	private String displayName;
 
-	@Column(name = "name")
-	private String name;
+	@Column(name = "text")
+	private String text;
 	
+	//defaultni ili nije
 	@Column(name = "type")
 	private String type;
 	
 	public HolidayType() {};
 
-	public HolidayType(String code, String displayName, String name, String type) {
+	public HolidayType(String code, String displayName, String text, String type) {
 		super();
 		this.code = code;
 		this.displayName = displayName;
-		this.name = name;
+		this.text = text;
 		this.type = type;
 	}
 	

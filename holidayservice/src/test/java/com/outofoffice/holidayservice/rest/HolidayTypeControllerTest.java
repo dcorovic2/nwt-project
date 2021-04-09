@@ -77,7 +77,7 @@ class HolidayTypeControllerTest {
 		
 		HolidayTypeRequest holidayType = new HolidayTypeRequest();
 		holidayType.setCode("proba");
-		holidayType.setName("probno ime");
+		holidayType.setText("probni text");
 		holidayType.setType("tip odmora");
 		
 		this.mockMvc.perform(MockMvcRequestBuilders
