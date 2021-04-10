@@ -66,15 +66,15 @@ public class EmployeeService {
 		return new ResponseEntity<>(upemployee, HttpStatus.OK);
 	}
 
-	public ResponseEntity<?> deleteEmployee(Long id) {
-		final Optional<Employee> employeeForDelete = employeeRepository.findById(id);
-		if (!employeeForDelete.isPresent()) {
-			throw new NoDataException();
-		}
-		employeeRepository.delete(employeeForDelete.get());
-		Long deleteEmpl = employeeForDelete.get().getId();
-		return new ResponseEntity<Long>(deleteEmpl, HttpStatus.OK);
-
-	}
+//	public ResponseEntity<?> deleteEmployee(Long id) {
+//		final Optional<Employee> employeeForDelete = employeeRepository.findById(id);
+//		if (!employeeForDelete.isPresent()) {
+//			throw new NoDataException();
+//		}
+//		employeeRepository.delete(employeeForDelete.get());
+//		Long deleteEmpl = employeeForDelete.get().getId();
+//		return new ResponseEntity<Long>(deleteEmpl, HttpStatus.OK);
+//
+//	}
 
 }

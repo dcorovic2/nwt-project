@@ -1,35 +1,22 @@
 package com.outofoffice.notificationsservice.model;
 
-import java.sql.Date;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 
-import org.hibernate.annotations.GenericGenerator;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.Data;
 
 @Entity
 @Table(name= "employee")
-@Data
+
 public class Employee {
+
 	@Id
     @GeneratedValue(generator = "EmployeeIdGenerator", strategy = GenerationType.AUTO)
 	private long interni_id;
@@ -38,10 +25,10 @@ public class Employee {
     private Long id;
 
 	@Column(name="allowance")
-	private int allowance;
+	private Long allowance;
 
 	@Column(name="department_id")
-	private int departmentId;
+	private Long departmentId;
 
 
     @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\."
@@ -58,7 +45,7 @@ public class Employee {
 	
 	public Employee() {};
 	
-	public Employee(int allowance,int departmentId,String email,String firstnameLastName, long id) {
+	public Employee(Long allowance,Long departmentId,String email,String firstnameLastName, long id) {
         this.allowance =allowance;
         this.departmentId = departmentId;
         this.email = email;
@@ -71,4 +58,38 @@ public class Employee {
 	
 //	@ManyToMany(mappedBy = "employees")
 //	private List<Notification> notifications;
+	
+
+	public Long getAllowance() {
+		return allowance;
+	}
+
+	public void setAllowance(Long allowance) {
+		this.allowance = allowance;
+	}
+
+	public Long getDepartmentId() {
+		return departmentId;
+	}
+
+	public void setDepartmentId(Long departmentId) {
+		this.departmentId = departmentId;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getFirstnameLastName() {
+		return firstnameLastName;
+	}
+
+	public void setFirstnameLastName(String firstnameLastName) {
+		this.firstnameLastName = firstnameLastName;
+	}
+
 }

@@ -1,22 +1,17 @@
 package com.outofoffice.notificationsservice.rest;
 
-import org.junit.jupiter.params.shadow.com.univocity.parsers.annotations.Validate;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.outofoffice.notificationsservice.requestobjects.EmployeeRequest;
-import com.outofoffice.notificationsservice.requestobjects.NotificationRequest;
 import com.outofoffice.notificationsservice.service.EmployeeService;
-
-import io.swagger.annotations.ApiOperation;
 
 
 
@@ -51,10 +46,10 @@ public class EmployeeController {
 		return employeeService.updateEmployee(requestEmployee, id);
 	}
 	
-	@ApiOperation(value = "Delete Notification", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	@DeleteMapping(value = "/employees/{employeeId}")
-	public ResponseEntity<?> deleteEmployee(@PathVariable Long employeeId){
-		return employeeService.deleteEmployee(employeeId);
-	}
+//	@ApiOperation(value = "Delete Notification", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+//	@DeleteMapping(value = "/employees/{employeeId}")
+//	public ResponseEntity<?> deleteEmployee(@PathVariable Long employeeId){
+//		return employeeService.deleteEmployee(employeeId);
+//	}
 	
 }
