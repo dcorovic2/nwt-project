@@ -34,6 +34,7 @@ import com.outofoffice.outofoffice.requestobjects.EmployeeDepartmentChange;
 import com.outofoffice.outofoffice.requestobjects.EmployeeRequest;
 import com.outofoffice.outofoffice.responseobjects.HolidayResponse;
 import com.outofoffice.outofoffice.responseobjects.LeaveRequestResponse;
+import com.outofoffice.outofoffice.responseobjects.NotificationResponse;
 
 @Service
 public class EmployeeService {
@@ -53,46 +54,47 @@ public class EmployeeService {
 	}
 
 	public List<Employee> insertBulkEmployees(List<EmployeeRequest> employees) {
-		//try {
-			List<Employee> insertedEmployees = new ArrayList<Employee>();
-			employees.forEach(employee -> {
-				insertedEmployees.add(insertEmployee(employee));
-			});
+		// try {
+		List<Employee> insertedEmployees = new ArrayList<Employee>();
+		employees.forEach(employee -> {
+			insertedEmployees.add(insertEmployee(employee));
+		});
 
-			return insertedEmployees;
-		//} catch (Exception e) {
+		return insertedEmployees;
+		// } catch (Exception e) {
 //			throw new NotSucesfullException();
 //		}
 	}
 
 	public Employee insertEmployee(EmployeeRequest employeeReq) {
-			Department department = departmentService.getById(employeeReq.getDepartmentId());
-			Role role = roleService.getById(employeeReq.getRoleId());
-			Employee employee = new Employee();
-			employee.setDepartment(department);
-			employee.setRole(role);
-			employee.setAllowance(employeeReq.getAllowance());
-			employee.setEmail(employeeReq.getEmail());
-			employee.setFirstnameLastName(employeeReq.getFirstnameLastName());
-			employee.setHireDate(employeeReq.getHireDate());
-			employee.setJmbg(employeeReq.getJmbg());
-			employee.setJobRole(employeeReq.getJobRole());
-			employee.setPhoneNumber(employeeReq.getPhoneNumber());
-			employee.setRemainingDays(employeeReq.getRemainingDays());
-			return employeeRepository.save(employee);
+		Department department = departmentService.getById(employeeReq.getDepartmentId());
+		Role role = roleService.getById(employeeReq.getRoleId());
+		Employee employee = new Employee();
+		employee.setDepartment(department);
+		employee.setRole(role);
+		employee.setAllowance(employeeReq.getAllowance());
+		employee.setEmail(employeeReq.getEmail());
+		employee.setFirstnameLastName(employeeReq.getFirstnameLastName());
+		employee.setHireDate(employeeReq.getHireDate());
+		employee.setJmbg(employeeReq.getJmbg());
+		employee.setJobRole(employeeReq.getJobRole());
+		employee.setPhoneNumber(employeeReq.getPhoneNumber());
+		employee.setRemainingDays(employeeReq.getRemainingDays());
+		return employeeRepository.save(employee);
 	}
+
 	public Employee updateEmployeeDepartment(EmployeeDepartmentChange employee) {
-			Employee updated_employee = this.getEmployeeByJmbg(employee.getEmployee_jmbg());
-			Department new_department = this.departmentService.getByCode(employee.getDepartment_code());
-			updated_employee.setDepartment(new_department);
-			return employeeRepository.save(updated_employee);
+		Employee updated_employee = this.getEmployeeByJmbg(employee.getEmployee_jmbg());
+		Department new_department = this.departmentService.getByCode(employee.getDepartment_code());
+		updated_employee.setDepartment(new_department);
+		return employeeRepository.save(updated_employee);
 	}
 
 	public Employee updateEmployee(EmployeeRequest employee, Long id) {
-			String id_string = id + "";
-			Employee updated_employee = this.employeeRepository.findById(id)
-					.orElseThrow(() -> new NotFoundException(id_string, "Employee", "id", ""));
-	try {
+		String id_string = id + "";
+		Employee updated_employee = this.employeeRepository.findById(id)
+				.orElseThrow(() -> new NotFoundException(id_string, "Employee", "id", ""));
+		try {
 			updated_employee.setAllowance(employee.getAllowance());
 			updated_employee.setEmail(employee.getEmail());
 			updated_employee.setFirstnameLastName(employee.getFirstnameLastName());
@@ -110,12 +112,12 @@ public class EmployeeService {
 	}
 
 	public Long deleteEmployee(Long id) {
-			String id_string = id + "";
-			Auth authForDelete = authRepository.findByEmployeeId(id);
-			authRepository.delete(authForDelete);
-			Employee employeeForDelete = this.employeeRepository.findById(id).get();
-			employeeRepository.delete(employeeForDelete);
-			return employeeForDelete.getId();
+		String id_string = id + "";
+		Auth authForDelete = authRepository.findByEmployeeId(id);
+		authRepository.delete(authForDelete);
+		Employee employeeForDelete = this.employeeRepository.findById(id).get();
+		employeeRepository.delete(employeeForDelete);
+		return employeeForDelete.getId();
 	}
 
 	public Employee getEmployeeByJmbg(String jmbg) {
@@ -130,34 +132,50 @@ public class EmployeeService {
 	public List<Employee> getAllEmployees() {
 		List<Employee> return_employees = new ArrayList<Employee>();
 		return_employees = employeeRepository.findAll();
-		if(return_employees.isEmpty()) throw new NoDataException();
-		else return return_employees;
+		if (return_employees.isEmpty())
+			throw new NoDataException();
+		else
+			return return_employees;
 	}
 
 	public Employee getEmployeeById(Long id) {
 		String id_string = id + "";
-		return employeeRepository.findById(id).orElseThrow(() -> new NotFoundException(id_string, "Employee", "id", ""));
+		return employeeRepository.findById(id)
+				.orElseThrow(() -> new NotFoundException(id_string, "Employee", "id", ""));
 	}
-	
+
 	public LeaveRequestResponse getEmployeesFromSameDepartment(Long id, Long days) {
 		LeaveRequestResponse response = new LeaveRequestResponse();
 		response.setEmployee_ids(employeeRepository.findByDepartmentId(id));
-		if(days > employeeRepository.findAllowanceByEmployeeId(id)) response.setAllowance(false);
-		else response.setAllowance(true);
-		response.setDepartmentallowance(departmentRepository.findAllowance(employeeRepository.findDepartmentIdByEmployeeId(id)));
+		if (days > employeeRepository.findAllowanceByEmployeeId(id))
+			response.setAllowance(false);
+		else
+			response.setAllowance(true);
+		response.setDepartmentallowance(
+				departmentRepository.findAllowance(employeeRepository.findDepartmentIdByEmployeeId(id)));
 		return response;
 	}
-	
-	public List<HolidayResponse> getAllEmployeesNames(){
+
+	public List<HolidayResponse> getAllEmployeesNames() {
 		List<HolidayResponse> names = new ArrayList<HolidayResponse>();
 		names = employeeRepository.findNamesAndIds();
 		return names;
 	}
-	
-	public Map<Long, String> getAllEmployeesNamesMap(){
+
+	public Map<Long, String> getAllEmployeesNamesMap() {
 		Map<Long, String> names = new HashMap<>();
-		names = employeeRepository.findAll().stream().collect(Collectors.toMap(Employee::getId, Employee::getFirstnameLastName));
+		names = employeeRepository.findAll().stream()
+				.collect(Collectors.toMap(Employee::getId, Employee::getFirstnameLastName));
 		return names;
 	}
 
+	public List<NotificationResponse> getAllEmployeesByIds(List<Long> ids) {
+		List<NotificationResponse> response = new ArrayList<NotificationResponse>();
+		List<Employee> employees = employeeRepository.findAllById(ids);
+		employees.forEach(employee -> {
+			response.add(new NotificationResponse(employee.getId(), employee.getAllowance(),
+					employee.getDepartment().getId(), employee.getEmail(), employee.getFirstnameLastName()));
+		});
+		return response;
+	}
 }
