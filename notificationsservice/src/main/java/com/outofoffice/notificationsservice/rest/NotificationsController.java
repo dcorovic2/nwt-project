@@ -6,6 +6,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -19,10 +20,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 import com.outofoffice.notificationsservice.service.NotificationService;
 import com.outofoffice.notificationsservice.requestobjects.NotificationRequest;
+import com.outofoffice.notificationsservice.responseobjects.NotificationResponse;
 
 import io.swagger.annotations.ApiOperation;
 
@@ -30,7 +34,7 @@ import io.swagger.annotations.ApiOperation;
 @Validated
 @RequestMapping(value = "/")
 public class NotificationsController {
-
+	
 	private final NotificationService notificationService;
 
 	public NotificationsController(NotificationService NotificationService) {
@@ -50,6 +54,11 @@ public class NotificationsController {
 		return notificationService.insertNotification(requestNotification, employeeId, notificationTypeId);
 	}
 
+	@PostMapping(value = "/notifications/{holidayTypeId}")
+	public ResponseEntity<?> insertNotificationsForHoliday(@PathVariable Long holidayTypeId) {
+		return notificationService.insertNotificationsForHoliday(holidayTypeId);
+	}
+	
 	// getting all notifications!!
 	@GetMapping("/all_notifications")
 	public ResponseEntity<?> getNotifications() {

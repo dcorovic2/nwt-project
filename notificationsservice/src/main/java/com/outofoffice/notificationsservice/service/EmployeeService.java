@@ -23,14 +23,14 @@ public class EmployeeService {
 		super();
 		this.employeeRepository = employeeRepository;
 	}
-
-	public ResponseEntity<?> insertEmployee(EmployeeRequest employee) {
-		Employee empl = new Employee(employee.getAllowance(), employee.getDepartmentId(), employee.getEmail(),
-				employee.getFirstnameLastName());
-		Employee newepl = employeeRepository.save(empl);
-		return new ResponseEntity<>(newepl, HttpStatus.OK);
-
-	}
+//
+//	public ResponseEntity<?> insertEmployee(EmployeeRequest employee) {
+//		Employee empl = new Employee(employee.getAllowance(), employee.getDepartmentId(), employee.getEmail(),
+//				employee.getFirstnameLastName());
+//		Employee newepl = employeeRepository.save(empl);
+//		return new ResponseEntity<>(newepl, HttpStatus.OK);
+//
+//	}
 
 	public ResponseEntity<?> getEmployeeList() {
 		List<Employee> employeeList = employeeRepository.findAll();
@@ -66,15 +66,15 @@ public class EmployeeService {
 		return new ResponseEntity<>(upemployee, HttpStatus.OK);
 	}
 
-	public ResponseEntity<?> deleteEmployee(Long id) {
-		final Optional<Employee> employeeForDelete = employeeRepository.findById(id);
-		if (!employeeForDelete.isPresent()) {
-			throw new NoDataException();
-		}
-		employeeRepository.delete(employeeForDelete.get());
-		Long deleteEmpl = employeeForDelete.get().getId();
-		return new ResponseEntity<Long>(deleteEmpl, HttpStatus.OK);
-
-	}
+//	public ResponseEntity<?> deleteEmployee(Long id) {
+//		final Optional<Employee> employeeForDelete = employeeRepository.findById(id);
+//		if (!employeeForDelete.isPresent()) {
+//			throw new NoDataException();
+//		}
+//		employeeRepository.delete(employeeForDelete.get());
+//		Long deleteEmpl = employeeForDelete.get().getId();
+//		return new ResponseEntity<Long>(deleteEmpl, HttpStatus.OK);
+//
+//	}
 
 }

@@ -3,30 +3,30 @@ package com.outofoffice.notificationsservice.requestobjects;
 
 public class EmployeeRequest {
 	
-	private int allowance;
-	private int departmentId;
+	private Long allowance;
+	private Long departmentId;
 	private String email;
 	private String firstnameLastName;
 	
 	public  EmployeeRequest() {}
 	
-	public EmployeeRequest(int allowance, int departmentId, String email, String firstnameLastName) {
+	public EmployeeRequest(Long allowance, Long departmentId, String email, String firstnameLastName) {
 		super();
 		this.allowance = allowance;
 		this.departmentId = departmentId;
 		this.email = email;
 		this.firstnameLastName = firstnameLastName;
 	}
-	public int getAllowance() {
+	public Long getAllowance() {
 		return allowance;
 	}
-	public void setAllowance(int allowance) {
+	public void setAllowance(Long allowance) {
 		this.allowance = allowance;
 	}
-	public int getDepartmentId() {
+	public Long getDepartmentId() {
 		return departmentId;
 	}
-	public void setDepartmentId(int departmentId) {
+	public void setDepartmentId(Long departmentId) {
 		this.departmentId = departmentId;
 	}
 	public String getEmail() {
