@@ -11,7 +11,7 @@ public class NotificationRequest {
             message = "Department ID must be between 1 to 20")
 	@Max(value = 20,
             message = "Department ID must be between 1 to 20")
-	private int departmentId;
+	private Long departmentId;
 	
 	@NotNull(message = "Text can not be empty")
 	private String text;
@@ -24,18 +24,18 @@ public class NotificationRequest {
 	
 	public  NotificationRequest() {}
 
-	public NotificationRequest(int departmentId,String text, int dismiss) {
+	public NotificationRequest(Long departmentId,String text, int dismiss) {
 		super();
 		this.departmentId = departmentId;
 		this.dismiss = dismiss;
 		this.text = text;
 	};
 
-		public int getDepartmentId() {
+		public Long getDepartmentId() {
 			return departmentId;
 		}
 
-		public void setDepartmentId(int departmentId) {
+		public void setDepartmentId(Long departmentId) {
 			this.departmentId = departmentId;
 		}
 		

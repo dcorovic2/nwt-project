@@ -19,7 +19,6 @@ public class RestTemplateResponseErrorHandler implements ResponseErrorHandler  {
 	
 	@Override
 	public boolean hasError(ClientHttpResponse httpResponse) throws IOException {
-		System.out.print("USLO!!!");
 		return (httpResponse.getStatusCode().series() == HttpStatus.Series.CLIENT_ERROR
 				|| httpResponse.getStatusCode().series() == HttpStatus.Series.SERVER_ERROR);
 	}
@@ -27,7 +26,6 @@ public class RestTemplateResponseErrorHandler implements ResponseErrorHandler  {
 	@Override
 	@ExceptionHandler({ ResourceAccessException.class })
 	public void handleError(ClientHttpResponse httpResponse) throws IOException {
-		System.out.print("uslo");
 		if (httpResponse.getStatusCode().series() == HttpStatus.Series.SERVER_ERROR) {
 			 String responseAsString = toString(httpResponse.getBody());
 			 throw new CustomException(responseAsString);

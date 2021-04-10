@@ -43,7 +43,7 @@ public class Notification {
     private OffsetDateTime createDate;
 
 	@Column(name="department_id")
-	private int departmentId;
+	private Long departmentId;
 
 	@Column(name="text")
 	private String text;
@@ -53,7 +53,7 @@ public class Notification {
 	
 	public Notification() {};
 
-	public Notification(OffsetDateTime create_date, int departmentId, String text,NotificationsType notificationsTypeId, List<Employee> employees, int dismiss) {
+	public Notification(OffsetDateTime create_date, Long departmentId, String text,NotificationsType notificationsTypeId, List<Employee> employees, int dismiss) {
 	        this.createDate = create_date;
 	        this.departmentId = departmentId;
             this.notifications_type = notificationsTypeId;
