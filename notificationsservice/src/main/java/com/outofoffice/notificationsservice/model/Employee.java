@@ -14,7 +14,7 @@ import lombok.Data;
 
 @Entity
 @Table(name= "employee")
-
+@Data
 public class Employee {
 
 	@Id
@@ -28,7 +28,7 @@ public class Employee {
 	private Long allowance;
 
 	@Column(name="department_id")
-	private Long departmentId;
+	private Long department_id;
 
 
     @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\."
@@ -39,18 +39,18 @@ public class Employee {
 	private String email;
 
 
-	@Column(name="firstname_last_name")
-	private String firstnameLastName;
+	@Column(name="firstNameLastName")
+	private String firstNameLastName;
 	
 	
 	public Employee() {};
 	
-	public Employee(Long allowance,Long departmentId,String email,String firstnameLastName, long id) {
+	public Employee(long id,Long allowance,Long departmentId,String email,String firstNameLastName) {
         this.allowance =allowance;
-        this.departmentId = departmentId;
+        this.department_id = departmentId;
         this.email = email;
         this.id = id;
-        this.firstnameLastName = firstnameLastName;
+        this.firstNameLastName = firstNameLastName;
 }
 	
 //	@ManyToMany(mappedBy = "employees")
@@ -59,37 +59,4 @@ public class Employee {
 //	@ManyToMany(mappedBy = "employees")
 //	private List<Notification> notifications;
 	
-
-	public Long getAllowance() {
-		return allowance;
-	}
-
-	public void setAllowance(Long allowance) {
-		this.allowance = allowance;
-	}
-
-	public Long getDepartmentId() {
-		return departmentId;
-	}
-
-	public void setDepartmentId(Long departmentId) {
-		this.departmentId = departmentId;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getFirstnameLastName() {
-		return firstnameLastName;
-	}
-
-	public void setFirstnameLastName(String firstnameLastName) {
-		this.firstnameLastName = firstnameLastName;
-	}
-
 }

@@ -121,8 +121,9 @@ public class EmployeeController {
 	}
 	
 	@ApiOperation(value="Send employees to notification service")
-	@GetMapping(value="/getAllEmployeesByIds")
+	@PostMapping(value="/getAllEmployeesByIds")
 	public ResponseEntity<List<NotificationResponse>> getAllEmployeesByIds(@RequestBody List<Long> ids){
+		System.out.println(ids);
 		List<NotificationResponse> response = employeeService.getAllEmployeesByIds(ids);
 		return new ResponseEntity<List<NotificationResponse>>(response, HttpStatus.OK);
 	}

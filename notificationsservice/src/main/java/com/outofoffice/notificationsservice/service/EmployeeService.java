@@ -59,9 +59,9 @@ public class EmployeeService {
 		Employee updateEmployee = employeeRepository.findById(id)
 				.orElseThrow(() -> new NotFoundException(id_string, "Employee", "ID", ""));
 		updateEmployee.setAllowance(employee.getAllowance());
-		updateEmployee.setDepartmentId(employee.getDepartmentId());
+		updateEmployee.setDepartment_id(employee.getDepartmentId());
 		updateEmployee.setEmail(employee.getEmail());
-		updateEmployee.setFirstnameLastName(employee.getFirstnameLastName());
+		updateEmployee.setFirstNameLastName(employee.getFirstNameLastName());
 		Employee upemployee = employeeRepository.save(updateEmployee);
 		return new ResponseEntity<>(upemployee, HttpStatus.OK);
 	}
