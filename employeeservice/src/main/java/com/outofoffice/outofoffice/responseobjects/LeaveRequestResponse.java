@@ -6,9 +6,9 @@ import lombok.Data;
 
 @Data
 public class LeaveRequestResponse {
-	public List<Long> employee_ids;
-	public boolean allowance;
-	public Integer departmentallowance;
+	private List<Long> employee_ids;
+	private boolean allowance;
+	private Integer departmentallowance;
 
 	public LeaveRequestResponse() {
 	};

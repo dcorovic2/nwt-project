@@ -40,27 +40,46 @@ public class HolidayserviceApplication {
 	public CommandLineRunner addingNotifications(HolidayRepository holidayRepository, HolidayTypeRepository holidayTypeRepository, NotificationRepository notificationRepository,
 			EmployeeRepository employeeRepository){
 		return (args -> {
-			HolidayType holidayType = new HolidayType("code1", "Godisnji odmor", "godisnji", "Godisnji odmor");
+			HolidayType holidayType = new HolidayType("code1", "Nova Godina", "NG", "NG");
 			holidayTypeRepository.save(holidayType);
 			
-			HolidayType holidayType1 = new HolidayType("code1", "Godisnji odmor", "godisnji", "Godisnji odmor");
+			HolidayType holidayType1 = new HolidayType("code1", "Bajram", "DP", "DP");
 			holidayTypeRepository.save(holidayType1);
 			
 			Employee employee = new Employee(1L, "Dalila Corovic");
+			Employee employee1 = new Employee(2L, "Nudzejma Pozder");
+			Employee employee2 = new Employee(3L, "Belmin Divjan");
+			Employee employee3 = new Employee(4L, "Esma Herenda");
+			Employee employee4 = new Employee(5L, "Neko Nekic");
 			employeeRepository.save(employee);
+			employeeRepository.save(employee1);
+			employeeRepository.save(employee2);
+			employeeRepository.save(employee3);
+			employeeRepository.save(employee4);
 			
 			List<Employee> listEmployees  = new ArrayList<>();
 			listEmployees.add(employee);
+			listEmployees.add(employee1);
+			listEmployees.add(employee2);
+			listEmployees.add(employee3);
+			listEmployees.add(employee4);
 			
-			LocalDate start = LocalDate.of(2020, Month.OCTOBER, 8);
-			LocalDate end = LocalDate.of(2020, Month.OCTOBER, 20);
+			List<Employee> listEmployees1  = new ArrayList<>();
+			listEmployees1.add(employee4);
+			
+			LocalDate start = LocalDate.parse("2020-12-31");
+			LocalDate end = LocalDate.parse("2021-01-04");
 			
 			Holiday holiday = new Holiday(start, end, listEmployees, holidayType);
 			holidayRepository.save(holiday);
 			
-			Notification notification = new Notification("neki tekst", listEmployees);
-			notificationRepository.save(notification);
 			
+			LocalDate start1 = LocalDate.of(2021, Month.MAY, 13);
+			LocalDate end1 = LocalDate.of(2021, Month.MAY, 16);
+			
+			Holiday holiday1 = new Holiday(start1, end1, listEmployees1, holidayType1);
+			holidayRepository.save(holiday1);
+						
 		});
 	}
 

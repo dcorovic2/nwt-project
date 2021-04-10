@@ -3,12 +3,19 @@ package com.outofoffice.holidayservice.service;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
+import com.outofoffice.holidayservice.errorhandling.NoDataException;
 import com.outofoffice.holidayservice.errorhandling.NotFoundException;
 import com.outofoffice.holidayservice.model.Employee;
 import com.outofoffice.holidayservice.model.Holiday;
@@ -22,6 +29,10 @@ import com.outofoffice.holidayservice.responseobjects.NotificationResponse;
 
 @Service
 public class HolidayService {
+	@Autowired
+	RestTemplate restTemplate; 
+	
+	final String uri = "http://employee-service/getAllEmployeesNames";
 	private final HolidayRepository holidayRepository;
 	private final EmployeeRepository employeeRepository;
 	private final HolidayTypeRepository holidayTypeRepository;
@@ -72,11 +83,18 @@ public class HolidayService {
 		return new ResponseEntity<Long>(deletedHoliday, HttpStatus.OK);
 	}
 
-	public ResponseEntity<?> insertDefaultHoliday(HolidayRequest holiday, long holidayTypeID, List<HolidayResponse> sourceList) {
+	public ResponseEntity<?> insertDefaultHoliday(HolidayRequest holiday, long holidayTypeID) {
+		HolidayResponse[] response =  restTemplate.getForObject(uri, HolidayResponse[].class);
+		List<HolidayResponse> sourceList = Arrays.asList(response);
+		
 		String idStringNotification = holidayTypeID + "";
 		
 		HolidayType holidayType = holidayTypeRepository.findById(holidayTypeID)
 				.orElseThrow(() -> new NotFoundException(idStringNotification, "HoldayType", "ID", ""));
+		
+		if(sourceList.isEmpty()) {
+			throw new NoDataException();
+		}
 		
 		List<Employee> employeeList = new ArrayList();
 		for(HolidayResponse x: sourceList) {
@@ -97,11 +115,31 @@ public class HolidayService {
 		
 		List<Holiday> holidays = holidayRepository.findAll();
 		
-		int returnDaysNum = 0;
+		long returnDaysNum = 0;
 		
 		for(Holiday x: holidays) {
-			if(x.getStartDate().isAfter(startDate) && x.getStartDate().isBefore(endDate)) {
-				returnDaysNum += ChronoUnit.DAYS.between(x.getEndDate(), x.getStartDate());
+			
+			LocalDate holidayStart = x.getStartDate();
+			LocalDate holidayEnd = x.getEndDate();
+			
+			if (holidayStart.isAfter(startDate) && holidayEnd.isBefore(endDate)) {
+				returnDaysNum += ChronoUnit.DAYS.between(x.getStartDate(), x.getEndDate());
+			} else if (x.getStartDate().equals(startDate) && x.getEndDate().equals(endDate)) {
+				returnDaysNum = daysNum;
+			} else if (x.getStartDate().equals(startDate) && x.getEndDate().isBefore(endDate)) {
+				returnDaysNum += ChronoUnit.DAYS.between(x.getStartDate(), x.getEndDate());
+			} else if (x.getStartDate().isAfter(startDate) && x.getEndDate().equals(endDate)) {
+				returnDaysNum += ChronoUnit.DAYS.between(x.getStartDate(), x.getEndDate()); 
+			} else if (x.getStartDate().equals(startDate) && x.getEndDate().isAfter(endDate)) {
+				returnDaysNum += daysNum;
+			} else if (x.getStartDate().isAfter(startDate) && x.getStartDate().isBefore(endDate) && x.getEndDate().isAfter(endDate)) { 
+				returnDaysNum += ChronoUnit.DAYS.between(x.getStartDate(), endDate); 
+			} else if (x.getEndDate().isAfter(startDate) && x.getEndDate().isBefore(endDate) && x.getStartDate().isBefore(startDate)) {
+				returnDaysNum += ChronoUnit.DAYS.between(startDate, x.getEndDate()); 
+			} else if (x.getEndDate().equals(endDate) && x.getStartDate().isBefore(startDate)) {
+				returnDaysNum = daysNum;
+			} else if (x.getStartDate().isBefore(startDate) && x.getEndDate().isAfter(endDate)) {
+				returnDaysNum = daysNum;
 			}
 				
 		}
@@ -125,7 +163,7 @@ public class HolidayService {
 	public ResponseEntity<?> getAllEmployees(long holidayTypeId) {
 		
 		Holiday holiday = holidayRepository.findHolidayByHolidayTypeId(holidayTypeId);
-		String text = holidayTypeRepository.getOne(holidayTypeId).getDisplayName();
+		String text = holidayTypeRepository.getOne(holidayTypeId).getText();
 		List<Employee> employeeList = holiday.getEmployees();
 		List<Long> listaIndeksa = new ArrayList();
 		
@@ -136,6 +174,43 @@ public class HolidayService {
 		NotificationResponse notificationResponse = new NotificationResponse(listaIndeksa, text);
 		
 		return new ResponseEntity<>(notificationResponse, HttpStatus.OK);
+	}
+
+	public ResponseEntity<?> getAllHolidays() {
+		List<Holiday> holidays = holidayRepository.findAll();
+		
+		if(holidays.isEmpty()) {
+			throw new NoDataException();
+		}
+		
+		return new ResponseEntity<>(holidays, HttpStatus.OK);
+	}
+
+	public ResponseEntity<?> updateHolidayListOfEmployees(Long employeeid) {
+		List<Holiday> holidays = holidayRepository.deleteByEmployees(employeeid);
+		
+//		if(holidays.isEmpty()) {
+//			throw new NoDataException();
+//		}
+//		
+//		for(Holiday holiday: holidays) {
+//			for(Employee employee: holiday.getEmployees()) {
+//				if(employee.getId() == employeeid) {
+//					List<Employee> empTmp = holiday.getEmployees();
+//					empTmp.remove(employee);
+//					holiday.setEmployees(empTmp);
+//				}
+//			}System.out.println("Izlaso");
+//		}
+//System.out.println("Izlaso");
+//		for(Employee e: holidays.get(0).getEmployees()) {
+//			System.out.println(e.getFirstnameLastName());
+//		}
+//		
+//		employeeRepository.deleteById(employeeid);
+//		List<Holiday> upholy = (List<Holiday>) holidayRepository.saveAll(holidays);
+//		
+		return new ResponseEntity<>(holidays, HttpStatus.OK);	
 	}
 
 }

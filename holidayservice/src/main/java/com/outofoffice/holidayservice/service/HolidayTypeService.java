@@ -21,7 +21,7 @@ public class HolidayTypeService {
 	}
 	
 	public ResponseEntity<?> insertHolidayType(HolidayTypeRequest holidayType) {
-		HolidayType holiday2 = new HolidayType(holidayType.getCode(), holidayType.getDisplayName(), holidayType.getName(), holidayType.getType());	
+		HolidayType holiday2 = new HolidayType(holidayType.getCode(), holidayType.getDisplayName(), holidayType.getText(), holidayType.getType());	
 		HolidayType newholiday = holidayTypeRepository.save(holiday2);
 			
 		return new ResponseEntity<>(newholiday, HttpStatus.OK);
@@ -34,7 +34,7 @@ public class HolidayTypeService {
 			 
 		updatedHolidayType.setCode(holiday.getCode());
 		updatedHolidayType.setDisplayName(holiday.getDisplayName());
-		updatedHolidayType.setName(holiday.getName());
+		updatedHolidayType.setText(holiday.getText());
 		updatedHolidayType.setType(holiday.getType());
 		HolidayType upholy = holidayTypeRepository.save(updatedHolidayType);
 		

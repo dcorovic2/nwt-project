@@ -30,6 +30,7 @@ import com.outofoffice.outofoffice.requestobjects.EmployeeDepartmentChange;
 import com.outofoffice.outofoffice.requestobjects.EmployeeRequest;
 import com.outofoffice.outofoffice.responseobjects.HolidayResponse;
 import com.outofoffice.outofoffice.responseobjects.LeaveRequestResponse;
+import com.outofoffice.outofoffice.responseobjects.NotificationResponse;
 import com.outofoffice.outofoffice.service.EmployeeService;
 
 import io.swagger.annotations.ApiOperation;
@@ -105,18 +106,25 @@ public class EmployeeController {
 		LeaveRequestResponse response = employeeService.getEmployeesFromSameDepartment(id, days);
 		return new ResponseEntity<LeaveRequestResponse>(response, HttpStatus.OK);
 	}
-	@ApiOperation(value="Send employees to notification service",consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE )
+	@ApiOperation(value="Send employees to holiday service",consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE )
 	@GetMapping(value="/getAllEmployeesNames")
 	public ResponseEntity<List<HolidayResponse>> getAllNames(){
 		List<HolidayResponse> response = employeeService.getAllEmployeesNames();
 		return new ResponseEntity<List<HolidayResponse>>(response, HttpStatus.OK);
 	}
 	
-	@ApiOperation(value="Send employees to notification service",consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE )
+	@ApiOperation(value="Send employees to holiday service",consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE )
 	@GetMapping(value="/getAllEmployeesNamesMap")
 	public ResponseEntity<Map<Long, String>> getAllNamesMap(){
 		Map<Long, String> response = employeeService.getAllEmployeesNamesMap();
 		return new ResponseEntity<Map<Long, String>>(response, HttpStatus.OK);
+	}
+	
+	@ApiOperation(value="Send employees to notification service")
+	@GetMapping(value="/getAllEmployeesByIds")
+	public ResponseEntity<List<NotificationResponse>> getAllEmployeesByIds(@RequestBody List<Long> ids){
+		List<NotificationResponse> response = employeeService.getAllEmployeesByIds(ids);
+		return new ResponseEntity<List<NotificationResponse>>(response, HttpStatus.OK);
 	}
 	
 }

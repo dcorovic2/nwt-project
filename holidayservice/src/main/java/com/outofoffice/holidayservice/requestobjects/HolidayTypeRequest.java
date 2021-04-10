@@ -3,6 +3,9 @@ package com.outofoffice.holidayservice.requestobjects;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import lombok.Data;
+
+@Data
 public class HolidayTypeRequest {
 	@NotNull(message = "Code cannot be empty")
 	@Size(min = 5, max = 25)
@@ -12,9 +15,9 @@ public class HolidayTypeRequest {
 	@Size(min = 5, max = 25)
 	private String displayName;
 	
-	@NotNull(message = "Name cannot be empty")
-	@Size(min = 5, max = 25)
-	private String name;
+	@NotNull(message = "Text cannot be empty")
+	@Size(min = 5, max = 100)
+	private String text;
 	
 	@NotNull(message = "Type cannot be empty")
 	@Size(min = 5, max = 25)
@@ -24,38 +27,12 @@ public class HolidayTypeRequest {
 		super();
 	}
 
-	public HolidayTypeRequest(String code, String displayName, String name, String type) {
+	public HolidayTypeRequest(String code, String displayName, String text, String type) {
 		super();
 		this.code = code;
 		this.displayName = displayName;
-		this.name = name;
+		this.text = text;
 		this.type = type;
 	}
-	
-	public String getCode() {
-		return code;
-	}
-	public void setCode(String code) {
-		this.code = code;
-	}
-	public String getDisplayName() {
-		return displayName;
-	}
-	public void setDisplayName(String displayName) {
-		this.displayName = displayName;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getType() {
-		return type;
-	}
-	public void setType(String type) {
-		this.type = type;
-	}
-	
-	
+
 }

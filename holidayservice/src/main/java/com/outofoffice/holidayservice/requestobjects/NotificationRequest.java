@@ -3,6 +3,9 @@ package com.outofoffice.holidayservice.requestobjects;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import lombok.Data;
+
+@Data
 public class NotificationRequest {	
 	@NotNull(message = "Text cannot be empty")
 	@Size(min = 2, max = 50)
@@ -12,11 +15,9 @@ public class NotificationRequest {
 		super();
 		this.text = text;
 	}
-	public String getText() {
-		return text;
-	}
-	public void setText(String text) {
-		this.text = text;
+
+	public NotificationRequest() {
+		super();
 	}
 	
 }
