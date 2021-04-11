@@ -8,11 +8,13 @@ import java.util.List;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
+import com.outofoffice.holidayservice.errorhandling.RestTemplateResponseErrorHandler;
 import com.outofoffice.holidayservice.model.Employee;
 import com.outofoffice.holidayservice.model.Holiday;
 import com.outofoffice.holidayservice.model.HolidayType;
@@ -32,9 +34,11 @@ public class HolidayserviceApplication {
 	
 	@Bean
 	@LoadBalanced
-	public RestTemplate getRestTemplate() {
-	    return new RestTemplate();
-	} 
+    RestTemplate restTemplateWithErrorHandler() {
+        return new RestTemplateBuilder()
+            .errorHandler(new RestTemplateResponseErrorHandler())
+            .build();
+    }
 	
 	@Bean
 	public CommandLineRunner addingNotifications(HolidayRepository holidayRepository, HolidayTypeRepository holidayTypeRepository, NotificationRepository notificationRepository,

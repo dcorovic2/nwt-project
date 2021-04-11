@@ -1,20 +1,23 @@
 package com.outofoffice.holidayservice.service;
 
+import java.net.ConnectException;
 import java.time.LocalDate;
+import java.time.OffsetDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.transaction.Transactional;
-
+import org.apache.http.HttpHeaders;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.ResourceAccessException;
+import org.springframework.web.client.RestClientResponseException;
 import org.springframework.web.client.RestTemplate;
 
+import com.outofoffice.holidayservice.errorhandling.ApiError;
 import com.outofoffice.holidayservice.errorhandling.NoDataException;
 import com.outofoffice.holidayservice.errorhandling.NotFoundException;
 import com.outofoffice.holidayservice.model.Employee;
@@ -30,13 +33,13 @@ import com.outofoffice.holidayservice.responseobjects.NotificationResponse;
 @Service
 public class HolidayService {
 	@Autowired
-	RestTemplate restTemplate; 
+	public RestTemplate restTemplate; 
 	
 	final String uri = "http://employee-service/getAllEmployeesNames";
 	private final HolidayRepository holidayRepository;
 	private final EmployeeRepository employeeRepository;
 	private final HolidayTypeRepository holidayTypeRepository;
-
+	
 	public HolidayService(HolidayRepository holidayRepository, EmployeeRepository employeeRepository, HolidayTypeRepository holidayTypeRepository) {
 		this.holidayRepository =  holidayRepository;	
 		this.employeeRepository = employeeRepository;
@@ -84,30 +87,38 @@ public class HolidayService {
 	}
 
 	public ResponseEntity<?> insertDefaultHoliday(HolidayRequest holiday, long holidayTypeID) {
-		HolidayResponse[] response =  restTemplate.getForObject(uri, HolidayResponse[].class);
-		List<HolidayResponse> sourceList = Arrays.asList(response);
-		
-		String idStringNotification = holidayTypeID + "";
-		
-		HolidayType holidayType = holidayTypeRepository.findById(holidayTypeID)
-				.orElseThrow(() -> new NotFoundException(idStringNotification, "HoldayType", "ID", ""));
-		
-		if(sourceList.isEmpty()) {
-			throw new NoDataException();
-		}
-		
-		List<Employee> employeeList = new ArrayList();
-		for(HolidayResponse x: sourceList) {
-			Employee employee = new Employee(x.getId(), x.getName());
-			Employee newemp = employeeRepository.save(employee);
+		try {
+			ResponseEntity<HolidayResponse[]> response =  restTemplate.getForEntity(uri, HolidayResponse[].class);
 			
-			employeeList.add(newemp);
-		}
-	
-		Holiday holiday2 = new Holiday(holiday.getStartDate(), holiday.getEndDate(), employeeList, holidayType);
-		Holiday newholiday = holidayRepository.save(holiday2);
+			List<HolidayResponse> sourceList = Arrays.asList(response.getBody());
+			
+			String idStringNotification = holidayTypeID + "";
+			
+			HolidayType holidayType = holidayTypeRepository.findById(holidayTypeID)
+					.orElseThrow(() -> new NotFoundException(idStringNotification, "HoldayType", "ID", ""));
+			
+			if(sourceList.isEmpty()) {
+				throw new NoDataException();
+			}
+			
+			List<Employee> employeeList = new ArrayList();
+			for(HolidayResponse x: sourceList) {
+				Employee employee = new Employee(x.getId(), x.getName());
+				Employee newemp = employeeRepository.save(employee);
+				
+				employeeList.add(newemp);
+			}
 		
-		return new ResponseEntity<>(newholiday, HttpStatus.OK);
+			Holiday holiday2 = new Holiday(holiday.getStartDate(), holiday.getEndDate(), employeeList, holidayType);
+			Holiday newholiday = holidayRepository.save(holiday2);
+			
+			return new ResponseEntity<>(newholiday, HttpStatus.OK);	
+			
+		} catch (ResourceAccessException e) {
+			ApiError apiError = new ApiError(HttpStatus.INTERNAL_SERVER_ERROR, "Could not connect to: " + uri , "Connection refused!", OffsetDateTime.now());
+			return new ResponseEntity<>(apiError, apiError.getStatus());
+	    }
+		
 	}
 
 	public ResponseEntity<?> getDaysNumOfHoliday(LocalDate startDate, int daysNum) {
