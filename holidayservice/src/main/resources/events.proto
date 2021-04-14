@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+option java_package = "com.outofoffice.grpc";
+
+service events {
+
+    rpc tracking(APIRequest) returns (APIResponse);
+    
+}
+
+
+message APIResponse {
+
+	string responseUrl = 1;
+    int32 responseCode = 2;
+    
+}
+
+message APIRequest {
+
+    string urlGet = 1;
+    
+}
