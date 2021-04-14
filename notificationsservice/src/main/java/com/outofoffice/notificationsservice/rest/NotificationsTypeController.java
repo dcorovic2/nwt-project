@@ -1,5 +1,7 @@
 package com.outofoffice.notificationsservice.rest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
@@ -22,8 +24,9 @@ import io.swagger.annotations.ApiOperation;
 @RequestMapping(value = "/")
 public class NotificationsTypeController {
 	private final NotificationsTypeService notificationsTypeService;
-
+	final static Logger logger = LoggerFactory.getLogger(NotificationsTypeController.class);
 	public NotificationsTypeController(NotificationsTypeService NotificationTypeService) {
+		super();
 		this.notificationsTypeService = NotificationTypeService;
 	}
 
@@ -35,6 +38,7 @@ public class NotificationsTypeController {
 	// getting all notification_types!!
 	@GetMapping("/all_notification_types")
 	public ResponseEntity<?> getNotifications() {
+		logger.info("USLO U METOD");
 		return notificationsTypeService.getNotificationTypeList();
 	}
 

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -15,7 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Component
 public class LoggerInterceptor implements HandlerInterceptor {
 	Logger log = org.slf4j.LoggerFactory.getLogger(this.getClass());
-	
+//	final static Logger log = LoggerFactory.getLogger(LoggerInterceptor.class);
 	@Override
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object object, Exception arg3) throws Exception {
 		log.info("Request is complete");
@@ -33,15 +34,16 @@ public class LoggerInterceptor implements HandlerInterceptor {
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object object) throws Exception {
+		System.out.println("we are Intercepting the Request");
 		log.info("PreHandle method is calling");
-		long startTime = System.currentTimeMillis();
-				
+		long startTime = System.currentTimeMillis();	
 	
 		//TODO - naziv microservisa
 		Instant instant = Instant.now();
 		
 		log.info("\nTimestamp: " + new Timestamp(System.currentTimeMillis()) + "\nMicroservice: "  + "\nMethod: " + request.getMethod());
-		
+
+			System.out.println("BACIO EXCEPTION!!");
 		return true;
 	}
 }
