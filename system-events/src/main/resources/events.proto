@@ -9,7 +9,7 @@ service events{
 }
 
 message APIRequest {
-	string responseMessage = 1;
+    string responseMessage = 1;
     string service = 3;
     string action = 4;
     string resource = 5;
