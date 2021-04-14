@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.ResponseErrorHandler;
 
-import io.netty.handler.codec.http.HttpMethod;
 
 @Component
 public class RestTemplateResponseErrorHandler implements ResponseErrorHandler  {
