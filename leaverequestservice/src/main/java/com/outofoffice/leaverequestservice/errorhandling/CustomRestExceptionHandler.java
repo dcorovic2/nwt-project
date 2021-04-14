@@ -39,5 +39,11 @@ public class CustomRestExceptionHandler extends ResponseEntityExceptionHandler {
 		 		ApiError apierror = new ApiError(HttpStatus.NOT_FOUND, ex.getMessage(),"No data in DB", OffsetDateTime.now());
 		 return new ResponseEntity<>(apierror, HttpStatus.NOT_FOUND);
 	    }
+	 @ExceptionHandler(RestTemplateException.class)
+	    public ResponseEntity<Object> handleNoData(
+	    		RestTemplateException ex, WebRequest request){
+		 		ApiError apierror = new ApiError(HttpStatus.NOT_FOUND, ex.getMessage(),"No instances available for service", OffsetDateTime.now());
+		 return new ResponseEntity<>(apierror, HttpStatus.NOT_FOUND);
+	    }
    
 }

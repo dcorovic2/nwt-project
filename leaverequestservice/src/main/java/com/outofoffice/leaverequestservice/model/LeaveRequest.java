@@ -44,11 +44,14 @@ public class LeaveRequest {
 	//@JsonFormat(pattern="dd.mm.yyyy",timezone = "UTC")
     @Column(name = "end_date")
     private LocalDate endDate;
+    
+    @Column(name="rest_days_num")
+	private long restDaysNum;
 	
 	public LeaveRequest() {};
 
 	public LeaveRequest(String comment, int daysNum, Long employeeId, LocalDate startDate, LocalDate endDate,
-			LeaveType leave_type, LeaveStatus leave_status, NotificationsType notifications_type) {
+			LeaveType leave_type, LeaveStatus leave_status, NotificationsType notifications_type, long restDaysNum) {
 		super();
 		//this.id = id;
 		this.comment = comment;
@@ -59,6 +62,7 @@ public class LeaveRequest {
 		this.leave_type = leave_type;
 		this.leave_status = leave_status;
 		this.notifications_type = notifications_type;
+		this.restDaysNum = restDaysNum;
 	}
 
 	@ManyToOne(fetch = FetchType.EAGER)
