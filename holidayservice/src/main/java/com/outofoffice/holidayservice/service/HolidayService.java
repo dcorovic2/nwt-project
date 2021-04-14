@@ -117,6 +117,9 @@ public class HolidayService {
 		} catch (ResourceAccessException e) {
 			ApiError apiError = new ApiError(HttpStatus.INTERNAL_SERVER_ERROR, "Could not connect to: " + uri , "Connection refused!", OffsetDateTime.now());
 			return new ResponseEntity<>(apiError, apiError.getStatus());
+	    } catch(IllegalStateException e) {
+	    	ApiError apiError = new ApiError(HttpStatus.INTERNAL_SERVER_ERROR, "Could not connect to: " + uri , "Connection refused!", OffsetDateTime.now());
+			return new ResponseEntity<>(apiError, apiError.getStatus());
 	    }
 		
 	}

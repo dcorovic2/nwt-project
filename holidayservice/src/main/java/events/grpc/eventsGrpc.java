@@ -1,4 +1,4 @@
-package com.outofoffice.grpc;
+package events.grpc;
 
 import static io.grpc.MethodDescriptor.generateFullMethodName;
 import static io.grpc.stub.ClientCalls.asyncBidiStreamingCall;
@@ -27,30 +27,30 @@ public final class eventsGrpc {
   public static final String SERVICE_NAME = "events";
 
   // Static method descriptors that strictly reflect the proto.
-  private static volatile io.grpc.MethodDescriptor<com.outofoffice.grpc.Events.APIRequest,
-      com.outofoffice.grpc.Events.APIResponse> getTrackingMethod;
+  private static volatile io.grpc.MethodDescriptor<events.grpc.Events.APIRequest,
+      events.grpc.Events.APIResponse> getTrackingMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "tracking",
-      requestType = com.outofoffice.grpc.Events.APIRequest.class,
-      responseType = com.outofoffice.grpc.Events.APIResponse.class,
+      requestType = events.grpc.Events.APIRequest.class,
+      responseType = events.grpc.Events.APIResponse.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<com.outofoffice.grpc.Events.APIRequest,
-      com.outofoffice.grpc.Events.APIResponse> getTrackingMethod() {
-    io.grpc.MethodDescriptor<com.outofoffice.grpc.Events.APIRequest, com.outofoffice.grpc.Events.APIResponse> getTrackingMethod;
+  public static io.grpc.MethodDescriptor<events.grpc.Events.APIRequest,
+      events.grpc.Events.APIResponse> getTrackingMethod() {
+    io.grpc.MethodDescriptor<events.grpc.Events.APIRequest, events.grpc.Events.APIResponse> getTrackingMethod;
     if ((getTrackingMethod = eventsGrpc.getTrackingMethod) == null) {
       synchronized (eventsGrpc.class) {
         if ((getTrackingMethod = eventsGrpc.getTrackingMethod) == null) {
           eventsGrpc.getTrackingMethod = getTrackingMethod = 
-              io.grpc.MethodDescriptor.<com.outofoffice.grpc.Events.APIRequest, com.outofoffice.grpc.Events.APIResponse>newBuilder()
+              io.grpc.MethodDescriptor.<events.grpc.Events.APIRequest, events.grpc.Events.APIResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(
                   "events", "tracking"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.outofoffice.grpc.Events.APIRequest.getDefaultInstance()))
+                  events.grpc.Events.APIRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  com.outofoffice.grpc.Events.APIResponse.getDefaultInstance()))
+                  events.grpc.Events.APIResponse.getDefaultInstance()))
                   .setSchemaDescriptor(new eventsMethodDescriptorSupplier("tracking"))
                   .build();
           }
@@ -88,8 +88,8 @@ public final class eventsGrpc {
 
     /**
      */
-    public void tracking(com.outofoffice.grpc.Events.APIRequest request,
-        io.grpc.stub.StreamObserver<com.outofoffice.grpc.Events.APIResponse> responseObserver) {
+    public void tracking(events.grpc.Events.APIRequest request,
+        io.grpc.stub.StreamObserver<events.grpc.Events.APIResponse> responseObserver) {
       asyncUnimplementedUnaryCall(getTrackingMethod(), responseObserver);
     }
 
@@ -99,8 +99,8 @@ public final class eventsGrpc {
             getTrackingMethod(),
             asyncUnaryCall(
               new MethodHandlers<
-                com.outofoffice.grpc.Events.APIRequest,
-                com.outofoffice.grpc.Events.APIResponse>(
+                events.grpc.Events.APIRequest,
+                events.grpc.Events.APIResponse>(
                   this, METHODID_TRACKING)))
           .build();
     }
@@ -126,8 +126,8 @@ public final class eventsGrpc {
 
     /**
      */
-    public void tracking(com.outofoffice.grpc.Events.APIRequest request,
-        io.grpc.stub.StreamObserver<com.outofoffice.grpc.Events.APIResponse> responseObserver) {
+    public void tracking(events.grpc.Events.APIRequest request,
+        io.grpc.stub.StreamObserver<events.grpc.Events.APIResponse> responseObserver) {
       asyncUnaryCall(
           getChannel().newCall(getTrackingMethod(), getCallOptions()), request, responseObserver);
     }
@@ -153,7 +153,7 @@ public final class eventsGrpc {
 
     /**
      */
-    public com.outofoffice.grpc.Events.APIResponse tracking(com.outofoffice.grpc.Events.APIRequest request) {
+    public events.grpc.Events.APIResponse tracking(events.grpc.Events.APIRequest request) {
       return blockingUnaryCall(
           getChannel(), getTrackingMethod(), getCallOptions(), request);
     }
@@ -179,8 +179,8 @@ public final class eventsGrpc {
 
     /**
      */
-    public com.google.common.util.concurrent.ListenableFuture<com.outofoffice.grpc.Events.APIResponse> tracking(
-        com.outofoffice.grpc.Events.APIRequest request) {
+    public com.google.common.util.concurrent.ListenableFuture<events.grpc.Events.APIResponse> tracking(
+        events.grpc.Events.APIRequest request) {
       return futureUnaryCall(
           getChannel().newCall(getTrackingMethod(), getCallOptions()), request);
     }
@@ -206,8 +206,8 @@ public final class eventsGrpc {
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
         case METHODID_TRACKING:
-          serviceImpl.tracking((com.outofoffice.grpc.Events.APIRequest) request,
-              (io.grpc.stub.StreamObserver<com.outofoffice.grpc.Events.APIResponse>) responseObserver);
+          serviceImpl.tracking((events.grpc.Events.APIRequest) request,
+              (io.grpc.stub.StreamObserver<events.grpc.Events.APIResponse>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -231,7 +231,7 @@ public final class eventsGrpc {
 
     @java.lang.Override
     public com.google.protobuf.Descriptors.FileDescriptor getFileDescriptor() {
-      return com.outofoffice.grpc.Events.getDescriptor();
+      return events.grpc.Events.getDescriptor();
     }
 
     @java.lang.Override

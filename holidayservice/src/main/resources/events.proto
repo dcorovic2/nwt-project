@@ -1,23 +1,27 @@
 syntax = "proto3";
 
-option java_package = "com.outofoffice.grpc";
+option java_package = "events.grpc";
 
-service events {
+import "google/protobuf/timestamp.proto";
 
-    rpc tracking(APIRequest) returns (APIResponse);
-    
-}
-
-
-message APIResponse {
-
-	string responseUrl = 1;
-    int32 responseCode = 2;
-    
+service events{
+ 		rpc tracking(APIRequest) returns (APIResponse);
 }
 
 message APIRequest {
+	string responseMessage = 1;
+    string service = 3;
+    string action = 4;
+    string resource = 5;
+    int32 status = 6;
+    google.protobuf.Timestamp liveStartDate = 7;
+}
 
-    string urlGet = 1;
-    
+message APIResponse {
+    string responseMessage = 1;
+    string service = 3;
+    string action = 4;
+    string resource = 5;
+    int32 status = 6;
+    google.protobuf.Timestamp liveStartDate = 7;
 }
