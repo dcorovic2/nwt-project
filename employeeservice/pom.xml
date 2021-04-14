@@ -114,6 +114,36 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-config</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>io.grpc</groupId>
+			<artifactId>grpc-netty-shaded</artifactId>
+			<version>1.27.0</version>
+		</dependency>
+		<dependency>
+			<groupId>io.grpc</groupId>
+			<artifactId>grpc-protobuf</artifactId>
+			<version>1.27.0</version>
+		</dependency>
+		<dependency>
+            <groupId>com.google.protobuf</groupId>
+            <artifactId>protobuf-java</artifactId>
+            <version>3.11.4</version>
+        </dependency>
+		<dependency>
+			<groupId>io.grpc</groupId>
+			<artifactId>grpc-stub</artifactId>
+			<version>1.27.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>23.6-jre</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpcore</artifactId>
+			<version>4.4.8</version>
+		</dependency>
 	</dependencies>
 	<!-- <dependencyManagement> -->
 	<!-- <dependencies> -->
@@ -143,6 +173,39 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+				<groupId>com.github.os72</groupId>
+				<artifactId>protoc-jar-maven-plugin</artifactId>
+				<version>3.11.4</version>
+				<executions>
+					<execution>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<includeMavenTypes>direct</includeMavenTypes>
+
+							<inputDirectories>
+								<include>src/main/resources</include>
+							</inputDirectories>
+
+							<outputTargets>
+								<outputTarget>
+									<type>java</type>
+									<outputDirectory>src/main/java</outputDirectory>
+								</outputTarget>
+								<outputTarget>
+									<type>grpc-java</type>
+									<pluginArtifact>io.grpc:protoc-gen-grpc-java:1.15.0</pluginArtifact>
+									<outputDirectory>src/main/java</outputDirectory>
+								</outputTarget>
+							</outputTargets>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
 		</plugins>
 	</build>
 </project>

@@ -25,6 +25,12 @@ import com.outofoffice.outofoffice.requestobjects.LoginRequest;
 import com.outofoffice.outofoffice.service.EmployeeService;
 import com.outofoffice.outofoffice.service.LoginService;
 
+import events.grpc.Events;
+import events.grpc.eventsGrpc;
+import io.grpc.ManagedChannel;
+import io.grpc.ManagedChannelBuilder;
+import io.grpc.Metadata;
+
 import java.sql.SQLException;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
@@ -36,14 +42,17 @@ public class OutOfOfficeApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(OutOfOfficeApplication.class, args);
-		
+
+
+	     //stub from proto file
+
 	}
 	@Bean
 	@LoadBalanced
 	public RestTemplate getRestTemplate() {
 	    return new RestTemplate();
 	}
-	
+
 //	@Bean
 //	public CommandLineRunner departmentInitial(DepartmentRepository departmentReposiotry) {
 //		return (args -> {
