@@ -16,6 +16,8 @@ import events.grpc.Events;
 import events.grpc.eventsGrpc;
 
 import static java.lang.System.currentTimeMillis;
+import java.sql.Date;
+
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 
@@ -34,21 +36,31 @@ public class LoggerInterceptor implements HandlerInterceptor {
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object object, ModelAndView model) throws Exception {
 		log.info("Handler execution is complete");
 		
-		//System.out.println("\nTimestamp: " + new Timestamp(System.currentTimeMillis()) + "\nResponse: " + response.getStatus());
+		Instant time = Instant.now();
+	    Timestamp timestamp = Timestamp.newBuilder().setSeconds(time.getEpochSecond()).setNanos(time.getNano()).build();
+	    
+	    Events.APIRequest requestGRPC = Events.APIRequest.newBuilder().setAction(request.getMethod()).setResource(request.getRequestURI()).setService("holiday-service").setLiveStartDate(timestamp)
+	    		.setStatus(response.getStatus()).build();
+	    Events.APIResponse responseGRPC = stub.tracking(requestGRPC);
+	    
+	    log.info("\nRESPONSE:\nStatus : " + responseGRPC.getStatus() + "\nTimestamp: " + new Date(responseGRPC.getLiveStartDate().getSeconds() * 1000) +
+	    		"\nMethod: " + responseGRPC.getAction() + "\nMicroservice: " + responseGRPC.getService() + "\nResource: " + responseGRPC.getResource());
+
 	}
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object object) throws Exception {
 		log.info("PreHandle method is calling");
 		
-		//TO DO - uredi timestamp format
-	    Instant time = Instant.now();
+		Instant time = Instant.now();
 	    Timestamp timestamp = Timestamp.newBuilder().setSeconds(time.getEpochSecond()).setNanos(time.getNano()).build();
 	    
-	    Events.APIRequest requestGRPC = Events.APIRequest.newBuilder().setAction(request.getMethod()).setResource(request.getRequestURI()).setService("holiday-service").setLiveStartDate(timestamp).build();
+	    Events.APIRequest requestGRPC = Events.APIRequest.newBuilder().setAction(request.getMethod()).setResource(request.getRequestURI()).setService("holiday-service").setLiveStartDate(timestamp)
+	    		.setStatus(response.getStatus()).build();
 	    Events.APIResponse responseGRPC = stub.tracking(requestGRPC);
 	    
-	    log.info("Response : " + responseGRPC.getResponseMessage());
+	    log.info("\nREQUEST:\nStatus : " + responseGRPC.getStatus() + "\nTimestamp: " + new Date(responseGRPC.getLiveStartDate().getSeconds() * 1000) +
+	    		"\nMethod: " + responseGRPC.getAction() + "\nMicroservice: " + responseGRPC.getService() + "\nResource: " + responseGRPC.getResource());
 	
 		return true;
 	}

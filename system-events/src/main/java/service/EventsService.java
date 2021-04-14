@@ -11,7 +11,7 @@ public class EventsService extends eventsImplBase {
         Events.APIResponse.Builder response = Events.APIResponse.newBuilder();
         
         response.setResource(request.getResource());
-        response.setResponseMessage("Success");
+        response.setStatus(request.getStatus());
         response.setAction(request.getAction());
         response.setService(request.getService());
         response.setLiveStartDate(request.getLiveStartDate());

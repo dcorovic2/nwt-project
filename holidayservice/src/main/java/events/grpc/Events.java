@@ -67,16 +67,10 @@ public final class Events {
         getResourceBytes();
 
     /**
-     * <code>string status = 6;</code>
+     * <code>int32 status = 6;</code>
      * @return The status.
      */
-    java.lang.String getStatus();
-    /**
-     * <code>string status = 6;</code>
-     * @return The bytes for status.
-     */
-    com.google.protobuf.ByteString
-        getStatusBytes();
+    int getStatus();
 
     /**
      * <code>.google.protobuf.Timestamp liveStartDate = 7;</code>
@@ -110,7 +104,6 @@ public final class Events {
       service_ = "";
       action_ = "";
       resource_ = "";
-      status_ = "";
     }
 
     @java.lang.Override
@@ -167,10 +160,9 @@ public final class Events {
               resource_ = s;
               break;
             }
-            case 50: {
-              java.lang.String s = input.readStringRequireUtf8();
+            case 48: {
 
-              status_ = s;
+              status_ = input.readInt32();
               break;
             }
             case 58: {
@@ -363,39 +355,13 @@ public final class Events {
     }
 
     public static final int STATUS_FIELD_NUMBER = 6;
-    private volatile java.lang.Object status_;
+    private int status_;
     /**
-     * <code>string status = 6;</code>
+     * <code>int32 status = 6;</code>
      * @return The status.
      */
-    public java.lang.String getStatus() {
-      java.lang.Object ref = status_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        status_ = s;
-        return s;
-      }
-    }
-    /**
-     * <code>string status = 6;</code>
-     * @return The bytes for status.
-     */
-    public com.google.protobuf.ByteString
-        getStatusBytes() {
-      java.lang.Object ref = status_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        status_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+    public int getStatus() {
+      return status_;
     }
 
     public static final int LIVESTARTDATE_FIELD_NUMBER = 7;
@@ -447,8 +413,8 @@ public final class Events {
       if (!getResourceBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 5, resource_);
       }
-      if (!getStatusBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 6, status_);
+      if (status_ != 0) {
+        output.writeInt32(6, status_);
       }
       if (liveStartDate_ != null) {
         output.writeMessage(7, getLiveStartDate());
@@ -474,8 +440,9 @@ public final class Events {
       if (!getResourceBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, resource_);
       }
-      if (!getStatusBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(6, status_);
+      if (status_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(6, status_);
       }
       if (liveStartDate_ != null) {
         size += com.google.protobuf.CodedOutputStream
@@ -504,8 +471,8 @@ public final class Events {
           .equals(other.getAction())) return false;
       if (!getResource()
           .equals(other.getResource())) return false;
-      if (!getStatus()
-          .equals(other.getStatus())) return false;
+      if (getStatus()
+          != other.getStatus()) return false;
       if (hasLiveStartDate() != other.hasLiveStartDate()) return false;
       if (hasLiveStartDate()) {
         if (!getLiveStartDate()
@@ -531,7 +498,7 @@ public final class Events {
       hash = (37 * hash) + RESOURCE_FIELD_NUMBER;
       hash = (53 * hash) + getResource().hashCode();
       hash = (37 * hash) + STATUS_FIELD_NUMBER;
-      hash = (53 * hash) + getStatus().hashCode();
+      hash = (53 * hash) + getStatus();
       if (hasLiveStartDate()) {
         hash = (37 * hash) + LIVESTARTDATE_FIELD_NUMBER;
         hash = (53 * hash) + getLiveStartDate().hashCode();
@@ -677,7 +644,7 @@ public final class Events {
 
         resource_ = "";
 
-        status_ = "";
+        status_ = 0;
 
         if (liveStartDateBuilder_ == null) {
           liveStartDate_ = null;
@@ -785,9 +752,8 @@ public final class Events {
           resource_ = other.resource_;
           onChanged();
         }
-        if (!other.getStatus().isEmpty()) {
-          status_ = other.status_;
-          onChanged();
+        if (other.getStatus() != 0) {
+          setStatus(other.getStatus());
         }
         if (other.hasLiveStartDate()) {
           mergeLiveStartDate(other.getLiveStartDate());
@@ -1125,78 +1091,32 @@ public final class Events {
         return this;
       }
 
-      private java.lang.Object status_ = "";
+      private int status_ ;
       /**
-       * <code>string status = 6;</code>
+       * <code>int32 status = 6;</code>
        * @return The status.
        */
-      public java.lang.String getStatus() {
-        java.lang.Object ref = status_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          status_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
+      public int getStatus() {
+        return status_;
       }
       /**
-       * <code>string status = 6;</code>
-       * @return The bytes for status.
-       */
-      public com.google.protobuf.ByteString
-          getStatusBytes() {
-        java.lang.Object ref = status_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          status_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>string status = 6;</code>
+       * <code>int32 status = 6;</code>
        * @param value The status to set.
        * @return This builder for chaining.
        */
-      public Builder setStatus(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+      public Builder setStatus(int value) {
+        
         status_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>string status = 6;</code>
+       * <code>int32 status = 6;</code>
        * @return This builder for chaining.
        */
       public Builder clearStatus() {
         
-        status_ = getDefaultInstance().getStatus();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string status = 6;</code>
-       * @param value The bytes for status to set.
-       * @return This builder for chaining.
-       */
-      public Builder setStatusBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        status_ = value;
+        status_ = 0;
         onChanged();
         return this;
       }
@@ -1425,16 +1345,10 @@ public final class Events {
         getResourceBytes();
 
     /**
-     * <code>string status = 6;</code>
+     * <code>int32 status = 6;</code>
      * @return The status.
      */
-    java.lang.String getStatus();
-    /**
-     * <code>string status = 6;</code>
-     * @return The bytes for status.
-     */
-    com.google.protobuf.ByteString
-        getStatusBytes();
+    int getStatus();
 
     /**
      * <code>.google.protobuf.Timestamp liveStartDate = 7;</code>
@@ -1468,7 +1382,6 @@ public final class Events {
       service_ = "";
       action_ = "";
       resource_ = "";
-      status_ = "";
     }
 
     @java.lang.Override
@@ -1525,10 +1438,9 @@ public final class Events {
               resource_ = s;
               break;
             }
-            case 50: {
-              java.lang.String s = input.readStringRequireUtf8();
+            case 48: {
 
-              status_ = s;
+              status_ = input.readInt32();
               break;
             }
             case 58: {
@@ -1721,39 +1633,13 @@ public final class Events {
     }
 
     public static final int STATUS_FIELD_NUMBER = 6;
-    private volatile java.lang.Object status_;
+    private int status_;
     /**
-     * <code>string status = 6;</code>
+     * <code>int32 status = 6;</code>
      * @return The status.
      */
-    public java.lang.String getStatus() {
-      java.lang.Object ref = status_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        status_ = s;
-        return s;
-      }
-    }
-    /**
-     * <code>string status = 6;</code>
-     * @return The bytes for status.
-     */
-    public com.google.protobuf.ByteString
-        getStatusBytes() {
-      java.lang.Object ref = status_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        status_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+    public int getStatus() {
+      return status_;
     }
 
     public static final int LIVESTARTDATE_FIELD_NUMBER = 7;
@@ -1805,8 +1691,8 @@ public final class Events {
       if (!getResourceBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 5, resource_);
       }
-      if (!getStatusBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 6, status_);
+      if (status_ != 0) {
+        output.writeInt32(6, status_);
       }
       if (liveStartDate_ != null) {
         output.writeMessage(7, getLiveStartDate());
@@ -1832,8 +1718,9 @@ public final class Events {
       if (!getResourceBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, resource_);
       }
-      if (!getStatusBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(6, status_);
+      if (status_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(6, status_);
       }
       if (liveStartDate_ != null) {
         size += com.google.protobuf.CodedOutputStream
@@ -1862,8 +1749,8 @@ public final class Events {
           .equals(other.getAction())) return false;
       if (!getResource()
           .equals(other.getResource())) return false;
-      if (!getStatus()
-          .equals(other.getStatus())) return false;
+      if (getStatus()
+          != other.getStatus()) return false;
       if (hasLiveStartDate() != other.hasLiveStartDate()) return false;
       if (hasLiveStartDate()) {
         if (!getLiveStartDate()
@@ -1889,7 +1776,7 @@ public final class Events {
       hash = (37 * hash) + RESOURCE_FIELD_NUMBER;
       hash = (53 * hash) + getResource().hashCode();
       hash = (37 * hash) + STATUS_FIELD_NUMBER;
-      hash = (53 * hash) + getStatus().hashCode();
+      hash = (53 * hash) + getStatus();
       if (hasLiveStartDate()) {
         hash = (37 * hash) + LIVESTARTDATE_FIELD_NUMBER;
         hash = (53 * hash) + getLiveStartDate().hashCode();
@@ -2035,7 +1922,7 @@ public final class Events {
 
         resource_ = "";
 
-        status_ = "";
+        status_ = 0;
 
         if (liveStartDateBuilder_ == null) {
           liveStartDate_ = null;
@@ -2143,9 +2030,8 @@ public final class Events {
           resource_ = other.resource_;
           onChanged();
         }
-        if (!other.getStatus().isEmpty()) {
-          status_ = other.status_;
-          onChanged();
+        if (other.getStatus() != 0) {
+          setStatus(other.getStatus());
         }
         if (other.hasLiveStartDate()) {
           mergeLiveStartDate(other.getLiveStartDate());
@@ -2483,78 +2369,32 @@ public final class Events {
         return this;
       }
 
-      private java.lang.Object status_ = "";
+      private int status_ ;
       /**
-       * <code>string status = 6;</code>
+       * <code>int32 status = 6;</code>
        * @return The status.
        */
-      public java.lang.String getStatus() {
-        java.lang.Object ref = status_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          status_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
+      public int getStatus() {
+        return status_;
       }
       /**
-       * <code>string status = 6;</code>
-       * @return The bytes for status.
-       */
-      public com.google.protobuf.ByteString
-          getStatusBytes() {
-        java.lang.Object ref = status_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          status_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>string status = 6;</code>
+       * <code>int32 status = 6;</code>
        * @param value The status to set.
        * @return This builder for chaining.
        */
-      public Builder setStatus(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+      public Builder setStatus(int value) {
+        
         status_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>string status = 6;</code>
+       * <code>int32 status = 6;</code>
        * @return This builder for chaining.
        */
       public Builder clearStatus() {
         
-        status_ = getDefaultInstance().getStatus();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string status = 6;</code>
-       * @param value The bytes for status to set.
-       * @return This builder for chaining.
-       */
-      public Builder setStatusBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        status_ = value;
+        status_ = 0;
         onChanged();
         return this;
       }
@@ -2752,11 +2592,11 @@ public final class Events {
       "\n\014events.proto\032\037google/protobuf/timestam" +
       "p.proto\"\233\001\n\nAPIRequest\022\027\n\017responseMessag" +
       "e\030\001 \001(\t\022\017\n\007service\030\003 \001(\t\022\016\n\006action\030\004 \001(\t" +
-      "\022\020\n\010resource\030\005 \001(\t\022\016\n\006status\030\006 \001(\t\0221\n\rli" +
+      "\022\020\n\010resource\030\005 \001(\t\022\016\n\006status\030\006 \001(\005\0221\n\rli" +
       "veStartDate\030\007 \001(\0132\032.google.protobuf.Time" +
       "stamp\"\234\001\n\013APIResponse\022\027\n\017responseMessage" +
       "\030\001 \001(\t\022\017\n\007service\030\003 \001(\t\022\016\n\006action\030\004 \001(\t\022" +
-      "\020\n\010resource\030\005 \001(\t\022\016\n\006status\030\006 \001(\t\0221\n\rliv" +
+      "\020\n\010resource\030\005 \001(\t\022\016\n\006status\030\006 \001(\005\0221\n\rliv" +
       "eStartDate\030\007 \001(\0132\032.google.protobuf.Times" +
       "tamp2/\n\006events\022%\n\010tracking\022\013.APIRequest\032" +
       "\014.APIResponseB\r\n\013events.grpcb\006proto3"
