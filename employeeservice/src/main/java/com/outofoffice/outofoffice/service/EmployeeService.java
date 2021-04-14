@@ -32,9 +32,12 @@ import com.outofoffice.outofoffice.repository.EmployeeRepository;
 import com.outofoffice.outofoffice.repository.RoleRepository;
 import com.outofoffice.outofoffice.requestobjects.EmployeeDepartmentChange;
 import com.outofoffice.outofoffice.requestobjects.EmployeeRequest;
+import com.outofoffice.outofoffice.requestobjects.LoginRequest;
 import com.outofoffice.outofoffice.responseobjects.HolidayResponse;
 import com.outofoffice.outofoffice.responseobjects.LeaveRequestResponse;
 import com.outofoffice.outofoffice.responseobjects.NotificationResponse;
+
+import io.grpc.stub.StreamObserver;
 
 @Service
 public class EmployeeService {
@@ -43,7 +46,7 @@ public class EmployeeService {
 	private final RoleService roleService;
 	private final AuthRepository authRepository;
 	private final DepartmentRepository departmentRepository;
-
+	
 	public EmployeeService(EmployeeRepository employeeRepository, DepartmentRepository departmentRepository,
 			RoleRepository roleRepository, AuthRepository authRepository) {
 		this.employeeRepository = employeeRepository;
