@@ -8,20 +8,14 @@ public class EventsService extends eventsImplBase {
 	@Override
     public void tracking(Events.APIRequest request, StreamObserver<Events.APIResponse> responseObserver) {
 
-        String url = request.getService();
         Events.APIResponse.Builder response = Events.APIResponse.newBuilder();
-        System.out.println("Vrijeme " +request.getLiveStartDate());
-        if(url.equals("employee-service")){
-            //success message
-            response.setResponseMessage("Success");
-            response.setAction(request.getAction());
+        
+        response.setResource(request.getResource());
+        response.setResponseMessage("Success");
+        response.setAction(request.getAction());
+        response.setService(request.getService());
+        response.setLiveStartDate(request.getLiveStartDate());
             
-
-        } else  {
-            //failure message
-            response.setResponseMessage("Invalid service name");
-        }
-
         responseObserver.onNext(response.build());
         responseObserver.onCompleted();
     }

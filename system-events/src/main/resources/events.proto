@@ -23,7 +23,7 @@ message APIResponse {
     string action = 4;
     string resource = 5;
     string status = 6;
-    
+    google.protobuf.Timestamp liveStartDate = 7;
 }
 
 
