@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -33,6 +34,7 @@ public class LoggerInterceptor implements HandlerInterceptor {
 
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object object, ModelAndView model) throws Exception {
+		try {
 		log.info("Handler execution is complete");
 		
 		Instant time = Instant.now();
@@ -44,10 +46,15 @@ public class LoggerInterceptor implements HandlerInterceptor {
 	    
 	    log.info("\nRESPONSE:\nStatus : " + responseGRPC.getStatus() + "\nTimestamp: " + new Date(responseGRPC.getLiveStartDate().getSeconds() * 1000) +
 	    		"\nMethod: " + responseGRPC.getAction() + "\nMicroservice: " + responseGRPC.getService() + "\nResource: " + responseGRPC.getResource());
+		} catch (Exception e) {
+			log.info("Status: " + HttpStatus.SERVICE_UNAVAILABLE);
+		}
+	
 	}
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object object) throws Exception {
+		try {
 		log.info("PreHandle method is calling");
 		
 		Instant time = Instant.now();
@@ -60,5 +67,9 @@ public class LoggerInterceptor implements HandlerInterceptor {
 	    log.info("\nREQUEST:\nStatus : " + responseGRPC.getStatus() + "\nTimestamp: " + new Date(responseGRPC.getLiveStartDate().getSeconds() * 1000) +
 	    		"\nMethod: " + responseGRPC.getAction() + "\nMicroservice: " + responseGRPC.getService() + "\nResource: " + responseGRPC.getResource());
 		return true;
+	} catch (Exception e) {
+		log.info("Status: " + HttpStatus.SERVICE_UNAVAILABLE);
+		return true;
+	}
 	}
 }
