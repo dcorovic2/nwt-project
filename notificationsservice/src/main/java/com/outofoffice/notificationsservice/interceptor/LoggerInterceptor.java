@@ -23,56 +23,36 @@ import io.grpc.ManagedChannelBuilder;
 @Component
 public class LoggerInterceptor implements HandlerInterceptor {
 	Logger log = org.slf4j.LoggerFactory.getLogger(this.getClass());
-	
+	ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 9091).usePlaintext().build();
+    eventsGrpc.eventsBlockingStub stub =  eventsGrpc.newBlockingStub(channel);
 	
 	@Override
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object object, Exception arg3) throws Exception {
-		
+		try {
+			log.info("Handler execution is complete");
+			
+			Instant time = Instant.now();
+		    Timestamp timestamp = Timestamp.newBuilder().setSeconds(time.getEpochSecond()).setNanos(time.getNano()).build();
+		    
+		    Events.APIRequest requestGRPC = Events.APIRequest.newBuilder().setAction(request.getMethod()).setResource(request.getRequestURI()).setService("notification-service").setLiveStartDate(timestamp)
+		    		.setStatus(response.getStatus()).build();
+		    Events.APIResponse responseGRPC = stub.tracking(requestGRPC);
+		    
+		    log.info("\nRESPONSE:\nStatus : " + responseGRPC.getStatus() + "\nTimestamp: " + new Date(responseGRPC.getLiveStartDate().getSeconds() * 1000) +
+		    		"\nMethod: " + responseGRPC.getAction() + "\nMicroservice: " + responseGRPC.getService() + "\nResource: " + responseGRPC.getResource());
+			} catch (Exception e) {
+				System.out.print("Pao iz posthandle");
+				log.info("Status: " + HttpStatus.SERVICE_UNAVAILABLE);
+			}
 	}
 
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object object, ModelAndView model) throws Exception {
-		ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 9090).usePlaintext().build();
-	    eventsGrpc.eventsBlockingStub stub =  eventsGrpc.newBlockingStub(channel);
-		try {
-		log.info("Handler execution is complete");
 		
-		Instant time = Instant.now();
-	    Timestamp timestamp = Timestamp.newBuilder().setSeconds(time.getEpochSecond()).setNanos(time.getNano()).build();
-	    
-	    Events.APIRequest requestGRPC = Events.APIRequest.newBuilder().setAction(request.getMethod()).setResource(request.getRequestURI()).setService("notification-service").setLiveStartDate(timestamp)
-	    		.setStatus(response.getStatus()).build();
-	    Events.APIResponse responseGRPC = stub.tracking(requestGRPC);
-	    
-	    log.info("\nRESPONSE:\nStatus : " + responseGRPC.getStatus() + "\nTimestamp: " + new Date(responseGRPC.getLiveStartDate().getSeconds() * 1000) +
-	    		"\nMethod: " + responseGRPC.getAction() + "\nMicroservice: " + responseGRPC.getService() + "\nResource: " + responseGRPC.getResource());
-		} catch (Exception e) {
-			System.out.print("Pao iz posthandle");
-			log.info("Status: " + HttpStatus.SERVICE_UNAVAILABLE);
-		}
-	
 	}
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object object) throws Exception {
-		ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 9090).usePlaintext().build();
-	    eventsGrpc.eventsBlockingStub stub =  eventsGrpc.newBlockingStub(channel);
-		try {
-		log.info("PreHandle method is calling");
-		
-		Instant time = Instant.now();
-	    Timestamp timestamp = Timestamp.newBuilder().setSeconds(time.getEpochSecond()).setNanos(time.getNano()).build();
-	    
-	    Events.APIRequest requestGRPC = Events.APIRequest.newBuilder().setAction(request.getMethod()).setResource(request.getRequestURI()).setService("notification-service").setLiveStartDate(timestamp)
-	    		.setStatus(response.getStatus()).build();
-	    Events.APIResponse responseGRPC = stub.tracking(requestGRPC);
-	    
-	    log.info("\nREQUEST:\nStatus : " + responseGRPC.getStatus() + "\nTimestamp: " + new Date(responseGRPC.getLiveStartDate().getSeconds() * 1000) +
-	    		"\nMethod: " + responseGRPC.getAction() + "\nMicroservice: " + responseGRPC.getService() + "\nResource: " + responseGRPC.getResource());
 		return true;
-		} catch (Exception e) {
-		log.info("Status: " + HttpStatus.SERVICE_UNAVAILABLE);
-		return true;
-	}
 	}
 }
