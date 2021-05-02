@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.outofoffice.notificationsservice.model.Employee;
-;
+
 
 @Repository
 public class EmployeeRepository extends SimpleJpaRepository<Employee, Long> {
