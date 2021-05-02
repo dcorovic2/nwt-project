@@ -15,7 +15,6 @@ import com.google.protobuf.Timestamp;
 import events.grpc.Events;
 import events.grpc.eventsGrpc;
 
-import static java.lang.System.currentTimeMillis;
 import java.sql.Date;
 
 import io.grpc.ManagedChannel;
@@ -24,16 +23,17 @@ import io.grpc.ManagedChannelBuilder;
 @Component
 public class LoggerInterceptor implements HandlerInterceptor {
 	Logger log = org.slf4j.LoggerFactory.getLogger(this.getClass());
-	ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 9091).usePlaintext().build();
-    eventsGrpc.eventsBlockingStub stub =  eventsGrpc.newBlockingStub(channel);
+	
 	
 	@Override
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object object, Exception arg3) throws Exception {
-		log.info("Request is complete");
+		
 	}
 
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object object, ModelAndView model) throws Exception {
+		ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 9090).usePlaintext().build();
+	    eventsGrpc.eventsBlockingStub stub =  eventsGrpc.newBlockingStub(channel);
 		try {
 		log.info("Handler execution is complete");
 		
@@ -47,6 +47,7 @@ public class LoggerInterceptor implements HandlerInterceptor {
 	    log.info("\nRESPONSE:\nStatus : " + responseGRPC.getStatus() + "\nTimestamp: " + new Date(responseGRPC.getLiveStartDate().getSeconds() * 1000) +
 	    		"\nMethod: " + responseGRPC.getAction() + "\nMicroservice: " + responseGRPC.getService() + "\nResource: " + responseGRPC.getResource());
 		} catch (Exception e) {
+			System.out.print("Pao iz posthandle");
 			log.info("Status: " + HttpStatus.SERVICE_UNAVAILABLE);
 		}
 	
@@ -54,6 +55,8 @@ public class LoggerInterceptor implements HandlerInterceptor {
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object object) throws Exception {
+		ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 9090).usePlaintext().build();
+	    eventsGrpc.eventsBlockingStub stub =  eventsGrpc.newBlockingStub(channel);
 		try {
 		log.info("PreHandle method is calling");
 		
@@ -67,7 +70,7 @@ public class LoggerInterceptor implements HandlerInterceptor {
 	    log.info("\nREQUEST:\nStatus : " + responseGRPC.getStatus() + "\nTimestamp: " + new Date(responseGRPC.getLiveStartDate().getSeconds() * 1000) +
 	    		"\nMethod: " + responseGRPC.getAction() + "\nMicroservice: " + responseGRPC.getService() + "\nResource: " + responseGRPC.getResource());
 		return true;
-	} catch (Exception e) {
+		} catch (Exception e) {
 		log.info("Status: " + HttpStatus.SERVICE_UNAVAILABLE);
 		return true;
 	}
