@@ -1,5 +1,6 @@
 package com.outofoffice.notificationsservice.service;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
@@ -7,8 +8,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.ResourceAccessException;
@@ -31,9 +37,14 @@ import com.outofoffice.notificationsservice.responseobjects.NotificationResponse
 public class NotificationService {
 	@Autowired
 	private RestTemplate restTemplate;
-	private String uri = "http://holiday-service/getlistofemployees/";
+	private String uri = "http://holiday-service/getlistofemployees/1";
 	private String uriEmployee = "http://employee-service/getAllEmployeesByIds/";
 
+	@Autowired
+	private DiscoveryClient discoveryClient;
+	
+	
+	
 	private final NotificationsRepository notificationRepository;
 	private final NotificationsTypeRepository notificationtypeRepository;
 	private final NotificationsTypeService notificationTypeService;
@@ -60,6 +71,7 @@ public class NotificationService {
 //	}
 
 	public ResponseEntity<?> insertNotification(NotificationRequest notif, Long employeeId, Long notificationTypeID) {
+		
 		Employee employee = employeeService.GetEmployeeById(employeeId);
 		List<Employee> employeeList = new ArrayList<>();
 		employeeList.add(employee);
@@ -117,12 +129,23 @@ public class NotificationService {
 
 	public ResponseEntity<?> insertNotificationsForHoliday(Long holidayTypeId) {
 		try {
+//			List<ServiceInstance> instances = discoveryClient.getInstances("ZUUL-SERVICE");
+//			ServiceInstance serviceInstance = instances.get(0);
+//			System.out.print("ISPIIIIIIIIIIIIISUJEEEEEE:" + serviceInstance);
+//			
+//			String baseUrl = serviceInstance.getUri().toString();
+//			System.out.print(baseUrl);
+//			baseUrl = baseUrl + "/holiday/getlistofemployees/";
+			
 			uri = uri + holidayTypeId;
 			restTemplate.setErrorHandler(new RestTemplateResponseErrorHandler());
 			NotificationResponse response = restTemplate.getForObject(uri, NotificationResponse.class);
 			NotificationsType holidaynotificationtype = new NotificationsType("H", response.getText(),
 					response.getText());
 			notificationtypeRepository.save(holidaynotificationtype);
+			
+			
+			
 			List<Long> ids = response.getId();
 			Employee[] employees = restTemplate.postForObject(uriEmployee,ids,Employee[].class);
 
@@ -144,6 +167,13 @@ public class NotificationService {
 					"Connection refused!", OffsetDateTime.now());
 			return new ResponseEntity<>(apiError, new HttpHeaders(), apiError.getStatus());
 		}
+		
 	}
 
+	
+	private static HttpEntity<?> getHeaders() throws IOException {
+		HttpHeaders headers = new HttpHeaders();
+		headers.set("Accept", MediaType.APPLICATION_JSON_VALUE);
+		return new HttpEntity<>(headers);
+	}
 }
