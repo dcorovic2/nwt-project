@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -87,6 +88,7 @@ public class EmployeeController {
 	}
 
 	@ApiOperation(value = "Get All Employees", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@CrossOrigin(origins = "http://localhost:4200")
 	@GetMapping(value = "/allemployees")
 	public ResponseEntity<List<Employee>> getEmployees() throws Exception {
 		List<Employee> employees = employeeService.getAllEmployees();
@@ -107,6 +109,7 @@ public class EmployeeController {
 		return new ResponseEntity<LeaveRequestResponse>(response, HttpStatus.OK);
 	}
 	@ApiOperation(value="Send employees to holiday service",consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE )
+	@CrossOrigin(origins = "http://localhost:4200")
 	@GetMapping(value="/getAllEmployeesNames")
 	public ResponseEntity<List<HolidayResponse>> getAllNames(){
 		List<HolidayResponse> response = employeeService.getAllEmployeesNames();

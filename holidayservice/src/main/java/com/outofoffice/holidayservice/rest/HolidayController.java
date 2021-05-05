@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -80,12 +81,14 @@ public class HolidayController {
 	}
 	
 	@ApiOperation(value = "Get list of employees for specific holiday type")
+	@CrossOrigin(origins = "http://localhost:4200")
 	@GetMapping(value = "/getlistofemployees/{holidayTypeId}")
 	public ResponseEntity<?> getAllHolidayEmployeeList(@PathVariable Long holidayTypeId) {
 		return holidayService.getAllEmployees(holidayTypeId);
 	}
 	
 	@ApiOperation(value = "Get list of all holidays")
+	@CrossOrigin(origins = "http://localhost:4200")
 	@GetMapping(value = "/getlistofholidays")
 	public ResponseEntity<?> getListOfHolidays() {
 		return holidayService.getAllHolidays();
