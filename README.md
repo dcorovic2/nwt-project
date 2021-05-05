@@ -5,7 +5,7 @@ Out of office is a web application created for leave tracking of an employee at 
 ## Installation
 
 1. Java installation and setup
-2. Loombok instalation and setup in Eclipse
+2. Lombok instalation and setup in Eclipse
 
 ```bash
 git clone https://github.com/dcorovic2/nwt-project.git
