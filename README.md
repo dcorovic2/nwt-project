@@ -1,6 +1,6 @@
 # Out of office
 
-Out of office is a web application created for an employee leave tracking at company. 
+Out of office is a web application created for leave tracking of an employee at the company. 
 
 ## Installation
 
@@ -16,7 +16,7 @@ git clone https://github.com/dcorovic2/nwt-project.git
 ```python
 import project in eclipse
 Run as Java application:
-    - config-server ("https://github.com/nudiey/configuration-server") --> Configuration server is used for setting up main configuration properties (server port on eureka,      database configuration) of all microservcies
+    - config-server ("https://github.com/nudiey/configuration-server") --> Configuration server is used for setting up main configuration properties (server port on eureka,database configuration) of all microservcies
     - eureka service discovery
     - system-events (optinal) --> system events is used for tracking microservices activities
     - zuul-server --> API Gateway 
