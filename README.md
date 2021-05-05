@@ -8,7 +8,7 @@ Out of office is a web application created for an employee leave tracking at com
 2. Loombok instalation and setup in Eclipse
 
 ```bash
-git clone project.url
+git clone https://github.com/dcorovic2/nwt-project.git
 ```
 
 ## Usage
