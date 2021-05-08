@@ -1,8 +1,6 @@
 package com.outofoffice.leaverequestservice.interceptor;
 
 
-import java.sql.Date;
-
 import java.time.Instant;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,6 +16,10 @@ import com.google.protobuf.Timestamp;
 
 import events.grpc.Events;
 import events.grpc.eventsGrpc;
+
+import static java.lang.System.currentTimeMillis;
+import java.sql.Date;
+
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 
@@ -26,15 +28,13 @@ public class LoggerInterceptor implements HandlerInterceptor {
 	Logger log = org.slf4j.LoggerFactory.getLogger(this.getClass());
 	ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 9091).usePlaintext().build();
     eventsGrpc.eventsBlockingStub stub =  eventsGrpc.newBlockingStub(channel);
+    
 	
 	@Override
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object object, Exception arg3) throws Exception {
 		try {
 			log.info("Request is complete");
 			
-			ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 9091).usePlaintext().build();
-		    eventsGrpc.eventsBlockingStub stub =  eventsGrpc.newBlockingStub(channel);
-		    
 			Instant time = Instant.now();
 		    Timestamp timestamp = Timestamp.newBuilder().setSeconds(time.getEpochSecond()).setNanos(time.getNano()).build();
 		    
