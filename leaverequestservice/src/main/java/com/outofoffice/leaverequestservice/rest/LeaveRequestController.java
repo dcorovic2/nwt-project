@@ -108,8 +108,8 @@ public class LeaveRequestController {
 		String id_request = id + "";
 		request = leaveRequestRepository.findById(id)
 				.orElseThrow(() -> new NotFoundException(id_request, "Leave Request", "ID", ""));
-		Long employeeId = request.getEmployeeId();
-		RequestNotification reqNotification = new RequestNotification(employeeId, statusRequest.getNotificationsId(), statusRequest.getReason());
+		RequestNotification reqNotification = new RequestNotification(request.getEmployeeId(), statusRequest.getNotificationsId(),
+				statusRequest.getReason(), request.getId());
 		
 		rabbitTemplate.convertAndSend(RabbitConfiguration.EXCHANGE, RabbitConfiguration.ROUTING_KEY, reqNotification);
 		return LeaveRequestService.updateRequestStatus(statusRequest, id);

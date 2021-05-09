@@ -8,12 +8,12 @@ import javax.persistence.Id;
 public class LeaveStatusRequest {
 	
 	private int statusId;
-	private int notificationsId;
+	private Long notificationsId;
 	private String reason;
 	
 	public LeaveStatusRequest() {}
 
-	public LeaveStatusRequest(int statusId, int notificationsId, String reason) {
+	public LeaveStatusRequest(int statusId, Long notificationsId, String reason) {
 		super();
 		this.statusId = statusId;
 		this.notificationsId = notificationsId;
@@ -36,11 +36,11 @@ public class LeaveStatusRequest {
 		this.statusId = statusId;
 	}
 
-	public int getNotificationsId() {
+	public Long getNotificationsId() {
 		return notificationsId;
 	}
 
-	public void setNotificationsId(int notificationsId) {
+	public void setNotificationsId(Long notificationsId) {
 		this.notificationsId = notificationsId;
 	}
 	
