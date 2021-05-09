@@ -4,6 +4,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 import com.outofoffice.dto.UserDataDTO;
 import com.outofoffice.dto.UserResponseDTO;
@@ -30,6 +33,8 @@ import io.swagger.annotations.Authorization;
 @RequestMapping("/users")
 @Api(tags = "users")
 public class UserController {
+	@Autowired
+	public RestTemplate restTemplate;
 
   @Autowired
   private UserService userService;
