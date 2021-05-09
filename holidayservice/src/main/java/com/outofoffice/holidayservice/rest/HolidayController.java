@@ -33,6 +33,9 @@ import com.outofoffice.holidayservice.responseobjects.HolidayResponse;
 import com.outofoffice.holidayservice.service.HolidayService;
 
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.Authorization;
 
 @RestController
 @RequestMapping(value = "/")
@@ -43,7 +46,7 @@ public class HolidayController {
 	public HolidayController(HolidayService holidayService) {
 		this.holidayService = holidayService;
 	}
-		
+	
 	@ApiOperation(value = "Admin creates a holiday with empty list of employees")
 	@PostMapping(value = "/holiday/{holidayTypeID}")
 	public ResponseEntity<?> insertHoliday(@RequestBody @Validated HolidayRequest requestHoliday, @PathVariable long holidayTypeID, Errors errors) {
@@ -87,7 +90,7 @@ public class HolidayController {
 		return holidayService.getAllEmployees(holidayTypeId);
 	}
 	
-	@ApiOperation(value = "Get list of all holidays")
+	//@ApiOperation(value = "Get list of all holidays")
 	@CrossOrigin(origins = "http://localhost:4200")
 	@GetMapping(value = "/getlistofholidays")
 	public ResponseEntity<?> getListOfHolidays() {

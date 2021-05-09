@@ -8,15 +8,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
+import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 import org.springframework.context.annotation.Bean;
+import org.springframework.web.client.RestTemplate;
 
+import com.outofoffice.filter.ErrorFilter;
+import com.outofoffice.filter.PostFilter;
+import com.outofoffice.filter.PreFilter;
+import com.outofoffice.filter.RouteFilter;
 import com.outofoffice.model.Role;
 import com.outofoffice.model.User;
 import com.outofoffice.service.UserService;
 
 @SpringBootApplication
 @EnableDiscoveryClient
+@EnableZuulProxy
 public class JwtAuthServiceApp implements CommandLineRunner {
 
   @Autowired
@@ -69,5 +78,34 @@ public class JwtAuthServiceApp implements CommandLineRunner {
     client3.setRoles(new ArrayList<Role>(Arrays.asList(Role.ROLE_CLIENT)));
     userService.signup(client3);
   }
+  
+  
+  @Bean
+  @LoadBalanced
+  RestTemplate restTemplateWithErrorHandler() {
+      return new RestTemplateBuilder()
+          .build();
+  }
+  
+  
+  	@Bean
+	public PreFilter preFilter() {
+		return new PreFilter();
+	}
+
+	@Bean
+	public PostFilter postFilter() {
+		return new PostFilter();
+	}
+
+	@Bean
+	public ErrorFilter errorFilter() {
+		return new ErrorFilter();
+	}
+
+	@Bean
+	public RouteFilter routeFilter() {
+		return new RouteFilter();
+	}
 
 }
