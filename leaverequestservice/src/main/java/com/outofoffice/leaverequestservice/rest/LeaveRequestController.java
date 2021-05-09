@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpStatus;
@@ -24,13 +25,17 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
 
+import com.outofoffice.leaverequestservice.configuration.RabbitConfiguration;
+import com.outofoffice.leaverequestservice.errorhandling.NotFoundException;
 import com.outofoffice.leaverequestservice.errorhandling.NotValidParamException;
 import com.outofoffice.leaverequestservice.errorhandling.RestTemplateException;
 import com.outofoffice.leaverequestservice.errorhandling.RestTemplateResponseErrorHandler;
 import com.outofoffice.leaverequestservice.model.LeaveRequest;
+import com.outofoffice.leaverequestservice.repository.LeaveRequestRepository;
 import com.outofoffice.leaverequestservice.service.LeaveRequestService;
 import com.outofoffice.leaverequestservice.requestobjects.LeaveRequestRequest;
 import com.outofoffice.leaverequestservice.requestobjects.LeaveStatusRequest;
+import com.outofoffice.leaverequestservice.requestobjects.RequestNotification;
 import com.outofoffice.leaverequestservice.responseobjects.LeaveRequestResponse;
 
 import io.swagger.annotations.ApiOperation;
@@ -40,12 +45,17 @@ import io.swagger.annotations.ApiOperation;
 
 public class LeaveRequestController {
 	private final LeaveRequestService LeaveRequestService;
+	private final LeaveRequestRepository leaveRequestRepository;
 	
 	@Autowired
-	RestTemplate restTemplate;  
+	RestTemplate restTemplate; 
+	
+	@Autowired
+	RabbitTemplate rabbitTemplate;
 
-	public LeaveRequestController(LeaveRequestService LeaveRequestService) {
+	public LeaveRequestController(LeaveRequestService LeaveRequestService, LeaveRequestRepository leaveRequestRepository) {
 		this.LeaveRequestService = LeaveRequestService;
+		this.leaveRequestRepository = leaveRequestRepository;
 	}
 	
 	@PostMapping(value = "/request")
@@ -93,7 +103,15 @@ public class LeaveRequestController {
 		return LeaveRequestService.updateRequest(requestRequest, id, response1, response2);
 	}
 	@PatchMapping(value = "/request/{id}")
-	public ResponseEntity<?> updateRequestStatus(@RequestBody LeaveStatusRequest statusRequest, @PathVariable long id) {		
+	public ResponseEntity<?> updateRequestStatus(@RequestBody LeaveStatusRequest statusRequest, @PathVariable long id) {
+		LeaveRequest request;
+		String id_request = id + "";
+		request = leaveRequestRepository.findById(id)
+				.orElseThrow(() -> new NotFoundException(id_request, "Leave Request", "ID", ""));
+		Long employeeId = request.getEmployeeId();
+		RequestNotification reqNotification = new RequestNotification(employeeId, statusRequest.getNotificationsId(), statusRequest.getReason());
+		
+		rabbitTemplate.convertAndSend(RabbitConfiguration.EXCHANGE, RabbitConfiguration.ROUTING_KEY, reqNotification);
 		return LeaveRequestService.updateRequestStatus(statusRequest, id);
 	}
 

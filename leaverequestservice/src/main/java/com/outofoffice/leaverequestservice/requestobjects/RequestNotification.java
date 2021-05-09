@@ -1,21 +1,15 @@
 package com.outofoffice.leaverequestservice.requestobjects;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
-public class LeaveStatusRequest {
-	
-	private int statusId;
+public class RequestNotification {
+	private Long employeeId;
 	private int notificationsId;
 	private String reason;
 	
-	public LeaveStatusRequest() {}
+	public RequestNotification() {}
 
-	public LeaveStatusRequest(int statusId, int notificationsId, String reason) {
+	public RequestNotification(Long employeeId, int notificationsId, String reason) {
 		super();
-		this.statusId = statusId;
+		this.employeeId = employeeId;
 		this.notificationsId = notificationsId;
 		this.reason = reason;
 	}
@@ -28,12 +22,12 @@ public class LeaveStatusRequest {
 		this.reason = reason;
 	}
 
-	public int getStatusId() {
-		return statusId;
+	public Long getEmployeeId() {
+		return employeeId;
 	}
 
-	public void setStatusId(int statusId) {
-		this.statusId = statusId;
+	public void setEmployeeId(Long employeeId) {
+		this.employeeId = employeeId;
 	}
 
 	public int getNotificationsId() {
@@ -43,10 +37,4 @@ public class LeaveStatusRequest {
 	public void setNotificationsId(int notificationsId) {
 		this.notificationsId = notificationsId;
 	}
-	
-	
-	
-	
-	
-
 }
