@@ -6,6 +6,7 @@ import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
@@ -42,9 +43,7 @@ public class NotificationService {
 
 	@Autowired
 	private DiscoveryClient discoveryClient;
-	
-	
-	
+
 	private final NotificationsRepository notificationRepository;
 	private final NotificationsTypeRepository notificationtypeRepository;
 	private final NotificationsTypeService notificationTypeService;
@@ -53,12 +52,12 @@ public class NotificationService {
 
 	public NotificationService(NotificationsRepository NotificationsRepository,
 			NotificationsTypeService notificationTypeService, EmployeeService employeeService,
-			NotificationsTypeRepository notificationtypeRepository,EmployeeRepository employeeRepo) {
+			NotificationsTypeRepository notificationtypeRepository, EmployeeRepository employeeRepo) {
 		this.notificationRepository = NotificationsRepository;
 		this.notificationTypeService = notificationTypeService;
 		this.employeeService = employeeService;
 		this.notificationtypeRepository = notificationtypeRepository;
-		this.employeeRepo=employeeRepo;
+		this.employeeRepo = employeeRepo;
 	}
 
 //	public List<Notification> insertBulkNotifications(List<Notification> notifications) {
@@ -71,7 +70,7 @@ public class NotificationService {
 //	}
 
 	public ResponseEntity<?> insertNotification(NotificationRequest notif, Long employeeId, Long notificationTypeID) {
-		
+
 		Employee employee = employeeService.GetEmployeeById(employeeId);
 		List<Employee> employeeList = new ArrayList<>();
 		employeeList.add(employee);
@@ -81,6 +80,27 @@ public class NotificationService {
 				employeeList, notif.getDismiss());
 		Notification newnotif = notificationRepository.save(notification);
 		return new ResponseEntity<>(newnotif, HttpStatus.OK);
+	}
+
+	public Notification insertNotificationForRequest(Long requestId, Long employeeId, Long notificationTypeId,
+			String reason) {
+		try {
+			Employee employee = new Employee();
+			NotificationsType notifType = new NotificationsType();
+			employee = employeeService.GetEmployeeById(employeeId);
+			notifType = notificationTypeService.getById(notificationTypeId);
+
+			String text = "Your request with ID: " + requestId + " is " + notifType.getDisplayName()
+					+ " by admin with reason: " + reason + "!";
+
+			Notification notification = new Notification(OffsetDateTime.now(), employee.getDepartment_id(), text,
+					notifType);
+			Notification newnotif = notificationRepository.save(notification);
+			return newnotif;
+		} catch (Exception e) {
+			new NotFoundException();
+			return null;
+		}
 	}
 
 	public ResponseEntity<?> getNotificationList() {
@@ -136,25 +156,24 @@ public class NotificationService {
 //			String baseUrl = serviceInstance.getUri().toString();
 //			System.out.print(baseUrl);
 //			baseUrl = baseUrl + "/holiday/getlistofemployees/";
-			
+
 			uri = uri + holidayTypeId;
 			restTemplate.setErrorHandler(new RestTemplateResponseErrorHandler());
 			NotificationResponse response = restTemplate.getForObject(uri, NotificationResponse.class);
 			NotificationsType holidaynotificationtype = new NotificationsType("H", response.getText(),
 					response.getText());
 			notificationtypeRepository.save(holidaynotificationtype);
-			
-			
-			
+
 			List<Long> ids = response.getId();
-			Employee[] employees = restTemplate.postForObject(uriEmployee,ids,Employee[].class);
+			Employee[] employees = restTemplate.postForObject(uriEmployee, ids, Employee[].class);
 
 			for (Employee employee : employees) {
 				OffsetDateTime date = OffsetDateTime.now();
 				List<Employee> empl = new ArrayList<>();
 				empl.add(employee);
 				employeeRepo.save(employee);
-				Notification notification1 = new Notification(date,employee.getDepartment_id(),response.getText(),holidaynotificationtype,empl,0);
+				Notification notification1 = new Notification(date, employee.getDepartment_id(), response.getText(),
+						holidaynotificationtype, empl, 0);
 				notificationRepository.save(notification1);
 			}
 			return null;
@@ -167,10 +186,9 @@ public class NotificationService {
 					"Connection refused!", OffsetDateTime.now());
 			return new ResponseEntity<>(apiError, new HttpHeaders(), apiError.getStatus());
 		}
-		
+
 	}
 
-	
 	private static HttpEntity<?> getHeaders() throws IOException {
 		HttpHeaders headers = new HttpHeaders();
 		headers.set("Accept", MediaType.APPLICATION_JSON_VALUE);

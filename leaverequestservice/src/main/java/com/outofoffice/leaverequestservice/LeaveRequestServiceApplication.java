@@ -56,17 +56,17 @@ public class LeaveRequestServiceApplication {
 			
 			NotificationsType notification1 = new NotificationsType("P","Pending","Pending");
 			notificationsTypeRepository.save(notification1);
-			NotificationsType notification2 = new NotificationsType("A","Approve","Approved Request");
+			NotificationsType notification2 = new NotificationsType("A","Approved","Approved Request");
 			notificationsTypeRepository.save(notification2);
-			NotificationsType notification3 = new NotificationsType("R","Reject","Rejected Request");
+			NotificationsType notification3 = new NotificationsType("R","Rejected","Rejected Request");
 			notificationsTypeRepository.save(notification3);
 			
 			LocalDate date1 = LocalDate.now();
 			
 			
 			LeaveRequest request1 = new LeaveRequest("comment1", 10, 1L, date1, date1.plusDays(10), leavetype1, leavestatus1, notification1, 15L);
-			LeaveRequest request2 = new LeaveRequest("comment2", 20, 4L, date1, date1.plusDays(20), leavetype1, leavestatus1, notification1, 15L);
-			LeaveRequest request3 = new LeaveRequest("comment3", 14, 6L, date1, date1.plusDays(14), leavetype1, leavestatus1, notification1, 15L);
+			LeaveRequest request2 = new LeaveRequest("comment2", 20, 2L, date1, date1.plusDays(20), leavetype1, leavestatus1, notification1, 15L);
+			LeaveRequest request3 = new LeaveRequest("comment3", 14, 3L, date1, date1.plusDays(14), leavetype1, leavestatus1, notification1, 15L);
 			leaveRequestRepository.save(request1);
 			leaveRequestRepository.save(request2);
 			leaveRequestRepository.save(request3);

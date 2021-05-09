@@ -1,4 +1,4 @@
-package com.outofoffice.leaverequestservice.requestobjects;
+package com.outofoffice.notificationsservice.responseobjects;
 
 public class RequestNotification {
 	private Long employeeId;
