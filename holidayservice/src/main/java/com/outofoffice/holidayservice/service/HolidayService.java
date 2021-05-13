@@ -202,6 +202,7 @@ public class HolidayService {
 
 	public ResponseEntity<?> updateHolidayListOfEmployees(Long employeeid) {
 		List<Holiday> holidays = holidayRepository.deleteByEmployees(employeeid);
+		holidayRepository.saveAll(holidays);
 		
 //		if(holidays.isEmpty()) {
 //			throw new NoDataException();
