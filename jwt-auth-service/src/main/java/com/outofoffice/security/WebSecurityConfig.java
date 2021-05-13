@@ -34,10 +34,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         
         /////HOLIDAY-MS
         .antMatchers(HttpMethod.POST,"/holiday/holiday/{holidayTypeID}").hasRole("ADMIN")
-        .antMatchers(HttpMethod.PATCH,"/holiday/{holidayTypeID}/{employeeID}/{firstAndLastName}").hasRole("CLIENT")
-        .antMatchers(HttpMethod.PATCH,"/holiday/{holidayId}").hasRole("ADMIN")
-        .antMatchers(HttpMethod.PATCH,"/holidayupdate/{employeeId}").hasRole("ADMIN")
-        .antMatchers(HttpMethod.DELETE,"/holiday/{holidayId}").hasRole("ADMIN")
+        .antMatchers(HttpMethod.PATCH,"/holiday/holiday/{holidayTypeID}/{employeeID}/{firstAndLastName}").hasRole("CLIENT")
+        .antMatchers(HttpMethod.PATCH,"/holiday/holiday/{holidayId}").hasRole("ADMIN")
+        .antMatchers(HttpMethod.PATCH,"/holiday/holidayupdate/{employeeId}").hasRole("ADMIN")
+        .antMatchers(HttpMethod.DELETE,"/holiday/holiday/{holidayId}").hasRole("ADMIN")
         .antMatchers(HttpMethod.GET,"/holiday/getlistofemployees/{holidayTypeId}").hasRole("ADMIN")
         .antMatchers(HttpMethod.GET,"/holiday/getlistofholidays").permitAll()
         .antMatchers(HttpMethod.GET,"/holiday/holiday/{startDate}/{daysNum}").permitAll()
