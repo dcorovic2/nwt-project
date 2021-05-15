@@ -40,102 +40,107 @@ public class LeaveRequestService {
 	}
 
 	public ResponseEntity<?> insertRequest(LeaveRequestRequest req, LeaveRequestResponse response, long response2) {
-		if(!response.allowance) {
+		if (!response.allowance) {
 			throw new NotValidParamException("You do not have " + req.getDaysNum() + " days allowed for leave!");
-		}
-		LocalDate end = req.getStartDate();
-		end = end.plusDays(req.getDaysNum());
-		List<LeaveRequest> requestList = leaveRequestRepository.findAll();
-		List<Long> employeeList = response.getEmployee_ids();
-		int x = 1;
-		for(Long e : employeeList) {
-			for(LeaveRequest r : requestList) {
-				if(r.getEmployeeId() == e) {
-					if(r.getStartDate().isBefore(req.getStartDate()) && r.getEndDate().isAfter(req.getStartDate())) {
-						x++;
-						break;
-					}
-					if(r.getStartDate().isEqual(req.getStartDate())) {
-						x++;
-						break;
-					}
-					if(r.getStartDate().isAfter(req.getStartDate()) && r.getEndDate().isBefore(end)) {
-						x++;
-						break;
+		} else {
+			LocalDate end = req.getStartDate();
+			end = end.plusDays(req.getDaysNum());
+			List<LeaveRequest> requestList = leaveRequestRepository.findAll();
+			List<Long> employeeList = response.getEmployee_ids();
+			int x = 1;
+			for (Long e : employeeList) {
+				for (LeaveRequest r : requestList) {
+					if (r.getEmployeeId() == e) {
+						if (r.getStartDate().isBefore(req.getStartDate())
+								&& r.getEndDate().isAfter(req.getStartDate())) {
+							x++;
+							break;
+						}
+						if (r.getStartDate().isEqual(req.getStartDate())) {
+							x++;
+							break;
+						}
+						if (r.getStartDate().isAfter(req.getStartDate()) && r.getEndDate().isBefore(end)) {
+							x++;
+							break;
+						}
 					}
 				}
 			}
-		}
-		if(x > response.getDepartmentallowance()) {
-			throw new NotValidParamException("Too many employees from your department took leave at the same time!");
-		}
-		
-		LeaveStatus statusId = LeaveStatusService.getById(1);
-		LeaveType typeId = LeaveTypeService.getById(req.getTypeId());
-		NotificationsType notification = NotificationsTypeService.getById(1);
-		
-		long rest_days = response.getDepartmentallowance() - response2;
+			if (x > response.getDepartmentallowance()) {
+				throw new NotValidParamException(
+						"Too many employees from your department took leave at the same time!");
+			}
 
+			LeaveStatus statusId = LeaveStatusService.getById(1);
+			LeaveType typeId = LeaveTypeService.getById(req.getTypeId());
+			NotificationsType notification = NotificationsTypeService.getById(1);
 
-		LeaveRequest request = new LeaveRequest(req.getComment(), req.getDaysNum(), req.getEmployeeId(),
-				req.getStartDate(), end, typeId, statusId, notification, rest_days);
-		LeaveRequest newreq = leaveRequestRepository.save(request);
-		return new ResponseEntity<>(newreq, HttpStatus.OK);
+			long rest_days = response.getDays() - req.getDaysNum() + response2;
+
+			LeaveRequest request = new LeaveRequest(req.getComment(), req.getDaysNum(), req.getEmployeeId(),
+					req.getStartDate(), end, typeId, statusId, notification, rest_days);
+			LeaveRequest newreq = leaveRequestRepository.save(request);
+			return new ResponseEntity<>(newreq, HttpStatus.OK);
+		}
 	}
 
-	public ResponseEntity<?> updateRequest(LeaveRequestRequest req, long id, LeaveRequestResponse response, long response2) {
-		if(!response.allowance) {
+	public ResponseEntity<?> updateRequest(LeaveRequestRequest req, long id, LeaveRequestResponse response,
+			long response2) {
+		if (!response.allowance) {
 			throw new NotValidParamException("You do not have " + req.getDaysNum() + " days allowed for leave!");
-		}
-		LocalDate end = req.getStartDate();
-		end = end.plusDays(req.getDaysNum());
-		List<LeaveRequest> requestList = leaveRequestRepository.findAll();
-		List<Long> employeeList = response.getEmployee_ids();
-		int x = 1;
-		for(Long e : employeeList) {
-			for(LeaveRequest r : requestList) {
-				if(r.getEmployeeId() == e) {
-					if(r.getStartDate().isBefore(req.getStartDate()) && r.getEndDate().isAfter(req.getStartDate())) {
-						x++;
-						break;
-					}
-					if(r.getStartDate().isEqual(req.getStartDate())) {
-						x++;
-						break;
-					}
-					if(r.getStartDate().isAfter(req.getStartDate()) && r.getEndDate().isBefore(end)) {
-						x++;
-						break;
+		} else {
+			LocalDate end = req.getStartDate();
+			end = end.plusDays(req.getDaysNum());
+			List<LeaveRequest> requestList = leaveRequestRepository.findAll();
+			List<Long> employeeList = response.getEmployee_ids();
+			int x = 1;
+			for (Long e : employeeList) {
+				for (LeaveRequest r : requestList) {
+					if (r.getEmployeeId() == e) {
+						if (r.getStartDate().isBefore(req.getStartDate())
+								&& r.getEndDate().isAfter(req.getStartDate())) {
+							x++;
+							break;
+						}
+						if (r.getStartDate().isEqual(req.getStartDate())) {
+							x++;
+							break;
+						}
+						if (r.getStartDate().isAfter(req.getStartDate()) && r.getEndDate().isBefore(end)) {
+							x++;
+							break;
+						}
 					}
 				}
 			}
-		}
-		if(x > response.getDepartmentallowance()) {
-			throw new NotValidParamException("Too many employees from your department took leave at the same time!");
-		}
-		
-		
-		LeaveStatus statusId = LeaveStatusService.getById(1);
-		LeaveType typeId = LeaveTypeService.getById(req.getTypeId());
-		NotificationsType notification = NotificationsTypeService.getById(1);
-		long rest_days = response.getDepartmentallowance() - response2;
-		LeaveRequest request;
-		String id_request = id + "";
-		request = leaveRequestRepository.findById(id)
-				.orElseThrow(() -> new NotFoundException(id_request, "Leave Request", "ID", ""));
+			if (x > response.getDepartmentallowance()) {
+				throw new NotValidParamException(
+						"Too many employees from your department took leave at the same time!");
+			}
 
-		request.setComment(req.getComment());
-		request.setDaysNum(req.getDaysNum());
-		request.setEmployeeId(req.getEmployeeId());
-		request.setEndDate(end);
-		request.setStartDate(req.getStartDate());
-		request.setLeave_status(statusId);
-		request.setLeave_type(typeId);
-		request.setNotifications_type(notification);
-		request.setRestDaysNum(rest_days);
+			LeaveStatus statusId = LeaveStatusService.getById(1);
+			LeaveType typeId = LeaveTypeService.getById(req.getTypeId());
+			NotificationsType notification = NotificationsTypeService.getById(1);
+			long rest_days = response.getDays() - req.getDaysNum() + response2;
+			LeaveRequest request;
+			String id_request = id + "";
+			request = leaveRequestRepository.findById(id)
+					.orElseThrow(() -> new NotFoundException(id_request, "Leave Request", "ID", ""));
 
-		LeaveRequest newreq = leaveRequestRepository.save(request);
-		return new ResponseEntity<>(newreq, HttpStatus.OK);
+			request.setComment(req.getComment());
+			request.setDaysNum(req.getDaysNum());
+			request.setEmployeeId(req.getEmployeeId());
+			request.setEndDate(end);
+			request.setStartDate(req.getStartDate());
+			request.setLeave_status(statusId);
+			request.setLeave_type(typeId);
+			request.setNotifications_type(notification);
+			request.setRestDaysNum(rest_days);
+
+			LeaveRequest newreq = leaveRequestRepository.save(request);
+			return new ResponseEntity<>(newreq, HttpStatus.OK);
+		}
 	}
 
 	public ResponseEntity<?> updateRequestStatus(LeaveStatusRequest req, long id) {
@@ -181,14 +186,14 @@ public class LeaveRequestService {
 		List<LeaveRequest> requestList;
 		if (statusId == 0) {
 			requestList = leaveRequestRepository.findAll();
-			if(requestList.isEmpty()) {
+			if (requestList.isEmpty()) {
 				throw new NoDataException();
 			}
 			return new ResponseEntity<>(requestList, HttpStatus.OK);
 		}
 		LeaveStatus status = LeaveStatusService.getById(statusId);
 		requestList = leaveRequestRepository.getAllRequestsForStatus(status);
-		if(requestList.isEmpty()) {
+		if (requestList.isEmpty()) {
 			throw new NoDataException();
 		}
 		return new ResponseEntity<>(requestList, HttpStatus.OK);
@@ -197,7 +202,8 @@ public class LeaveRequestService {
 	public ResponseEntity<?> getRequestById(long id) {
 		LeaveRequest request;
 		String id_request = id + "";
-		request = leaveRequestRepository.findById(id).orElseThrow(() -> new NotFoundException(id_request, "Leave Request", "ID", ""));
+		request = leaveRequestRepository.findById(id)
+				.orElseThrow(() -> new NotFoundException(id_request, "Leave Request", "ID", ""));
 		return new ResponseEntity<>(request, HttpStatus.OK);
 	}
 }

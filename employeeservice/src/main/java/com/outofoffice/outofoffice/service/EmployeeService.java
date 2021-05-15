@@ -156,6 +156,7 @@ public class EmployeeService {
 			response.setAllowance(true);
 		response.setDepartmentallowance(
 				departmentRepository.findAllowance(employeeRepository.findDepartmentIdByEmployeeId(id)));
+		response.setDays(days);
 		return response;
 	}
 
