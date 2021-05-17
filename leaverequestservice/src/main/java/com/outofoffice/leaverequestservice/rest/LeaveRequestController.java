@@ -35,6 +35,7 @@ import com.outofoffice.leaverequestservice.repository.LeaveRequestRepository;
 import com.outofoffice.leaverequestservice.service.LeaveRequestService;
 import com.outofoffice.leaverequestservice.requestobjects.LeaveRequestRequest;
 import com.outofoffice.leaverequestservice.requestobjects.LeaveStatusRequest;
+import com.outofoffice.leaverequestservice.requestobjects.RequestEmployee;
 import com.outofoffice.leaverequestservice.requestobjects.RequestNotification;
 import com.outofoffice.leaverequestservice.responseobjects.LeaveRequestResponse;
 
@@ -110,8 +111,11 @@ public class LeaveRequestController {
 				.orElseThrow(() -> new NotFoundException(id_request, "Leave Request", "ID", ""));
 		RequestNotification reqNotification = new RequestNotification(request.getEmployeeId(), statusRequest.getNotificationsId(),
 				statusRequest.getReason(), request.getId());
+		RequestEmployee reqEmployee = new RequestEmployee(request.getEmployeeId(), request.getRestDaysNum());
 		
 		rabbitTemplate.convertAndSend(RabbitConfiguration.EXCHANGE, RabbitConfiguration.ROUTING_KEY, reqNotification);
+		
+		rabbitTemplate.convertAndSend(RabbitConfiguration.EXCHANGE, RabbitConfiguration.ROUTING_KEY2, reqEmployee);
 		return LeaveRequestService.updateRequestStatus(statusRequest, id);
 	}
 
