@@ -1,4 +1,4 @@
-package com.outofoffice.leaverequestservice.configuration;
+package com.outofoffice.outofoffice.configuration;
 
 import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
