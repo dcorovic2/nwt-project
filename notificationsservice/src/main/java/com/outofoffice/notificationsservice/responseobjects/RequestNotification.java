@@ -3,17 +3,30 @@ package com.outofoffice.notificationsservice.responseobjects;
 public class RequestNotification {
 	private Long employeeId;
 	private Long notificationsId;
+	private int statusId;
 	private String reason;
 	private Long requestId;
+	private long restDays;
+	private boolean backup;
 	
 	public RequestNotification() {}
 
-	public RequestNotification(Long employeeId, Long notificationsId, String reason, Long requestId) {
+	public RequestNotification(Long employeeId, Long notificationsId, int statusId, String reason, Long requestId, long restDays) {
 		super();
 		this.employeeId = employeeId;
 		this.notificationsId = notificationsId;
 		this.reason = reason;
 		this.requestId = requestId;
+		this.restDays = restDays;
+		this.statusId = statusId;
+	}
+
+	public boolean isBackup() {
+		return backup;
+	}
+
+	public void setBackup(boolean backup) {
+		this.backup = backup;
 	}
 
 	public Long getRequestId() {
@@ -32,6 +45,14 @@ public class RequestNotification {
 		this.reason = reason;
 	}
 
+	public int getStatusId() {
+		return statusId;
+	}
+
+	public void setStatusId(int statusId) {
+		this.statusId = statusId;
+	}
+
 	public Long getEmployeeId() {
 		return employeeId;
 	}
@@ -46,5 +67,11 @@ public class RequestNotification {
 
 	public void setNotificationsId(Long notificationsId) {
 		this.notificationsId = notificationsId;
+	}
+	public long getRestDays() {
+		return restDays;
+	}
+	public void setRestDays(long restDays) {
+		this.restDays = restDays;
 	}
 }
