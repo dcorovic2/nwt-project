@@ -143,7 +143,7 @@ public class LeaveRequestService {
 		}
 	}
 
-	public ResponseEntity<?> updateRequestStatus(LeaveStatusRequest req, long id) {
+	public ResponseEntity<?> updateRequestStatus(LeaveStatusRequest req, Long id) {
 		LeaveStatus newStatusId = LeaveStatusService.getById(req.getStatusId());
 		if (req.getStatusId() != req.getNotificationsId()) {
 			throw new NotSucesfullException();

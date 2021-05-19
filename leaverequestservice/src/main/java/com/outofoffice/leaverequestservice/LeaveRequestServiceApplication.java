@@ -66,7 +66,7 @@ public class LeaveRequestServiceApplication {
 			
 			LeaveRequest request1 = new LeaveRequest("comment1", 10, 1L, date1, date1.plusDays(10), leavetype1, leavestatus1, notification1, 15L);
 			LeaveRequest request2 = new LeaveRequest("comment2", 20, 2L, date1, date1.plusDays(20), leavetype1, leavestatus1, notification1, 15L);
-			LeaveRequest request3 = new LeaveRequest("comment3", 14, 3L, date1, date1.plusDays(14), leavetype1, leavestatus1, notification1, 15L);
+			LeaveRequest request3 = new LeaveRequest("comment3", 14, 344L, date1, date1.plusDays(14), leavetype1, leavestatus1, notification1, 15L);
 			leaveRequestRepository.save(request1);
 			leaveRequestRepository.save(request2);
 			leaveRequestRepository.save(request3);

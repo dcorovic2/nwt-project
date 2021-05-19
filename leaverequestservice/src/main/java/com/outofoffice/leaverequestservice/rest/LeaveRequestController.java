@@ -74,12 +74,12 @@ public class LeaveRequestController {
 		
 		try {
 			response1 = restTemplate.getForObject(uri1, LeaveRequestResponse.class);
-		} catch (IllegalStateException e) {
+		} catch (Exception e) {
 			throw new RestTemplateException(uri1);
 		}
 		try {
 			response2 = restTemplate.getForObject(uri2, long.class);	
-		} catch (IllegalStateException e) {
+		} catch (Exception e) {
 			throw new RestTemplateException(uri2);
 		}  
 	    //System.out.println(response2);
@@ -104,18 +104,17 @@ public class LeaveRequestController {
 		return LeaveRequestService.updateRequest(requestRequest, id, response1, response2);
 	}
 	@PatchMapping(value = "/request/{id}")
-	public ResponseEntity<?> updateRequestStatus(@RequestBody LeaveStatusRequest statusRequest, @PathVariable long id) {
+	public ResponseEntity<?> updateRequestStatus(@RequestBody LeaveStatusRequest statusRequest, @PathVariable Long id) {
 		LeaveRequest request;
 		String id_request = id + "";
 		request = leaveRequestRepository.findById(id)
 				.orElseThrow(() -> new NotFoundException(id_request, "Leave Request", "ID", ""));
-		RequestNotification reqNotification = new RequestNotification(request.getEmployeeId(), statusRequest.getNotificationsId(),
-				statusRequest.getReason(), request.getId());
-		RequestEmployee reqEmployee = new RequestEmployee(request.getEmployeeId(), request.getRestDaysNum());
+
+		RequestNotification req = new RequestNotification(request.getEmployeeId(), statusRequest.getNotificationsId(),
+				request.getLeave_status().getId(), statusRequest.getReason(), request.getId(), request.getRestDaysNum());
 		
-		rabbitTemplate.convertAndSend(RabbitConfiguration.EXCHANGE, RabbitConfiguration.ROUTING_KEY, reqNotification);
-		
-		rabbitTemplate.convertAndSend(RabbitConfiguration.EXCHANGE, RabbitConfiguration.ROUTING_KEY2, reqEmployee);
+		rabbitTemplate.convertAndSend(RabbitConfiguration.EXCHANGE, RabbitConfiguration.ROUTING_KEY2, req);
+
 		return LeaveRequestService.updateRequestStatus(statusRequest, id);
 	}
 
