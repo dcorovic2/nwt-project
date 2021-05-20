@@ -13,10 +13,13 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.security.web.header.writers.StaticHeadersWriter;
 
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
+@CrossOrigin
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Autowired
@@ -26,6 +29,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
   protected void configure(HttpSecurity http) throws Exception {
 
     http.csrf().disable();
+     http
+     .cors()
+     .and()
+    .headers()
+    .contentSecurityPolicy("script-src 'self'");
+
     http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     http.authorizeRequests()
         .antMatchers("/users/signin").permitAll()
@@ -85,7 +94,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     	
 
     	
-    http.exceptionHandling().accessDeniedPage("/login");
+   // http.exceptionHandling().accessDeniedPage("/login");
     http.apply(new JwtTokenFilterConfigurer(jwtTokenProvider));
 
   }

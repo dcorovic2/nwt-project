@@ -2,6 +2,8 @@ package com.outofoffice;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +16,11 @@ import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 
+import com.netflix.ribbon.proxy.annotation.Http.HttpMethod;
 import com.outofoffice.filter.ErrorFilter;
 import com.outofoffice.filter.PostFilter;
 import com.outofoffice.filter.PreFilter;
@@ -39,7 +45,16 @@ public class JwtAuthServiceApp implements CommandLineRunner {
   public ModelMapper modelMapper() {
     return new ModelMapper();
   }
-
+  @Bean
+  public CorsFilter corsFilter() {
+      final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+      final CorsConfiguration config = new CorsConfiguration();
+      config.setAllowedOrigins(Collections.singletonList("*"));
+      config.setAllowedHeaders(Collections.singletonList("*"));
+      config.setAllowedMethods(Arrays.stream(HttpMethod.values()).map(HttpMethod::name).collect(Collectors.toList()));
+      source.registerCorsConfiguration("/**", config);
+      return new CorsFilter(source);
+  }
   @Override
   public void run(String... params) throws Exception {
     User admin = new User();

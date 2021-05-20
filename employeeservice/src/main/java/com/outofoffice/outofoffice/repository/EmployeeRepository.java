@@ -7,11 +7,13 @@ import javax.persistence.EntityManager;
 
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import com.outofoffice.outofoffice.model.Employee;
 import com.outofoffice.outofoffice.responseobjects.HolidayResponse;
 
 @Repository
+@CrossOrigin
 public class EmployeeRepository extends SimpleJpaRepository<Employee, Long> {
 	private final EntityManager entityManager;
 

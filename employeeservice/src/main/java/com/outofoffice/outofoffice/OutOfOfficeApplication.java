@@ -14,6 +14,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.init.ScriptException;
 import org.springframework.jdbc.datasource.init.ScriptUtils;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 
 import com.outofoffice.outofoffice.model.Auth;
 import com.outofoffice.outofoffice.model.Department;
@@ -52,7 +55,6 @@ public class OutOfOfficeApplication {
 	public RestTemplate getRestTemplate() {
 	    return new RestTemplate();
 	}
-
 //	@Bean
 //	public CommandLineRunner departmentInitial(DepartmentRepository departmentReposiotry) {
 //		return (args -> {

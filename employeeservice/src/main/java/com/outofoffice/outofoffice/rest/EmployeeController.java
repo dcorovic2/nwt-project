@@ -9,6 +9,7 @@ import java.util.Map;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +26,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 
 import com.outofoffice.outofoffice.model.Employee;
 import com.outofoffice.outofoffice.requestobjects.EmployeeDepartmentChange;
@@ -38,7 +42,7 @@ import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping(value = "/")
-
+@CrossOrigin
 public class EmployeeController {
 	private final EmployeeService employeeService;
 	
@@ -47,6 +51,7 @@ public class EmployeeController {
 	public EmployeeController(EmployeeService employeeService) {
 		this.employeeService = employeeService;
 	}
+	
 
 //	@ApiOperation(value = "Insert multiple employees", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 //	@PostMapping(value = "/bulkEmployeeCreate")
@@ -80,6 +85,7 @@ public class EmployeeController {
 		} 
 		
 	@ApiOperation(value = "Find Employee by Jmbg", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@CrossOrigin(origins = "http://localhost:4200")
 	@GetMapping(value = "/employee")
 	public ResponseEntity<Employee> getEmployee(@RequestParam(name = "jmbg", required = true) String jmbg)
 			throws Exception {

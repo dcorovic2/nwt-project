@@ -1,7 +1,9 @@
 package com.outofoffice.filter;
 
-import com.netflix.zuul.ZuulFilter;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
+import com.netflix.zuul.ZuulFilter;
+@CrossOrigin(origins = "http://localhost:4200")
 public class RouteFilter extends ZuulFilter {
 
 	@Override
