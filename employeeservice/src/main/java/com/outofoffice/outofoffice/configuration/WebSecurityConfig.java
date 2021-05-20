@@ -13,10 +13,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
     	http.cors();
-        http.authorizeRequests()
-                //allows preflight options from clients
-                .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                .anyRequest()
-                .authenticated();
 }
 }
