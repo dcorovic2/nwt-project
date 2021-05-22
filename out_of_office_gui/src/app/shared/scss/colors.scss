@@ -1,0 +1,85 @@
+//////////// Main Color /////////////////
+$ht 				:#eeaafd;
+$magenta			:#E20074;
+$white				:#FFFFFF;
+$black 				:#000;
+
+//////////// HT Black scale /////////////
+$back 				:#000000;
+$gray38				:#262626;
+$gray5				:#4B4B4B;
+$gray3				:#6C6C6C;
+$gray2				:#7C7C7C;
+$gray1				:#A4A4A4;
+$gray6				:#D0D0D0;
+$gray230			:#E6E6E6;
+$gray4				:#EDEDED;
+
+//////////// HT Color scale /////////////
+
+$alert-red			:#D90000;
+$alert-yellow		:#FECB00;
+$alert-green		:#6BB324;
+$alert-blue			:#00A1DE;
+
+$yellow 			:#FFD329;
+$yellow-light 		:#FFDE5D;
+$yellow-dark 		:#DBAD39;
+$yellow-new         :#FECB00;
+$yellow-dark-new    :#BFA17C;
+
+$orange 			:#FF9A1E;
+$orange-light 		:#FFB356;
+$orange-dark 		:#D48936;
+$orange-iskon     	:#EB7203;
+
+$lightblue			:#53BAF2;
+$lightblue-light 	:#7ECBF5;
+$lightblue-dark 	:#317CB3;
+
+$darkblue			:#1063AD;
+$darkblue-light 	:#529AD6;
+$darkblue-dark 		:#235482;
+
+$petrol 			:#1BADA2;
+$petrol-light 		:#65C8C0;
+$petrol-dark 		:#218076;
+
+$green 				:#BFCB44;
+$green-light 		:#CFD873;
+$green-dark 		:#889130;
+$green-dark-new     :#93A97D;
+$green-new          :#6BB324;
+
+$purple-dark        :#7D4277;
+$purple-light       :#B35FAB;
+
+$red                :#D90000;
+$red-dark           :#B47272;
+
+//Order Colors
+$order-product :#BF7CAF;
+$order-service :#9E7CBF;
+$order-sapsd :#7C8DBF;
+$order-billing :#7CBFBF;
+$order-delivery :#7CBF8D;
+$order-npo :#9EBF7C;
+$order-trgo :#BFAF7C;
+$order-customer :#BF7C7C;
+$order-customer-documentation: #999999;
+
+$inventory-assets :#BF7C7C;
+$inventory-cfs :#9E7CBF;
+$inventory-rbp :#7CBFBF;
+
+
+
+//End order colors
+
+
+
+@mixin color($color, $alpha:1) {color: rgba($color, $alpha);}
+
+@mixin background($color, $alpha:1) {background: rgba($color, $alpha);}
+
+@mixin bcolor($color, $alpha:1) {border-color: rgba($color, $alpha);}

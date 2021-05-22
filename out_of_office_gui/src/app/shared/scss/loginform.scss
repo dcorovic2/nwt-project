@@ -1,0 +1,101 @@
+.login-body{
+display: flex;
+position: absolute;
+width: 100%;
+height: 100%;
+.login-form{
+    width: 100%;
+    border: black;
+    padding-top: 15%;
+    padding-left: 8%;
+    color: rgb(98,98,98);
+    h1{
+      font-size:45px;
+      padding-top: 5px;
+    }
+    p{
+      font-size: 17px;
+      padding-bottom: 10px;
+    }
+    .inputs{
+        display: flex;
+        flex-direction: column;
+        > input{
+            margin-top: 20px;
+            height: 38px;
+            padding: 12px;
+            border-radius: 5px;
+            width: 345px;
+            border: 1px solid rgb(98,98,98);
+        }
+            
+        .submit {background-image: linear-gradient(to right, #6441A5 0%, #2a0845  51%, #6441A5  100%)}
+        .submit {
+            padding: 5px;
+            text-align: center;
+            text-transform: uppercase;
+            font-weight: bold;
+            transition: 0.5s;
+            background-size: 200% auto;
+            color: white;            
+            box-shadow: 0 0 20px #eee;
+            border-radius: 10px;
+            display: block;
+            width: 180px;
+            height: 35px;
+            margin: 20px;
+             margin-left: 166px;
+          }
+
+          .submit:hover {
+            background-position: right center; /* change the direction of the change here */
+            color: #fff;
+            text-decoration: none;
+          }
+         
+        
+    }
+}
+.background{
+    width: 100%;
+    display:flex;
+    background-image: url("../../../assets/img/—Pngtree—purple gradient low polygon background_1266092.jpg");
+    background-size: contain;
+    .help-background-left{
+
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom right, transparent 0%, transparent 0%, #fff 50%, #fff 100%);
+
+}
+    .help-background{
+
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to bottom left, transparent 0%, transparent 0%, #fff 50%, #fff 100%);
+        .appname{
+          text-align: center;
+          padding-right: 50px;
+          padding-top: 35px;
+          display:flex;
+          flex-direction: column;
+          float:right;
+          span{
+            float: right;
+            color: white;
+            font-size: 75px;
+            font-weight: 900;
+          }
+          p{
+            float: right;
+            color: white;
+            font-size: 25px;
+            font-weight: 900;
+            padding-left: 225px;
+          }
+        }
+
+}
+}
+
+}

@@ -1,0 +1,15 @@
+<div class="menu"  [ngClass]="{active: expandIndicator, menuopen: expandIndicator,
+    menuclose: !expandIndicator}">
+    <div class="z-menu-expand"><span [ngClass]="{hidden: !expandIndicator}">Out of office</span><i class="fas fa-bars" (click)="expand();"></i></div>
+    <div class="menu-items" >
+        <ul>
+            <li *ngFor="let menu of menus" [ngClass]="{
+            menuitemsopen: expandIndicator, menuitemsclose: !expandIndicator}" >
+               <a (click)="execMenu(menu.route);"  [ngClass]="{ active: menu.selected}">
+                   <i *ngIf="menu.icon" class="{{menu.icon}} icon"></i>
+                   <span>{{menu.label}}</span>
+               </a>
+           </li>
+        </ul>
+    </div>
+</div>
