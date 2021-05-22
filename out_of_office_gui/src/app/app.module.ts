@@ -23,6 +23,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SettingsComponent } from './pages/settings/settings.component';
 import { PendingComponent } from './pages/pending/pending.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RequestformComponent } from './components/requestform/requestform/requestform.component';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     EmployeeDashboardComponent,
     HeaderComponent,
     SettingsComponent,
-    PendingComponent
+    PendingComponent,
+    RequestformComponent
   ],
   imports: [
     BrowserModule,
