@@ -1,0 +1,54 @@
+.outerDiv{
+    position: fixed;
+    top: 18%;
+    left: 80%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    font-size: 20px;
+    z-index: 100;
+    background-color: white;
+    padding: 20px;
+    width: 350px;
+
+    box-shadow:
+        0 2.8px 2.2px rgb(0 0 0 / 3%), 
+        0 6.7px 5.3px rgb(0 0 0 / 1%), 
+        0 12.5px 10px rgb(0 0 0 / 4%), 
+        0 22.3px 17.9px rgb(0 0 0 / 2%), 
+        0 41.8px 33.4px rgb(0 0 0 / 1%), 
+        0 10px 80px rgb(0 0 0 / 4%);
+
+    border-radius: 15px;
+
+    p {
+        font-weight: bold;
+    }
+
+    font-family: 'Trebuchet MS', sans-serif;
+
+    .particularNotification:hover{
+        border-bottom: 0.5px solid lightgray;
+        background-color: rgb(240, 240, 240);
+    }
+
+    #textDiv{
+        font-size: small;
+        font-weight: lighter;
+        padding: 0%;
+
+        #approvedBy{
+            font-style: italic;
+            color: gray;
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+    }
+
+    #iconDiv{
+        width: 15%;
+    }
+}
+

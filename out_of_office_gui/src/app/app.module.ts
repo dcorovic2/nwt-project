@@ -23,6 +23,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SettingsComponent } from './pages/settings/settings.component';
 import { PendingComponent } from './pages/pending/pending.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NotificationpopupComponent } from './components/notificationpopup/notificationpopup/notificationpopup.component';
+import { ListnotificationComponent } from './components/listnotification/listnotification/listnotification.component';
 
 
 @NgModule({
@@ -35,7 +37,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     EmployeeDashboardComponent,
     HeaderComponent,
     SettingsComponent,
-    PendingComponent
+    PendingComponent,
+    NotificationpopupComponent,
+    ListnotificationComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,15 @@
+<div class="outerDiv">
+    <p>Notifications</p>
+
+    <div class="particularNotification" (click)="showNoti()">
+        <div id="iconDiv" style="display: inline-block;">
+            <i class="fas fa-users" style="color: lightgray;"></i>
+        </div>
+        <div id="textDiv" style="display: inline-block;">
+            <p id="approvedBy">Dalila Corovic</p>
+            <p id="someText">Leave request approved</p>
+        </div>
+    </div>
+</div>
+
+<app-notificationpopup *ngIf="showN"></app-notificationpopup>
