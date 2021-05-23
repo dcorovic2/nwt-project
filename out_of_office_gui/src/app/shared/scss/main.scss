@@ -19,11 +19,11 @@ html {
     @import 'colors';    
     @import 'loginform';  
     @import 'notificationpopup';
-    @import 'listnotification';         	
+    @import 'listnotification';      	
     margin: 0; 
 	height:100%;
     font-size:12px;
-    font-family:Roboto;
+    font-family:'Trebuchet MS', sans-serif;
     background-color: $white; 
     color: $gray5;
     }

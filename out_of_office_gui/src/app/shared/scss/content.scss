@@ -139,19 +139,20 @@
       
       }
       }
+        span{
+          color: gray;
+          font-size: 25px;
+          padding-bottom: 20px;
+        }
         .form{
-          display: flex;
           flex-direction: column;
+          column-count: 2;
           height: 100%;
           text-align: left;
           padding-left: 115px;
           padding-top: 10%;
           width: 30%;
-          span{
-            color: purple;
-            font-size: 25px;
-            padding-bottom: 20px;
-          }
+          column-gap: 150%;
           input{
             margin-bottom: 25px;
             height: 35px;

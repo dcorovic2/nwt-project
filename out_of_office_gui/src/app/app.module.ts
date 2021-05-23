@@ -25,6 +25,7 @@ import { PendingComponent } from './pages/pending/pending.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NotificationpopupComponent } from './components/notificationpopup/notificationpopup/notificationpopup.component';
 import { ListnotificationComponent } from './components/listnotification/listnotification/listnotification.component';
+import { AddemployeeComponent } from './pages/addemployee/addemployee/addemployee.component';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { ListnotificationComponent } from './components/listnotification/listnot
     SettingsComponent,
     PendingComponent,
     NotificationpopupComponent,
-    ListnotificationComponent
+    ListnotificationComponent,
+    AddemployeeComponent
   ],
   imports: [
     BrowserModule,
