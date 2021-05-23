@@ -1,0 +1,48 @@
+<div class="content-wrap">
+    <app-menu></app-menu>
+    <div class="main-content">
+        <app-header></app-header>
+    <div class="name">
+        <span>Employees list</span>
+    </div>
+    <div class="table">
+    <nz-table #nzTable [nzData]="listOfDisplayData" nzTableLayout="fixed">
+        <thead>
+        <tr>
+            <th nzCustomFilter>
+          Name
+          <nz-filter-trigger  class="search" [(nzVisible)]="visible" [nzActive]="searchValue.length > 0" [nzDropdownMenu]="menu">
+            <i class="fas fa-search"></i>
+          </nz-filter-trigger>
+        </th>
+        <th>Department</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of nzTable.data">
+        <td>{{ data.name }}</td>
+        <td>{{ data.department }}</td>
+        <td><div class="buttoni">
+            <button class="view">View</button>
+            <button class="delete" (click)="doSomething()">Delete</button>
+        </div>
+    </td>
+      </tr>
+    </tbody>
+  </nz-table>
+  <nz-dropdown-menu #menu="nzDropdownMenu">
+    <div class="ant-table-filter-dropdown">
+      <div class="search-box">
+        <input type="text" nz-input placeholder="Search name" [(ngModel)]="searchValue" class="input-name"/>
+        <button nz-button  nzSize="small" nzType="primary" (click)="search()" class="search-button">
+          Search
+        </button>
+        <button nz-button class="reset" nzSize="small" (click)="reset()">Reset</button>
+      </div>
+    </div>
+  </nz-dropdown-menu>
+</div>
+</div>
+</div>
+<app-deleteemployee *ngIf="show"></app-deleteemployee>

@@ -18,11 +18,13 @@ html {
     @import 'content';
     @import 'colors';    
     @import 'loginform';  
-    @import 'requestform';       	
+    @import 'requestform';   
+    @import 'listofemployees'; 
+    @import 'deleteemployee'; 
     margin: 0; 
 	height:100%;
     font-size:12px;
-    font-family:Roboto;
+    font-family: 'Trebuchet MS', sans-serif;
     background-color: $white; 
     color: $gray5;
     }

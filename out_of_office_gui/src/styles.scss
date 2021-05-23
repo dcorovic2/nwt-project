@@ -4,6 +4,7 @@
     padding: 0;
   }
   @import '../src/app/shared/scss/main.scss';
+  @import "~ng-zorro-antd/ng-zorro-antd.min.css";
  
 /* Importing Bootstrap SCSS file. */
 @import '~bootstrap/scss/bootstrap';

@@ -1,0 +1,107 @@
+.popup-overlay{
+    font-family: 'Trebuchet MS', sans-serif;
+    .popup{
+        border-radius: 5px;
+        box-shadow:
+    0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+    0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+    0 12.5px 10px rgba(0, 0, 0, 0.06),
+    0 22.3px 17.9px rgba(0, 0, 0, 0.072),
+    0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+    0 100px 80px rgba(0, 0, 0, 0.12);
+
+        position: fixed;
+        width: 29%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        -webkit-transform: translate(-50%, -50%);
+        -moz-transform: translate(-50%, -50%);
+        -o-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        background-color: white;
+        border: gray 1px solid;
+        padding: 5px;
+   
+        span{
+            font-size: 30px;
+            justify-content: center;
+            display: flex;
+        }
+       
+        .topic{
+            padding-top: 10px;
+        }
+
+        .popup-content{
+                font-size: 17px;
+                display: inline;
+            }
+
+            .buttoni{
+                padding-left: 40px;
+                padding-right: 50px;
+                padding-bottom: 30px;
+                    .delete1 {
+                        float: right;
+                        font-size: 17px;
+                        text-align: center;
+                        background-size: 200% auto;
+                        color: white;            
+                        box-shadow: 0 0 20px #eee;
+                        border-radius: 10px;
+                        width: 125px;
+                        border-color: transparent;
+                        background-color: #f56042;
+                        height: 32px;
+                      }
+            
+                      .submit:hover {
+                        background-position: right center; /* change the direction of the change here */
+                        color: #fff;
+                        text-decoration: none;
+                      }
+
+                      .cancel{
+                        background-image: linear-gradient(to right, rgb(39, 39, 39) 0%, gray  51%, gray  100%);
+                        font-size: 17px;
+                        text-align: center;
+                        background-size: 200% auto;
+                        color: white;            
+                        box-shadow: 0 0 20px #eee;
+                        border-radius: 10px;
+                        border-color: transparent;
+                        width: 125px;
+                        height: 32px;
+                    }
+                      
+                      .delete1:hover {
+                        background-position: right center; /* change the direction of the change here */
+                        background-color: #f3aa9c;
+                      }
+
+                      .cancel:hover {
+                        background-position: right center; /* change the direction of the change here */
+                        color: #fff;
+                        text-decoration: none;
+                      }
+                     
+        }
+        .popup-belowname{
+                text-align: center;
+                padding-bottom: 20px;
+        }
+
+    .popup-icon{
+        display: inline;
+        
+       .icon{
+        text-align: center;
+        padding-top: 30px;
+        i{ 
+            color: #f56042;
+        }
+       }
+    }
+    }
+}

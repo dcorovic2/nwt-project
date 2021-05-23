@@ -4,6 +4,7 @@ import { LoginformComponent } from './pages/loginform/loginform.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { SettingsComponent } from './pages/settings/settings.component';
 import { PendingComponent } from './pages/pending/pending.component';
+import { ListofemployeesComponent } from './pages/employeeslist/listofemployees/listofemployees.component';
 
 const routes: Routes = [
   {
@@ -25,6 +26,11 @@ const routes: Routes = [
   {
     path: 'pending',
     component: PendingComponent,
+    pathMatch: 'full',
+  },
+  {
+    path: 'listofemployees',
+    component: ListofemployeesComponent,
     pathMatch: 'full',
   },
 
