@@ -39,6 +39,8 @@ import fi from '@angular/common/locales/fi';
 import { FormsModule } from '@angular/forms';
 import en from '@angular/common/locales/en';
 import { DeleteemployeeComponent } from './components/deleteemployee/deleteemployee/deleteemployee.component';
+import { RequestslistComponent } from './pages/requestslist/requestslist/requestslist.component';
+import { FullemployeeviewComponent } from './pages/fullemployeeview/fullemployeeview/fullemployeeview.component';
 
 registerLocaleData(fi);
 
@@ -59,7 +61,9 @@ registerLocaleData(fi);
     AddemployeeComponent,
     RequestformComponent,
     ListofemployeesComponent,
-    DeleteemployeeComponent
+    DeleteemployeeComponent,
+    RequestslistComponent,
+    FullemployeeviewComponent
   ],
   imports: [
     BrowserModule,

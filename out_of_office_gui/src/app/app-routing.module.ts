@@ -6,6 +6,8 @@ import { SettingsComponent } from './pages/settings/settings.component';
 import { PendingComponent } from './pages/pending/pending.component';
 import { AddemployeeComponent } from './pages/addemployee/addemployee/addemployee.component';
 import { ListofemployeesComponent } from './pages/employeeslist/listofemployees/listofemployees.component';
+import { RequestslistComponent } from './pages/requestslist/requestslist/requestslist.component';
+import { FullemployeeviewComponent } from './pages/fullemployeeview/fullemployeeview/fullemployeeview.component';
 
 const routes: Routes = [
   {
@@ -39,7 +41,16 @@ const routes: Routes = [
     component: ListofemployeesComponent,
     pathMatch: 'full',
   },
-
+  {
+    path: 'listofrequests',
+    component: RequestslistComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: 'employeeview',
+    component: FullemployeeviewComponent,
+    pathMatch: 'full'
+  }
 ];
 
 @NgModule({
