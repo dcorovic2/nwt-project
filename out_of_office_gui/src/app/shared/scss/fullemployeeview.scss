@@ -1,0 +1,21 @@
+.classback {    
+    width: fit-content;
+    height: fit-content;
+    
+    i {
+        font-size: medium;
+        color: cornflowerblue;
+        display: inline;
+    }
+
+    .modifyBack {
+        display: inline-block;
+        font-size: 25px;
+        color: cornflowerblue;
+        display: inline;
+    }
+}
+
+.classback:hover {
+    opacity: 0.6;
+}

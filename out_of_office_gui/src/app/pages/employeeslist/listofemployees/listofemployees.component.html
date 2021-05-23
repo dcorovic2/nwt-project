@@ -24,8 +24,7 @@
         <td>{{ data.name }}</td>
         <td>{{ data.department }}</td>
         <td><div class="buttoni">
-            <button class="view">View</button>
-            <button class="delete" (click)="doSomething()">Delete</button>
+            <button class="view" (click) = "fullPage()">View</button>
         </div>
     </td>
       </tr>
@@ -45,4 +44,3 @@
 </div>
 </div>
 </div>
-<app-deleteemployee *ngIf="show"></app-deleteemployee>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
+import { Router } from '@angular/router';
 
 interface DataItem {
   name: string;
@@ -35,12 +36,13 @@ interface DataItem {
 
 export class ListofemployeesComponent implements OnInit {
 
-  constructor() { }
-  public show:boolean = false;
+  constructor(private route:Router) { }
 
-  public doSomething(): void {
-    this.show = !this.show;
+  fullPage(): void {
+    this.route.navigate(['employeeview']);
   }
+
+
   ngOnInit(): void {
   }
 
