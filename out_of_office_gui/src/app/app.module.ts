@@ -13,6 +13,8 @@ import { ApiserviceService } from './shared/services/apiservice.service';
 import {AuthInterceptor}from './shared/services/authinterceptor';
 import {AuthService} from './shared/services/auth.service'
 import { ToastrModule } from 'ngx-toastr';
+import { NzTableModule } from 'ng-zorro-antd/table';
+import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { HeaderComponent } from './components/header/header.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule,MatFormFieldModule,MatInputModule} from '@angular/material';
@@ -20,12 +22,25 @@ import {DpDatePickerModule} from 'ng2-date-picker';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 import { SettingsComponent } from './pages/settings/settings.component';
 import { PendingComponent } from './pages/pending/pending.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NotificationpopupComponent } from './components/notificationpopup/notificationpopup/notificationpopup.component';
 import { ListnotificationComponent } from './components/listnotification/listnotification/listnotification.component';
 import { AddemployeeComponent } from './pages/addemployee/addemployee/addemployee.component';
+import { RequestformComponent } from './components/requestform/requestform/requestform.component';
+import { ListofemployeesComponent } from './pages/employeeslist/listofemployees/listofemployees.component';
+import { NZ_I18N } from 'ng-zorro-antd/i18n';
+import { fi_FI, en_US } from 'ng-zorro-antd/i18n';
+import { registerLocaleData } from '@angular/common';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import fi from '@angular/common/locales/fi';
+import { FormsModule } from '@angular/forms';
+import en from '@angular/common/locales/en';
+import { DeleteemployeeComponent } from './components/deleteemployee/deleteemployee/deleteemployee.component';
+
+registerLocaleData(fi);
 
 
 @NgModule({
@@ -41,7 +56,10 @@ import { AddemployeeComponent } from './pages/addemployee/addemployee/addemploye
     PendingComponent,
     NotificationpopupComponent,
     ListnotificationComponent,
-    AddemployeeComponent
+    AddemployeeComponent,
+    RequestformComponent,
+    ListofemployeesComponent,
+    DeleteemployeeComponent
   ],
   imports: [
     BrowserModule,
@@ -55,9 +73,13 @@ import { AddemployeeComponent } from './pages/addemployee/addemployee/addemploye
     DpDatePickerModule,
     CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
     NgbModule,
-    BrowserAnimationsModule
+    NzIconModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    NzTableModule,
+    NzDropDownModule
   ],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },ApiserviceService,MatDatepickerModule, AuthService 
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },ApiserviceService,MatDatepickerModule, AuthService, { provide: NZ_I18N, useValue: fi_FI } 
   ],
   bootstrap: [AppComponent]
 })

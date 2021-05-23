@@ -1,0 +1,43 @@
+<div class="popup-overlay" *ngIf="hide">
+<div class="popup">
+    <div class="popup-name">
+        <span>Create new leave request</span>
+    </div>
+    <div class="popup-content">
+        <div class="popup-date">
+            <div class="popup-start-date">
+                <label class="start" for="start">Start date:</label>
+                <input class="date" type="date" id="start" name="leave-start"
+                    value="2021-07-22"
+                    min="2021-01-01" max="2021-12-31">
+            </div>
+            <div class="popup-end-date">
+                <label class="end" for="end">End date:</label>
+                <input class="date" type="date" id="end" name="leave-end"
+                    value="2021-11-18"
+                    min="2021-01-01" max="2021-12-31">
+            </div>
+        </div>
+        <div class="leave-type">
+            <label>Leave type:</label>
+            <select name="demo" id="#">
+                <option selected="selected" value="one">Holiday</option>
+                <option value="two">Sick leave</option>
+                <option value="three">Parental leave</option>
+                <option value="four">Mariagge leave</option>
+            </select>
+        </div>
+
+        <div class="comment">
+            <textarea  type="text"  placeholder="Comment"></textarea>
+        </div>
+
+        <div class="buttoni">
+            <button class="cancel" (click)="hidePopUp()">Cancel</button>
+            <button class="submit">Submit</button>
+        </div>
+        
+    </div>
+</div>
+</div>   
+    

@@ -19,9 +19,13 @@ html {
     @import 'colors';    
     @import 'loginform';  
     @import 'notificationpopup';
-    @import 'listnotification';      	
+    @import 'listnotification'; 
+    @import 'requestform';   
+    @import 'listofemployees'; 
+    @import 'deleteemployee'; 
+   
     margin: 0; 
-	height:100%;
+  	height:100%;
     font-size:12px;
     font-family:'Trebuchet MS', sans-serif;
     background-color: $white; 

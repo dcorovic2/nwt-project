@@ -1,0 +1,151 @@
+.popup-overlay{
+    font-family: 'Trebuchet MS', sans-serif;
+    .popup{
+        border-radius: 5px;
+        box-shadow:
+    0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+    0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+    0 12.5px 10px rgba(0, 0, 0, 0.06),
+    0 22.3px 17.9px rgba(0, 0, 0, 0.072),
+    0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+    0 100px 80px rgba(0, 0, 0, 0.12);
+
+        position: fixed;
+        width: 50%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        -webkit-transform: translate(-50%, -50%);
+        -moz-transform: translate(-50%, -50%);
+        -o-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        background-color: white;
+        border: black 1px solid;
+        padding: 5px;
+   
+        span{
+            font-size: 30px;
+            justify-content: center;
+            display: flex;
+        }
+       
+        .popup-name{
+            padding-top: 20px;
+            padding-bottom: 30px;
+        }
+
+        .popup-content{
+                font-size: 17px;
+                display: inline;
+            .popup-date{
+                padding-top: 3px;
+                padding-bottom: 20px;
+                display: inline;
+                .popup-start-date{
+                    float: left;
+                    display: inline;
+                    padding-left: 40px;
+                    input{
+                        border-radius: 10px;
+                        height: 32px;
+                        border-color: gray;
+                        background-color: white;
+                    }
+                    .start{
+                        padding-right: 20px;  
+                    }    
+                }
+                .popup-end-date{
+                    float: right;
+                    padding-right: 52px;
+                    display: inline;
+                    background-color: white;
+                    input{
+                        border-color: gray;
+                        border-radius: 10px;
+                        height: 32px;
+                    }
+                      
+                .end{
+                    padding-right: 20px; 
+                    padding-left: 20px;
+                }
+                }
+            }
+    
+            .leave-type{
+                padding-left: 40px;
+                padding-top: 40px;
+                padding-bottom: 10px;
+                label{
+                    padding-right: 14px;
+                }
+                select{
+                    width: 73.5%;
+                    height: 32px;
+                    border-radius: 10px;
+                }
+            }
+            .comment{
+                padding-left: 40px;
+                padding-bottom: 50px;
+                textarea{
+                    width: 91%;
+                    height: 100px;
+                    border-radius: 10px;
+                    max-height: 200px;
+                    min-height: 50px;
+                }
+                ::placeholder{
+                   padding-top: 5px;
+                   padding-left: 5px;
+                   position: absolute;
+                }
+            }
+
+            .buttoni{
+                padding-left: 40px;
+                padding-right: 50px;
+                padding-bottom: 30px;
+                    .submit {background-image: linear-gradient(to right, #6441A5 0%, #2a0845  51%, #6441A5  100%)}
+                    .submit {
+                        float: right;
+                        font-size: 17px;
+                        text-align: center;
+                        background-size: 200% auto;
+                        color: white;            
+                        box-shadow: 0 0 20px #eee;
+                        border-radius: 10px;
+                        width: 125px;
+                        height: 32px;
+                      }
+            
+                      .submit:hover {
+                        background-position: right center; /* change the direction of the change here */
+                        color: #fff;
+                        text-decoration: none;
+                      }
+
+                      .cancel{
+                        background-image: linear-gradient(to right, black 0%, gray  51%, gray  100%);
+                        font-size: 17px;
+                        text-align: center;
+                        background-size: 200% auto;
+                        color: white;            
+                        box-shadow: 0 0 20px #eee;
+                        border-radius: 10px;
+                        width: 125px;
+                        height: 32px;
+                    }
+                      
+                      .cancel:hover {
+                        background-position: right center; /* change the direction of the change here */
+                        color: #fff;
+                        text-decoration: none;
+                      }
+                     
+                    }
+        }
+   
+    }
+}

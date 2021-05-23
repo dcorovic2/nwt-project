@@ -17,6 +17,8 @@ import {
 } from 'date-fns';
 import { Subject } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
+
 import {
   CalendarEvent,
   CalendarEventAction,
@@ -57,7 +59,12 @@ export class DashboardComponent implements OnInit {
     action: string;
     event: CalendarEvent;
   };
-  
+
+  public show:boolean = false;
+
+  public doSomething(): void {
+    this.show = !this.show;
+  }
     actions: CalendarEventAction[] = [
       {
         label: '<i class="fas fa-fw fa-pencil-alt"></i>',

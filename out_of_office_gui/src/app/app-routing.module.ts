@@ -5,6 +5,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { SettingsComponent } from './pages/settings/settings.component';
 import { PendingComponent } from './pages/pending/pending.component';
 import { AddemployeeComponent } from './pages/addemployee/addemployee/addemployee.component';
+import { ListofemployeesComponent } from './pages/employeeslist/listofemployees/listofemployees.component';
 
 const routes: Routes = [
   {
@@ -32,6 +33,11 @@ const routes: Routes = [
     path: 'addemployee',
     component: AddemployeeComponent,
     pathMatch: 'full'
+  },
+  {
+    path: 'listofemployees',
+    component: ListofemployeesComponent,
+    pathMatch: 'full',
   },
 
 ];

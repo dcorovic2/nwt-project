@@ -1,0 +1,93 @@
+@import "~ng-zorro-antd/ng-zorro-antd.min.css";
+.search-box {
+    padding: 8px;
+    color: black;
+    font-family: 'Trebuchet MS', sans-serif;
+    .input-name{
+      border: red;
+      border-color: red;
+    }
+    .search-button{
+      border-color: transparent;
+      background-color: #1a68f6;
+      color: white;
+    }
+
+    button{
+      border-color: transparent;
+      color: white;
+      background-color: #7a7a7a;
+    }
+  }
+
+  .search-box input {
+    width: 188px;
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .search-box button {
+    width: 90px;
+  }
+
+  .search-button {
+    margin-right: 8px;
+  }
+
+  .ant-table-filter-trigger.active {
+    color: #1890ff;
+}
+
+.ant-table-filter-trigger {
+  display: block;
+  width: 2.3em;
+  color: #bfbfbf;
+  font-size: 12px;
+  transition: color .3s;
+}
+
+.name{
+  font-size: 25px;
+  color: purple;
+  padding-left: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.search{
+    color: black;
+    position: absolute;
+    /* text-align: center; */
+    top: 29%;
+    bottom: 50%;
+  
+}
+
+.table{
+  width: 95%;
+  padding-left: 20px;
+  font-family: 'Trebuchet MS', sans-serif;
+}
+
+
+    .view{
+      border-color: transparent;
+      background-color: transparent;
+      color: blue;
+    }
+
+    .delete{
+      border-color: transparent;
+      background-color: transparent;
+      color: red;
+      float: right;
+    }
+
+    .ant-table-filter-trigger ant-dropdown-trigger{
+      color: red;
+    }
+
+.fas fa-search{
+  position: relative;
+  width: 50px;
+}
