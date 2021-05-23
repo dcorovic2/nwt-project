@@ -140,19 +140,72 @@
       
       }
       }
+        span{
+          color: gray;
+          font-size: 25px;
+          padding-bottom: 20px;
+        }
+
+        .form1{
+          flex-direction: column;
+          column-count: 2;
+          height: 100%;
+          text-align: left;
+          padding-left: 115px;
+          padding-top: 10%;
+          width: 30%;
+          column-gap: 150%;
+          input{
+            margin-bottom: 25px;
+            height: 35px;
+            border-radius: 9px;
+            width: 320px;
+            font-size: 16px;
+            padding-left: 10px;
+          }
+          .buttons{
+            display: flex;
+            justify-content: space-between;
+            
+         .cancel{background-image: linear-gradient(to right, #000000 0%, #d7d2cc 51%, #000000 100%);}
+
+          .cancel:hover {
+            background-position: right center; /* change the direction of the change here */
+            color: #fff;
+            text-decoration: none;
+          }
+         
+        .submit {background-image: linear-gradient(to right, #6441A5 0%, #2a0845  51%, #6441A5  100%)}
+        .submit, .cancel {
+          padding: 5px;
+          text-align: center;
+          text-transform: uppercase;
+          font-weight: bold;
+          transition: 0.5s;
+          background-size: 200% auto;
+          color: white;
+          box-shadow: 0 0 20px #eee;
+          border-radius: 5px;
+          display: block;
+          width: 150px;
+          height: 35px;
+          }
+
+          .submit:hover {
+            background-position: right center; /* change the direction of the change here */
+            color: #fff;
+            text-decoration: none;
+          }
+          }
+        }
+
         .form{
-          display: flex;
           flex-direction: column;
           height: 100%;
           text-align: left;
           padding-left: 115px;
           padding-top: 10%;
           width: 30%;
-          span{
-            color: purple;
-            font-size: 25px;
-            padding-bottom: 20px;
-          }
           input{
             margin-bottom: 25px;
             height: 35px;

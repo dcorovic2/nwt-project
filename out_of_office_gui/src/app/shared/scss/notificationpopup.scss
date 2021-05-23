@@ -1,0 +1,69 @@
+.notPopUp {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    
+    font-size: 20px;
+    z-index: 100;
+
+    box-shadow:
+        0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+        0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+        0 12.5px 10px rgba(0, 0, 0, 0.06),
+        0 22.3px 17.9px rgba(0, 0, 0, 0.072),
+        0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+        0 100px 80px rgba(0, 0, 0, 0.12);
+
+    #part1 {
+        background-color:#72bb53;
+        padding: 10px;
+        font-size: larger;
+        font-family: 'Trebuchet MS', sans-serif;
+
+        .container1, .container2 {
+            display: flex;
+            justify-content: center;
+            padding: 5px;
+        }
+
+        .container2{
+            .tmpdiv{
+                width: 97%;
+                justify-content: center;
+                text-align: center;
+            }
+        }
+    }
+        
+    #part2 {
+        background-color:white;
+        padding: 10px;
+        font-family: 'Trebuchet MS', sans-serif;
+    }
+
+}
+
+
+.far:hover{
+    opacity: 0.5;
+}
+
+
+.badge {
+    display: inline-block;
+    padding: 0.25em 0.4em;
+    font-size: 40%;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: top;
+    border-radius: 0.25rem;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    margin-left: -10px;
+}

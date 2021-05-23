@@ -26,6 +26,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SettingsComponent } from './pages/settings/settings.component';
 import { PendingComponent } from './pages/pending/pending.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NotificationpopupComponent } from './components/notificationpopup/notificationpopup/notificationpopup.component';
+import { ListnotificationComponent } from './components/listnotification/listnotification/listnotification.component';
+import { AddemployeeComponent } from './pages/addemployee/addemployee/addemployee.component';
 import { RequestformComponent } from './components/requestform/requestform/requestform.component';
 import { ListofemployeesComponent } from './pages/employeeslist/listofemployees/listofemployees.component';
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
@@ -51,6 +54,9 @@ registerLocaleData(fi);
     HeaderComponent,
     SettingsComponent,
     PendingComponent,
+    NotificationpopupComponent,
+    ListnotificationComponent,
+    AddemployeeComponent,
     RequestformComponent,
     ListofemployeesComponent,
     DeleteemployeeComponent

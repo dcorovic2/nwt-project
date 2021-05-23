@@ -5,8 +5,12 @@
         <span>Esma Herenda</span>
         <span>ems.herenda@gmail.com</span>
       </div>
-      <div class="notif">
-        <i class="far fa-bell"></i>
+      <div class="notif" (click)="doSomething()">
+          <i class="far fa-bell">
+            <span class="badge rounded-pill badge-notification bg-danger" style="color: white;">1</span>
+          </i>
       </div>
   </div>
 </div>
+
+<app-listnotification *ngIf="show"></app-listnotification>

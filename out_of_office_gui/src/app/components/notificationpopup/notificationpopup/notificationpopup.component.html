@@ -1,0 +1,20 @@
+<div class="notPopUp" *ngIf="hide">
+    <div id="part1"> 
+        <div class="container2">
+            <div class="tmpdiv">
+                <i class="fas fa-check-circle" style="font-size:120px;color:white"></i>
+            </div>
+            <div (click)="hidePopUp()">
+                <i class="far fa-times-circle" style="color: white;"></i>
+            </div>
+        </div>
+        <div class="container1"> 
+            <p id="action" style="color: white;">Approved by: </p>
+            <p id="admin_name" style="color: white;">Dalila Corovic</p>
+        </div>
+    </div>
+    <div id="part2">
+        <p id ="action_text">Before your leave, please send me final report</p>
+    </div>
+</div>
+
