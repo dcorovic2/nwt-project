@@ -1,0 +1,38 @@
+[
+    {
+      "name": "dashboard",
+      "label": "Dashboard",
+      "icon": "fas fa-home",
+      "category": "global",
+      "route": "dashboard"
+    },
+    {
+        "name": "employees",
+        "label": "Employees",
+        "icon": "fas fa-users",
+        "category": "global",
+        "route": "listofemployees"
+      },
+      {
+        "name": "addemployee",
+        "label": "Add employee",
+        "icon": "fas fa-user-plus",
+        "category": "global",
+        "route": "addemployee"
+      },
+      {
+        "name": "requests",
+        "label": "Requests",
+        "icon": "fas fa-plus-square",
+        "category": "global",
+        "route": "listofrequests"
+      },
+      {
+        "name": "logout",
+        "label": "Log out",
+        "icon": "fas fa-sign-out-alt",
+        "category": "global",
+        "route": ""
+      }
+
+]

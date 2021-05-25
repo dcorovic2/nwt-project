@@ -66,6 +66,9 @@ public class Employee {
 	@Column(name="remaining_days")
 	private Integer remainingDays;
 	
+	@Column(name="username")
+	private String username;
+	
 	public Employee() {};
 	
 	@ManyToOne//(fetch = FetchType.LAZY)

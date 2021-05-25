@@ -49,6 +49,7 @@
           border-bottom: 1.6px solid #4d094d;;
           padding-bottom: 10px;
           .user-info{
+            width: 400px;
             display: flex;
             flex-direction: column;
             text-align: left;
@@ -333,7 +334,10 @@
             padding-right: 100px;
             padding-top: 15px;
             &.first {
-              box-shadow: 0 8px 6px -6px #2d1b2d;
+              background: url('../../../assets/img/sticker.jpg') !important;
+              background-repeat: no-repeat !important;
+              background-position: center !important;
+              height: 970px !important;
             }
             &.second {
               padding-top: 50px;
@@ -341,8 +345,12 @@
             .stat-contents{
               padding-top: 10px;
             }
-
-            .number, .head{
+          .number{
+            font-size: 95px;
+            padding-top: 40px;
+            font-family: cursive;
+          }
+            .head{
               font-size: 80px;
               border-bottom: 1px solid black;
             }

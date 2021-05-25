@@ -1,1 +1,43 @@
-<p>admin-dashboard works!</p>
+<div class="content-wrap">
+    <app-menu [role]="'admin'"></app-menu>
+    <div class="main-content">
+        <app-header *ngIf="user"  [user]="user"></app-header>
+        <div class="content">
+            <div class="content-left">
+                <span class="title">Statistics ADMIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIN</span>
+               <div class="statistics first">
+                   <span class="number">{{info.remainingDays}}</span>
+                   <div class="stat-contents">
+                   <span>Days remaining out of {{info.allowance}} in Allowance</span>
+                </div>
+               </div>
+               <div class="statistics second">
+                <span class="head">Used so far</span>
+                <div class="types">
+            <div class="types-left">
+                <span>Holiday:</span>
+                <span>Sick leave:</span>
+            </div>
+            <div class="types-right">
+                <span>7</span>
+                <span>4</span>
+            </div>
+            </div>
+        </div>
+            </div>
+            <div class="content-right">
+                <span class="title">Calendar</span>
+                <mwl-calendar-month-view
+                [viewDate]="viewDate"
+                [events]="events"> 
+              </mwl-calendar-month-view> 
+            </div>
+        </div>
+        <div  class="plusbutton">
+            <i (click)="doSomething()" class="fas fa-plus-circle"></i>
+        </div>
+    </div>
+    </div>
+    <app-requestform *ngIf="show"></app-requestform>
+    
+

@@ -131,6 +131,15 @@ public class EmployeeService {
 		}
 
 	}
+	
+	public Employee getEmployeeByUsername(String username) {
+		try {
+			return employeeRepository.getEmployeeByUsername(username);
+		} catch (Exception e) {
+			throw new NotFoundException("", "Employee", "username", username);
+		}
+
+	}
 
 	public List<Employee> getAllEmployees() {
 		List<Employee> return_employees = new ArrayList<Employee>();

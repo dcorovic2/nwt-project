@@ -5,6 +5,7 @@ import {ApiserviceService} from '../../shared/services/apiservice.service';
 import * as queryParse from 'query-string';
 
 import  jwt_decode from 'jwt-decode';
+import { JwtToken } from 'src/app/shared/interfaces/jwt-token';
 @Component({
   selector: 'app-loginform',
   templateUrl: './loginform.component.html'
@@ -23,14 +24,14 @@ export class LoginformComponent implements OnInit {
     params = params.append('username', username);
     this.api.post('users/signin',{username:username, password:password}).subscribe(data=>{
     localStorage.setItem('token', data);
-    console.log(jwt_decode(data));
-    this.api.get('notification/all_notification_types').subscribe(data=>console.log(data));
-    this.api.get('holiday/getlistofholidays').subscribe(data=>console.log(data));
-    this.api.get('leaverequest/requests',{status_id: 0}).subscribe(data=>console.log(data));
-    this.api.get('employee/allemployees').subscribe((data=>console.log(data)))
+    const token = jwt_decode<JwtToken>(data);
+    localStorage.setItem('role', token.auth[0].authority);
+    localStorage.setItem('username', token.sub);
   });
+  setTimeout(()=>this.route.navigate(['dashboard']),3000); 
+}
     
-   // this.route.navigate(['dashboard']);
-  }
+
+  
 
 }

@@ -6,6 +6,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
   @Input() settings: any;
+  @Input() user: any;
 
   public show:boolean = false;
   constructor() { }

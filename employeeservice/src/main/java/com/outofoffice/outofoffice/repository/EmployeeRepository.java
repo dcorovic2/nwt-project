@@ -29,6 +29,14 @@ public class EmployeeRepository extends SimpleJpaRepository<Employee, Long> {
 		return employee;
 
 	}
+	
+	public Employee getEmployeeByUsername(String username) {
+		final Employee employee = entityManager
+				.createQuery("SELECT emp FROM Employee emp" + " WHERE emp.username = :username", Employee.class)
+				.setParameter("username", username).getSingleResult();
+		return employee;
+
+	}
 
 	public List<Long> findByDepartmentId(Long employeeID) {
 		final List<Long> ids = entityManager

@@ -17,7 +17,7 @@ import {
 } from 'date-fns';
 import { Subject } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import {
   CalendarEvent,
@@ -25,6 +25,8 @@ import {
   CalendarEventTimesChangedEvent,
   CalendarView,
 } from 'angular-calendar';
+import { ApiserviceService } from 'src/app/shared/services/apiservice.service';
+import { prepareEventListenerParameters } from '@angular/compiler/src/render3/view/template';
 
 const colors: any = {
   red: {
@@ -126,10 +128,18 @@ export class FullemployeeviewComponent implements OnInit {
       },
     ];
   
-    activeDayIsOpen: boolean = true;
-  constructor(private modal: NgbModal, private route: Router) { }
+  activeDayIsOpen: boolean = true;
+  public user = {};
+  public info = {allowance: "", remainingDays: ""};
+  constructor(private modal: NgbModal, private route: Router, private router: ActivatedRoute, private api: ApiserviceService) { }
 
   ngOnInit(){
+    this.router.queryParams.subscribe(params=>{
+      this.api.get('employee/employee/username', {username: params.username}).subscribe((data:any)=>{
+        Object.assign(this.user, {firstnameLastName:data.firstnameLastName, email: data.email});
+        this.info = data; 
+       })
+    });
   }
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
     if (isSameMonth(date, this.viewDate)) {

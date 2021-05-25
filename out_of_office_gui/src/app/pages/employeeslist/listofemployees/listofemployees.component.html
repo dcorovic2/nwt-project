@@ -1,7 +1,7 @@
 <div class="content-wrap">
     <app-menu></app-menu>
     <div class="main-content">
-        <app-header></app-header>
+        <app-header *ngIf="user" [user]="user"></app-header>
     <div class="name">
         <span>Employees list</span>
     </div>
@@ -20,12 +20,12 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let data of nzTable.data">
-        <td>{{ data.name }}</td>
-        <td>{{ data.department }}</td>
+      <tr *ngFor="let data of employees">
+        <td>{{ data.firstnameLastName }}</td>
+        <td>{{ data.department.displayName }}</td>
         <td><div class="buttoni">
-            <button class="view" (click) = "fullPage()">View</button>
-            <button class="delete" (click) = "hideDelete=!hideDelete">Delete</button>
+            <button class="view" (click) = "fullPage(data.username)">View</button>
+            <button class="delete" (click) = "hideDelete=!hideDelete; employeeId = data.id">Delete</button>
         </div>
     </td>
       </tr>
@@ -45,4 +45,4 @@
 </div>
 </div>
 </div>
-<app-deleteemployee *ngIf="!hideDelete"></app-deleteemployee>
+<app-deleteemployee [employeeId]="employeeId" *ngIf="!hideDelete"></app-deleteemployee>

@@ -71,7 +71,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .antMatchers(HttpMethod.PATCH, "/leaverequest/request").hasRole("CLIENT")
         .antMatchers(HttpMethod.PATCH, "/leaverequest/request/{id}").hasRole("ADMIN")
         .antMatchers(HttpMethod.DELETE, "/leaverequest/request/{id}").hasRole("ADMIN")
-        .antMatchers(HttpMethod.GET, "/leaverequest/requests").hasRole("ADMIN")
+       // .antMatchers(HttpMethod.GET).hasRole("ADMIN")
         .antMatchers(HttpMethod.GET, "/leaverequest/request/{id}").hasRole("ADMIN")
         
         
@@ -79,7 +79,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .antMatchers(HttpMethod.POST, "/employee/employee").hasRole("ADMIN")
         .antMatchers(HttpMethod.PATCH, "/employee/employee").hasRole("ADMIN")
         .antMatchers(HttpMethod.DELETE, "/employee/employee").hasRole("ADMIN")
-        .antMatchers(HttpMethod.GET, "/employee/employee").permitAll()
+        .antMatchers(HttpMethod.GET, "/employee/employee").hasRole("ADMIN")
+        .antMatchers(HttpMethod.GET, "/employee/employee/username").permitAll()
         .antMatchers(HttpMethod.GET, "/employee/allemployees").hasRole("ADMIN")
         .antMatchers(HttpMethod.PUT, "/employee/employee/{id}").hasRole("ADMIN")
         .antMatchers(HttpMethod.GET, "/employee/employee/{id}/{days}").hasRole("ADMIN")

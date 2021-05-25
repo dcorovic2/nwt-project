@@ -27,6 +27,12 @@ public post(path:string, param?:object,body?:any): Observable<any> {
   })); 
 }
 
+public delete(path:string, param?:object,body?:any): Observable<any> {
+  return this.http.delete(this.query(this.env(path), param), body).pipe(catchError((error:HttpErrorResponse)=>{
+      /*this.loading.hide(path);*/ this.message.error(error.error.message||error.message);return throwError(error.message);
+  })); 
+}
+
 public query(path:string, query?:any, queryextend?:object) {
   return Array.isArray(query) ? path + '/' + query.join('/') + (queryextend ? "?" + queryParse.stringify(queryextend) : ""): query ? path + '?'+ queryParse.stringify(query): path;
 }

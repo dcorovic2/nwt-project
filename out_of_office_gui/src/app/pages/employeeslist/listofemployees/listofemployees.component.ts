@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { Router } from '@angular/router';
+import { ApiserviceService } from 'src/app/shared/services/apiservice.service';
+import { ActionService } from 'src/app/shared/services/action.service';
 
 interface DataItem {
   name: string;
@@ -35,17 +37,27 @@ interface DataItem {
 })
 
 export class ListofemployeesComponent implements OnInit {
-
+  public user = {};
   public hideDelete = true; 
+  public employees: any;
+  public employees2: any;
+  public employeeId: any;
 
-  constructor(private route:Router) { }
+  constructor(private route:Router, private api: ApiserviceService, private action: ActionService) { }
 
-  fullPage(): void {
-    this.route.navigate(['employeeview']);
+  fullPage(username:string): void {
+    this.route.navigate(['employeeview'], {queryParams:{username: username}});
   }
 
 
   ngOnInit(): void {
+    this.action.set('getEmployees', ()=>{
+      this.api.get('employee/allemployees').subscribe((data)=>{this.employees = data; this.employees2 = [...this.employees]});
+    });
+    this.api.get('employee/employee/username', {username: localStorage.getItem('username')}).subscribe((data:any)=>{
+      Object.assign(this.user, {firstnameLastName:data.firstnameLastName, email: data.email});
+     })
+     this.api.get('employee/allemployees').subscribe((data)=>{this.employees = data; this.employees2 = [...this.employees]});
   }
 
   searchValue = '';
@@ -81,6 +93,6 @@ export class ListofemployeesComponent implements OnInit {
 
   search(): void {
     this.visible = false;
-    this.listOfDisplayData = this.listOfData.filter((item: DataItem) => item.name.indexOf(this.searchValue) !== -1);
+    this.employees = this.employees2.filter((item: any) => item.firstnameLastName.indexOf(this.searchValue) !== -1);
   }
 }

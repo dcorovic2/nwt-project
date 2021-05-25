@@ -91,6 +91,14 @@ public class EmployeeController {
 		return new ResponseEntity<Employee>(employee, HttpStatus.OK);
 	}
 
+	@ApiOperation(value = "Find Employee by Username", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "/employee/username")
+	public ResponseEntity<Employee> getEmployeeUsername(@RequestParam(name = "username", required = true) String username)
+			throws Exception {
+	      Employee employee = employeeService.getEmployeeByUsername(username);
+		return new ResponseEntity<Employee>(employee, HttpStatus.OK);
+	}
+
 	@ApiOperation(value = "Get All Employees", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@GetMapping(value = "/allemployees")
 	public ResponseEntity<List<Employee>> getEmployees() throws Exception {
