@@ -10,40 +10,25 @@ import { catchError, mapTo, tap } from 'rxjs/operators';
 
 
 //import * as moment from "moment";
-import * as jwt from 'jwt-decode';
+import jwt_decode from 'jwt-decode';
 import { Observable } from 'rxjs';
 
 
 @Injectable()
-export class AuthService implements CanActivate {
-    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-        throw new Error('Method not implemented.');
-    }
-    /*
-    private user:any;
+export class AuthService{
+    /*private user:any;
     private token:any = {};
     private expire:any = {};
-    private code:string;
-    private guid:string;
     private readonly JWT_TOKEN = 'JWT_TOKEN';
     private readonly REFRESH_TOKEN = 'REFRESH_TOKEN';
-    constructor(private api:HttpClient, private http: HttpClient, private action:ActionService, private OAuth:OAuthService){
-        this.code = new URLSearchParams(window.location.search).get('code')||null;
-        this.action.user = localStorage.getItem('user')? JSON.parse(localStorage.getItem('user')):undefined;
-        this.action.set('getGUID', ()=>this.getGUID());
-        Object.assign(this.OAuth,{loginUrl:env.auth, redirectUri:env.host, clientId:env.appId});
-        this.OAuth.setStorage(sessionStorage);
-        //this.OAuth.tryLogin({});      
-        console.log('this.OAuth', this.OAuth);
-        //this.OAuth.initImplicitFlow();
-        console.log('done');
+    constructor(private api:HttpClient, private http: HttpClient){
+        this.user = localStorage.getItem('user')? JSON.parse(localStorage.getItem('user')):undefined;
     }
 
-    public canActivate() {return this.isLogged()/*||this.authorize();}
+    public canActivate() {return this.isLogged()||this.authorize();}
 
-    //public getToken(token) {return this.token[token] = this.token[token]||localStorage.getItem(token);}
+    public getToken(token) {return this.token[token] = this.token[token]||localStorage.getItem(token);}
 
-    public getGUID() {return this.guid = this.guid||localStorage.getItem('guid');}
 
   public logout(){ localStorage.clear(); return this.redirect(); }
     isLogged() {
@@ -57,12 +42,7 @@ export class AuthService implements CanActivate {
           this.storeJwtToken(tokens.jwt);
         }));
       }
-      private setGUID(){
-        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-           var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
-           return v.toString(16);
-        });
-     }
+
       getToken() {
         return localStorage.getItem(this.JWT_TOKEN);
       }
@@ -73,9 +53,8 @@ export class AuthService implements CanActivate {
       }
     
       private storeJwtToken(jwt: string) {
-        let identity =  jwt(jwt);
-        localStorage.setItem('user', JSON.stringify(this.action.user = {name:identity.name, email:identity.email, username:identity.preferred_username }));
-        localStorage.setItem('guid', this.guid = this.setGUID());
+        let identity =  jwt_decode(jwt);
+        localStorage.setItem('user', JSON.stringify(this.user = {name:identity.name, email:identity.email, username:identity.preferred_username }));
         localStorage.setItem(this.JWT_TOKEN, jwt);
       }
     
@@ -122,7 +101,6 @@ export class AuthService implements CanActivate {
         localStorage.setItem('guid', this.guid = this.setGUID());
         let identity =  jwt(token.access_token);
         localStorage.setItem('user', JSON.stringify(this.action.user = {name:identity.name, email:identity.email, username:identity.preferred_username }));
-        this.code = undefined;
     }
 
     private setGUID(){
@@ -149,6 +127,6 @@ export class AuthService implements CanActivate {
         return this.api.post(env.auth+'token', query, options).catch((error:HttpErrorResponse)=> {
             console.log(error.error.message||error.message); this.redirect(); return Observable.throw(error.message);
         });
-    }*/
-    
+    }
+    */
 }

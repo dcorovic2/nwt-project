@@ -38,7 +38,6 @@ public class NotificationsTypeController {
 	// getting all notification_types!!
 	@GetMapping("/all_notification_types")
 	public ResponseEntity<?> getNotifications() {
-		logger.info("USLO U METOD");
 		return notificationsTypeService.getNotificationTypeList();
 	}
 

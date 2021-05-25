@@ -62,7 +62,6 @@ public class NotificationsController {
 	
 	// getting all notifications!!
 	@GetMapping("/all_notifications")
-	@CrossOrigin(origins = "http://localhost:4200")
 	public ResponseEntity<?> getNotifications() {
 		return notificationService.getNotificationList();
 	}

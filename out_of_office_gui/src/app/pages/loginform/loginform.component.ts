@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import {ApiserviceService} from '../../shared/services/apiservice.service';
 import * as queryParse from 'query-string';
 
+import  jwt_decode from 'jwt-decode';
 @Component({
   selector: 'app-loginform',
   templateUrl: './loginform.component.html'
@@ -22,8 +23,11 @@ export class LoginformComponent implements OnInit {
     params = params.append('username', username);
     this.api.post('users/signin',{username:username, password:password}).subscribe(data=>{
     localStorage.setItem('token', data);
-   // this.api.get('/notification/all_notifications').subscribe(data=>console.log(data));
-    this.api.get('employee/employee',{jmbg:"8523697414562"}).subscribe((data=>console.log(data)))
+    console.log(jwt_decode(data));
+    this.api.get('notification/all_notification_types').subscribe(data=>console.log(data));
+    this.api.get('holiday/getlistofholidays').subscribe(data=>console.log(data));
+    this.api.get('leaverequest/requests',{status_id: 0}).subscribe(data=>console.log(data));
+    this.api.get('employee/allemployees').subscribe((data=>console.log(data)))
   });
     
    // this.route.navigate(['dashboard']);

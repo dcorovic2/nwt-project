@@ -42,7 +42,6 @@ import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping(value = "/")
-@CrossOrigin
 public class EmployeeController {
 	private final EmployeeService employeeService;
 	
@@ -85,7 +84,6 @@ public class EmployeeController {
 		} 
 		
 	@ApiOperation(value = "Find Employee by Jmbg", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	@CrossOrigin(origins = "http://localhost:4200")
 	@GetMapping(value = "/employee")
 	public ResponseEntity<Employee> getEmployee(@RequestParam(name = "jmbg", required = true) String jmbg)
 			throws Exception {
@@ -94,7 +92,6 @@ public class EmployeeController {
 	}
 
 	@ApiOperation(value = "Get All Employees", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	@CrossOrigin(origins = "http://localhost:4200")
 	@GetMapping(value = "/allemployees")
 	public ResponseEntity<List<Employee>> getEmployees() throws Exception {
 		List<Employee> employees = employeeService.getAllEmployees();

@@ -91,7 +91,6 @@ public class HolidayController {
 	}
 	
 	//@ApiOperation(value = "Get list of all holidays")
-	@CrossOrigin(origins = "http://localhost:4200")
 	@GetMapping(value = "/getlistofholidays")
 	public ResponseEntity<?> getListOfHolidays() {
 		return holidayService.getAllHolidays();

@@ -125,13 +125,12 @@ public class LeaveRequestController {
 		return LeaveRequestService.deleteRequest(id);
 	}
 	
-	@CrossOrigin(origins = "http://localhost:4200")
 	@GetMapping("/requests")
 	public ResponseEntity<?> getRequestsByStatus(@RequestParam(name = "status_id", required = true) long statusId) {
 	    return LeaveRequestService.getStatusRequestList(statusId);
 	}
 		
-	@CrossOrigin(origins = "http://localhost:4200")
+
 	@GetMapping("/request/{id}")
 	public ResponseEntity<?> getRequestById(@PathVariable long id){
 		return LeaveRequestService.getRequestById(id);

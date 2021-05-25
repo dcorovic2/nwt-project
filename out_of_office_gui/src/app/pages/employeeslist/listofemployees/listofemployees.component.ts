@@ -36,6 +36,8 @@ interface DataItem {
 
 export class ListofemployeesComponent implements OnInit {
 
+  public hideDelete = true; 
+
   constructor(private route:Router) { }
 
   fullPage(): void {
