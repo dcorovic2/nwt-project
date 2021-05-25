@@ -344,6 +344,14 @@
             }
             .stat-contents{
               padding-top: 10px;
+              width: 182px !important;
+              margin: auto;
+              margin-top: 0px;
+              > span{
+                overflow-wrap: break-word;
+    word-break: break-all;
+    font-size: 21px;
+              }
             }
           .number{
             font-size: 95px;
