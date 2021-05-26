@@ -1,17 +1,9 @@
 .popup-overlay{
     font-family: 'Trebuchet MS', sans-serif;
-    .popup{
+    .popup-window{
         border-radius: 5px;
-        box-shadow:
-    0 2.8px 2.2px rgba(0, 0, 0, 0.034),
-    0 6.7px 5.3px rgba(0, 0, 0, 0.048),
-    0 12.5px 10px rgba(0, 0, 0, 0.06),
-    0 22.3px 17.9px rgba(0, 0, 0, 0.072),
-    0 41.8px 33.4px rgba(0, 0, 0, 0.086),
-    0 100px 80px rgba(0, 0, 0, 0.12);
-
         position: fixed;
-        width: 50%;
+        width: 60%;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
@@ -21,80 +13,111 @@
         -ms-transform: translate(-50%, -50%);
         background-color: white;
         border: black 1px solid;
-        padding: 5px;
-   
-        span{
-            font-size: 30px;
-            justify-content: center;
-            display: flex;
-        }
+        padding: 20px;
        
         .popup-name{
             padding-top: 20px;
             padding-bottom: 30px;
+            span{
+                font-size: 30px;
+                text-align: center;
+                justify-content: center;
+                display: flex;
+            }
         }
 
-        .popup-content{
+        .popup-content-window{
                 font-size: 17px;
                 display: inline;
-            .popup-date{
+                width: inherit;
+                .space{
+                    width: 8%;
+                    display: inline-block;
+                }
+                .middle_space{
+                    display: inline-block;
+                    width: 10%;
+                }
+            .popup-date-window{
+                width: inherit;
                 padding-top: 3px;
-                padding-bottom: 20px;
                 display: inline;
-                .popup-start-date{
-                    float: left;
+                padding-bottom: 20px;
+                
+                .popup-start-date-window{
+                    justify-content: center;
                     display: inline;
-                    padding-left: 40px;
                     input{
                         border-radius: 10px;
                         height: 32px;
-                        border-color: gray;
+                        border: 1px solid gray;
+                        border-color: 1px solid gray;
                         background-color: white;
+                        padding-left: 5px;
+                        &:focus{
+                            outline: none;
+                        }
                     }
+                   
                     .start{
-                        padding-right: 20px;  
+                       padding-right: 20px;  
                     }    
                 }
-                .popup-end-date{
-                    float: right;
-                    padding-right: 52px;
+                .popup-end-date-window{
+                    justify-content: center;
                     display: inline;
                     background-color: white;
                     input{
-                        border-color: gray;
+                        padding-left: 5px;
+                        border: 1px solid gray;
+                        border-color: 1px solid gray;
                         border-radius: 10px;
                         height: 32px;
+                        &:focus{
+                            outline: none;
+                        }
                     }
                       
                 .end{
-                    padding-right: 20px; 
-                    padding-left: 20px;
+                    padding-right: 20px;  
                 }
                 }
             }
     
             .leave-type{
-                padding-left: 40px;
-                padding-top: 40px;
-                padding-bottom: 10px;
+                padding-bottom: 20px;
+                padding-top: 20px;
+                .leave-space{
+                    display: inline-block;
+                    width: 10%;
+                }
                 label{
-                    padding-right: 14px;
+                    padding-left: 8%;
+                    padding-right: 15px;
                 }
                 select{
-                    width: 73.5%;
+                    padding-left: 5px;
                     height: 32px;
                     border-radius: 10px;
+                    width: 68%;
+                    &:focus{
+                        outline: none;
+                    }
                 }
             }
             .comment{
-                padding-left: 40px;
                 padding-bottom: 50px;
+                padding-left: 8%;
+                width: 100%;
                 textarea{
-                    width: 91%;
                     height: 100px;
                     border-radius: 10px;
                     max-height: 200px;
                     min-height: 50px;
+                    width: 90%;
+                    &:focus{
+                        outline: none;
+                    }
                 }
                 ::placeholder{
                    padding-top: 5px;
@@ -104,8 +127,8 @@
             }
 
             .buttoni{
-                padding-left: 40px;
-                padding-right: 50px;
+                padding-left: 8%;
+                padding-right: 8.5%;
                 padding-bottom: 30px;
                     .submit {background-image: linear-gradient(to right, #6441A5 0%, #2a0845  51%, #6441A5  100%)}
                     .submit {
@@ -118,6 +141,7 @@
                         border-radius: 10px;
                         width: 125px;
                         height: 32px;
+                        border-color: transparent;
                       }
             
                       .submit:hover {
@@ -136,6 +160,7 @@
                         border-radius: 10px;
                         width: 125px;
                         height: 32px;
+                        border-color: transparent;
                     }
                       
                       .cancel:hover {

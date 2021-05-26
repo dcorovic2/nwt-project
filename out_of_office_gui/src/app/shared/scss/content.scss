@@ -3,6 +3,16 @@
     display: flex;
     flex-flow: row;
     height: 100%;
+    .gap{
+      width: 10%;
+  }
+  .gapTwo{
+    width: 7%;
+  }
+
+  .cal-day-badge{
+    height: 30px;
+  }
     .cal-month-view .cal-day-cell {
       min-height: 45px !important;
       height: 56px !important;
@@ -37,7 +47,9 @@
       width: calc(100% - 57px);
       position:relative;
       overflow-y: auto;
-
+      .hidden-content{
+        visibility: hidden;
+      }
       .header{
         padding: 20px;
         padding-bottom: 0px;
@@ -48,6 +60,17 @@
           display: flex;
           border-bottom: 1.6px solid #4d094d;;
           padding-bottom: 10px;
+          .fa-user-circle{
+            color: rgb(104,35,139);
+          }
+         
+       
+          .fa-bell{
+            color: rgb(104,35,139);
+          }
+          .fa-plus-circle{
+            color: rgb(104,35,139);
+        }
           .user-info{
             width: 400px;
             display: flex;
@@ -85,12 +108,11 @@
       .plusbutton{
         padding-right: 35px;
         padding-bottom: 25px;
-    
-          i{
+          .fa-plus-circle{
             font-size: 50px;
             float: right;
-            color: #4c084c;
-          }
+            color: rgb(104,35,139);
+        }
       }
       .content{
         padding:20px;
@@ -254,9 +276,26 @@
           width: 100%;
           display: flex;
           flex-direction: column;
+          input{
+            height: 32px;
+            border-radius: 10px;
+            border: 1px solid gray !important;
+            padding-left: 15px;
+            padding-right: 15px;
+            &:focus{
+              outline: none !important;
+              border-color: gray !important;
+            }
+          }
+
+          input::-webkit-calendar-picker-indicator {
+            color: rgba(0, 0, 0, 0);
+            opacity: 1
+          }
+          
           .title{
             font-size: 25px;
-            color:purple;
+            color:gray;
           }
           .request-table{
             margin-top: 15px;

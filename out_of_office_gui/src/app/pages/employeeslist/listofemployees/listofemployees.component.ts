@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { NzTableModule } from 'ng-zorro-antd/table';
-import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { Router } from '@angular/router';
 import { ApiserviceService } from 'src/app/shared/services/apiservice.service';
 import { ActionService } from 'src/app/shared/services/action.service';
