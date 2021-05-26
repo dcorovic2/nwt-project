@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 
 import com.outofoffice.outofoffice.model.Employee;
 import com.outofoffice.outofoffice.responseobjects.HolidayResponse;
+import com.outofoffice.outofoffice.responseobjects.LeaveRequestResponse2;
 
 @Repository
 @CrossOrigin
@@ -69,5 +70,16 @@ public class EmployeeRepository extends SimpleJpaRepository<Employee, Long> {
 		});
 		return names;
 	}
+	
+	public List<LeaveRequestResponse2> findNamesAndDepartments() {
+		final List<Employee> employees = entityManager.createQuery("SELECT emp FROM Employee emp ", Employee.class)
+				.getResultList();
+		final List<LeaveRequestResponse2> names = new ArrayList<>();
+		employees.forEach(employee -> {
+			names.add(new LeaveRequestResponse2(employee.getId(), employee.getFirstnameLastName(), employee.getDepartment().getDisplayName()));
+		});
+		return names;
+	}
+
 
 }

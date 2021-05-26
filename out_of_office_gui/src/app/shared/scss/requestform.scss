@@ -1,5 +1,14 @@
 .popup-overlay{
     font-family: 'Trebuchet MS', sans-serif;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 7000;
+    -webkit-animation: flyconfirmation 200ms;
+    animation: flyconfirmation 200ms;
     .popup-window{
         border-radius: 5px;
         position: fixed;
