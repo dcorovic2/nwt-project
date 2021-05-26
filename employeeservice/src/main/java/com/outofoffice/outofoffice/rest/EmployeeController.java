@@ -149,4 +149,11 @@ public class EmployeeController {
 		return new ResponseEntity<List<LeaveRequestResponse2>>(response, HttpStatus.OK);
 	}
 	
+	@GetMapping(value="/employeeName/{id}")
+	public ResponseEntity<String> getName(@PathVariable(value = "id") Long id){
+		Employee employee = employeeService.getEmployeeById(id);
+		String response = employee.getFirstnameLastName();
+		return new ResponseEntity<String>(response, HttpStatus.OK);
+	}
+	
 }
