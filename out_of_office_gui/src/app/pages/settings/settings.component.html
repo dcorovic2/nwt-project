@@ -8,14 +8,20 @@
                     <span class="change-pass">
                         Change you password
                     </span>
-                    <div class="form">
-                        <input type="text"  placeholder="Username">
-                        <input type="text"  placeholder="Old password">
+                    <form class="form" [formGroup]="validateForm" (ngSubmit)="submitForm()">
+                        <input type="text"  id = "username" placeholder="Username" [formControlName]="'username'">
+                        <div *ngIf="usernameError" style="color: red;">
+                            Username does not exist!
+                        </div>
+                        <input type="text"  id = "password" placeholder="Old password" [formControlName]="'password'">
+                        <div *ngIf="passwordError" style="color: red;">
+                            Old password is incorrect!
+                        </div>
                         <button class="cancel">Cancel</button>
                         <input type="text"  placeholder="New password">
                         <input type="text"  placeholder="Confirm new password">
                         <button class="submit">Submit</button>
-                    </div>
+                    </form>
                 </div>
 
         </div>

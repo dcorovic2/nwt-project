@@ -14,6 +14,7 @@ import com.outofoffice.exception.CustomException;
 import com.outofoffice.model.User;
 import com.outofoffice.repository.UserRepository;
 import com.outofoffice.security.JwtTokenProvider;
+import java.util.List;
 
 @Service
 public class UserService {
@@ -38,6 +39,20 @@ public class UserService {
       throw new CustomException("Invalid username/password supplied", HttpStatus.UNPROCESSABLE_ENTITY);
     }
   }
+  
+  public User checkUsername(String username) {
+	    try {
+	      User user = userRepository.findByUsername(username);
+	      System.out.print(user.getUsername());
+	      if(user.getUsername() == null) {
+	    	  return null;
+	      }else {
+	    	  return user;  
+	      }
+	    } catch (Exception e) {
+	    	return null;
+	    }
+   }
 
   public String signup(User user) {
     if (!userRepository.existsByUsername(user.getUsername())) {

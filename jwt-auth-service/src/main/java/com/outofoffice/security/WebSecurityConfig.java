@@ -41,6 +41,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .antMatchers("/users/signup").permitAll()
         .antMatchers("/h2-console/**/**").permitAll()
         
+        .antMatchers("/users/username").permitAll()
         /////HOLIDAY-MS
         .antMatchers(HttpMethod.POST,"/holiday/holiday/{holidayTypeID}").hasRole("ADMIN")
         .antMatchers(HttpMethod.PATCH,"/holiday/holiday/{holidayTypeID}/{employeeID}/{firstAndLastName}").hasRole("CLIENT")
