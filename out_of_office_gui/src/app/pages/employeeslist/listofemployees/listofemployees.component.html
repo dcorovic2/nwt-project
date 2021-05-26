@@ -6,7 +6,8 @@
         <span>Employees list</span>
     </div>
     <div class="table">
-    <nz-table #nzTable [nzData]="listOfDisplayData" [nzLoading]='loading' nzTableLayout="fixed">
+    <nz-table #nzTable #dynamicTable
+ [nzPageSize]="50" [nzData]="listOfDisplayData" [nzLoading]='loading' nzTableLayout="fixed">
         <thead>
         <tr>
             <th nzCustomFilter>

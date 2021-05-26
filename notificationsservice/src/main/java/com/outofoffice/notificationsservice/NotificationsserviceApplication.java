@@ -47,27 +47,25 @@ public class NotificationsserviceApplication {
 	@Bean
 	public CommandLineRunner addingNotifications(NotificationsRepository notificationsRepository, NotificationsTypeRepository notificationsTypeRepository, EmployeeRepository employeeRepository, HolidayRepository holidayRepository){
 		return (args -> {
-			NotificationsType notificationtype1 = new NotificationsType("P","Pending","display message");
+			NotificationsType notificationtype1 = new NotificationsType("P","Pending","Pending");
 			notificationsTypeRepository.save(notificationtype1);
-			NotificationsType notificationtype2 = new NotificationsType("A","Approved","display message");
+			NotificationsType notificationtype2 = new NotificationsType("A","Approved","Approved Request");
 			notificationsTypeRepository.save(notificationtype2);
-			NotificationsType notificationtype3 = new NotificationsType("R","Rejected","display message");
+			NotificationsType notificationtype3 = new NotificationsType("R","Rejected","Rejected Request");
 			notificationsTypeRepository.save(notificationtype3);
-			NotificationsType notificationtype4 = new NotificationsType("R","LR is rejected","display message");
-			notificationsTypeRepository.save(notificationtype4);
 			
-			Employee employee1 = new Employee(1,20L,5L,"test@gmail.com","Neko Nekić");
-			List<Employee> employees1 = new ArrayList<>();
-			employees1.add(employee1);
-			employeeRepository.save(employee1);
-			Employee employee2 = new Employee(2,30L,6L,"test@gmail.com","Niko Nikić");
-			List<Employee> employees2 = new ArrayList<>();
-			employees1.add(employee1);
-			employeeRepository.save(employee2);
-			Employee employee3 = new Employee(3,25L,7L,"test@gmail.com","Noko Nokić");
-			List<Employee> employees3 = new ArrayList<>();
-			employees1.add(employee1);
-			employeeRepository.save(employee3);
+//			Employee employee1 = new Employee(1,20L,5L,"test@gmail.com","Neko Nekić");
+//			List<Employee> employees1 = new ArrayList<>();
+//			employees1.add(employee1);
+//			employeeRepository.save(employee1);
+//			Employee employee2 = new Employee(2,30L,6L,"test@gmail.com","Niko Nikić");
+//			List<Employee> employees2 = new ArrayList<>();
+//			employees1.add(employee1);
+//			employeeRepository.save(employee2);
+//			Employee employee3 = new Employee(3,25L,7L,"test@gmail.com","Noko Nokić");
+//			List<Employee> employees3 = new ArrayList<>();
+//			employees1.add(employee1);
+//			employeeRepository.save(employee3);
 //			
 //			Employee employee2 = new Employee(2,15,2,"bpozder@gmail.com","Benjamin Pozder");
 //			List<Employee> employees2 = new ArrayList<>();

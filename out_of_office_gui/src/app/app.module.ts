@@ -45,6 +45,8 @@ import { FullemployeeviewComponent } from './pages/fullemployeeview/fullemployee
 import { NzAlertModule } from 'ng-zorro-antd/alert';
 import { NzMessageModule } from 'ng-zorro-antd/message';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
+import { NzPaginationModule } from 'ng-zorro-antd/pagination';
+
 
 registerLocaleData(fi);
 
@@ -91,7 +93,8 @@ registerLocaleData(fi);
     NzFormModule,
     ReactiveFormsModule,
     NzAlertModule,
-    NzMessageModule
+    NzMessageModule,
+    NzPaginationModule
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },ApiserviceService,MatDatepickerModule, AuthService, { provide: NZ_I18N, useValue: fi_FI } 
   ],

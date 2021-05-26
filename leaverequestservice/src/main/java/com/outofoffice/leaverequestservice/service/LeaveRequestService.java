@@ -207,6 +207,15 @@ public class LeaveRequestService {
 		}
 		return new ResponseEntity<>(requestList, HttpStatus.OK);
 	}
+	
+	public ResponseEntity<?> getEmployeeRequestList(Long employeeId) {
+		List<LeaveRequest> requestList;
+		requestList = leaveRequestRepository.getAllRequestsForEmployee(employeeId);
+		if (requestList.isEmpty()) {
+			throw new NoDataException();
+		}
+		return new ResponseEntity<>(requestList, HttpStatus.OK);
+	}
 
 	public ResponseEntity<?> getRequestById(long id) {
 		LeaveRequest request;

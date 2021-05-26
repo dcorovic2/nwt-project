@@ -29,6 +29,15 @@ public class LeaveRequestRepository extends SimpleJpaRepository<LeaveRequest, Lo
 			
 		}
 		
+		public List<LeaveRequest> getAllRequestsForEmployee(Long employeeId) {
+			final List<LeaveRequest> requests = entityManager.createQuery("SELECT req FROM LeaveRequest req"
+					+ " WHERE req.employeeId = :employeeId", LeaveRequest.class)
+					.setParameter("employeeId", employeeId)
+					.getResultList();
+			return requests;
+			
+		}
+		
 		public List<LeaveRequest> getAllApprovedRequests() {
 			LeaveStatus status = LeaveStatusService.getById(2L);
 			final List<LeaveRequest> requests = entityManager.createQuery("SELECT req FROM LeaveRequest req"

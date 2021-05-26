@@ -3,6 +3,10 @@
     <div class="main-content">
         <app-header *ngIf="user" [user]="user"></app-header>
         <div class="content">
+            <div class = "classback" (click)="backOnTable()">
+                <i class = "fas fa-chevron-left"></i>
+                <p class = "modifyBack">Back</p>
+            </div>
             <div class="content-left">
                 <span class="title">Statistics</span>
                <div class="statistics first">
@@ -31,10 +35,6 @@
                 [viewDate]="viewDate"
                 [events]="events"> 
               </mwl-calendar-month-view> 
-            </div>
-            <div class = "classback" (click)="backOnTable()">
-                <i class = "fas fa-chevron-left"></i>
-                <p class = "modifyBack">Back</p>
             </div>
         </div>
     </div>

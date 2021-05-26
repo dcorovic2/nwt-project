@@ -130,6 +130,11 @@ public class LeaveRequestController {
 	    return LeaveRequestService.getStatusRequestList(statusId);
 	}
 	
+	@GetMapping("/requests/employee")
+	public ResponseEntity<?> getRequestsByEmployee(@RequestParam(name = "employeeId", required = true) long employeeId) {
+	    return LeaveRequestService.getEmployeeRequestList(employeeId);
+	}
+	
 	@GetMapping("/employees")
 	public ResponseEntity<?> getEmployeesOnLeave() {
 	    return LeaveRequestService.getEmployeesOnRequest();

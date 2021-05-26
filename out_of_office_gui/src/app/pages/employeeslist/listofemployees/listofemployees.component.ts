@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiserviceService } from 'src/app/shared/services/apiservice.service';
 import { ActionService } from 'src/app/shared/services/action.service';
+import { NzTablePaginationPosition, NzTablePaginationType} from 'ng-zorro-antd/table'; 
 
 interface DataItem {
   name: string;
@@ -42,6 +43,8 @@ export class ListofemployeesComponent implements OnInit {
   public employees: any;
   public employees2: any;
   public employeeId: any;
+  public position: NzTablePaginationPosition | undefined;
+  public paginationType: NzTablePaginationType | undefined;
 
   constructor(private route:Router, private api: ApiserviceService, private action: ActionService) { }
 
