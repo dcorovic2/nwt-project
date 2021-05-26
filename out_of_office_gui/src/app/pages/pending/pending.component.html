@@ -1,11 +1,42 @@
 <div class="content-wrap">
-    <app-menu></app-menu>
+    <app-menu [role]="'employee'"></app-menu>
     <div class="main-content">
-        <app-header></app-header>
+        <app-header [user]="user"></app-header>
         <div class="content">
         <div class="content-right">
             <span class="title">Leave request</span>
-            <div class="request-table">
+            <div class="table">
+                <nz-table #nzTable [nzData]="requests" nzTableLayout="fixed">
+                    <thead>
+                    <tr>
+                    <th>Type</th>
+                    <th>Dates</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let request of requests">
+                    <td>{{ request.leave_type.displayName }}</td>
+                    <td>From {{request.startDate}} to {{request.endDate }}</td>
+                    <td>{{ request.leave_status.displayName }}</td>
+                    <td><div  class="value actions"><span class="active" [ngClass]="{disabled: request.leave_status.code!='P'}">Edit</span> <span class="enabled" [ngClass]="{disabled: request.leave_status.code!='P'}">Cancel</span> <span class="enabled" [ngClass]="{disabled: request.leave_status.code=='P'}">Comment</span></div></td>
+                  </tr>
+                </tbody>
+              </nz-table>
+              <nz-dropdown-menu #menu="nzDropdownMenu">
+                <div class="ant-table-filter-dropdown">
+                  <div class="search-box">
+                    <input type="text" nz-input placeholder="Search name" [(ngModel)]="searchValue" class="input-name"/>
+                    <button nz-button  nzSize="small" nzType="primary" (click)="search()" class="search-button">
+                      Search
+                    </button>
+                    <button nz-button class="reset" nzSize="small" (click)="reset()">Reset</button>
+                  </div>
+                </div>
+              </nz-dropdown-menu>
+            </div>
+         <!--  <div class="request-table">
             <div class="table-header">
                     <span class="column">Type</span>
                     <span class="column">Dates</span>
@@ -54,6 +85,9 @@
         <div class="plusbutton">
             <i class="fas fa-plus-circle"></i>
         </div>
+    -->
+    </div>
+</div>
     </div>
     </div>
     

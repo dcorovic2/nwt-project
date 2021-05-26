@@ -167,7 +167,19 @@
       }
         span{
           color: gray;
-          font-size: 25px;
+          font-size: 15px;
+          padding-right: 30px;
+          &.active{
+            color: blue;
+          }
+          &.disabled{
+            opacity: 0.3;
+            font-weight: 800;
+          }
+          &.enabled{
+            color: blue;
+            font-weight: 800;
+          }
         }
 
         .form1{
@@ -343,22 +355,24 @@
                   }
                   
                 }
-               
-                &.actions{
-                  display: flex;
-                  .disabled{
-                    opacity: 0.3;
-                    font-weight: 800;
-                  }
-                  .enabled{
-                    color: blue;
-                    font-weight: 800;
-                  }
-                  span{
-                    flex: 1 1 100%;
-                    font-weight: 800;
-                  }
+            td{
+                             
+              &.actions{
+                display: flex;
+                .disabled{
+                  opacity: 0.3;
+                  font-weight: 800;
                 }
+                .enabled{
+                  color: blue;
+                  font-weight: 800;
+                }
+                span{
+                  flex: 1 1 100%;
+                  font-weight: 800;
+                }
+              }
+            }
               }
               div{
                 background-color: transparent !important;

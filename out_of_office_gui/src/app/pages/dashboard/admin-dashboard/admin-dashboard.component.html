@@ -38,9 +38,9 @@
         </thead>
         <tbody>
           <tr *ngFor="let data of employees">
-            <td>{{ data.firstnameLastName }}</td>
-            <td>{{ data.department.displayName }}</td>
-            <td></td>
+            <td>{{ data.employeeName }}</td>
+            <td>{{ data.departmentName }}</td>
+            <td>{{data.leaveType}}</td>
           </tr>
         </tbody>
       </nz-table>

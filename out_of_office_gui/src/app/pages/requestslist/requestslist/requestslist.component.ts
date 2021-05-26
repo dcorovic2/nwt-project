@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
+import { ApiserviceService } from 'src/app/shared/services/apiservice.service';
 
 interface DataItem {
   name: string;
@@ -13,42 +14,24 @@ interface DataItem {
   templateUrl: './requestslist.component.html'
 })
 export class RequestslistComponent implements OnInit {
-
-  constructor() { }
+  @Input() id: any;
+  public user: any={};
+  public requests: any = [];
+  searchValue = '';
+  visible = false;
+  constructor(private api: ApiserviceService) { }
   public show:boolean = false;
 
   public doSomething(): void {
     this.show = !this.show;
   }
   ngOnInit(): void {
-  }
+    this.api.get('employee/employee/username', {username: localStorage.getItem('username')}).subscribe((data:any)=>{
+      Object.assign(this.user, {firstnameLastName:data.firstnameLastName, email: data.email, id: data.id});
+      this.api.get('leaverequest/requests',{status_id: 0}).subscribe((data)=>this.requests = data);
+    })
 
-  searchValue = '';
-  visible = false;
-  listOfData: DataItem[] = [
-    {
-      name: 'John Brown',
-      type: 'Holiday',
-      dates: 'From 02.03.2021 to 06.03.2021'
-      
-    },
-    {
-      name: 'Jim Green',
-      type: 'New Year',
-      dates: 'From 02.03.2021 to 06.03.2021'
-    },
-    {
-      name: 'Joe Black',
-      type: 'Sick leave',
-      dates: 'From 02.03.2021 to 06.03.2021'
-    },
-    {
-      name: 'Jim Red',
-      type: 'Funeral',
-      dates: 'From 02.03.2021 to 06.03.2021'
-    }
-  ];
-  listOfDisplayData = [...this.listOfData];
+  }
 
   reset(): void {
     this.searchValue = '';
@@ -57,7 +40,7 @@ export class RequestslistComponent implements OnInit {
 
   search(): void {
     this.visible = false;
-    this.listOfDisplayData = this.listOfData.filter((item: DataItem) => item.name.indexOf(this.searchValue) !== -1);
+ //   this.listOfDisplayData = this.listOfData.filter((item: DataItem) => item.name.indexOf(this.searchValue) !== -1);
   }
 
 }

@@ -1,48 +1,94 @@
 <div class="content-wrap">
-    <app-menu></app-menu>
-    <div class="main-content">
-        <app-header></app-header>
-    <div class="name">
-        <span>Active Leave Requests</span>
-    </div>
-    <div class="table">
-    <nz-table #nzTable [nzData]="listOfDisplayData" nzTableLayout="fixed">
-        <thead>
-        <tr>
-            <th nzCustomFilter>
-          Employee name
-          <nz-filter-trigger  class="search" [(nzVisible)]="visible" [nzActive]="searchValue.length > 0" [nzDropdownMenu]="menu">
-            <i class="fas fa-search"></i>
-          </nz-filter-trigger>
-        </th>
-        <th>Type</th>
-        <th>Dates</th>
-        <th>Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let data of nzTable.data">
-        <td>{{ data.name }}</td>
-        <td>{{ data.type }}</td>
-        <td>{{ data.dates }}</td>
-        <td><div class="buttoni">
-            <button class="view">View</button>
-        </div>
-    </td>
-      </tr>
-    </tbody>
-  </nz-table>
-  <nz-dropdown-menu #menu="nzDropdownMenu">
-    <div class="ant-table-filter-dropdown">
-      <div class="search-box">
-        <input type="text" nz-input placeholder="Search name" [(ngModel)]="searchValue" class="input-name"/>
-        <button nz-button  nzSize="small" nzType="primary" (click)="search()" class="search-button">
-          Search
-        </button>
-        <button nz-button class="reset" nzSize="small" (click)="reset()">Reset</button>
+  <app-menu></app-menu>
+  <div class="main-content">
+      <app-header [user]="user"></app-header>
+      <div class="content">
+      <div class="content-right">
+          <span class="title">Active Leave Requests</span>
+          <div class="table">
+              <nz-table #nzTable [nzData]="requests" nzTableLayout="fixed">
+                  <thead>
+                  <tr>
+                  <th>Employee Name</th>
+                  <th>Type</th>
+                  <th>Dates</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let request of requests">
+                  <td>{{ request.leave_type.displayName }}</td>
+                  <td>{{ request.leave_type.displayName }}</td>
+                  <td>From {{request.startDate}} to {{request.endDate }}</td>
+                  <td><div  class="value actions"><span class="active" [ngClass]="{disabled: request.leave_status.code!='P'}">View</span></div></td>
+                </tr>
+              </tbody>
+            </nz-table>
+            <nz-dropdown-menu #menu="nzDropdownMenu">
+              <div class="ant-table-filter-dropdown">
+                <div class="search-box">
+                  <input type="text" nz-input placeholder="Search name" [(ngModel)]="searchValue" class="input-name"/>
+                  <button nz-button  nzSize="small" nzType="primary" (click)="search()" class="search-button">
+                    Search
+                  </button>
+                  <button nz-button class="reset" nzSize="small" (click)="reset()">Reset</button>
+                </div>
+              </div>
+            </nz-dropdown-menu>
+          </div>
+       <!--  <div class="request-table">
+          <div class="table-header">
+                  <span class="column">Type</span>
+                  <span class="column">Dates</span>
+                  <span class="column">Status</span>
+                  <span class="column">Action</span>
+              </div>
+              <div class=table-header>
+                  <span class="value">Sick leave</span>
+                  <span class="value">From 13.04.2021 to 15.04.2021</span>
+                  <div class="value status pending"><span>Pending</span> <i class="fas fa-hourglass-start"></i></div>
+                  <div  class="value actions"><span class="enabled">Edit</span><span>Cancel</span> <span class="disabled">Comment</span></div>
+              </div>
+              <div class=table-header>
+                  <span class="value">Holiday</span>
+                  <span class="value">From 01.01.2021 to 15.01.2021</span>
+                  <div class="value status approved"><span>Approved</span> <i class="fas fa-check-circle"></i></div>
+                  <div  class="value actions"><span class="disabled">Edit</span> <span class="disabled">Cancel</span> <span class="enabled">Comment</span></div>
+              </div>
+              <div class=table-header>
+                  <span class="value">Sick leave</span>
+                  <span class="value">From 08.02.2021 to 12.02.2021</span>
+                  <div class="value status approved"><span>Approved</span> <i class="fas fa-check-circle"></i></div>
+                  <div  class="value actions"><span class="disabled">Edit</span> <span class="disabled">Cancel</span> <span class="enabled">Comment</span></div>
+              </div>
+              <div class=table-header>
+                  <span class="value">Holiday</span>
+                  <span class="value">From 15.02.2021 to 15.05.2021</span>
+                  <div class="value status rejected"><span>Rejected</span><i class="fas fa-times-circle"></i></div>
+                  <div  class="value actions"><span class="disabled">Edit</span> <span class="disabled">Cancel</span> <span class="enabled">Comment</span></div>
+              </div>
+              <div class=table-header>
+                  <span class="value">Sick leave</span>
+                  <span class="value">From 13.04.2021 to 15.04.2021</span>
+                  <div class="value status pending"><span>Pending</span><i class="fas fa-hourglass-start"></i></div>
+                  <div  class="value actions"><span class="enabled">Edit</span> <span>Cancel</span><span class="disabled">Comment</span></div>
+              </div>
+              <div class=table-header>
+                  <span class="value">Holiday</span>
+                  <span class="value">From 17.08.2021 to 17.12.2021</span>
+                  <div class="value status rejected"><span>Rejected</span><i class="fas fa-times-circle"></i></div>
+                  <div  class="value actions"><span class="disabled">Edit</span> <span class="disabled">Cancel</span> <span class="enabled">Comment</span></div>
+              </div>
+          </div>
       </div>
-    </div>
-  </nz-dropdown-menu>
+      </div>
+      <div class="plusbutton">
+          <i class="fas fa-plus-circle"></i>
+      </div>
+  -->
+  </div>
 </div>
-</div>
-</div>
+  </div>
+  </div>
+  
+  
