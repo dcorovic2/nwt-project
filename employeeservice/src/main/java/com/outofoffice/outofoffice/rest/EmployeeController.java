@@ -35,6 +35,7 @@ import com.outofoffice.outofoffice.requestobjects.EmployeeDepartmentChange;
 import com.outofoffice.outofoffice.requestobjects.EmployeeRequest;
 import com.outofoffice.outofoffice.responseobjects.HolidayResponse;
 import com.outofoffice.outofoffice.responseobjects.LeaveRequestResponse;
+import com.outofoffice.outofoffice.responseobjects.LeaveRequestResponse2;
 import com.outofoffice.outofoffice.responseobjects.NotificationResponse;
 import com.outofoffice.outofoffice.service.EmployeeService;
 
@@ -140,6 +141,12 @@ public class EmployeeController {
 		System.out.println(ids);
 		List<NotificationResponse> response = employeeService.getAllEmployeesByIds(ids);
 		return new ResponseEntity<List<NotificationResponse>>(response, HttpStatus.OK);
+	}
+	
+	@GetMapping(value="/getEmployeesNames")
+	public ResponseEntity<List<LeaveRequestResponse2>> getNamesAndDepartments(){
+		List<LeaveRequestResponse2> response = employeeService.getEmployeesNamesAndDepartments();
+		return new ResponseEntity<List<LeaveRequestResponse2>>(response, HttpStatus.OK);
 	}
 	
 }
