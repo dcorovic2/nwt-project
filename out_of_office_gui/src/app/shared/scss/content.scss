@@ -175,18 +175,22 @@
       }
         span{
           color: gray;
-          font-size: 15px;
+          font-size: 25px;
           padding-right: 30px;
           &.active{
             color: blue;
+            font-weight: 800;
+            font-size: 15px !important;
           }
           &.disabled{
             opacity: 0.3;
             font-weight: 800;
+            font-size: 15px !important;
           }
           &.enabled{
             color: blue;
             font-weight: 800;
+            font-size: 15px !important;
           }
         }
 

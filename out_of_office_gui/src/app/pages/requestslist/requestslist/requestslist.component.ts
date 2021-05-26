@@ -21,6 +21,7 @@ export class RequestslistComponent implements OnInit {
   visible = false;
   constructor(private api: ApiserviceService) { }
   public show:boolean = false;
+  public popupData: any = {};
 
   public doSomething(): void {
     this.show = !this.show;
@@ -41,6 +42,10 @@ export class RequestslistComponent implements OnInit {
   search(): void {
     this.visible = false;
  //   this.listOfDisplayData = this.listOfData.filter((item: DataItem) => item.name.indexOf(this.searchValue) !== -1);
+  }
+
+  openPopup(request: any){
+   Object.assign(this.popupData, {type: request.leave_type.displayName, startDate: request.startDate, endDate: request.endDate, reason: request.leave_status.reason});
   }
 
 }

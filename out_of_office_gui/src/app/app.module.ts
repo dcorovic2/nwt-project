@@ -46,6 +46,7 @@ import { NzAlertModule } from 'ng-zorro-antd/alert';
 import { NzMessageModule } from 'ng-zorro-antd/message';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
+import { ViewrequestComponent } from './components/viewrequest/viewrequest/viewrequest.component';
 
 
 registerLocaleData(fi);
@@ -69,7 +70,8 @@ registerLocaleData(fi);
     ListofemployeesComponent,
     DeleteemployeeComponent,
     RequestslistComponent,
-    FullemployeeviewComponent 
+    FullemployeeviewComponent,
+    ViewrequestComponent 
   ],
   imports: [
     BrowserModule,
