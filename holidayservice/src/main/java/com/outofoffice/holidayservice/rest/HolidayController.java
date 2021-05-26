@@ -84,7 +84,6 @@ public class HolidayController {
 	}
 	
 	@ApiOperation(value = "Get list of employees for specific holiday type")
-	@CrossOrigin(origins = "http://localhost:4200")
 	@GetMapping(value = "/getlistofemployees/{holidayTypeId}")
 	public ResponseEntity<?> getAllHolidayEmployeeList(@PathVariable Long holidayTypeId) {
 		return holidayService.getAllEmployees(holidayTypeId);
