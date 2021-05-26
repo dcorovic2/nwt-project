@@ -1,12 +1,12 @@
 <div class="content-wrap">
     <app-menu></app-menu>
     <div class="main-content">
-        <app-header *ngIf="user" [user]="user"></app-header>
+        <app-header [user]="user"></app-header>
     <div class="name">
         <span>Employees list</span>
     </div>
     <div class="table">
-    <nz-table #nzTable [nzData]="listOfDisplayData" nzTableLayout="fixed">
+    <nz-table #nzTable [nzData]="listOfDisplayData" [nzLoading]='loading' nzTableLayout="fixed">
         <thead>
         <tr>
             <th nzCustomFilter>
@@ -21,8 +21,8 @@
     </thead>
     <tbody>
       <tr *ngFor="let data of employees">
-        <td>{{ data.firstnameLastName }}</td>
-        <td>{{ data.department.displayName }}</td>
+        <td> {{ data.firstnameLastName }}</td>
+        <td> {{ data.department.displayName }}</td>
         <td><div class="buttoni">
             <button class="view" (click) = "fullPage(data.username)">View</button>
             <button class="delete" (click) = "hideDelete=!hideDelete; employeeId = data.id">Delete</button>

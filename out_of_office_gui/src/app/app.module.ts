@@ -38,12 +38,13 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import fi from '@angular/common/locales/fi';
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { NzFormModule } from 'ng-zorro-antd/form';
-import en from '@angular/common/locales/en';
+import { NzButtonModule } from 'ng-zorro-antd/button';
 import { DeleteemployeeComponent } from './components/deleteemployee/deleteemployee/deleteemployee.component';
 import { RequestslistComponent } from './pages/requestslist/requestslist/requestslist.component';
 import { FullemployeeviewComponent } from './pages/fullemployeeview/fullemployeeview/fullemployeeview.component';
 import { NzAlertModule } from 'ng-zorro-antd/alert';
 import { NzMessageModule } from 'ng-zorro-antd/message';
+import { NzSpinModule } from 'ng-zorro-antd/spin';
 
 registerLocaleData(fi);
 
@@ -74,7 +75,9 @@ registerLocaleData(fi);
     HttpClientModule,
     ToastrModule.forRoot({timeOut: 5000, positionClass: 'toast-bottom-right',preventDuplicates: true}),
     MatDatepickerModule,
-    MatNativeDateModule ,
+    MatNativeDateModule,
+    NzSpinModule,
+    NzButtonModule,
     MatFormFieldModule,
     MatInputModule,
     DpDatePickerModule,

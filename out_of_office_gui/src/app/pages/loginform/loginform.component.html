@@ -12,14 +12,14 @@
             <p>Enter your username and password</p>
             <form class="inputs" [formGroup]="validateForm" (ngSubmit)="submitForm()">
                 <input type="text" id = "username" placeholder="Username" [formControlName]="'username'">
-                <div *ngIf="(this.validateForm.get('username')!.dirty && this.validateForm.get('username')!.hasError('required')) && usernameError" style="color: red;">
+                <div *ngIf="(this.validateForm.get('username')!.dirty && this.validateForm.get('username')!.hasError('required')) || usernameError" style="color: red;">
                     Username is a required field!
                 </div>
                 <input type="password" id = "password" placeholder="Password" [formControlName]="'password'">
-                <div *ngIf="(this.validateForm.get('password')!.dirty && this.validateForm.get('password')!.hasError('required')) && passwordError" style="color: red;">
+                <div *ngIf="(this.validateForm.get('password')!.dirty && this.validateForm.get('password')!.hasError('required')) || passwordError" style="color: red;">
                     Password is a required field!
                 </div>
-                <button class="submit">Sign In</button>
+                <button nz-button nzType="primary" (click)="loadOne()" [nzLoading]="isLoadingOne" class="submit">Sign In</button>
             </form>
         </div>
     </div>

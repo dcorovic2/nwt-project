@@ -37,6 +37,8 @@ interface DataItem {
 export class ListofemployeesComponent implements OnInit {
   public user = {};
   public hideDelete = true; 
+  public spinner = true;
+  public loading = true; 
   public employees: any;
   public employees2: any;
   public employeeId: any;
@@ -50,12 +52,12 @@ export class ListofemployeesComponent implements OnInit {
 
   ngOnInit(): void {
     this.action.set('getEmployees', ()=>{
-      this.api.get('employee/allemployees').subscribe((data)=>{this.employees = data; this.employees2 = [...this.employees]});
+      this.api.get('employee/allemployees').subscribe((data)=>{this.employees = data; this.loading=false; this.employees2 = [...this.employees]});
     });
     this.api.get('employee/employee/username', {username: localStorage.getItem('username')}).subscribe((data:any)=>{
       Object.assign(this.user, {firstnameLastName:data.firstnameLastName, email: data.email});
      })
-     this.api.get('employee/allemployees').subscribe((data)=>{this.employees = data; this.employees2 = [...this.employees]});
+     this.api.get('employee/allemployees').subscribe((data)=>{this.employees = data; this.loading=false; this.employees2 = [...this.employees]});
   }
 
   searchValue = '';

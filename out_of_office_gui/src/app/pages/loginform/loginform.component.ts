@@ -15,6 +15,16 @@ import { JwtToken } from 'src/app/shared/interfaces/jwt-token';
 })
 
 export class LoginformComponent implements OnInit {
+  isLoadingOne = false;
+
+  loadOne(): void {
+    this.isLoadingOne = true;
+    setTimeout(() => {
+      this.isLoadingOne = false;
+    }, 5000);
+  }
+
+
   validateForm: FormGroup;
   public  usernameError: boolean=false;
   public passwordError: boolean=false;
@@ -38,7 +48,7 @@ export class LoginformComponent implements OnInit {
       let params: HttpParams = new HttpParams();
 
       params = params.append('username', username);
-      this.api.post('users/signin', {username:username, password:password}).subscribe(data=>{
+        this.api.post('users/signin', {username:username, password:password}).subscribe(data=>{
         localStorage.setItem('token', data);
         const token = jwt_decode<JwtToken>(data);
         localStorage.setItem('role', token.auth[0].authority);
