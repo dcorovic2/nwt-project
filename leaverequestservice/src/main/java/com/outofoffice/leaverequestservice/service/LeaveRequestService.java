@@ -3,16 +3,19 @@ package com.outofoffice.leaverequestservice.service;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import com.outofoffice.leaverequestservice.model.LeaveRequest;
 import com.outofoffice.leaverequestservice.model.LeaveStatus;
@@ -23,17 +26,23 @@ import com.outofoffice.leaverequestservice.repository.LeaveStatusRepository;
 import com.outofoffice.leaverequestservice.service.LeaveTypeService;
 import com.outofoffice.leaverequestservice.requestobjects.LeaveRequestRequest;
 import com.outofoffice.leaverequestservice.requestobjects.LeaveStatusRequest;
+import com.outofoffice.leaverequestservice.responseobjects.EmployeesOnLeaveResponse;
 import com.outofoffice.leaverequestservice.responseobjects.LeaveRequestResponse;
+import com.outofoffice.leaverequestservice.responseobjects.LeaveRequestResponse2;
 import com.outofoffice.leaverequestservice.error.ErrorMessage;
 import com.outofoffice.leaverequestservice.errorhandling.NoDataException;
 import com.outofoffice.leaverequestservice.errorhandling.NotFoundException;
 import com.outofoffice.leaverequestservice.errorhandling.NotSucesfullException;
 import com.outofoffice.leaverequestservice.errorhandling.NotValidParamException;
+import com.outofoffice.leaverequestservice.errorhandling.RestTemplateException;
 
 @Service
 public class LeaveRequestService {
 
 	private final LeaveRequestRepository leaveRequestRepository;
+	
+	@Autowired
+	RestTemplate restTemplate; 
 
 	public LeaveRequestService(LeaveRequestRepository leaveRequestRepository) {
 		this.leaveRequestRepository = leaveRequestRepository;
@@ -205,5 +214,30 @@ public class LeaveRequestService {
 		request = leaveRequestRepository.findById(id)
 				.orElseThrow(() -> new NotFoundException(id_request, "Leave Request", "ID", ""));
 		return new ResponseEntity<>(request, HttpStatus.OK);
+	}
+	
+	public ResponseEntity<?> getEmployeesOnRequest() {
+		List<LeaveRequest> requestList;
+		final String uri = "http://employee-service/getEmployeesNames";
+		ResponseEntity<LeaveRequestResponse2[]> response;
+		try {
+			response = restTemplate.getForEntity(uri, LeaveRequestResponse2[].class);
+		} catch (IllegalStateException e) {
+			throw new RestTemplateException(uri);
+		}		
+		List<LeaveRequestResponse2> sourceList = Arrays.asList(response.getBody());
+		
+		requestList = leaveRequestRepository.getAllApprovedRequests();
+		
+		final List<EmployeesOnLeaveResponse> names = new ArrayList<>();
+		requestList.forEach(request -> {
+			sourceList.forEach(source -> {
+				if(source.getEmployeeId() == request.getEmployeeId()) {
+					names.add(new EmployeesOnLeaveResponse(source.getName(), source.getDepartment(),request.getLeave_type().getDisplayName(), request.getStartDate(), request.getEndDate()));
+				}
+			});
+		});
+		
+		return new ResponseEntity<>(names, HttpStatus.OK);
 	}
 }
