@@ -29,6 +29,7 @@ import com.outofoffice.leaverequestservice.requestobjects.LeaveStatusRequest;
 import com.outofoffice.leaverequestservice.responseobjects.EmployeesOnLeaveResponse;
 import com.outofoffice.leaverequestservice.responseobjects.LeaveRequestResponse;
 import com.outofoffice.leaverequestservice.responseobjects.LeaveRequestResponse2;
+import com.outofoffice.leaverequestservice.responseobjects.LeaveStatusResponse;
 import com.outofoffice.leaverequestservice.error.ErrorMessage;
 import com.outofoffice.leaverequestservice.errorhandling.NoDataException;
 import com.outofoffice.leaverequestservice.errorhandling.NotFoundException;
@@ -205,7 +206,20 @@ public class LeaveRequestService {
 		if (requestList.isEmpty()) {
 			throw new NoDataException();
 		}
-		return new ResponseEntity<>(requestList, HttpStatus.OK);
+		List<LeaveStatusResponse> response = new ArrayList<>();
+		requestList.forEach(request -> {
+			final String uri = "http://employee-service/employeeName/" + request.getEmployeeId() ;
+			final String employeeName;
+			try {
+				employeeName = restTemplate.getForObject(uri, String.class);
+			} catch (IllegalStateException e) {
+				throw new RestTemplateException(uri);
+			}
+			response.add(new LeaveStatusResponse(request.getComment(), request.getDaysNum(), request.getEmployeeId(), request.getStartDate(),
+					request.getEndDate(), request.getLeave_type(), request.getLeave_status(), request.getNotifications_type(), request.getRestDaysNum(),
+					employeeName));
+		});
+		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 	
 	public ResponseEntity<?> getEmployeeRequestList(Long employeeId) {
