@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import * as queryParse from 'query-string';
 import { environment } from '../../../environments/environment';
 import {catchError } from "rxjs/operators";
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ import {catchError } from "rxjs/operators";
 export class ApiserviceService {
  
   private host: string = environment.apiHost;
-  constructor(private http: HttpClient, private message:ToastrService) { }
+  constructor(private http: HttpClient, private message:ToastrService, private message1: NzMessageService) { }
 
   
   public get(path:string, param?:any, queryextend?:object): Observable<any> {
@@ -23,6 +24,10 @@ export class ApiserviceService {
 
 public post(path:string, param?:object,body?:any): Observable<any> {
   return this.http.post(this.query(this.env(path), param), body,{responseType: 'text'}).pipe(catchError((error:HttpErrorResponse)=>{
+      if(error.status == 422) {
+        this.message1.create('error', `Username or password incorrect!`);
+      }
+      
       /*this.loading.hide(path);*/ this.message.error(error.error.message||error.message);return throwError(error.message);
   })); 
 }

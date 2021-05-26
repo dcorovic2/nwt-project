@@ -36,11 +36,14 @@ import { fi_FI, en_US } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import fi from '@angular/common/locales/fi';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
+import { NzFormModule } from 'ng-zorro-antd/form';
 import en from '@angular/common/locales/en';
 import { DeleteemployeeComponent } from './components/deleteemployee/deleteemployee/deleteemployee.component';
 import { RequestslistComponent } from './pages/requestslist/requestslist/requestslist.component';
 import { FullemployeeviewComponent } from './pages/fullemployeeview/fullemployeeview/fullemployeeview.component';
+import { NzAlertModule } from 'ng-zorro-antd/alert';
+import { NzMessageModule } from 'ng-zorro-antd/message';
 
 registerLocaleData(fi);
 
@@ -63,7 +66,7 @@ registerLocaleData(fi);
     ListofemployeesComponent,
     DeleteemployeeComponent,
     RequestslistComponent,
-    FullemployeeviewComponent
+    FullemployeeviewComponent 
   ],
   imports: [
     BrowserModule,
@@ -80,8 +83,12 @@ registerLocaleData(fi);
     NzIconModule,
     BrowserAnimationsModule,
     FormsModule,
-    NzTableModule,
-    NzDropDownModule
+    NzTableModule, 
+    NzDropDownModule,
+    NzFormModule,
+    ReactiveFormsModule,
+    NzAlertModule,
+    NzMessageModule
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },ApiserviceService,MatDatepickerModule, AuthService, { provide: NZ_I18N, useValue: fi_FI } 
   ],
