@@ -35,6 +35,7 @@ import com.outofoffice.outofoffice.requestobjects.EmployeeRequest;
 import com.outofoffice.outofoffice.requestobjects.LoginRequest;
 import com.outofoffice.outofoffice.responseobjects.HolidayResponse;
 import com.outofoffice.outofoffice.responseobjects.LeaveRequestResponse;
+import com.outofoffice.outofoffice.responseobjects.LeaveRequestResponse2;
 import com.outofoffice.outofoffice.responseobjects.NotificationResponse;
 
 import io.grpc.stub.StreamObserver;
@@ -172,6 +173,12 @@ public class EmployeeService {
 	public List<HolidayResponse> getAllEmployeesNames() {
 		List<HolidayResponse> names = new ArrayList<HolidayResponse>();
 		names = employeeRepository.findNamesAndIds();
+		return names;
+	}
+	
+	public List<LeaveRequestResponse2> getEmployeesNamesAndDepartments() {
+		List<LeaveRequestResponse2> names = new ArrayList<LeaveRequestResponse2>();
+		names = employeeRepository.findNamesAndDepartments();
 		return names;
 	}
 
