@@ -3,7 +3,7 @@
         <div class="user">
             <i class="far fa-user-circle fa-8x"></i>
             <div class="user-info">
-                <span>Ime korisnika</span>
+                <span>{{popupData.employeeName}}</span>
               </div>
         </div>
         <div class="popup-content-window">
@@ -27,12 +27,12 @@
             </div>
     
             <div class="commentrequest">
-                <textarea  type="text"  placeholder="Leave comment"></textarea>
+                <textarea  type="text" id = "comment" placeholder="Leave comment"></textarea>
             </div>
     
             <div class="buttoni">
-                <button class="cancel" (click)="hidePopUp()">Cancel</button>
-                <button class="submit">Submit</button>
+                <button class="cancel" (click)="hidePopUp()">Reject</button>
+                <button class="submit" (click)="approve()">Approve</button>
                 <div class="space">
                 </div>
             </div>

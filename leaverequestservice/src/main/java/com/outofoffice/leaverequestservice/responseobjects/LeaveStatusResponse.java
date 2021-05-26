@@ -22,10 +22,10 @@ public class LeaveStatusResponse {
 	
 	public LeaveStatusResponse() {};
 
-	public LeaveStatusResponse(String comment, int daysNum, Long employeeId, LocalDate startDate, LocalDate endDate,
+	public LeaveStatusResponse(Long id, String comment, int daysNum, Long employeeId, LocalDate startDate, LocalDate endDate,
 			LeaveType leave_type, LeaveStatus leave_status, NotificationsType notifications_type, long restDaysNum, String employeeName) {
 		super();
-		//this.id = id;
+		this.id = id;
 		this.comment = comment;
 		this.daysNum = daysNum;
 		this.employeeId = employeeId;

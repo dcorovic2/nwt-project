@@ -215,7 +215,7 @@ public class LeaveRequestService {
 			} catch (IllegalStateException e) {
 				throw new RestTemplateException(uri);
 			}
-			response.add(new LeaveStatusResponse(request.getComment(), request.getDaysNum(), request.getEmployeeId(), request.getStartDate(),
+			response.add(new LeaveStatusResponse(request.getId(), request.getComment(), request.getDaysNum(), request.getEmployeeId(), request.getStartDate(),
 					request.getEndDate(), request.getLeave_type(), request.getLeave_status(), request.getNotifications_type(), request.getRestDaysNum(),
 					employeeName));
 		});

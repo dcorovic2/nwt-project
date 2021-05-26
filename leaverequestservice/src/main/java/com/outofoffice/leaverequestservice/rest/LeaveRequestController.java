@@ -31,8 +31,10 @@ import com.outofoffice.leaverequestservice.errorhandling.NotValidParamException;
 import com.outofoffice.leaverequestservice.errorhandling.RestTemplateException;
 import com.outofoffice.leaverequestservice.errorhandling.RestTemplateResponseErrorHandler;
 import com.outofoffice.leaverequestservice.model.LeaveRequest;
+import com.outofoffice.leaverequestservice.model.LeaveType;
 import com.outofoffice.leaverequestservice.repository.LeaveRequestRepository;
 import com.outofoffice.leaverequestservice.service.LeaveRequestService;
+import com.outofoffice.leaverequestservice.service.LeaveTypeService;
 import com.outofoffice.leaverequestservice.requestobjects.LeaveRequestRequest;
 import com.outofoffice.leaverequestservice.requestobjects.LeaveStatusRequest;
 import com.outofoffice.leaverequestservice.requestobjects.RequestEmployee;
@@ -46,6 +48,7 @@ import io.swagger.annotations.ApiOperation;
 
 public class LeaveRequestController {
 	private final LeaveRequestService LeaveRequestService;
+	private final LeaveTypeService leaveTypeService;
 	private final LeaveRequestRepository leaveRequestRepository;
 	
 	@Autowired
@@ -54,11 +57,12 @@ public class LeaveRequestController {
 	@Autowired
 	RabbitTemplate rabbitTemplate;
 
-	public LeaveRequestController(LeaveRequestService LeaveRequestService, LeaveRequestRepository leaveRequestRepository) {
+	public LeaveRequestController(LeaveRequestService LeaveRequestService, LeaveRequestRepository leaveRequestRepository,
+			LeaveTypeService leaveTypeService) {
 		this.LeaveRequestService = LeaveRequestService;
 		this.leaveRequestRepository = leaveRequestRepository;
+		this.leaveTypeService = leaveTypeService;
 	}
-	
 	@PostMapping(value = "/request")
 	public ResponseEntity<?> insertRequest(@RequestBody @Valid LeaveRequestRequest requestRequest, Errors errors) {
 		if (errors.hasErrors()) {
@@ -143,5 +147,10 @@ public class LeaveRequestController {
 	@GetMapping("/request/{id}")
 	public ResponseEntity<?> getRequestById(@PathVariable long id){
 		return LeaveRequestService.getRequestById(id);
+	}
+	@GetMapping(value="/leavetypes")
+	public ResponseEntity<List<LeaveType>> getAllTypes(){
+		List<LeaveType> types = leaveTypeService.getListOfTypes();
+		return new ResponseEntity<List<LeaveType>>(types, HttpStatus.OK);
 	}
 }

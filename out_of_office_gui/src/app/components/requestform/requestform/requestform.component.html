@@ -16,30 +16,25 @@
             <div class="middle_space">
             </div>
             <div class="popup-end-date-window">
-                <label class="end" for="end">End date:</label>
-                <input class="date" type="date" id="end" name="leave-end"
-                    value="2021-11-18"
-                    min="2021-01-01" max="2021-12-31">
+                <label class="end" for="end">Number of days:</label>
+                <input class="date" type="number" id="num">
             </div>
             <div class="space">
             </div>
         </div>
         <div class="leave-type">
             <label>Leave type:</label>
-            <select name="demo" id="#">
-                <option selected="selected" value="one">Holiday</option>
-                <option value="two">Sick leave</option>
-                <option value="three">Parental leave</option>
-                <option value="four">Mariagge leave</option> </select>
+            <select [formControl]="selectControl" name="demo" id="#">
+                <option *ngFor="let type of types" selected="selected" value="{{type.id}}">{{type.displayName}}</option></select>
         </div>
 
         <div class="comment">
-            <textarea  type="text"  placeholder="Comment"></textarea>
+            <textarea  type="text" id = "comment" placeholder="Comment"></textarea>
         </div>
 
         <div class="buttoni">
             <button class="cancel" (click)="hidePopUp()">Cancel</button>
-            <button class="submit">Submit</button>
+            <button class="submit" (click)="createRequest()">Submit</button>
             <div class="space">
             </div>
         </div>
