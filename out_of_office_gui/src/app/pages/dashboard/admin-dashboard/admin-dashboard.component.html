@@ -23,7 +23,7 @@
             </div>
     </div>
     <div class="table">
-        <nz-table #nzTable [nzData]="listOfDisplayData" nzTableLayout="fixed">
+        <nz-table #nzTable [nzData]="listOfDisplayData" [nzLoading]='loading' nzTableLayout="fixed">
             <thead>
             <tr>
                 <th nzCustomFilter>

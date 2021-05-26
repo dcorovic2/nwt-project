@@ -2,6 +2,7 @@
   <div class="user">
     <i class="far fa-user-circle fa-8x"></i>
       <div class="user-info">
+        <nz-spin class="spinner"  *ngIf="!user.firstnameLastName" nzSimple></nz-spin>
         <span>{{user.firstnameLastName}}</span>
         <span>{{user.email}}</span>
       </div>

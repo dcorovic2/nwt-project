@@ -35,7 +35,8 @@ interface DataItem {
 })
 export class AdminDashboardComponent implements OnInit {
   @Input() user = {};
-  public hideDelete = true; 
+  public hideDelete = true;
+  public loading = true;  
   public employees: any;
   public employees2: any;
   public employeeId: any;
@@ -49,9 +50,9 @@ export class AdminDashboardComponent implements OnInit {
  
   ngOnInit(): void {
     this.action.set('getEmployees', ()=>{
-      this.api.get('employee/allemployees').subscribe((data)=>{this.employees = data; this.employees2 = [...this.employees]});
+      this.api.get('employee/allemployees').subscribe((data)=>{this.employees = data; this.loading=false; this.employees2 = [...this.employees]});
     });
-     this.api.get('leaverequest/employees').subscribe((data)=>{this.employees = data; this.employees2 = [...this.employees]});
+     this.api.get('leaverequest/employees').subscribe((data)=>{this.employees = data;  this.employees2 = [...this.employees]});
   }
 
   searchValue = '';
