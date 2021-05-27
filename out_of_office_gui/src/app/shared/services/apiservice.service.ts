@@ -31,7 +31,15 @@ public post(path:string, param?:object,body?:any): Observable<any> {
       /*this.loading.hide(path);*/ this.message.error(error.error.message||error.message);return throwError(error.message);
   })); 
 }
-
+public patch(path:string, param?:object,body?:any): Observable<any> {
+  return this.http.patch(this.query(this.env(path), param), body,{responseType: 'text'}).pipe(catchError((error:HttpErrorResponse)=>{
+      if(error.status == 422) {
+        this.message1.create('error', `Username or password incorrect!`);
+      }
+      
+      /*this.loading.hide(path);*/ this.message.error(error.error.message||error.message);return throwError(error.message);
+  })); 
+}
 public delete(path:string, param?:object,body?:any): Observable<any> {
   return this.http.delete(this.query(this.env(path), param), body).pipe(catchError((error:HttpErrorResponse)=>{
       /*this.loading.hide(path);*/ this.message.error(error.error.message||error.message);return throwError(error.message);

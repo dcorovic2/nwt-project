@@ -130,7 +130,7 @@ export class EmployeeDashboardComponent implements OnInit {
   
   activeDayIsOpen: boolean = true;
   constructor(private modal: NgbModal, private api: ApiserviceService) { }
-  @Input() user  = {};
+  @Input() user  = {id:"", firstnameLastName:"", email:""};
   @Input() info = {allowance: "", remainingDays: ""};
   ngOnInit(){
   }

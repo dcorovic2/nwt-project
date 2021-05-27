@@ -1,0 +1,43 @@
+<div class="popup-overlay" *ngIf="hide">
+    <div class="popup-window">
+        <div class="user">
+            <i class="far fa-user-circle fa-8x"></i>
+            <div class="user-info">
+                <span>{{popupData.employeeName}}</span>
+              </div>
+        </div>
+        <div class="popup-content-window">
+            <div class="popup-date-window view">
+                    <div class="span-container">
+                        <span class="title">Type</span>
+                        <span>{{popupData.type}}</span>
+                    </div>
+                    <div class="span-container">
+                        <span  class="title">Dates</span>
+                        <span>From {{popupData.startDate}} to {{popupData.endDate}} </span>
+                    </div>
+            </div>
+            <div class="popup-date-window">
+        </div>
+            <div class="popup-date-window view">
+                <div class="span-container">
+                    <span  class="title">Reason</span>
+                    <span>{{popupData.reason}}</span>
+                </div>
+            </div>
+    
+            <div class="commentrequest">
+                <textarea  type="text" id = "comment" placeholder="Leave comment"></textarea>
+            </div>
+    
+            <div class="buttoni">
+                <button class="cancel" (click)="hidePopUp()">Reject</button>
+                <button class="submit" (click)="approve()">Approve</button>
+                <div class="space">
+                </div>
+            </div>
+            
+        </div>
+    </div>
+        
+    

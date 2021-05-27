@@ -9,6 +9,7 @@ import { FormBuilder, FormGroup, Validators  } from '@angular/forms'
 })
 export class SettingsComponent implements OnInit {
  public settings = true;
+ public user: any;
  validateForm: FormGroup;
  public  usernameError: boolean = false;
  public passwordError: boolean=false;
@@ -21,6 +22,9 @@ export class SettingsComponent implements OnInit {
 }
 
   ngOnInit(): void {
+    this.api.get('employee/employee/username', {username: localStorage.getItem('username')}).subscribe((data:any)=>{
+      Object.assign(this.user, {firstnameLastName:data.firstnameLastName, email: data.email, id: data.id});
+    })
   }
 
   submitForm(): void {

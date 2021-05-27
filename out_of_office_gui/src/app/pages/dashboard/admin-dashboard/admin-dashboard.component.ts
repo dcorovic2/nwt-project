@@ -52,7 +52,7 @@ export class AdminDashboardComponent implements OnInit {
     this.action.set('getEmployees', ()=>{
       this.api.get('employee/allemployees').subscribe((data)=>{this.employees = data; this.loading=false; this.employees2 = [...this.employees]});
     });
-     this.api.get('leaverequest/employees').subscribe((data)=>{this.employees = data;  this.employees2 = [...this.employees]});
+     this.api.get('leaverequest/employees').subscribe((data)=>{this.employees = data; this.loading=false; this.employees2 = [...this.employees]});
   }
 
   searchValue = '';

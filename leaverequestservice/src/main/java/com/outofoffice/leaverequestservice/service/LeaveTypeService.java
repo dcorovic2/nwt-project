@@ -28,4 +28,7 @@ public class LeaveTypeService {
 		String id_string = id + "";
 			return leaveTypeRepository.findById(id).orElseThrow(()->new NotFoundException(id_string, "Leave Request Type", "ID", ""));
 		}
+	public static List<LeaveType> getListOfTypes() {
+		return leaveTypeRepository.findAll();
+	}
 }

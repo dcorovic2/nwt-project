@@ -47,7 +47,7 @@ const colors: any = {
   templateUrl: './dashboard.component.html'
 })
 export class DashboardComponent implements OnInit {
-  public user  = {};
+  public user  = {id:"", firstnameLastName:"", email:""};
   public info = {allowance: "", remainingDays: ""};
   public role: any;
 
@@ -58,7 +58,7 @@ export class DashboardComponent implements OnInit {
       case "ROLE_CLIENT": this.role = 'employee'; break;
     }
     this.api.get('employee/employee/username', {username: localStorage.getItem('username')}).subscribe((data:any)=>{
-      Object.assign(this.user, {firstnameLastName:data.firstnameLastName, email: data.email});
+      Object.assign(this.user, {firstnameLastName:data.firstnameLastName, email: data.email, id:data.id});
       this.info = data; 
      })
   }

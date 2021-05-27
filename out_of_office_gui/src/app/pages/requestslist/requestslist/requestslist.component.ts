@@ -21,6 +21,7 @@ export class RequestslistComponent implements OnInit {
   visible = false;
   constructor(private api: ApiserviceService) { }
   public show:boolean = false;
+  public popupData: any = {};
 
   public doSomething(): void {
     this.show = !this.show;
@@ -28,7 +29,7 @@ export class RequestslistComponent implements OnInit {
   ngOnInit(): void {
     this.api.get('employee/employee/username', {username: localStorage.getItem('username')}).subscribe((data:any)=>{
       Object.assign(this.user, {firstnameLastName:data.firstnameLastName, email: data.email, id: data.id});
-      this.api.get('leaverequest/requests',{status_id: 0}).subscribe((data)=>this.requests = data);
+      this.api.get('leaverequest/requests',{status_id: 1}).subscribe((data)=>this.requests = data);
     })
 
   }
@@ -41,6 +42,16 @@ export class RequestslistComponent implements OnInit {
   search(): void {
     this.visible = false;
  //   this.listOfDisplayData = this.listOfData.filter((item: DataItem) => item.name.indexOf(this.searchValue) !== -1);
+  }
+
+  openPopup(request: any){
+   Object.assign(this.popupData, {type: request.leave_type.displayName, 
+                                  startDate: request.startDate, 
+                                  endDate: request.endDate, 
+                                  reason: request.leave_status.reason,
+                                  employeeName: request.employeeName,
+                                  employeeId: request.employeeId,
+                                  requestId: request.id});
   }
 
 }

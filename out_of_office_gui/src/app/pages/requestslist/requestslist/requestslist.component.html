@@ -17,10 +17,10 @@
               </thead>
               <tbody>
                 <tr *ngFor="let request of requests">
-                  <td>{{ request.leave_type.displayName }}</td>
+                  <td>{{ request.employeeName}}</td>
                   <td>{{ request.leave_type.displayName }}</td>
                   <td>From {{request.startDate}} to {{request.endDate }}</td>
-                  <td><div  class="value actions"><span class="active" [ngClass]="{disabled: request.leave_status.code!='P'}">View</span></div></td>
+                  <td><div  class="value actions"><span class="active" (click)="show=!show; openPopup(request)" [ngClass]="{disabled: request.leave_status.code!='P'}">View</span></div></td>
                 </tr>
               </tbody>
             </nz-table>
@@ -90,5 +90,6 @@
 </div>
   </div>
   </div>
+  <app-viewrequest [popupData]="popupData" *ngIf="show"></app-viewrequest>
   
   

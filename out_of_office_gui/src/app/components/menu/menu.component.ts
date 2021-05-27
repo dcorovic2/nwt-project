@@ -13,8 +13,8 @@ export class MenuComponent implements OnInit {
   constructor(public api: ApiserviceService,private route:Router) { }
 
   ngOnInit(){
-    this.role == 'employee' ? this.api.get(`local/assets/menu/menu.json`).subscribe((r: any) => {this.menus = r; console.log(r);})
-                            : this.api.get(`local/assets/menu/menuadmin.json`).subscribe((r: any) => {this.menus = r; console.log(r);});
+    this.role == 'employee' ? this.api.get(`local/assets/menu/menu.json`).subscribe((r: any) => {this.menus = r;})
+                            : this.api.get(`local/assets/menu/menuadmin.json`).subscribe((r: any) => {this.menus = r;});
   }
   
   expand(){

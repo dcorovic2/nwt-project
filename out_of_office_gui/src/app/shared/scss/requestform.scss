@@ -23,6 +23,51 @@
         background-color: white;
         border: black 1px solid;
         padding: 20px;
+
+        .user{
+            display: flex;
+            border-bottom: 1.6px solid #4d094d;;
+            padding-bottom: 10px;
+            .fa-user-circle{
+              color: rgb(104,35,139);
+            }
+           
+         
+            .fa-bell{
+              color: rgb(104,35,139);
+            }
+            .fa-plus-circle{
+              color: rgb(104,35,139);
+          }
+            .user-info{
+              width: 400px;
+              display: flex;
+              flex-direction: column;
+              text-align: left;
+              font-size: 20px;
+              padding-top: 15px;
+              padding-left: 20px;
+              color:#626262;
+              span{
+                &:first-child {
+                  font-size: 30px;
+                  font-weight: 800;
+                }
+              }
+  
+            }
+            .notif{
+              width: 100%;
+              text-align: center;
+              font-size: 35px;
+              padding-top: 33px;
+              color: #4d094d;
+              padding-right: 45px;
+            i{
+              float:right;
+            }
+            }
+          }
        
         .popup-name{
             padding-top: 20px;
@@ -47,12 +92,43 @@
                     display: inline-block;
                     width: 10%;
                 }
+                .commentrequest{
+                    padding-bottom: 50px;
+                    width: 100%;
+                    textarea{
+                        height: 100px;
+                        border-radius: 10px;
+                        max-height: 200px;
+                        min-height: 50px;
+                        width: 100%;
+                        &:focus{
+                            outline: none;
+                        }
+                    }
+                    ::placeholder{
+                       padding-top: 5px;
+                       padding-left: 5px;
+                       position: absolute;
+                    }
+                }
             .popup-date-window{
                 width: inherit;
                 padding-top: 3px;
                 display: inline;
                 padding-bottom: 20px;
-                
+                &.view{
+                    display: flex; 
+                    .span-container{
+                        display: flex;
+                        flex-direction: column;
+                        color: gray;
+                        padding-right: 25px;
+                        .title{
+                            color: #68238b;
+                        }
+
+                    }
+                }
                 .popup-start-date-window{
                     justify-content: center;
                     display: inline;
