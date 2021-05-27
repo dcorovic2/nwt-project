@@ -21,7 +21,10 @@
                               <td>{{ data.displayName }}</td>
                               <td>{{ data.text }}</td>
                               <td>{{ data.type }}</td>
-                              <td><a (click)="startEdit(data.id)">Edit</a></td>
+                              <td>
+                                  <a (click)="startEdit(data.id)">Edit</a>
+                                  <a (click)="deleteHoliType(data.id)">Delete</a>
+                              </td>
                             </ng-container>
                             <ng-template #editTemplate>
                               <td><input type="text" nz-input [(ngModel)]="editCache[data.id].data.code" /></td>
@@ -30,7 +33,7 @@
                               <td><input type="text" nz-input [(ngModel)]="editCache[data.id].data.type" /></td>
                               <td>
                                 <a (click)="saveEdit(data.id)" class="save">Save</a>
-                               <!-- <a nz-popconfirm nzPopconfirmTitle="Sure to cancel?" (nzOnConfirm)="cancelEdit(data.id)">Cancel</a>-->
+                                <a (click)="cancelEdit(data.id)">Cancel</a>
                               </td>
                             </ng-template>
                           </tr>

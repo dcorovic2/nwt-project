@@ -34,6 +34,16 @@ export class HolidaytypelistComponent implements OnInit {
     };
   }
 
+  deleteHoliType(id: string): void {
+    const index = this.listOfData.findIndex(item => item.id === id);
+    let tmp = this.editCache[id].data;
+
+    this.api.delete('holiday/holidayType/' + tmp.id, {}, {}).subscribe(data=>{
+      this.listOfData = this.listOfData.filter(d => d.id !== id);
+    });
+
+  }
+
   saveEdit(id: string): void {
     const index = this.listOfData.findIndex(item => item.id === id);
     Object.assign(this.listOfData[index], this.editCache[id].data);
