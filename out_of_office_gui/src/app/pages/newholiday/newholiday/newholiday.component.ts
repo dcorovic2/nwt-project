@@ -10,6 +10,16 @@ import { FormControl } from '@angular/forms';
   templateUrl: './newholiday.component.html'
 })
 export class NewholidayComponent implements OnInit {
+  isLoadingOne = false;
+
+  loadOne(): void {
+    this.isLoadingOne = true;
+    setTimeout(() => {
+      this.isLoadingOne = false;
+    }, 5000);
+  }
+
+  
   @Input() user = {};
   public addemp = true;
   public loading = true;  
