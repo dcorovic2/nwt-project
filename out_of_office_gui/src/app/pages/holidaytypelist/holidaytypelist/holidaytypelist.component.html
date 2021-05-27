@@ -1,0 +1,43 @@
+<div class="content-wrap">
+    <app-menu></app-menu>
+    <div class="main-content">
+        <app-header *ngIf="user" [user]="user"></app-header>
+        <div class="content settings">
+                    <span>List of holiday type</span>
+                    <nz-table #editRowTable nzBordered [nzData]="listOfData" nzTableLayout="fixed">
+                        <thead>
+                          <tr>
+                            <th nzWidth="10%">Code</th>
+                            <th nzWidth="20%">Display name</th>
+                            <th nzWidth="30%">Text</th>
+                            <th nzWidth="10%">Type</th>
+                            <th>Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let data of editRowTable.data">
+                            <ng-container *ngIf="!editCache[data.id].edit; else editTemplate">
+                              <td>{{ data.code }}</td>
+                              <td>{{ data.displayName }}</td>
+                              <td>{{ data.text }}</td>
+                              <td>{{ data.type }}</td>
+                              <td>
+                                  <a (click)="startEdit(data.id)">Edit</a>
+                                  <a (click)="deleteHoliType(data.id)">Delete</a>
+                              </td>
+                            </ng-container>
+                            <ng-template #editTemplate>
+                              <td><input type="text" nz-input [(ngModel)]="editCache[data.id].data.code" /></td>
+                              <td><input type="text" nz-input [(ngModel)]="editCache[data.id].data.displayName" /></td>
+                              <td><input type="text" nz-input [(ngModel)]="editCache[data.id].data.text" /></td>
+                              <td><input type="text" nz-input [(ngModel)]="editCache[data.id].data.type" /></td>
+                              <td>
+                                <a (click)="saveEdit(data.id)" class="save">Save</a>
+                                <a (click)="cancelEdit(data.id)">Cancel</a>
+                              </td>
+                            </ng-template>
+                          </tr>
+                        </tbody>
+                      </nz-table>
+    </div>
+</div>

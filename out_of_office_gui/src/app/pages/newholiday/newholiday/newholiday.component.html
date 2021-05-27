@@ -1,0 +1,36 @@
+<div class="content-wrap">
+    <app-menu></app-menu>
+    <div class="main-content">
+        <app-header *ngIf="user" [user]="user"></app-header>
+        <div class="content settings">
+            <div class="background">
+                <div class="help-background">
+                    <span>Add new holiday</span>
+                    <form class="form" (ngSubmit)="submitForm()">
+                        <input type="date" id="code"  placeholder="Code">
+                        <input type="date" id="displayname"  placeholder="Display name">
+                        
+                        <div>
+                            <label>Choose holiday type:</label>
+                            <select [formControl]="selectControl" name="demo" id="#">
+                                <option *ngFor="let type of types" selected="selected" value="{{type.id}}">{{type.displayName}}</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label>Choose holiday scope:</label>
+                            <select [formControl]="selectControl1" name="demo" id="#">
+                                <option selected="selected" value="for all">For all</option>
+                                <option selected="selected" value="not for all">Not for all</option>
+                            </select>
+                        </div>
+                        
+                        <!--for all, not for all-->
+                        <button class="cancel">Cancel</button>
+                        <button class="submit">Submit</button>
+                    </form>
+                </div>
+
+        </div>
+    </div>
+</div>

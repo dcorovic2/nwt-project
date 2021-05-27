@@ -47,7 +47,10 @@ import { NzMessageModule } from 'ng-zorro-antd/message';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 import { ViewrequestComponent } from './components/viewrequest/viewrequest/viewrequest.component';
-
+import { CreateholidaytypeComponent } from './pages/createholidaytype/createholidaytype/createholidaytype.component';
+import { HolidaytypelistComponent } from './pages/holidaytypelist/holidaytypelist/holidaytypelist.component';
+import { CreateholidayComponent } from './pages/createholiday/createholiday/createholiday.component';
+import { NewholidayComponent } from './pages/newholiday/newholiday/newholiday.component';
 
 registerLocaleData(fi);
 
@@ -71,7 +74,11 @@ registerLocaleData(fi);
     DeleteemployeeComponent,
     RequestslistComponent,
     FullemployeeviewComponent,
-    ViewrequestComponent 
+    ViewrequestComponent,
+    CreateholidaytypeComponent,
+    HolidaytypelistComponent,
+    CreateholidayComponent,
+    NewholidayComponent 
   ],
   imports: [
     BrowserModule,

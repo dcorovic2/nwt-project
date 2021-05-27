@@ -42,14 +42,18 @@ public class HolidayTypeService {
 	} 
 	
 	public ResponseEntity<?> deleteHolidayType(Long id) {
-		String tmp = id + "";
-		HolidayType holidayTypeForDelete =  holidayTypeRepository.findById(id)
-				.orElseThrow(() -> new NotFoundException(tmp, "HolidayType", "ID", ""));
-			
-		holidayTypeRepository.delete(holidayTypeForDelete);
-		Long deletedHolidayType = holidayTypeForDelete.getId();
-			
-		return new ResponseEntity<Long>(deletedHolidayType, HttpStatus.OK);
+		try {
+			String tmp = id + "";
+			HolidayType holidayTypeForDelete =  holidayTypeRepository.findById(id)
+					.orElseThrow(() -> new NotFoundException(tmp, "HolidayType", "ID", ""));
+				
+			holidayTypeRepository.delete(holidayTypeForDelete);
+			Long deletedHolidayType = holidayTypeForDelete.getId();
+				
+			return new ResponseEntity<Long>(deletedHolidayType, HttpStatus.OK);
+		} catch (Exception e){
+			return new ResponseEntity<>("Some employees are subscribed to this holiday", HttpStatus.CONFLICT);
+		}
 	}
 
 	public ResponseEntity<?> getAllHolidays() {
