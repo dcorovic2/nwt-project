@@ -6,7 +6,7 @@
         <div class="content-right">
             <span class="title">Leave request</span>
             <div class="table">
-                <nz-table #nzTable [nzData]="requests" nzTableLayout="fixed">
+                <nz-table #nzTable [nzData]="requests" nzTableLayout="fixed" [nzScroll]="{ y: '440px' }" [nzFrontPagination]="false">
                     <thead>
                     <tr>
                     <th>Type</th>

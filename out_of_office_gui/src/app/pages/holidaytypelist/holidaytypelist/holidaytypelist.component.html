@@ -4,7 +4,7 @@
         <app-header *ngIf="user" [user]="user"></app-header>
         <div class="content settings">
                     <span>List of holiday type</span>
-                    <nz-table #editRowTable nzBordered [nzData]="listOfData" nzTableLayout="fixed">
+                    <nz-table #editRowTable nzBordered [nzData]="listOfData" nzTableLayout="fixed" [nzScroll]="{ y: '440px' }" [nzFrontPagination]="false">
                         <thead>
                           <tr>
                             <th nzWidth="10%">Code</th>

@@ -19,6 +19,7 @@
                 <div *ngIf="(this.validateForm.get('password')!.dirty && this.validateForm.get('password')!.hasError('required')) || passwordError" style="color: red;">
                     Password is a required field!
                 </div>
+
                 <button nz-button nzType="primary" (click)="loadOne()" [nzLoading]="isLoadingOne" class="submit">Sign In</button>
             </form>
         </div>

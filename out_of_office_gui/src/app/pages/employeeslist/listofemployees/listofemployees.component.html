@@ -5,9 +5,8 @@
     <div class="name">
         <span>Employees list</span>
     </div>
-    <div class="table">
-    <nz-table #nzTable
- [nzPageSize]="2" [nzData]="listOfDisplayData" [nzLoading]='loading' nzTableLayout="fixed">
+    
+    <nz-table #headerTable [nzData]="listOfDisplayData" [nzLoading]='loading' nzTableLayout="fixed" [nzScroll]="{ y: '440px' }" [nzFrontPagination]="false">
         <thead>
         <tr>
             <th nzCustomFilter>
@@ -43,7 +42,7 @@
       </div>
     </div>
   </nz-dropdown-menu>
-</div>
+
 </div>
 </div>
 <app-deleteemployee [employeeId]="employeeId" *ngIf="!hideDelete"></app-deleteemployee>
