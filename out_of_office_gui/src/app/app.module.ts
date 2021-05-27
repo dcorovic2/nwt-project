@@ -49,6 +49,7 @@ import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 import { ViewrequestComponent } from './components/viewrequest/viewrequest/viewrequest.component';
 import { CreateholidaytypeComponent } from './pages/createholidaytype/createholidaytype/createholidaytype.component';
 import { HolidaytypelistComponent } from './pages/holidaytypelist/holidaytypelist/holidaytypelist.component';
+import { CreateholidayComponent } from './pages/createholiday/createholiday/createholiday.component';
 
 registerLocaleData(fi);
 
@@ -74,7 +75,8 @@ registerLocaleData(fi);
     FullemployeeviewComponent,
     ViewrequestComponent,
     CreateholidaytypeComponent,
-    HolidaytypelistComponent 
+    HolidaytypelistComponent,
+    CreateholidayComponent 
   ],
   imports: [
     BrowserModule,

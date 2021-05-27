@@ -42,6 +42,13 @@
         "route": "listofholidaytypes"
       },
       {
+        "name": "holidaylist",
+        "label": "Holiday list",
+        "icon": "far fa-plus-square",
+        "category": "global",
+        "route": "createholiday"
+      },
+      {
         "name": "logout",
         "label": "Log out",
         "icon": "fas fa-sign-out-alt",
