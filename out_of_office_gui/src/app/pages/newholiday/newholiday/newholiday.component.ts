@@ -28,27 +28,20 @@ export class NewholidayComponent implements OnInit {
   }
 
   submitForm(): void { 
-    let code = (<HTMLInputElement>document.getElementById('code')).value;
-    let text = (<HTMLInputElement>document.getElementById('text')).value;
-    let type = (<HTMLInputElement>document.getElementById('type')).value;
-    let displayname = (<HTMLInputElement>document.getElementById('displayname')).value;
-    let params: HttpParams = new HttpParams();
-    let jsonObj = {
-      "code": code,
-      "displayName": text,
-      "text": type,
-      "type": displayname
-    }
+    let date1 = (<HTMLInputElement>document.getElementById('date1')).value;
+    let date2 = (<HTMLInputElement>document.getElementById('date2')).value;
+    console.log(date1);
+    console.log(date2);
 
-    //pozivanje holiday type post apija
-      this.api.post('holiday/holidayType', {}, {"code": code, "displayName": text, "text": type, "type": displayname}).subscribe(data=>{
-         console.log(data);
-
+    if(this.selectControl1.value == "not for all") {
+      this.api.post('holiday/holiday/' + this.selectControl.value, {}, {"endDate": date2, "startDate": date1}).subscribe(data=>{
+        
       });
-
-    //(<HTMLInputElement>document.getElementById('displayname')).value = "";
-    //(<HTMLInputElement>document.getElementById('type')).value = "";
-    //(<HTMLInputElement>document.getElementById('text')).value = "";
-    //(<HTMLInputElement>document.getElementById('code')).value = "";
+    }
+    if(this.selectControl1.value == "for all") {
+      this.api.post('holiday/defaultHoliday/' + this.selectControl.value, {}, {"endDate": date2, "startDate": date1}).subscribe(data=>{
+        
+      });
+    }
   }
 }
