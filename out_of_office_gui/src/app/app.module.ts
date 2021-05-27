@@ -50,7 +50,6 @@ import { ViewrequestComponent } from './components/viewrequest/viewrequest/viewr
 import { CreateholidaytypeComponent } from './pages/createholidaytype/createholidaytype/createholidaytype.component';
 import { HolidaytypelistComponent } from './pages/holidaytypelist/holidaytypelist/holidaytypelist.component';
 
-
 registerLocaleData(fi);
 
 
