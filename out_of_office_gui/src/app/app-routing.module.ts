@@ -8,6 +8,8 @@ import { AddemployeeComponent } from './pages/addemployee/addemployee/addemploye
 import { ListofemployeesComponent } from './pages/employeeslist/listofemployees/listofemployees.component';
 import { RequestslistComponent } from './pages/requestslist/requestslist/requestslist.component';
 import { FullemployeeviewComponent } from './pages/fullemployeeview/fullemployeeview/fullemployeeview.component';
+import { CreateholidaytypeComponent } from './pages/createholidaytype/createholidaytype/createholidaytype.component';
+import { HolidaytypelistComponent } from './pages/holidaytypelist/holidaytypelist/holidaytypelist.component';
 
 const routes: Routes = [
   {
@@ -49,6 +51,16 @@ const routes: Routes = [
   {
     path: 'employeeview',
     component: FullemployeeviewComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: 'createholidaytype',
+    component: CreateholidaytypeComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: 'listofholidaytypes',
+    component: HolidaytypelistComponent,
     pathMatch: 'full'
   }
 ];

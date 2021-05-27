@@ -28,6 +28,20 @@
         "route": "listofrequests"
       },
       {
+        "name": "createholitype",
+        "label": "Create holiday type",
+        "icon": "fas fa-calendar-plus",
+        "category": "global",
+        "route": "createholidaytype"
+      },
+      {
+        "name": "holidaytypelist",
+        "label": "Holiday type list",
+        "icon": "fas fa-list",
+        "category": "global",
+        "route": "listofholidaytypes"
+      },
+      {
         "name": "logout",
         "label": "Log out",
         "icon": "fas fa-sign-out-alt",

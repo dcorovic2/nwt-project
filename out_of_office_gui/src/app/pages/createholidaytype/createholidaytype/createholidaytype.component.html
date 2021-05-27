@@ -1,0 +1,21 @@
+<div class="content-wrap">
+    <app-menu></app-menu>
+    <div class="main-content">
+        <app-header *ngIf="user" [user]="user"></app-header>
+        <div class="content settings">
+            <div class="background">
+                <div class="help-background">
+                    <span>Add new holiday type</span>
+                    <form class="form" (ngSubmit)="submitForm()">
+                            <input type="text" id="code"  placeholder="Code">
+                            <input type="text" id="displayname"  placeholder="Display name">
+                            <input type="text" id="text" placeholder="Text">
+                            <input type="text" id="type"  placeholder="Type">
+                            <button class="cancel">Cancel</button>
+                            <button class="submit">Submit</button>
+                    </form>
+                </div>
+
+        </div>
+    </div>
+</div>
