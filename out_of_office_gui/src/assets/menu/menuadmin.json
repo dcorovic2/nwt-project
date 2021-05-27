@@ -49,6 +49,13 @@
         "route": "createholiday"
       },
       {
+        "name": "newholi",
+        "label": "Create holiday",
+        "icon": "fas fa-external-link-alt",
+        "category": "global",
+        "route": "newholi"
+      },
+      {
         "name": "logout",
         "label": "Log out",
         "icon": "fas fa-sign-out-alt",

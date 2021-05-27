@@ -11,6 +11,7 @@ import { FullemployeeviewComponent } from './pages/fullemployeeview/fullemployee
 import { CreateholidaytypeComponent } from './pages/createholidaytype/createholidaytype/createholidaytype.component';
 import { HolidaytypelistComponent } from './pages/holidaytypelist/holidaytypelist/holidaytypelist.component';
 import { CreateholidayComponent } from './pages/createholiday/createholiday/createholiday.component';
+import { NewholidayComponent } from './pages/newholiday/newholiday/newholiday.component';
 
 const routes: Routes = [
   {
@@ -67,6 +68,11 @@ const routes: Routes = [
   {
     path: 'createholiday',
     component: CreateholidayComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: 'newholi',
+    component: NewholidayComponent,
     pathMatch: 'full'
   }
 ];
