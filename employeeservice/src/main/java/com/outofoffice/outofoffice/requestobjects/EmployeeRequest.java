@@ -22,9 +22,10 @@ public class EmployeeRequest {
 	public Integer remainingDays;
 	public Long departmentId; 
 	public Long roleId;
+	public String username;
 	
 	public EmployeeRequest(Long allowance, String email, String firstnameLastName, OffsetDateTime hireDate, String jmbg,
-			String jobRole, String phoneNumber, Integer remainingDays, Long departmentId, Long roleId) {
+			String jobRole, String phoneNumber, Integer remainingDays, String username, Long departmentId, Long roleId) {
 		super();
 		this.allowance = allowance;
 		this.email = email;
@@ -35,7 +36,9 @@ public class EmployeeRequest {
 		this.phoneNumber = phoneNumber;
 		this.remainingDays = remainingDays;
 		this.departmentId = departmentId; 
+		this.username = username;
 		this.roleId = roleId; 
 	}
+
 		
 }

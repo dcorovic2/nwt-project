@@ -84,6 +84,7 @@ public class EmployeeService {
 		employee.setJobRole(employeeReq.getJobRole());
 		employee.setPhoneNumber(employeeReq.getPhoneNumber());
 		employee.setRemainingDays(employeeReq.getRemainingDays());
+		employee.setUsername(employeeReq.getUsername());
 		return employeeRepository.save(employee);
 	}
 

@@ -78,23 +78,23 @@ public class OutOfOfficeApplication {
 	public CommandLineRunner EmployeeInitial(EmployeeService employeeService) {
 		List<EmployeeRequest> employeeRequests = new ArrayList<EmployeeRequest>();
 		employeeRequests.add(new EmployeeRequest(21L, "email1@gmail.com", "Nermin Boja", OffsetDateTime.now(), "1597536248569", "jobRole1",
-				"phoneNumber1", 21, 1L, 2L));
+				"phoneNumber1", 21,"nermin", 1L, 2L));
 		employeeRequests.add(new EmployeeRequest(21L, "email2@gmail.com", "Kerim Franca", OffsetDateTime.now(), "8523697414562", "jobRole2",
-				"phoneNumber2", 21, 2L, 1L));
+				"phoneNumber2", 21, "admin", 2L, 1L));
 		employeeRequests.add(new EmployeeRequest(21L, "email3@gmail.com", "Esma Herenda", OffsetDateTime.now(), "9632514879652", "jobRole3",
-				"phoneNumber3", 21, 3L, 2L));
+				"phoneNumber3", 21, "esma", 3L, 2L));
 		employeeRequests.add(new EmployeeRequest(21L, "email4@gmail.com", "Nudzejma Pozder", OffsetDateTime.now(), "2225558796412", "jobRole4",
-				"phoneNumber4", 21, 4L, 2L));
+				"phoneNumber4", 21, "nudza", 4L, 2L));
 		employeeRequests.add(new EmployeeRequest(21L, "email5@gmail.com", "Belmin Divjan", OffsetDateTime.now(), "3336665478965", "jobRole5",
-				"phoneNumber5", 21, 5L, 2L));
+				"phoneNumber5", 21, "bele", 5L, 2L));
 		employeeRequests.add(new EmployeeRequest(21L, "email6@gmail.com", "Dalila Ćorović", OffsetDateTime.now(), "7539512585264", "jobRole6",
-				"phoneNumber6", 21, 3L, 2L));
+				"phoneNumber6", 21, "dali",3L, 2L));
 		employeeRequests.add(new EmployeeRequest(21L, "email7@gmail.com", "Amina Herenda", OffsetDateTime.now(), "9874563214528", "jobRole7",
-				"phoneNumber7", 21, 2L, 2L));
+				"phoneNumber7", 21,"amii", 2L, 2L));
 		employeeRequests.add(new EmployeeRequest(21L, "email8@gmail.com", "Aida Herenda", OffsetDateTime.now(), "7359684129568", "jobRole8",
-				"phoneNumber8", 21, 1L, 2L));
+				"phoneNumber8", 21,"idaa", 1L, 2L));
 		employeeRequests.add(new EmployeeRequest(21L, "email9@gmail.com", "Samir Herenda", OffsetDateTime.now(), "0326508452963", "jobRole9",
-				"phoneNumber9", 21, 2L, 2L));
+				"phoneNumber9", 21,"samba", 2L, 2L));
 		return (args -> {
 			employeeService.insertBulkEmployees(employeeRequests);
 		});

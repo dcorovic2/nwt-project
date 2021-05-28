@@ -53,22 +53,12 @@ export class LoginformComponent implements OnInit {
         const token = jwt_decode<JwtToken>(data);
         localStorage.setItem('role', token.auth[0].authority);
         localStorage.setItem('username', token.sub);
-
         setTimeout(()=>this.route.navigate(['dashboard']),5000);
       });
  
     } else {
-      console.log('There is a problem with the form');
-
-      if((<HTMLInputElement>document.getElementById('username')).value.length == 0)
-      {
-       this.usernameError = true;
-      }
-
-      if((<HTMLInputElement>document.getElementById('password')).value.length == 0) {
-        this.passwordError = true;
-        console.log("uslo");
-      }
+      if((<HTMLInputElement>document.getElementById('username')).value.length == 0) this.usernameError = true;
+      if((<HTMLInputElement>document.getElementById('password')).value.length == 0) this.passwordError = true;
     }
   }
       
