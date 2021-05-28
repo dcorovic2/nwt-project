@@ -10,7 +10,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class SettingsComponent implements OnInit {
   isLoadingOne = false;
   public settings = true;
-  public user: any;
+  public user  = {id:"", firstnameLastName:"", email:""};
   validateForm: FormGroup;
   public usernameError: boolean = false;
   public passwordError: boolean = false;
@@ -24,6 +24,11 @@ export class SettingsComponent implements OnInit {
       username: ['', [Validators.required]],
       password: ['', [Validators.required]],
     });
+  }
+  resetinputs(): void{
+    (<HTMLInputElement>document.getElementById('password')).value = "";
+    (<HTMLInputElement>document.getElementById('newpassword')).value = "";
+    (<HTMLInputElement>document.getElementById('confnewpass')).value = "";
   }
 
   loadOne(): void {

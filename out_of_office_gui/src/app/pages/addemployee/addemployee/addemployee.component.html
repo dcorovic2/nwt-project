@@ -12,55 +12,65 @@
             <div clas="form-content1" style="display: flex">
               <div class="form-left">
                 <div class="conf-new-class">
-                  <input type="text" placeholder="First name" />
+                  <input type="text" id="firstname" placeholder="First name" />
                 </div>
 
                 <div class="conf-new-class">
-                  <input type="text" placeholder="Job role" />
+                  <input type="text" id="jobrole" placeholder="Job role" />
                 </div>
 
                 <div class="conf-new-class">
-                  <input type="tel" placeholder="Telephone number" />
+                  <input type="tel" id="tel" placeholder="Telephone number" />
                 </div>
 
                 <div class="conf-new-class">
-                  <input type="text" placeholder="Enter username" />
+                  <input type="text" id="username" placeholder="Enter username" />
                 </div>
                 <div class="conf-new-class">
                   <input
                     type="number"
                     min="5"
                     max="35"
+                    id="alowance"
                     placeholder="Allowance"
                   />
                 </div>
                 <div class="settigns-buttons">
-                    <button class="cancel" style="width: 50%;">Cancel</button>
-                  </div>
+                  <button (click)="resetinputs()" class="cancel" style="width: 50%">Cancel</button>
+                </div>
               </div>
 
               <div class="form-right">
                 <div class="conf-new-class">
-                  <input type="text" placeholder="Last name" />
+                  <input type="text" id="lastname" placeholder="Last name" />
                 </div>
                 <div class="conf-new-class">
-                  <input type="email" placeholder="E-mail" />
-                </div>
-
-                <div class="conf-new-class">
-                  <input type="text" placeholder="Department" />
+                  <input type="email" id="email" placeholder="E-mail" />
                 </div>
 
                 <div class="conf-new-class">
-                    <input type="password" placeholder="Enter password" />
-                  </div>
+                  <input type="text" id="department" placeholder="Department" />
+                </div>
 
                 <div class="conf-new-class">
-                  <input type="password" placeholder="Confirm password" />
+                  <input type="password" id="pass" placeholder="Enter password" />
+                </div>
+
+                <div class="conf-new-class">
+                  <input type="password" id="confpass"  placeholder="Confirm password" />
                 </div>
                 <div class="settigns-buttons">
-                    <button nz-button nzType="primary" (click)="loadOne()" [nzLoading]="isLoadingOne" class="submit" style="width: 50%;">Submit</button>
-                  </div>
+                  <button
+                    nz-button
+                    nzType="primary"
+                    (click)="loadOne()"
+                    [nzLoading]="isLoadingOne"
+                    class="submit"
+                    style="width: 50%"
+                  >
+                    Submit
+                  </button>
+                </div>
               </div>
             </div>
           </form>

@@ -1,48 +1,85 @@
 <div class="content-wrap">
-    <app-menu></app-menu>
-    <div class="main-content">
-        <app-header [user]="user"></app-header>
+  <app-menu></app-menu>
+  <div class="main-content">
+    <app-header [user]="user"></app-header>
     <div class="name">
-        <span>Employees list</span>
+      <span>Employees list</span>
     </div>
     <div class="table">
-    <nz-table #nzTable [nzData]="listOfDisplayData" [nzLoading]='loading' nzTableLayout="fixed" [nzScroll]="{ y: '440px' }" [nzFrontPagination]="false">
+      <nz-table
+        #nzTable
+        [nzData]="listOfDisplayData"
+        [nzLoading]="loading"
+        nzTableLayout="fixed"
+        [nzScroll]="{ y: '440px' }"
+        [nzFrontPagination]="false"
+      >
         <thead>
-        <tr>
+          <tr>
             <th nzCustomFilter>
-          Name
-          <nz-filter-trigger  class="search" [(nzVisible)]="visible" [nzActive]="searchValue.length > 0" [nzDropdownMenu]="menu">
-            <i class="fas fa-search"></i>
-          </nz-filter-trigger>
-        </th>
-        <th>Department</th>
-        <th>Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let data of employees">
-        <td> {{ data.firstnameLastName }}</td>
-        <td> {{ data.department.displayName }}</td>
-        <td><div class="buttoni">
-            <button class="view" (click) = "fullPage(data.username)">View</button>
-            <button class="delete" (click) = "hideDelete=!hideDelete; employeeId = data.id">Delete</button>
+              Name
+              <nz-filter-trigger
+                class="search"
+                [(nzVisible)]="visible"
+                [nzActive]="searchValue.length > 0"
+                [nzDropdownMenu]="menu"
+              >
+                <i class="fas fa-search"></i>
+              </nz-filter-trigger>
+            </th>
+            <th>Department</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of employees">
+            <td>{{ data.firstnameLastName }}</td>
+            <td>{{ data.department.displayName }}</td>
+            <td>
+              <div class="buttoni">
+                <button class="view" (click)="fullPage(data.username)">
+                  View
+                </button>
+                <button
+                  class="delete"
+                  (click)="hideDelete = !hideDelete; employeeId = data.id"
+                >
+                  Delete
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </nz-table>
+      <nz-dropdown-menu #menu="nzDropdownMenu">
+        <div class="ant-table-filter-dropdown">
+          <div class="search-box">
+            <input
+              type="text"
+              nz-input
+              placeholder="Search name"
+              [(ngModel)]="searchValue"
+              class="input-name"
+            />
+            <button
+              nz-button
+              nzSize="small"
+              nzType="primary"
+              (click)="search()"
+              class="search-button"
+            >
+              Search
+            </button>
+            <button nz-button class="reset" nzSize="small" (click)="reset()">
+              Reset
+            </button>
+          </div>
         </div>
-    </td>
-      </tr>
-    </tbody>
-  </nz-table>
-  <nz-dropdown-menu #menu="nzDropdownMenu">
-    <div class="ant-table-filter-dropdown">
-      <div class="search-box">
-        <input type="text" nz-input placeholder="Search name" [(ngModel)]="searchValue" class="input-name"/>
-        <button nz-button  nzSize="small" nzType="primary" (click)="search()" class="search-button">
-          Search
-        </button>
-        <button nz-button class="reset" nzSize="small" (click)="reset()">Reset</button>
-      </div>
+      </nz-dropdown-menu>
     </div>
-  </nz-dropdown-menu>
+  </div>
 </div>
-</div>
-</div>
-<app-deleteemployee [employeeId]="employeeId" *ngIf="!hideDelete"></app-deleteemployee>
+<app-deleteemployee
+  [employeeId]="employeeId"
+  *ngIf="!hideDelete"
+></app-deleteemployee>

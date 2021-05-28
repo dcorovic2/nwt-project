@@ -54,6 +54,28 @@
     width: calc(100% - 57px);
     position: relative;
     overflow-y: auto;
+    .value{
+      span {
+        color: gray;
+        font-size: 25px;
+        padding-right: 30px;
+        &.active {
+          color: blue;
+          font-weight: 800;
+          font-size: 15px !important;
+        }
+        &.disabled {
+          opacity: 0.3;
+          font-weight: 800;
+          font-size: 15px !important;
+        }
+        &.enabled {
+          color: blue;
+          font-weight: 800;
+          font-size: 15px !important;
+        }
+      }
+    }
     .hidden-content {
       visibility: hidden;
     }
@@ -68,6 +90,7 @@
         border-bottom: 1.2px solid gray;
         padding-bottom: 10px;
         .fa-user-circle {
+          padding-top: 4px;
           color: rgb(104, 35, 139);
         }
         .fa-8x {
@@ -80,13 +103,13 @@
         .fa-plus-circle {
           color: rgb(104, 35, 139);
         }
+    
         .user-info {
           width: 400px;
           display: flex;
           flex-direction: column;
           text-align: left;
           font-size: 20px;
-          padding-top: 15px;
           padding-left: 20px;
           color: #626262;
           span {
@@ -100,9 +123,9 @@
           width: 100%;
           text-align: center;
           font-size: 35px;
-          padding-top: 33px;
+          padding-top: 24px;
           color: #4d094d;
-          padding-right: 45px;
+          padding-right: 63px;
           i {
             float: right;
           }
@@ -130,7 +153,7 @@
         height: 20% !important;
       }
       &.settings {
-        padding-top: 0px !important;
+        padding-top: 20px;
         flex-direction: column;
         padding-right: 0px;
       }
@@ -185,26 +208,28 @@
           }
         }
       }
-      span {
-        color: gray;
-        font-size: 25px;
-        padding-right: 30px;
-        &.active {
-          color: blue;
-          font-weight: 800;
-          font-size: 15px !important;
+     
+        span {
+          color: gray;
+          font-size: 25px;
+          padding-right: 30px;
+          &.active {
+            color: blue;
+            font-weight: 800;
+            font-size: 15px !important;
+          }
+          &.disabled {
+            opacity: 0.3;
+            font-weight: 800;
+            font-size: 15px !important;
+          }
+          &.enabled {
+            color: blue;
+            font-weight: 800;
+            font-size: 15px !important;
+          }
         }
-        &.disabled {
-          opacity: 0.3;
-          font-weight: 800;
-          font-size: 15px !important;
-        }
-        &.enabled {
-          color: blue;
-          font-weight: 800;
-          font-size: 15px !important;
-        }
-      }
+          
       .form {
         flex-direction: column;
         column-count: 2;

@@ -1,7 +1,7 @@
 <div class="content-wrap">
   <app-menu [role]="'employee'"></app-menu>
   <div class="main-content">
-    <app-header [user]="user"></app-header>
+    <app-header *ngIf="user" [user]="user"></app-header>
     <div class="content-settings">
       <div class="form-background">
         <div class="help-form-background">
@@ -26,15 +26,15 @@
             </div>
 
             <div class="new-pass">
-              <input type="text" placeholder="New password" />
+              <input id="newpassword" type="text" placeholder="New password" />
             </div>
 
             <div class="conf-new-class">
-              <input type="text" placeholder="Confirm new password" />
+              <input  id="confnewpass" type="text" placeholder="Confirm new password" />
             </div>
 
             <div class="settigns-buttons">
-              <button class="cancel">Cancel</button>
+              <button class="cancel" (click)="resetinputs()" >Cancel</button>
               <button class="submit">Submit</button>
             </div>
           </form>

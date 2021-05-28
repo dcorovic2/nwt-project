@@ -14,7 +14,7 @@ interface ItemData {
 })
 export class CreateholidayComponent implements OnInit {
   @Input() user = {};
-  
+  public loading = true;
   editCache: { [key: string]: { edit: boolean; data: ItemData } } = {};
   listOfData: ItemData[] = [];
 
@@ -63,8 +63,13 @@ export class CreateholidayComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.api.get('employee/employee/username', {username: localStorage.getItem('username')}).subscribe((data:any)=>{
+      Object.assign(this.user, {firstnameLastName:data.firstnameLastName, email: data.email, id:data.id});
+     })
+     
     this.api.get('holiday/getlistofholidays', {}, {}).subscribe((dataa: any) =>{
       this.listOfData = dataa;
+      this.loading = false;
       console.log(dataa);
       this.updateEditCache();
     });
