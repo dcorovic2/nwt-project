@@ -9,6 +9,15 @@ import { ActionService } from 'src/app/shared/services/action.service';
 })
 
 export class AddemployeeComponent implements OnInit {
+  isLoadingOne = false;
+
+  loadOne(): void {
+    this.isLoadingOne = true;
+    setTimeout(() => {
+      this.isLoadingOne = false;
+    }, 5000);
+  }
+  
   @Input() user = {};
   public addemp = true;
   public loading = true;  

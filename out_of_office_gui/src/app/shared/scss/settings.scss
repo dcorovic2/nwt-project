@@ -1,22 +1,32 @@
 .content-settings {
   font-family: "Trebuchet MS", sans-serif;
   margin: auto;
-  width: 40%;
+  width: 50%;
   background-color: rgb(247, 247, 247);
   .form-background {
     display: flex;
     padding-bottom: 20px;
-    .settings-background{  
-        width: 37%; 
-        background-image: url("../../../assets/img/—Pngtree—purple gradient low polygon background_1266092.jpg");
-        background-size: cover;
-        
-     
+    .settings-background {
+      width: 30%;
+      background-image: url("../../../assets/img/—Pngtree—purple gradient low polygon background_1266092.jpg");
+      background-size: cover;
     }
     .help-form-background {
-        width: 60%;
+      width: 70%;
       .settings-form {
         text-align: center;
+        .form-content1 {
+          display: flex;
+
+          .form-left {
+            width: 35%;
+          }
+
+          .form-right {
+            width: 35%;
+          }
+        }
+
         .settings-name {
           padding-top: 20px;
           text-align: center;
@@ -40,14 +50,14 @@
             border: 1px solid rgb(98, 98, 98);
             box-sizing: border-box;
             width: 100%;
-            &:hover{
-                border-color: gold;
+            &:hover {
+              border-color: gold;
             }
-            &::placeholder{
-                font-size: 14px;
+            &::placeholder {
+              font-size: 14px;
             }
-            .Code{
-                font-size: 14px;
+            .Code {
+              font-size: 14px;
             }
           }
         }
@@ -61,11 +71,11 @@
             border: 1px solid rgb(98, 98, 98);
             box-sizing: border-box;
             width: 100%;
-            &:hover{
-                border-color: gold;
+            &:hover {
+              border-color: gold;
             }
-            &::placeholder{
-                font-size: 14px;
+            &::placeholder {
+              font-size: 14px;
             }
           }
         }
@@ -80,32 +90,31 @@
             border: 1px solid rgb(98, 98, 98);
             box-sizing: border-box;
             width: 100%;
-            &:hover{
-                border-color: gold;
+            &:hover {
+              border-color: gold;
             }
-            &::placeholder{
-                font-size: 14px;
+            &::placeholder {
+              font-size: 14px;
             }
           }
-          .Code{
+          .Code {
             font-size: 14px;
           }
-          select{
+          select {
             height: 38px;
             padding: 12px;
             border-radius: 5px;
             border: 1px solid rgb(98, 98, 98);
             box-sizing: border-box;
           }
-          label{
-              font-family: 14px;
+          label {
+            font-family: 14px;
           }
         }
 
         .settigns-buttons {
           padding: 15px;
           padding-bottom: 20px;
-
           .submit {
             font-size: 14px;
             border-color: #5900b3;
@@ -115,7 +124,7 @@
             color: #5900b3;
             box-shadow: 0 0 20px white;
             border-radius: 10px;
-            width: 40%;
+            width: 30%;
             height: 35px;
             float: right;
           }
@@ -135,7 +144,7 @@
             color: #4a494b;
             box-shadow: 0 0 20px white;
             border-radius: 10px;
-            width: 40%;
+            width: 30%;
             height: 35px;
             float: left;
           }
