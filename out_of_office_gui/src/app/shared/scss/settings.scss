@@ -1,0 +1,151 @@
+.content-settings {
+  font-family: "Trebuchet MS", sans-serif;
+  margin: auto;
+  width: 40%;
+  background-color: rgb(247, 247, 247);
+  .form-background {
+    display: flex;
+    padding-bottom: 20px;
+    .settings-background{  
+        width: 37%; 
+        background-image: url("../../../assets/img/—Pngtree—purple gradient low polygon background_1266092.jpg");
+        background-size: cover;
+        
+     
+    }
+    .help-form-background {
+        width: 60%;
+      .settings-form {
+        text-align: center;
+        .settings-name {
+          padding-top: 20px;
+          text-align: center;
+          .change-pass {
+            font-size: 25px;
+          }
+        }
+        .old-pass {
+          padding: 15px;
+          padding-top: 40px;
+          i {
+            position: absolute;
+            color: gray;
+            right: 23px;
+            top: 53px;
+          }
+          input {
+            height: 38px;
+            padding: 12px;
+            border-radius: 5px;
+            border: 1px solid rgb(98, 98, 98);
+            box-sizing: border-box;
+            width: 100%;
+            &:hover{
+                border-color: gold;
+            }
+            &::placeholder{
+                font-size: 14px;
+            }
+            .Code{
+                font-size: 14px;
+            }
+          }
+        }
+
+        .new-pass {
+          padding: 15px;
+          input {
+            height: 38px;
+            padding: 12px;
+            border-radius: 5px;
+            border: 1px solid rgb(98, 98, 98);
+            box-sizing: border-box;
+            width: 100%;
+            &:hover{
+                border-color: gold;
+            }
+            &::placeholder{
+                font-size: 14px;
+            }
+          }
+        }
+
+        .conf-new-class {
+          padding: 15px;
+          font-size: 14px;
+          input {
+            height: 38px;
+            padding: 12px;
+            border-radius: 5px;
+            border: 1px solid rgb(98, 98, 98);
+            box-sizing: border-box;
+            width: 100%;
+            &:hover{
+                border-color: gold;
+            }
+            &::placeholder{
+                font-size: 14px;
+            }
+          }
+          .Code{
+            font-size: 14px;
+          }
+          select{
+            height: 38px;
+            padding: 12px;
+            border-radius: 5px;
+            border: 1px solid rgb(98, 98, 98);
+            box-sizing: border-box;
+          }
+          label{
+              font-family: 14px;
+          }
+        }
+
+        .settigns-buttons {
+          padding: 15px;
+          padding-bottom: 20px;
+
+          .submit {
+            font-size: 14px;
+            border-color: #5900b3;
+            transition: 0.5s;
+            background-color: white;
+            background-size: 200% auto;
+            color: #5900b3;
+            box-shadow: 0 0 20px white;
+            border-radius: 10px;
+            width: 40%;
+            height: 35px;
+            float: right;
+          }
+
+          .submit:hover {
+            background-position: right center; /* change the direction of the change here */
+            color: #c38ef8;
+            text-decoration: none;
+          }
+
+          .cancel {
+            font-size: 14px;
+            border-color: #0d0a0f;
+            transition: 0.5s;
+            background-color: white;
+            background-size: 200% auto;
+            color: #4a494b;
+            box-shadow: 0 0 20px white;
+            border-radius: 10px;
+            width: 40%;
+            height: 35px;
+            float: left;
+          }
+          .cancel:hover {
+            background-position: right center; /* change the direction of the change here */
+            color: #a0a0a3;
+            text-decoration: none;
+          }
+        }
+      }
+    }
+  }
+}

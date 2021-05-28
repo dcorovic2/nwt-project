@@ -8,6 +8,7 @@ import java.util.Map;
 
 import javax.validation.Valid;
 
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
@@ -30,7 +31,9 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
+import com.outofoffice.outofoffice.configuration.RabbitConfiguration;
 import com.outofoffice.outofoffice.model.Employee;
+import com.outofoffice.outofoffice.requestobjects.AddedEmployee;
 import com.outofoffice.outofoffice.requestobjects.EmployeeDepartmentChange;
 import com.outofoffice.outofoffice.requestobjects.EmployeeRequest;
 import com.outofoffice.outofoffice.responseobjects.HolidayResponse;
@@ -48,6 +51,8 @@ public class EmployeeController {
 	
 	@Autowired
 	RestTemplate restTemplate;  
+	@Autowired
+	RabbitTemplate rabbitTemplate;
 	public EmployeeController(EmployeeService employeeService) {
 		this.employeeService = employeeService;
 	}
@@ -65,6 +70,9 @@ public class EmployeeController {
 	@PostMapping(value = "/employee")
 	public ResponseEntity<Employee> insertEmployee(@Valid @RequestBody EmployeeRequest requestEmployee) {
 		Employee employee = employeeService.insertEmployee(requestEmployee);
+		AddedEmployee addedEmployee = new AddedEmployee(employee.getId(), requestEmployee.getAllowance(), 
+				requestEmployee.getDepartmentId(), requestEmployee.getEmail(), requestEmployee.getFirstnameLastName());
+		rabbitTemplate.convertAndSend(RabbitConfiguration.EXCHANGE, RabbitConfiguration.ROUTING_KEY3, addedEmployee);
 		return new ResponseEntity<Employee>(employee, HttpStatus.CREATED);
 
 	}

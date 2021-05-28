@@ -1,0 +1,40 @@
+<div class="content-wrap">
+    <app-menu></app-menu>
+    <div class="main-content">
+        <app-header *ngIf="user" [user]="user"></app-header>
+        <div class="content-settings">
+            <div class="form-background">
+                <div class="help-form-background">
+                    <form class="settings-form" (ngSubmit)="submitForm()">
+                        <div class="settings-name">
+                            <span class="change-pass">
+                                Add new holiday type
+                            </span>
+                        </div>
+                        <div class="conf-new-class">
+                            <input type="text" id="code"  placeholder="Code">
+                        </div>
+
+                        <div class="conf-new-class">
+                            <input type="text" id="displayname"  placeholder="Display name">
+                        </div>
+
+                        <div class="conf-new-class">
+                            <input type="text" id="text" placeholder="Text">
+                        </div>
+
+                        <div class="conf-new-class">
+                            <input type="text" id="type"  placeholder="Type">
+                        </div>
+
+                        <div class="settigns-buttons">
+                            <button class="cancel">Cancel</button>
+                            <button nz-button nzType="primary" class="submit" (click)="loadOne()" [nzLoading]="isLoadingOne">Submit</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="settings-background">
+                </div>
+        </div>
+    </div>
+</div>

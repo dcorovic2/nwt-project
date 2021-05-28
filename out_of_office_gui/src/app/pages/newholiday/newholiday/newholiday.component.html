@@ -1,0 +1,54 @@
+<div class="content-wrap">
+  <app-menu></app-menu>
+  <div class="main-content">
+    <app-header *ngIf="user" [user]="user"></app-header>
+    <div class="content-settings">
+      <div class="form-background">
+        <div class="help-form-background">
+          <form class="settings-form" (ngSubmit)="submitForm()">
+            <div class="settings-name">
+              <span class="change-pass"> Add new holiday </span>
+            </div>
+
+            <div class="conf-new-class">
+              <input type="date" id="code" placeholder="Code" />
+            </div>
+
+            <div class="conf-new-class">
+              <input type="date" id="displayname" placeholder="Display name" />
+            </div>
+
+            <div class="conf-new-class">
+              <label style="padding-right: 18px;">Choose holiday type:</label>
+              <select style="min-width: 111px;" [formControl]="selectControl" name="demo" id="#">
+                <option
+                  *ngFor="let type of types"
+                  selected="selected"
+                  value="{{ type.id }}"
+                >
+                  {{ type.displayName }}
+                </option>
+              </select>
+            </div>
+
+            <div class="conf-new-class">
+              <label style="padding-right: 12px;">Choose holiday scope:</label>
+              <select [formControl]="selectControl1" name="demo" id="#">
+                <option selected="selected" value="for all">For all</option>
+                <option selected="selected" value="not for all">
+                  Not for all
+                </option>
+              </select>
+            </div>
+
+            <div class="settigns-buttons">
+              <button class="cancel">Cancel</button>
+              <button nz-button nzType="primary" class="submit" (click)="loadOne()" [nzLoading]="isLoadingOne">Submit</button>
+            </div>
+          </form>
+        </div>
+        <div class="settings-background"></div>
+      </div>
+    </div>
+  </div>
+</div>

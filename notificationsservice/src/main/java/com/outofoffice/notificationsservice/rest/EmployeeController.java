@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.outofoffice.notificationsservice.requestobjects.EmployeeRequest;
+import com.outofoffice.notificationsservice.requestobjects.AddedEmployee;
 import com.outofoffice.notificationsservice.service.EmployeeService;
 
 
@@ -42,7 +42,7 @@ public class EmployeeController {
 	}
 	
 	@PatchMapping(value = "/employees/{id}")
-	public ResponseEntity<?> updateEmployee(@RequestBody EmployeeRequest requestEmployee, @PathVariable Long id) {
+	public ResponseEntity<?> updateEmployee(@RequestBody AddedEmployee requestEmployee, @PathVariable Long id) {
 		return employeeService.updateEmployee(requestEmployee, id);
 	}
 	

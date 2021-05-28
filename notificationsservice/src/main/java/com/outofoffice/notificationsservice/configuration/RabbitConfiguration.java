@@ -11,13 +11,26 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitConfiguration {
 
-    public static final String QUEUE = "request_notification_queue";
+	public static final String QUEUE = "request_notification_queue";
+    public static final String QUEUE2 = "request_employee_queue";
+    public static final String QUEUE3 = "employee_notification_queue";
     public static final String EXCHANGE = "request_notification_exchange";
+    public static final String EXCHANGE2 = "request_employee_exchange";
     public static final String ROUTING_KEY = "request_notification_routingKey";
+    public static final String ROUTING_KEY2 = "request_employee_routingKey";
+    public static final String ROUTING_KEY3 = "employee_notification_routingKey";
 
     @Bean
-    public Queue queue() {
+    public Queue queue1() {
         return new Queue(QUEUE);
+    }
+    @Bean
+    public Queue queue2() {
+        return new Queue(QUEUE2);
+    }
+    @Bean
+    public Queue queue3() {
+        return new Queue(QUEUE3);
     }
 
     @Bean
@@ -26,9 +39,18 @@ public class RabbitConfiguration {
     }
 
     @Bean
-    public Binding binding(Queue queue, TopicExchange exchange) {
-        return BindingBuilder.bind(queue).to(exchange).with(ROUTING_KEY);
+    public Binding binding1(TopicExchange exchange) {
+        return BindingBuilder.bind(queue1()).to(exchange).with(ROUTING_KEY);
     }
+    @Bean
+    public Binding binding2(TopicExchange exchange) {
+        return BindingBuilder.bind(queue2()).to(exchange).with(ROUTING_KEY2);
+    }
+    @Bean
+    public Binding binding3(TopicExchange exchange) {
+        return BindingBuilder.bind(queue3()).to(exchange).with(ROUTING_KEY3);
+    }
+
 
     @Bean
     public MessageConverter converter() {

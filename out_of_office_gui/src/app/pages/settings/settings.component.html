@@ -1,34 +1,46 @@
 <div class="content-wrap">
-    <app-menu [role]="'employee'"></app-menu>
-    <div class="main-content">
-        <app-header [user]="user"></app-header>
-        <div class="content settings">
-            <div class="background">
-                <div class="help-background">
-                    <span class="change-pass">
-                        Change you password
-                    </span>
-                    <form class="form" [formGroup]="validateForm" (ngSubmit)="submitForm()">
-                        <input type="text"  id = "username" placeholder="Username" [formControlName]="'username'">
-                        <div *ngIf="usernameError" style="color: red;">
-                            Username does not exist!
-                        </div>
-                        <input type="text"  id = "password" placeholder="Old password" [formControlName]="'password'">
-                        <div *ngIf="passwordError" style="color: red;">
-                            Old password is incorrect!
-                        </div>
-                        <button class="cancel">Cancel</button>
-                        <input type="text"  placeholder="New password">
-                        <input type="text"  placeholder="Confirm new password">
-                        <button class="submit">Submit</button>
-                    </form>
-                </div>
+  <app-menu [role]="'employee'"></app-menu>
+  <div class="main-content">
+    <app-header [user]="user"></app-header>
+    <div class="content-settings">
+      <div class="form-background">
+        <div class="help-form-background">
+          <form
+            class="settings-form"
+            [formGroup]="validateForm"
+            (ngSubmit)="submitForm()"
+          >
+            <div class="settings-name">
+              <span class="change-pass"> Change your password </span>
+            </div>
+            <div class="old-pass">
+              <input
+                type="text"
+                id="password"
+                placeholder="Old password"
+                [formControlName]="'password'"
+              />
+              <div *ngIf="passwordError" style="color: red">
+                Old password is incorrect!
+              </div>
+            </div>
 
+            <div class="new-pass">
+              <input type="text" placeholder="New password" />
+            </div>
+
+            <div class="conf-new-class">
+              <input type="text" placeholder="Confirm new password" />
+            </div>
+
+            <div class="settigns-buttons">
+              <button class="cancel">Cancel</button>
+              <button class="submit">Submit</button>
+            </div>
+          </form>
         </div>
-        <div class="plusbutton">
-            <i class="fas fa-plus-circle"></i>
-        </div>
+        <div class="settings-background"></div>
+      </div>
     </div>
-    </div>
-    
-    
+  </div>
+</div>

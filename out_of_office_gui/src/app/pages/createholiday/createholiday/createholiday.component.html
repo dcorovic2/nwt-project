@@ -1,0 +1,41 @@
+<div class="content-wrap">
+    <app-menu></app-menu>
+    <div class="main-content">
+        <app-header *ngIf="user" [user]="user"></app-header>
+        <div class="content settings">
+            <span>Holiday list</span>
+            <nz-table #editRowTable nzBordered [nzData]="listOfData" nzTableLayout="fixed" [nzScroll]="{ y: '440px' }" [nzFrontPagination]="false">
+                <thead>
+                  <tr>
+                    <th nzWidth="10%">Holiday type</th>
+                    <th nzWidth="20%">Start date</th>
+                    <th nzWidth="30%">End date</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let data of editRowTable.data">
+                    <ng-container *ngIf="!editCache[data.id].edit; else editTemplate">
+                      <td>{{ data.holidayType.displayName }}</td>
+                      <td>{{ data.startDate }}</td>
+                      <td>{{ data.endDate }}</td>
+                      <td>
+                          <a (click)="startEdit(data.id)">Edit</a>
+                          <a (click)="deleteHoliType(data.id)">Delete</a>
+                      </td>
+                    </ng-container>
+                    <ng-template #editTemplate>
+                      <td>{{ data.holidayType.displayName }}</td>
+                      <td><input type="text" nz-input [(ngModel)]="editCache[data.id].data.startDate" /></td>
+                      <td><input type="text" nz-input [(ngModel)]="editCache[data.id].data.endDate" /></td>
+                      <td>
+                        <a (click)="saveEdit(data.id)" class="save">Save</a>
+                        <a (click)="cancelEdit(data.id)">Cancel</a>
+                      </td>
+                    </ng-template>
+                  </tr>
+                </tbody>
+              </nz-table>
+        </div>           
+    </div>
+</div>

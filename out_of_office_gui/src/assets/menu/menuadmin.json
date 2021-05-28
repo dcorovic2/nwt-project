@@ -28,6 +28,34 @@
         "route": "listofrequests"
       },
       {
+        "name": "createholitype",
+        "label": "Create holiday type",
+        "icon": "fas fa-calendar-plus",
+        "category": "global",
+        "route": "createholidaytype"
+      },
+      {
+        "name": "holidaytypelist",
+        "label": "Holiday type list",
+        "icon": "fas fa-list",
+        "category": "global",
+        "route": "listofholidaytypes"
+      },
+      {
+        "name": "holidaylist",
+        "label": "Holiday list",
+        "icon": "far fa-plus-square",
+        "category": "global",
+        "route": "createholiday"
+      },
+      {
+        "name": "newholi",
+        "label": "Create holiday",
+        "icon": "fas fa-external-link-alt",
+        "category": "global",
+        "route": "newholi"
+      },
+      {
         "name": "logout",
         "label": "Log out",
         "icon": "fas fa-sign-out-alt",

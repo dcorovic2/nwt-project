@@ -1,5 +1,6 @@
 package com.outofoffice.outofoffice.service;
 
+import com.outofoffice.outofoffice.configuration.RabbitConfiguration;
 import com.outofoffice.outofoffice.errorhandling.CustomRestExceptionHandler;
 import com.outofoffice.outofoffice.errorhandling.NoDataException;
 
@@ -14,6 +15,8 @@ import java.util.stream.Collectors;
 import javax.persistence.Column;
 import javax.validation.constraints.NotEmpty;
 
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -30,6 +33,7 @@ import com.outofoffice.outofoffice.repository.AuthRepository;
 import com.outofoffice.outofoffice.repository.DepartmentRepository;
 import com.outofoffice.outofoffice.repository.EmployeeRepository;
 import com.outofoffice.outofoffice.repository.RoleRepository;
+import com.outofoffice.outofoffice.requestobjects.AddedEmployee;
 import com.outofoffice.outofoffice.requestobjects.EmployeeDepartmentChange;
 import com.outofoffice.outofoffice.requestobjects.EmployeeRequest;
 import com.outofoffice.outofoffice.requestobjects.LoginRequest;
@@ -47,6 +51,8 @@ public class EmployeeService {
 	private final RoleService roleService;
 	private final AuthRepository authRepository;
 	private final DepartmentRepository departmentRepository;
+	
+	
 	
 	public EmployeeService(EmployeeRepository employeeRepository, DepartmentRepository departmentRepository,
 			RoleRepository roleRepository, AuthRepository authRepository) {

@@ -11,7 +11,7 @@ import com.outofoffice.notificationsservice.errorhandling.NoDataException;
 import com.outofoffice.notificationsservice.errorhandling.NotFoundException;
 import com.outofoffice.notificationsservice.model.Employee;
 import com.outofoffice.notificationsservice.repository.EmployeeRepository;
-import com.outofoffice.notificationsservice.requestobjects.EmployeeRequest;
+import com.outofoffice.notificationsservice.requestobjects.AddedEmployee;
 
 
 @Service
@@ -54,7 +54,7 @@ public class EmployeeService {
 		return empl;
 	}
 
-	public ResponseEntity<?> updateEmployee(EmployeeRequest employee, long id) {
+	public ResponseEntity<?> updateEmployee(AddedEmployee employee, long id) {
 		String id_string = id + " ";
 		Employee updateEmployee = employeeRepository.findById(id)
 				.orElseThrow(() -> new NotFoundException(id_string, "Employee", "ID", ""));
