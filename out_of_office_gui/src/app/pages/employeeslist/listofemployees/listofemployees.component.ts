@@ -98,4 +98,5 @@ export class ListofemployeesComponent implements OnInit {
     this.visible = false;
     this.employees = this.employees2.filter((item: any) => item.firstnameLastName.indexOf(this.searchValue) !== -1);
   }
+
 }
