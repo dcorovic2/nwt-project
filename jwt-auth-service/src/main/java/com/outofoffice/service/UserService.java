@@ -56,7 +56,7 @@ public class UserService {
 	    } catch (Exception e) {
 	    	return null;
 	    }
-   }
+ }
 
   public String signup(User user) {
 	System.out.println("Udje u signup metodu");
