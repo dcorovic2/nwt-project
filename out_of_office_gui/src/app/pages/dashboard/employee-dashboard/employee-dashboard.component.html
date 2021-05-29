@@ -33,12 +33,12 @@
                 <div class="conf-new-class">
                   <label style="padding-right: 18px;">Choose holiday type:</label>
                   <select style="min-width: 111px;" [formControl]="selectControl" name="demo" id="#">
-                    <option
+                    <option 
                       *ngFor="let type of types"
                       selected="selected"
                       value="{{ type.id }}"
                     >
-                      {{ type.displayName }}
+                      {{ type.holidayType.displayName }}
                     </option>
                   </select>
                 </div>

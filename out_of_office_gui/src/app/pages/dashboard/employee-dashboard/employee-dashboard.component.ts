@@ -33,17 +33,14 @@ export class EmployeeDashboardComponent implements OnInit {
   ngOnInit(): void {
     let tmpData: any;
     this.api.get('holiday/getlistofholidays', {}, {}).subscribe((dataa: any) =>{
-      tmpData = JSON.parse(JSON.stringify(dataa));
+      console.log(dataa);
       this.types = dataa;
-      console.log(this.types);
     });
 
   }
 
-  submitForm(): void {
-    let type = (<HTMLInputElement>document.getElementById('type')).value;
-    
-    console.log(type);
+  submitForm(): void {    
+    console.log(this.selectControl.value);
   }
 
 }
