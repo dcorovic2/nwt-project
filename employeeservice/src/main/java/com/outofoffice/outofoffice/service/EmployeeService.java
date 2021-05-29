@@ -21,6 +21,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.client.RestTemplate;
 
 import com.outofoffice.outofoffice.errorhandling.NotFoundException;
 import com.outofoffice.outofoffice.errorhandling.NotSucesfullException;
@@ -37,6 +38,7 @@ import com.outofoffice.outofoffice.requestobjects.AddedEmployee;
 import com.outofoffice.outofoffice.requestobjects.EmployeeDepartmentChange;
 import com.outofoffice.outofoffice.requestobjects.EmployeeRequest;
 import com.outofoffice.outofoffice.requestobjects.LoginRequest;
+import com.outofoffice.outofoffice.requestobjects.NewUser;
 import com.outofoffice.outofoffice.responseobjects.HolidayResponse;
 import com.outofoffice.outofoffice.responseobjects.LeaveRequestResponse;
 import com.outofoffice.outofoffice.responseobjects.LeaveRequestResponse2;
@@ -51,6 +53,9 @@ public class EmployeeService {
 	private final RoleService roleService;
 	private final AuthRepository authRepository;
 	private final DepartmentRepository departmentRepository;
+	
+	@Autowired
+	RestTemplate restTemplate;  
 	
 	
 	
@@ -91,7 +96,10 @@ public class EmployeeService {
 		employee.setPhoneNumber(employeeReq.getPhoneNumber());
 		employee.setRemainingDays(employeeReq.getRemainingDays());
 		employee.setUsername(employeeReq.getUsername());
-		return employeeRepository.save(employee);
+		
+		Employee newEmployee = employeeRepository.save(employee);
+
+		return newEmployee;
 	}
 
 	public Employee updateEmployeeDepartment(EmployeeDepartmentChange employee) {

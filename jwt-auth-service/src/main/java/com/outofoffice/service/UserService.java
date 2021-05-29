@@ -55,6 +55,7 @@ public class UserService {
    }
 
   public String signup(User user) {
+	System.out.println("Udje u signup metodu");
     if (!userRepository.existsByUsername(user.getUsername())) {
       user.setPassword(passwordEncoder.encode(user.getPassword()));
       userRepository.save(user);
