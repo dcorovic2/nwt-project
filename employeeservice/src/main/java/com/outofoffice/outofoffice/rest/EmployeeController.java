@@ -36,6 +36,7 @@ import com.outofoffice.outofoffice.model.Employee;
 import com.outofoffice.outofoffice.requestobjects.AddedEmployee;
 import com.outofoffice.outofoffice.requestobjects.EmployeeDepartmentChange;
 import com.outofoffice.outofoffice.requestobjects.EmployeeRequest;
+import com.outofoffice.outofoffice.requestobjects.NewUser;
 import com.outofoffice.outofoffice.responseobjects.HolidayResponse;
 import com.outofoffice.outofoffice.responseobjects.LeaveRequestResponse;
 import com.outofoffice.outofoffice.responseobjects.LeaveRequestResponse2;
@@ -73,6 +74,9 @@ public class EmployeeController {
 		AddedEmployee addedEmployee = new AddedEmployee(employee.getId(), requestEmployee.getAllowance(), 
 				requestEmployee.getDepartmentId(), requestEmployee.getEmail(), requestEmployee.getFirstnameLastName());
 		rabbitTemplate.convertAndSend(RabbitConfiguration.EXCHANGE, RabbitConfiguration.ROUTING_KEY3, addedEmployee);
+		
+		NewUser user = new NewUser(requestEmployee.getUsername(), requestEmployee.getEmail(), requestEmployee.getPassword());
+		rabbitTemplate.convertAndSend(RabbitConfiguration.EXCHANGE, RabbitConfiguration.ROUTING_KEY4, user);
 		return new ResponseEntity<Employee>(employee, HttpStatus.CREATED);
 
 	}

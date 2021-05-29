@@ -30,8 +30,18 @@ public class User {
 
   @ElementCollection(fetch = FetchType.EAGER)
   List<Role> roles;
+  
+  
 
-  public Integer getId() {
+  public User(@Size(min = 4, max = 255, message = "Minimum username length: 4 characters") String username, String email,
+		@Size(min = 8, message = "Minimum password length: 8 characters") String password) {
+	super();
+	this.username = username;
+	this.email = email;
+	this.password = password;
+}
+
+public Integer getId() {
     return id;
   }
 

@@ -67,7 +67,7 @@ class EmployeeControllerTest {
 	}
 	private EmployeeRequest createTestEmployee() throws Exception {
 		EmployeeRequest employee_req = new EmployeeRequest(21L, "test@gmail.com", "testname", OffsetDateTime.now(),
-				"9999999999999", "jobRole1", "phoneNumber1", 21, "test", 1L, 2L);
+				"9999999999999", "jobRole1", "phoneNumber1", 21, "test", "test", 1L, 2L);
 		this.mockMvc.perform(MockMvcRequestBuilders.post("/employee").contentType("application/json")
 				.content(objectMapper.writeValueAsString(employee_req))).andExpect(status().isCreated());
 		return employee_req;
@@ -85,7 +85,7 @@ class EmployeeControllerTest {
 	@Test
 	void testEmployeeWrongDataPOST() throws Exception {
 		EmployeeRequest employee_req = new EmployeeRequest(21L, "test@gmail.com", "ime prezime", OffsetDateTime.now(),
-				"rr", "jobRole1", "phoneNumber1", 21,"test", 1L, 2L);
+				"rr", "jobRole1", "phoneNumber1", 21,"test", "test", 1L, 2L);
 		this.mockMvc.perform(MockMvcRequestBuilders.post("/employee").contentType("application/json")
 				.content(objectMapper.writeValueAsString(employee_req))).andExpect(status().isBadRequest());
 	}
@@ -159,7 +159,7 @@ class EmployeeControllerTest {
 	@Test
 	public void testPutEmployeeeDepartmentWrongiDPUT() throws Exception {
 		EmployeeRequest employee_req = new EmployeeRequest(21L, "test@gmail.com", "testname", OffsetDateTime.now(),
-				"9999999999999", "jobRole1", "phoneNumber1", 21, "test",15L, 2L);
+				"9999999999999", "jobRole1", "phoneNumber1", 21, "test", "test",15L, 2L);
 		this.mockMvc
 				.perform(MockMvcRequestBuilders.put("/employee/{id}", 3).contentType("application/json")
 						.content(objectMapper.writeValueAsString(employee_req)))
