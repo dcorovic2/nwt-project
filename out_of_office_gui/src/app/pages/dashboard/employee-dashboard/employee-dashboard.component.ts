@@ -33,7 +33,7 @@ export class EmployeeDashboardComponent implements OnInit {
   ngOnInit(): void {
     let tmpData: any;
     this.api.get('holiday/getlistofholidays', {}, {}).subscribe((dataa: any) =>{
-      console.log(dataa);
+      console.log(typeof dataa);
       this.types = dataa;
     });
 
