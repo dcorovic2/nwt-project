@@ -1,5 +1,10 @@
 package com.outofoffice.controller;
 
+
+
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.modelmapper.ModelMapper;
@@ -20,8 +25,10 @@ import org.springframework.web.client.RestTemplate;
 
 import com.outofoffice.dto.UserDataDTO;
 import com.outofoffice.dto.UserResponseDTO;
+import com.outofoffice.model.Role;
 import com.outofoffice.model.User;
 import com.outofoffice.service.UserService;
+
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -62,8 +69,22 @@ public class UserController {
 			@ApiResponse(code = 403, message = "Access denied"), //
 			@ApiResponse(code = 422, message = "Username is already in use") })
 	public String signup(@ApiParam("Signup User") @RequestBody UserDataDTO user) {
+		if (user.getRoles().isEmpty()) {
+			user.setRoles(new ArrayList<Role>(Arrays.asList(Role.ROLE_CLIENT)));
+		}
 		return userService.signup(modelMapper.map(user, User.class));
 	}
+	
+//	@PostMapping("/newuser")
+//	@ApiOperation(value = "${UserController.newuser}")
+//	@ApiResponses(value = { //
+//			@ApiResponse(code = 400, message = "Something went wrong"), //
+//			@ApiResponse(code = 403, message = "Access denied"), //
+//			@ApiResponse(code = 422, message = "Username is already in use") })
+//	public String newUser(@RequestBody User user) {
+//		user.setRoles(new ArrayList<Role>(Arrays.asList(Role.ROLE_CLIENT)));
+//		return userService.signup(modelMapper.map(user, User.class));
+//	}
 
 	@PostMapping("/password")
 	@ApiOperation(value = "${UserController.username}")

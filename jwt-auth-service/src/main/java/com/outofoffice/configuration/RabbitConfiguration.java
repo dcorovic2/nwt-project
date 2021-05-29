@@ -1,4 +1,4 @@
-package com.outofoffice.outofoffice.configuration;
+package com.outofoffice.configuration;
 
 import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
