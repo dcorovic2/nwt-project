@@ -12,9 +12,8 @@ export class SettingsComponent implements OnInit {
   public settings = true;
   public user  = {id:"", firstnameLastName:"", email:""};
   validateForm: FormGroup;
-  public usernameError: boolean = false;
   public passwordError: boolean = false;
-
+  public newpasswordError : boolean = false;
   constructor(
     private route: Router,
     private api: ApiserviceService,
@@ -52,21 +51,19 @@ export class SettingsComponent implements OnInit {
   }
 
   submitForm(): void {
-    let username = (<HTMLInputElement>document.getElementById('username'))
-      .value;
-    let password = (<HTMLInputElement>document.getElementById('password'))
-      .value;
+    let password = (<HTMLInputElement>document.getElementById('password')).value;
+    let newpassword = (<HTMLInputElement>document.getElementById('newpassword')).value;
+    let confirmnewpassword = (<HTMLInputElement>document.getElementById('confnewpass')).value;
+    let username = localStorage.getItem('username');
     let params: HttpParams = new HttpParams();
 
-    params = params.append('username', username);
+    params = params.append('password', password);
     this.api
-      .post('users/username', { username: username })
+      .post('users/password', { password: password, username: username  })
       .subscribe((data) => {
-        console.log(data.length);
-        if (data.length != 0) this.usernameError = false;
-        else this.usernameError = true;
-
-        console.log(JSON.parse(data).password);
+        console.log(data);
+        if (data.length != 0) this.passwordError = false;
+        else this.passwordError = true;
         //setTimeout(()=>this.route.navigate(['dashboard']),5000);
       });
   }

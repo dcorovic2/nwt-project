@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +31,8 @@ public class UserService {
 
   @Autowired
   private AuthenticationManager authenticationManager;
+  
+  BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(); 
 
   public String signin(String username, String password) {
     try {
@@ -40,11 +43,12 @@ public class UserService {
     }
   }
   
-  public User checkUsername(String username) {
+  public User checkPassword(String password, String username) {
 	    try {
 	      User user = userRepository.findByUsername(username);
 	      System.out.print(user.getUsername());
-	      if(user.getUsername() == null) {
+	      System.out.print(encoder.matches(password, user.getPassword()));
+	      if(!encoder.matches(password, user.getPassword())) {
 	    	  return null;
 	      }else {
 	    	  return user;  

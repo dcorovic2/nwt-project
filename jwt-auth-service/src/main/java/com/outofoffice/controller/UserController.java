@@ -65,14 +65,14 @@ public class UserController {
 		return userService.signup(modelMapper.map(user, User.class));
 	}
 
-	@PostMapping("/username")
+	@PostMapping("/password")
 	@ApiOperation(value = "${UserController.username}")
 	@ApiResponses(value = { //
 			@ApiResponse(code = 400, message = "Something went wrong"), //
 			@ApiResponse(code = 403, message = "Access denied"), //
 			@ApiResponse(code = 422, message = "Username is already in use") })
-	public User signup(@ApiParam("Username") @RequestParam String username) {
-		return userService.checkUsername(username);
+	public User signup(@ApiParam("Password") @RequestParam String password, @ApiParam("Username") @RequestParam String username) {
+		return userService.checkPassword(password, username);
 	}
 
 	@DeleteMapping(value = "/{username}")

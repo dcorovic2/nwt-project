@@ -20,13 +20,16 @@
                 placeholder="Old password"
                 [formControlName]="'password'"
               />
-              <div *ngIf="passwordError" style="color: red">
+              <div *ngIf="passwordError" style="color: red; float: left;">
                 Old password is incorrect!
               </div>
             </div>
 
             <div class="new-pass">
               <input id="newpassword" type="text" placeholder="New password" />
+              <div *ngIf="newpasswordError" style="color: red">
+                New password is incorrect!
+              </div>
             </div>
 
             <div class="conf-new-class">
