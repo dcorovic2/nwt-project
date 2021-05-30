@@ -61,11 +61,12 @@ public class Notification {
 	        this.dismiss = dismiss;
 	        this.employees = employees;
 	}
-	public Notification(OffsetDateTime create_date, Long departmentId, String text,NotificationsType notificationsTypeId) {
+	public Notification(OffsetDateTime create_date, Long departmentId, String text,NotificationsType notificationsTypeId,List<Employee> employees) {
         this.createDate = create_date;
         this.departmentId = departmentId;
         this.notifications_type = notificationsTypeId;
         this.text = text;
+        this.employees = employees;
 }
 
 	@ManyToMany()

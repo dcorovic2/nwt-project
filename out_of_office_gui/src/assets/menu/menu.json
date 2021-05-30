@@ -4,21 +4,21 @@
       "label": "Dashboard",
       "icon": "fas fa-home",
       "category": "global",
-      "route": "dashboard"
+      "route": "layout/dashboard"
     },
     {
         "name": "pending",
         "label": "Pending",
         "icon": "fas fa-hourglass-start",
         "category": "global",
-        "route": "pending"
+        "route": "layout/pending"
       },
       {
         "name": "settings",
         "label": "Settings",
         "icon": "fas fa-cog",
         "category": "global",
-        "route": "settings"
+        "route": "layout/settings"
       },
       {
         "name": "logout",

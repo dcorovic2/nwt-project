@@ -57,6 +57,9 @@ public class EmployeeService {
 	@Autowired
 	RestTemplate restTemplate;  
 	
+	@Autowired
+	RabbitTemplate rabbitTemplate;
+	
 	
 	
 	public EmployeeService(EmployeeRepository employeeRepository, DepartmentRepository departmentRepository,
@@ -97,7 +100,12 @@ public class EmployeeService {
 		employee.setRemainingDays(employeeReq.getRemainingDays());
 		employee.setUsername(employeeReq.getUsername());
 		
+	
+		
 		Employee newEmployee = employeeRepository.save(employee);
+		AddedEmployee addedEmployee = new AddedEmployee(employee.getId(), employee.getAllowance(), 
+				employeeReq.getDepartmentId(), employee.getEmail(), employee.getFirstnameLastName());
+		rabbitTemplate.convertAndSend(RabbitConfiguration.EXCHANGE, RabbitConfiguration.ROUTING_KEY3, addedEmployee);
 
 		return newEmployee;
 	}
