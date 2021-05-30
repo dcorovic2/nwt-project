@@ -44,46 +44,24 @@ export class NewholidayComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.api
-      .get('employee/employee/username', {
-        username: localStorage.getItem('username'),
-      })
-      .subscribe((data: any) => {
-        Object.assign(this.user, {
-          firstnameLastName: data.firstnameLastName,
-          email: data.email,
-          id: data.id,
-        });
-      });
-
-    this.api.get('holiday/listHolidayTypes').subscribe((data) => {
-      this.types = data;
-      this.dvaaa = data;
-    });
+    this.api.get('holiday/listHolidayTypes').subscribe((data)=> {this.types = data; this.dvaaa=data;});
   }
 
-  submitForm(): void {
-    let code = (<HTMLInputElement>document.getElementById('code')).value;
-    let text = (<HTMLInputElement>document.getElementById('text')).value;
-    let type = (<HTMLInputElement>document.getElementById('type')).value;
-    let displayname = (<HTMLInputElement>document.getElementById('displayname'))
-      .value;
-    let params: HttpParams = new HttpParams();
-    let jsonObj = {
-      code: code,
-      displayName: text,
-      text: type,
-      type: displayname,
-    };
+  submitForm(): void { 
+    let date1 = (<HTMLInputElement>document.getElementById('date1')).value;
+    let date2 = (<HTMLInputElement>document.getElementById('date2')).value;
+    console.log(date1);
+    console.log(date2);
 
-    this.api
-      .post(
-        'holiday/holidayType',
-        {},
-        { code: code, displayName: text, text: type, type: displayname }
-      )
-      .subscribe((data) => {
-        console.log(data);
+    if(this.selectControl1.value == "not for all") {
+      this.api.post('holiday/holiday/' + this.selectControl.value, {}, {"endDate": date2, "startDate": date1}).subscribe(data=>{
+        
       });
+    }
+    if(this.selectControl1.value == "for all") {
+      this.api.post('holiday/defaultHoliday/' + this.selectControl.value, {}, {"endDate": date2, "startDate": date1}).subscribe(data=>{
+        
+      });
+    }
   }
 }
