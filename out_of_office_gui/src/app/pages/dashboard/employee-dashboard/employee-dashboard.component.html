@@ -24,15 +24,30 @@
             </div>
             </div>
         </div>
+            </div >
+            <form class="settings-form" (ngSubmit)="submitForm()">
+                <div class="settings-name">
+                  <span class="change-pass"> Holidays: </span>
+                </div>
+    
+                <div class="conf-new-class">
+                  <label style="padding-right: 18px;">Choose holiday type:</label>
+                  <select style="min-width: 111px;" [formControl]="selectControl" name="demo" id="#" [disabled]="tmpDisabled">
+                    <option 
+                      *ngFor="let type of types"
+                      selected="selected"
+                      value="{{ type.id }}"
+                    >
+                      {{ type.holidayType.displayName }}
+                    </option>
+                  </select>
+                </div>
+    <!--matTooltip="The holiday is already chosen!"-->
+                <div class="settigns-buttons">
+                  <button nzType="primary" class="submit" [disabled]="tmpDisabled">Submit</button>
+                </div>
+              </form>
             </div>
-            <div class="content-right">
-                <span class="title">Calendar</span>
-                <mwl-calendar-month-view
-                [viewDate]="viewDate"
-                [events]="events"> 
-              </mwl-calendar-month-view> 
-            </div>
-        </div>
         <div (click)="doSomething()" class="plusbutton">
             <i class="fas fa-plus-circle"></i>
         </div>

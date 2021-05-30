@@ -1,203 +1,62 @@
 import {
   Component,
-  ChangeDetectionStrategy,
   ViewChild,
   TemplateRef,
   OnInit,
   Input,
 } from '@angular/core';
-import {
-  startOfDay,
-  endOfDay,
-  subDays,
-  addDays,
-  endOfMonth,
-  isSameDay,
-  isSameMonth,
-  addHours,
-} from 'date-fns';
-import { Subject } from 'rxjs';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-
-
-import {
-  CalendarEvent,
-  CalendarEventAction,
-  CalendarEventTimesChangedEvent,
-  CalendarView,
-} from 'angular-calendar';
 import { ApiserviceService } from 'src/app/shared/services/apiservice.service';
-
-const colors: any = {
-  red: {
-    primary: '#ad2121',
-    secondary: '#FAE3E3',
-  },
-  blue: {
-    primary: '#1e90ff',
-    secondary: '#D1E8FF',
-  },
-  yellow: {
-    primary: '#e3bc08',
-    secondary: '#FDF1BA',
-  },
-};
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-employee-dashboard',
   templateUrl: './employee-dashboard.component.html'
 })
 export class EmployeeDashboardComponent implements OnInit {
-
   @ViewChild('modalContent', { static: true })
   modalContent!: TemplateRef<any>;
-
-    view: CalendarView = CalendarView.Month;
-    CalendarView = CalendarView;
-  
-    viewDate: Date = new Date();
-  
-    modalData!: {
-    action: string;
-    event: CalendarEvent;
-  };
-
+  @Input() user  = {id:"", firstnameLastName:"", email:""};
+  @Input() info = {allowance: "", remainingDays: ""};
   public show:boolean = false;
+  selectControl: FormControl = new FormControl();
+  public types: any;
+  public tmpDisabled:boolean = false;
 
   public doSomething(): void {
     this.show = !this.show;
   }
-    actions: CalendarEventAction[] = [
-      {
-        label: '<i class="fas fa-fw fa-pencil-alt"></i>',
-        a11yLabel: 'Edit',
-        onClick: ({ event }: { event: CalendarEvent }): void => {
-          this.handleEvent('Edited', event);
-        },
-      },
-      {
-        label: '<i class="fas fa-fw fa-trash-alt"></i>',
-        a11yLabel: 'Delete',
-        onClick: ({ event }: { event: CalendarEvent }): void => {
-          this.events = this.events.filter((iEvent) => iEvent !== event);
-          this.handleEvent('Deleted', event);
-        },
-      },
-    ];
-  
-    refresh: Subject<any> = new Subject();
-  
-    events: CalendarEvent[] = [
-      {
-        start: subDays(startOfDay(new Date()), 1),
-        end: addDays(new Date(), 1),
-        title: 'A 3 day event',
-        color: colors.red,
-        actions: this.actions,
-        allDay: true,
-        resizable: {
-          beforeStart: true,
-          afterEnd: true,
-        },
-        draggable: true,
-      },
-      {
-        start: startOfDay(new Date()),
-        title: 'An event with no end date',
-        color: colors.yellow,
-        actions: this.actions,
-      },
-      {
-        start: subDays(endOfMonth(new Date()), 3),
-        end: addDays(endOfMonth(new Date()), 3),
-        title: 'A long event that spans 2 months',
-        color: colors.blue,
-        allDay: true,
-      },
-      {
-        start: addHours(startOfDay(new Date()), 2),
-        end: addHours(new Date(), 2),
-        title: 'A draggable and resizable event',
-        color: colors.yellow,
-        actions: this.actions,
-        resizable: {
-          beforeStart: true,
-          afterEnd: true,
-        },
-        draggable: true,
-      },
-    ];
-  
-  activeDayIsOpen: boolean = true;
-  constructor(private modal: NgbModal, private api: ApiserviceService) { }
-  @Input() user  = {id:"", firstnameLastName:"", email:""};
-  @Input() info = {allowance: "", remainingDays: ""};
-  ngOnInit(){
-  }
-  dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
-    if (isSameMonth(date, this.viewDate)) {
-      if (
-        (isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) ||
-        events.length === 0
-      ) {
-        this.activeDayIsOpen = false;
-      } else {
-        this.activeDayIsOpen = true;
-      }
-      this.viewDate = date;
-    }
-  }
 
-  eventTimesChanged({
-    event,
-    newStart,
-    newEnd,
-  }: CalendarEventTimesChangedEvent): void {
-    this.events = this.events.map((iEvent) => {
-      if (iEvent === event) {
-        return {
-          ...event,
-          start: newStart,
-          end: newEnd,
-        };
+  public checkShow(): boolean {
+    return this.tmpDisabled;
+  }
+  
+  constructor(private api: ApiserviceService){}
+
+  ngOnInit(): void {
+    this.api.get('holiday/getlistofholidays', {}, {}).subscribe((dataa: any) =>{
+      let dataa1 = dataa.filter((dataFiltered: any) => dataFiltered.holidayType.code == "Not for all");
+      
+      for(let i = 0; i < dataa1.length; i++) {
+        let emploteesList = dataa1[i].employees;
+
+        for(let j = 0; j < emploteesList.length; j++) { console.log()
+          if(emploteesList[j].id == this.user.id) {
+            this.tmpDisabled = true;
+          }
+        }
       }
-      return iEvent;
+
+      this.types = dataa1;
     });
-    this.handleEvent('Dropped or resized', event);
   }
 
-  handleEvent(action: string, event: CalendarEvent): void {
-    this.modalData = { event, action };
-    this.modal.open(this.modalContent, { size: 'lg' });
-  }
+  submitForm(): void {    
+    console.log(this.selectControl.value);
+    console.log(this.user.id);
+    console.log(this.user.firstnameLastName);
 
-  addEvent(): void {
-    this.events = [
-      ...this.events,
-      {
-        title: 'New event',
-        start: startOfDay(new Date()),
-        end: endOfDay(new Date()),
-        color: colors.red,
-        draggable: true,
-        resizable: {
-          beforeStart: true,
-          afterEnd: true,
-        },
-      },
-    ];
+    this.api.patch('holiday/holiday/' + this.selectControl.value + '/' + this.user.id + '/' + this.user.firstnameLastName, {}, {}).subscribe((dataa: any) =>{
+      this.tmpDisabled = true;
+    });
   }
-
-  deleteEvent(eventToDelete: CalendarEvent) {
-    this.events = this.events.filter((event) => event !== eventToDelete);
-  }
-
-  setView(view: CalendarView) {
-    this.view = view;
-  }
-
-  closeOpenMonthViewDay() {
-    this.activeDayIsOpen = false;
-  }
-
 }

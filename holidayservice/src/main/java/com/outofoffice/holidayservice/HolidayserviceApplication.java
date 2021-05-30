@@ -47,10 +47,10 @@ public class HolidayserviceApplication {
 	public CommandLineRunner addingNotifications(HolidayRepository holidayRepository, HolidayTypeRepository holidayTypeRepository, NotificationRepository notificationRepository,
 			EmployeeRepository employeeRepository){
 		return (args -> {
-			HolidayType holidayType = new HolidayType("code1", "Nova Godina", "NG", "NG");
+			HolidayType holidayType = new HolidayType("For all", "New Year", "NY", "NY");
 			holidayTypeRepository.save(holidayType);
 			
-			HolidayType holidayType1 = new HolidayType("code1", "Bajram", "DP", "DP");
+			HolidayType holidayType1 = new HolidayType("Not for all", "Eid", "Eid", "Eid");
 			holidayTypeRepository.save(holidayType1);
 			
 			Employee employee = new Employee(1L, "Dalila Corovic");
