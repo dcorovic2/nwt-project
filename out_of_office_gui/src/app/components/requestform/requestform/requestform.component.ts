@@ -13,6 +13,8 @@ export class RequestformComponent implements OnInit {
   selectControl:FormControl = new FormControl()
   @Input() id: any;
   public types: any;
+  public option1Error: boolean = false;
+  public date1Error: boolean = false;
   constructor(private api: ApiserviceService) { }
 
   hidePopUp(): void {
@@ -24,13 +26,21 @@ export class RequestformComponent implements OnInit {
   }
 
   createRequest(){
+    //resetovanje validacija
+    this.option1Error = false;
+    this.date1Error = false;
     let num = (<HTMLInputElement>document.getElementById('num')).value;
     let start = (<HTMLInputElement>document.getElementById('start')).value;
     let comment = (<HTMLInputElement>document.getElementById('comment')).value;
-    let typeId = 1;
-    console.log(this.selectControl.value);
-    this.api.post('leaverequest/request', {}, {comment:comment, daysNum: num, employeeId: this.id, startDate: start, typeId: this.selectControl.value}).subscribe((data)=>console.log(data));
-
+    
+    if(num == "") {
+      this.date1Error = true;
+    }
+    if(this.selectControl.value == null) {
+      this.option1Error = true;
+    } else {
+      this.api.post('leaverequest/request', {}, {comment:comment, daysNum: num, employeeId: this.id, startDate: start, typeId: this.selectControl.value}).subscribe((data)=>console.log(data));
+    }
   }
 
 }

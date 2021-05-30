@@ -18,6 +18,9 @@
             <div class="popup-end-date-window">
                 <label class="end" for="end">Number of days:</label>
                 <input class="date" type="number" id="num">
+                <div *ngIf="date1Error" style="color: red; float: left; font-size: 15px;">
+                    Incorrect input!
+                </div>
             </div>
             <div class="space">
             </div>
@@ -26,7 +29,10 @@
             <label>Leave type:</label>
             <select [formControl]="selectControl" name="demo" id="#">
                 <option *ngFor="let type of types" selected="selected" value="{{type.id}}">{{type.displayName}}</option></select>
-        </div>
+                <div *ngIf="option1Error" style="color: red; float: left; font-size: 15px;">
+                    Option cannot be empty
+                  </div>
+            </div>
 
         <div class="comment">
             <textarea  type="text" id = "comment" placeholder="Comment"></textarea>
