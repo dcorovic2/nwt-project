@@ -17,7 +17,7 @@ export class ApiserviceService {
 
   
   public get(path:string, param?:any, queryextend?:object): Observable<any> {
-    return this.http.get(this.query(this.env(path), param, queryextend)).pipe(catchError((error:HttpErrorResponse)=>{
+    return this.http.get(this.query(this.env(path), param), queryextend).pipe(catchError((error:HttpErrorResponse)=>{
       /*this.loading.hide(path)*/;this.message.error(error.error.message||error.message);return throwError(error.message);
     }));
 }

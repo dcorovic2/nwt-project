@@ -1,4 +1,3 @@
-import { HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 
 import { Router } from '@angular/router';
@@ -7,6 +6,7 @@ import { FormBuilder, FormGroup, Validators  } from '@angular/forms'
  
 import  jwt_decode from 'jwt-decode';
 import { JwtToken } from 'src/app/shared/interfaces/jwt-token';
+import { HttpClient, HttpErrorResponse, HttpParams, HttpRequest} from '@angular/common/http';
 
 
 @Component({ 
@@ -38,8 +38,17 @@ export class LoginformComponent implements OnInit {
   
 
   ngOnInit(): void {
+    setInterval(()=>this.refresh(), 300000);
   }
 
+ public refresh(){
+    return this.api.get('users/refresh').subscribe((data)=>{
+    localStorage.clear();
+    localStorage.setItem('token', data);
+    const token = jwt_decode<JwtToken>(data);
+    localStorage.setItem('role', token.auth[0].authority);
+    localStorage.setItem('username', token.sub);});
+  } 
 
   submitForm(): void {
     if (this.validateForm.valid) {
@@ -51,6 +60,7 @@ export class LoginformComponent implements OnInit {
         this.api.post('users/signin', {username:username, password:password}).subscribe(data=>{
         localStorage.setItem('token', data);
         const token = jwt_decode<JwtToken>(data);
+        localStorage.setItem('exp', token.exp);
         localStorage.setItem('role', token.auth[0].authority);
         localStorage.setItem('username', token.sub);
         setTimeout(()=>this.route.navigate(['dashboard']),5000);
