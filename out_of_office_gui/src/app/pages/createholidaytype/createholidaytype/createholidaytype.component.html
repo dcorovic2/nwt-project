@@ -5,26 +5,42 @@
         <div class="content-settings">
             <div class="form-background">
                 <div class="help-form-background">
-                    <form class="settings-form" (ngSubmit)="submitForm()">
+                    <form class="settings-form" (ngSubmit)="submitForm()" [formGroup]="validateForm">
                         <div class="settings-name">
                             <span class="change-pass">
                                 Add new holiday type
                             </span>
+                            <p *ngIf="newholiyday" style="color: green; font-size: 15px;">New holiday type is successfully added!</p>
                         </div>
                         <div class="conf-new-class">
-                            <input type="text" id="code"  placeholder="Code">
+                            <input type="text" id="code"  placeholder="Not for all/for all" [formControlName]="'code'">
+                            <div *ngIf="(this.validateForm.get('code')!.dirty && this.validateForm.get('code')!.hasError('required')) || codeError" style="color: red; float: left; font-size: 15px;">
+                                Code is incorrect!
+                            </div>
+                            <div *ngIf="(this.validateForm.get('code')!.dirty && this.validateForm.get('code')!.hasError('required')) || codeError2" style="color: red; float: left; font-size: 15px;">
+                                Field must have value 'Not for all' or 'For all'
+                            </div>
                         </div>
 
                         <div class="conf-new-class">
-                            <input type="text" id="displayname"  placeholder="Display name">
+                            <input type="text" id="displayname"  placeholder="Display name" [formControlName]="'displayname'"> 
+                            <div *ngIf="(this.validateForm.get('displayname')!.dirty && this.validateForm.get('displayname')!.hasError('required')) || displayNameError" style="color: red; float: left; font-size: 15px;">
+                                Display name is incorrect!
+                            </div>
                         </div>
 
                         <div class="conf-new-class">
-                            <input type="text" id="text" placeholder="Text">
+                            <input type="text" id="text" placeholder="Text" [formControlName]="'text'">
+                            <div *ngIf="(this.validateForm.get('text')!.dirty && this.validateForm.get('text')!.hasError('required')) || textError" style="color: red; float: left; font-size: 15px;">
+                                Text is incorrect!
+                            </div>
                         </div>
 
                         <div class="conf-new-class">
-                            <input type="text" id="type"  placeholder="Type">
+                            <input type="text" id="type"  placeholder="Type" [formControlName]="'type'">
+                            <div *ngIf="(this.validateForm.get('type')!.dirty && this.validateForm.get('type')!.hasError('required')) || typeError" style="color: red; float: left; font-size: 15px;">
+                                Type is incorrect!
+                            </div>
                         </div>
 
                         <div class="settigns-buttons">
