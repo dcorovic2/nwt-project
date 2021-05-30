@@ -13,8 +13,6 @@ import { FormControl } from '@angular/forms';
   templateUrl: './employee-dashboard.component.html'
 })
 export class EmployeeDashboardComponent implements OnInit {
-  
-
   @ViewChild('modalContent', { static: true })
   modalContent!: TemplateRef<any>;
   @Input() user  = {id:"", firstnameLastName:"", email:""};
@@ -22,6 +20,7 @@ export class EmployeeDashboardComponent implements OnInit {
   public show:boolean = false;
   selectControl: FormControl = new FormControl();
   public types: any;
+  public tmpDisabled:boolean = false;
 
   public doSomething(): void {
     this.show = !this.show;
@@ -29,18 +28,31 @@ export class EmployeeDashboardComponent implements OnInit {
   
   constructor(private api: ApiserviceService){}
 
- 
   ngOnInit(): void {
-    let tmpData: any;
     this.api.get('holiday/getlistofholidays', {}, {}).subscribe((dataa: any) =>{
-      console.log(typeof dataa);
-      this.types = dataa;
-    });
+      let dataa1 = dataa.filter((dataFiltered: any) => dataFiltered.holidayType.code == "Not for all");
+      
+      for(let i = 0; i < dataa1.length; i++) {
+        let emploteesList = dataa1[i].employees;
 
+        for(let j = 0; j < emploteesList.length; j++) { console.log()
+          if(emploteesList[j].id == this.user.id) {
+            this.tmpDisabled = true;
+          }
+        }
+      }
+
+      this.types = dataa1;
+    });
   }
 
   submitForm(): void {    
     console.log(this.selectControl.value);
-  }
+    console.log(this.user.id);
+    console.log(this.user.firstnameLastName);
 
+    this.api.patch('holiday/holiday/' + this.selectControl.value + '/' + this.user.id + '/' + this.user.firstnameLastName, {}, {}).subscribe((dataa: any) =>{
+      
+    });
+  }
 }

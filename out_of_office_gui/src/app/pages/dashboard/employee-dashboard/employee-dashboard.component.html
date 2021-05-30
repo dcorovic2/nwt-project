@@ -32,7 +32,7 @@
     
                 <div class="conf-new-class">
                   <label style="padding-right: 18px;">Choose holiday type:</label>
-                  <select style="min-width: 111px;" [formControl]="selectControl" name="demo" id="#">
+                  <select style="min-width: 111px;" [formControl]="selectControl" name="demo" id="#" [disabled]="tmpDisabled">
                     <option 
                       *ngFor="let type of types"
                       selected="selected"
@@ -43,8 +43,8 @@
                   </select>
                 </div>
     
-                <div class="settigns-buttons">
-                  <button nz-button nzType="primary" class="submit">Submit</button>
+                <div class="settigns-buttons"  matTooltip="The holiday is already chosen!">
+                  <button mat-raised-button matTooltip="Info about the action" nz-button nzType="primary" class="submit" [disabled]="tmpDisabled">Submit</button>
                 </div>
               </form>
             </div>
