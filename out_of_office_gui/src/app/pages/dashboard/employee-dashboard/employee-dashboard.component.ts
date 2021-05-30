@@ -25,6 +25,10 @@ export class EmployeeDashboardComponent implements OnInit {
   public doSomething(): void {
     this.show = !this.show;
   }
+
+  public checkShow(): boolean {
+    return this.tmpDisabled;
+  }
   
   constructor(private api: ApiserviceService){}
 
@@ -52,7 +56,7 @@ export class EmployeeDashboardComponent implements OnInit {
     console.log(this.user.firstnameLastName);
 
     this.api.patch('holiday/holiday/' + this.selectControl.value + '/' + this.user.id + '/' + this.user.firstnameLastName, {}, {}).subscribe((dataa: any) =>{
-      
+      this.tmpDisabled = true;
     });
   }
 }
