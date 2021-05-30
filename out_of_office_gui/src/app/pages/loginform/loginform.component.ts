@@ -46,7 +46,8 @@ export class LoginformComponent implements OnInit {
       let username = (<HTMLInputElement>document.getElementById('username')).value;
       let password = (<HTMLInputElement>document.getElementById('password')).value;
       let params: HttpParams = new HttpParams();
-
+      console.log(username);
+      console.log(password);
       params = params.append('username', username);
         this.api.post('users/signin', {username:username, password:password}).subscribe(data=>{
         localStorage.setItem('token', data);
@@ -55,7 +56,6 @@ export class LoginformComponent implements OnInit {
         localStorage.setItem('username', token.sub);
         setTimeout(()=>this.route.navigate(['dashboard']),5000);
       });
- 
     } else {
       if((<HTMLInputElement>document.getElementById('username')).value.length == 0) this.usernameError = true;
       if((<HTMLInputElement>document.getElementById('password')).value.length == 0) this.passwordError = true;

@@ -1,11 +1,11 @@
 package com.outofoffice.controller;
 
-
-
 import java.util.ArrayList;
 import java.util.Arrays;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +15,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,12 +24,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import com.outofoffice.dto.PasswordDTO;
 import com.outofoffice.dto.UserDataDTO;
 import com.outofoffice.dto.UserResponseDTO;
 import com.outofoffice.model.Role;
 import com.outofoffice.model.User;
 import com.outofoffice.service.UserService;
-
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -74,7 +75,7 @@ public class UserController {
 		}
 		return userService.signup(modelMapper.map(user, User.class));
 	}
-	
+
 //	@PostMapping("/newuser")
 //	@ApiOperation(value = "${UserController.newuser}")
 //	@ApiResponses(value = { //
@@ -92,8 +93,15 @@ public class UserController {
 			@ApiResponse(code = 400, message = "Something went wrong"), //
 			@ApiResponse(code = 403, message = "Access denied"), //
 			@ApiResponse(code = 422, message = "Username is already in use") })
-	public User signup(@ApiParam("Password") @RequestParam String password, @ApiParam("Username") @RequestParam String username) {
+	public User signup(@ApiParam("Password") @RequestParam String password,
+			@ApiParam("Username") @RequestParam String username) {
 		return userService.checkPassword(password, username);
+	}
+
+	@PatchMapping(value = "/{employee}")
+	public ResponseEntity<?> updateNotification(@RequestBody PasswordDTO password,
+			@PathVariable("employee") Long employeeId) {
+		return userService.updatePassword(password, employeeId);
 	}
 
 	@DeleteMapping(value = "/{username}")

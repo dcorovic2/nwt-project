@@ -16,7 +16,7 @@ public class User {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Integer id;
+  private Long id;
 
   @Size(min = 4, max = 255, message = "Minimum username length: 4 characters")
   @Column(unique = true, nullable = false)
@@ -31,7 +31,9 @@ public class User {
   @ElementCollection(fetch = FetchType.EAGER)
   List<Role> roles;
   
-  
+  public User() {
+	  
+  }
 
   public User(@Size(min = 4, max = 255, message = "Minimum username length: 4 characters") String username, String email,
 		@Size(min = 8, message = "Minimum password length: 8 characters") String password) {
@@ -41,11 +43,11 @@ public class User {
 	this.password = password;
 }
 
-public Integer getId() {
+public Long getId() {
     return id;
   }
 
-  public void setId(Integer id) {
+  public void setId(Long id) {
     this.id = id;
   }
 

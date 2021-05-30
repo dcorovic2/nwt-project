@@ -5,35 +5,55 @@
     <div class="content-settings">
       <div class="form-background">
         <div class="help-form-background">
-          <form class="settings-form">
+          <form class="settings-form"
+          [formGroup]="validateForm"
+          (ngSubmit)="submitForm()">
             <div class="settings-name">
               <span class="change-pass"> Add new employee </span>
+              <p *ngIf="newemployeeadded" style="color: green; font-size: 15px;">New employee is successfully added!</p>
             </div>
             <div clas="form-content1" style="display: flex">
               <div class="form-left">
                 <div class="conf-new-class">
-                  <input type="text" id="firstname" placeholder="First name" />
+                  <input type="text" id="firstname" [formControlName]="'firstname'" placeholder="First and last name" />
+                  <div *ngIf="(this.validateForm.get('firstname')!.dirty && this.validateForm.get('firstname')!.hasError('required')) || firstnameError" style="color: red; float: left;">
+                    This field is incorrect!
+                  </div>
                 </div>
 
                 <div class="conf-new-class">
-                  <input type="text" id="jobrole" placeholder="Job role" />
+                  <input type="text" id="jobrole" [formControlName]="'jobrole'" placeholder="Job role" />
+                  <div *ngIf="(this.validateForm.get('jobrole')!.dirty && this.validateForm.get('jobrole')!.hasError('required')) || jobroleError" style="color: red; float: left;">
+                    This field is incorrect!
+                  </div>
                 </div>
 
                 <div class="conf-new-class">
-                  <input type="tel" id="tel" placeholder="Telephone number" />
+                  <input type="tel" id="tel" [formControlName]="'tel'" placeholder="Telephone number" />
+                  <div *ngIf="(this.validateForm.get('tel')!.dirty && this.validateForm.get('tel')!.hasError('required')) || telError" style="color: red; float: left;">
+                    This field is incorrect!
+                  </div>
                 </div>
 
                 <div class="conf-new-class">
-                  <input type="text" id="username" placeholder="Enter username" />
+                  <input type="text" id="username" [formControlName]="'username'" placeholder="Enter username" />
+                  <div *ngIf="(this.validateForm.get('username')!.dirty && this.validateForm.get('username')!.hasError('required')) || usernameError" style="color: red; float: left;">
+                    This field is incorrect!
+                  </div>
                 </div>
+                
                 <div class="conf-new-class">
                   <input
                     type="number"
                     min="5"
                     max="35"
                     id="alowance"
+                    [formControlName]="'alowance'"
                     placeholder="Allowance"
                   />
+                  <div *ngIf="(this.validateForm.get('alowance')!.dirty && this.validateForm.get('alowance')!.hasError('required')) || alowanceError" style="color: red; float: left;">
+                    This field is incorrect!
+                  </div>
                 </div>
                 <div class="settigns-buttons">
                   <button (click)="resetinputs()" class="cancel" style="width: 50%">Cancel</button>
@@ -42,22 +62,38 @@
 
               <div class="form-right">
                 <div class="conf-new-class">
-                  <input type="text" id="lastname" placeholder="Last name" />
-                </div>
-                <div class="conf-new-class">
-                  <input type="email" id="email" placeholder="E-mail" />
-                </div>
-
-                <div class="conf-new-class">
-                  <input type="text" id="department" placeholder="Department" />
+                  <input type="text" id="jmbg" [formControlName]="'jmbg'" placeholder="JMBG" />
+                  <div *ngIf="(this.validateForm.get('jmbg')!.dirty && this.validateForm.get('jmbg')!.hasError('required')) || jmbgError" style="color: red; float: left;">
+                    This field is incorrect!
+                  </div>
                 </div>
 
                 <div class="conf-new-class">
-                  <input type="password" id="pass" placeholder="Enter password" />
+                  <input type="email" id="email" [formControlName]="'email'" placeholder="E-mail" />
+                  <div *ngIf="(this.validateForm.get('email')!.dirty && this.validateForm.get('email')!.hasError('required')) || emailError" style="color: red; float: left;">
+                    This field is incorrect!
+                  </div>
                 </div>
 
                 <div class="conf-new-class">
-                  <input type="password" id="confpass"  placeholder="Confirm password" />
+                  <input type="text" id="department" [formControlName]="'department'" placeholder="Department" />
+                  <div *ngIf="(this.validateForm.get('department')!.dirty && this.validateForm.get('department')!.hasError('required')) || departmentError" style="color: red; float: left;">
+                    This field is incorrect!
+                  </div>
+                </div>
+
+                <div class="conf-new-class">
+                  <input type="password" id="pass" [formControlName]="'pass'" placeholder="Enter password" />
+                  <div *ngIf="(this.validateForm.get('pass')!.dirty && this.validateForm.get('pass')!.hasError('required')) || passError" style="color: red; float: left;">
+                    This field is incorrect!
+                  </div>
+                </div>
+
+                <div class="conf-new-class">
+                  <input type="password" id="confpass"  [formControlName]="'confpass'" placeholder="Confirm password" />
+                  <div *ngIf="(this.validateForm.get('confpass')!.dirty && this.validateForm.get('confpass')!.hasError('required')) || confpassError" style="color: red; float: left;">
+                    This field is incorrect!
+                  </div>
                 </div>
                 <div class="settigns-buttons">
                   <button

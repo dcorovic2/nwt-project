@@ -12,33 +12,37 @@
           >
             <div class="settings-name">
               <span class="change-pass"> Change your password </span>
+              <p *ngIf="passwordchanged" style="color: green; font-size: 15px;">Password is successfully changed!</p>
             </div>
             <div class="old-pass">
               <input
-                type="text"
+                type="password"
                 id="password"
                 placeholder="Old password"
                 [formControlName]="'password'"
               />
-              <div *ngIf="passwordError" style="color: red; float: left;">
+              <div *ngIf="(this.validateForm.get('password')!.dirty && this.validateForm.get('password')!.hasError('required')) || passwordError" style="color: red; float: left; font-size: 15px;">
                 Old password is incorrect!
               </div>
             </div>
 
             <div class="new-pass">
-              <input id="newpassword" type="text" placeholder="New password" />
-              <div *ngIf="newpasswordError" style="color: red">
+              <input id="newpassword" type="password" placeholder="New password" [formControlName]="'newpassword'"/>
+              <div *ngIf="(this.validateForm.get('newpassword')!.dirty && this.validateForm.get('newpassword')!.hasError('required')) || newpasswordError" style="color: red; float: left; font-size: 15px;">
                 New password is incorrect!
               </div>
             </div>
 
             <div class="conf-new-class">
-              <input  id="confnewpass" type="text" placeholder="Confirm new password" />
+              <input  id="confnewpass" type="password" placeholder="Confirm new password" [formControlName]="'confnewpass'"/>
+              <div *ngIf="(this.validateForm.get('confnewpass')!.dirty && this.validateForm.get('confnewpass')!.hasError('required')) || confirmnewpasswordError" style="color: red; float: left; font-size: 15px;">
+                Confirm new password is incorrect!
+              </div>
             </div>
 
             <div class="settigns-buttons">
               <button class="cancel" (click)="resetinputs()" >Cancel</button>
-              <button class="submit">Submit</button>
+              <button nz-button nzType="primary" (click)="loadOne()" [nzLoading]="isLoadingOne" class="submit">Submit</button>
             </div>
           </form>
         </div>
