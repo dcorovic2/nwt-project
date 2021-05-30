@@ -12,9 +12,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.outofoffice.exception.CustomException;
+import com.outofoffice.model.Role;
 import com.outofoffice.model.User;
 import com.outofoffice.repository.UserRepository;
 import com.outofoffice.security.JwtTokenProvider;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -59,7 +63,6 @@ public class UserService {
  }
 
   public String signup(User user) {
-	System.out.println("Udje u signup metodu");
     if (!userRepository.existsByUsername(user.getUsername())) {
       user.setPassword(passwordEncoder.encode(user.getPassword()));
       userRepository.save(user);
