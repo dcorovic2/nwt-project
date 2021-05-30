@@ -1,15 +1,15 @@
 <div class="outerDiv">
     <p>Notifications</p>
 
-    <div class="particularNotification" (click)="showNoti()">
+    <div *ngFor="let notification of notif" class="particularNotification" (click)="showNoti(notification.text)">
         <div id="iconDiv" style="display: inline-block;">
             <i class="fas fa-users" style="color: lightgray;"></i>
         </div>
         <div id="textDiv" style="display: inline-block;">
-            <p id="approvedBy">Dalila Corovic</p>
-            <p id="someText">Leave request approved</p>
+            <p id="approvedBy">{{notification.employee}}</p>
+            <p id="someText">{{notification.displayName}}</p>
         </div>
     </div>
 </div>
 
-<app-notificationpopup *ngIf="showN"></app-notificationpopup>
+<app-notificationpopup [text]="text" *ngIf="showN"></app-notificationpopup>

@@ -8,10 +8,10 @@
       </div>
       <div class="notif" (click)="doSomething()">
           <i class="far fa-bell">
-            <span class="badge rounded-pill badge-notification bg-danger" style="color: white;">1</span>
+            <span *ngIf="numOfnotifications" class="badge rounded-pill badge-notification bg-danger" style="color: white;">{{numOfnotifications}}</span>
           </i>
       </div>
   </div>
 </div>
 
-<app-listnotification *ngIf="show"></app-listnotification>
+<app-listnotification  [notif]="notif" *ngIf="show"></app-listnotification>

@@ -1,0 +1,11 @@
+<div class="content-wrap">
+    <app-menu [role]="'employee'"></app-menu>
+    <div class="main-content">
+        <app-header [user]="user" *ngIf="user"></app-header>
+            <router-outlet></router-outlet>
+
+    </div>
+    </div>
+
+
+    

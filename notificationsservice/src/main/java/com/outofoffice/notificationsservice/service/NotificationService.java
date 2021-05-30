@@ -89,12 +89,14 @@ public class NotificationService {
 			NotificationsType notifType = new NotificationsType();
 			employee = employeeService.GetEmployeeById(employeeId);
 			notifType = notificationTypeService.getById(notificationTypeId);
+			List<Employee> employeeList = new ArrayList<>();
+			employeeList.add(employee);
 
 			String text = "Your request with ID: " + requestId + " is " + notifType.getDisplayName()
 					+ " by admin with reason: " + reason + "!";
 
 			Notification notification = new Notification(OffsetDateTime.now(), employee.getDepartment_id(), text,
-					notifType);
+					notifType,employeeList);
 			Notification newnotif = notificationRepository.save(notification);
 			return newnotif;
 		} catch (Exception e) {

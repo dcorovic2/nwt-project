@@ -1,7 +1,4 @@
-<div class="content-wrap">
-    <app-menu [role]="'employee'"></app-menu>
-    <div class="main-content">
-        <app-header *ngIf="user"  [user]="user"></app-header>
+
         <div class="content">
             <div class="content-left">
                 <span class="title">Statistics</span>
@@ -51,7 +48,6 @@
         <div (click)="doSomething()" class="plusbutton">
             <i class="fas fa-plus-circle"></i>
         </div>
-    </div>
-    </div>
     <app-requestform *ngIf="show" [id]="user.id"></app-requestform>
+
     
