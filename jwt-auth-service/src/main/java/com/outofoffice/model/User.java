@@ -31,7 +31,9 @@ public class User {
   @ElementCollection(fetch = FetchType.EAGER)
   List<Role> roles;
   
-  
+  public User() {
+	  
+  }
 
   public User(@Size(min = 4, max = 255, message = "Minimum username length: 4 characters") String username, String email,
 		@Size(min = 8, message = "Minimum password length: 8 characters") String password) {
@@ -41,9 +43,6 @@ public class User {
 	this.password = password;
 }
 
-public User() {
-	// TODO Auto-generated constructor stub
-}
 
 public Integer getId() {
     return id;
