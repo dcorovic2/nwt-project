@@ -1,0 +1,64 @@
+.employee-content-left{
+    .statistics {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        padding-left: 100px;
+        padding-right: 100px;
+        padding-top: 15px;
+        &.first {
+          background: url("../../../assets/img/sticker.jpg") !important;
+          background-repeat: no-repeat !important;
+          background-position: center !important;
+          height: 970px !important;
+        }
+        &.second {
+          padding-top: 50px;
+        }
+        .stat-contents {
+          padding-top: 10px;
+          width: 182px !important;
+          margin: auto;
+          margin-top: 0px;
+          > span {
+            overflow-wrap: break-word;
+            word-break: break-all;
+            font-size: 21px;
+          }
+        }
+        .number {
+          font-size: 88px;
+          padding-top: 90px;
+          font-family: cursive;
+          height: 200px;
+        }
+        .head {
+          font-size: 80px;
+          border-bottom: 1px solid black;
+        }
+        .head {
+          font-size: 30px;
+          font-weight: 800;
+        }
+        span {
+          font-size: 25px;
+        }
+        .types {
+          display: flex;
+          padding-top: 10px;
+          .types-right {
+            text-align: right;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+          }
+          .types-left {
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+          }
+        }
+      }
+}

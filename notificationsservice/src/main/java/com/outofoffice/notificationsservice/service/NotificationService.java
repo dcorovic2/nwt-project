@@ -128,7 +128,6 @@ public class NotificationService {
 			throw new NoDataException();
 		else
 			return new ResponseEntity<>(notificationlist, HttpStatus.OK);
-
 	}
 
 	public ResponseEntity<?> updateNotification(int dismiss, long id) {

@@ -1,7 +1,7 @@
 <div class="content-wrap">
   <app-menu></app-menu>
   <div class="main-content">
-    <app-header [user]="user"></app-header>
+    <app-header *ngIf="user" [user]="user"></app-header>
     <div class="name">
       <span class="title">Active Leave Requests</span>
     </div>

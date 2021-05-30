@@ -86,6 +86,7 @@ export class SettingsComponent implements OnInit {
           data=JSON.parse(data);
           console.log(data.id);
           console.log(data.password);
+          console.log(confnewpass);
           this.api
           .patch(
           'users/' + data.id,
