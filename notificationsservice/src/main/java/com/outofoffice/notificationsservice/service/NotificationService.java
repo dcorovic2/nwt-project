@@ -104,6 +104,27 @@ public class NotificationService {
 			return null;
 		}
 	}
+	
+	public Notification insertNotificationForAdmin(String comment) {
+		try {
+			Employee employee = new Employee();
+			NotificationsType notifType = new NotificationsType();
+			employee = employeeService.GetEmployeeById(2);
+			notifType = notificationTypeService.getById(1);
+			List<Employee> employeeList = new ArrayList<>();
+			employeeList.add(employee);
+
+			String text = "New request created: " + comment;
+
+			Notification notification = new Notification(OffsetDateTime.now(), employee.getDepartment_id(), text,
+					notifType,employeeList);
+			Notification newnotif = notificationRepository.save(notification);
+			return newnotif;
+		} catch (Exception e) {
+			new NotFoundException();
+			return null;
+		}
+	}
 
 	public ResponseEntity<?> getNotificationList() {
 		List<Notification> notificationList = notificationRepository.findAll();

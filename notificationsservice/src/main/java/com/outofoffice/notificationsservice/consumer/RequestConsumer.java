@@ -24,7 +24,7 @@ public class RequestConsumer {
 		System.out.println("Message recieved from LeaveRequest MS !");
 		Notification notification = notificationService.insertNotificationForRequest(requestNotification.getRequestId(), requestNotification.getEmployeeId(),
 				requestNotification.getNotificationsId(), requestNotification.getReason());
-		System.out.println("Notification with ID: " + notification.getId() + " is created!");
+		System.out.println("Notification(for EMPLOYEE) created!");
 	}
 	
 
