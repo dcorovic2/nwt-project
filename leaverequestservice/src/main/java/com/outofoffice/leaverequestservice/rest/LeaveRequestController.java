@@ -35,6 +35,7 @@ import com.outofoffice.leaverequestservice.model.LeaveType;
 import com.outofoffice.leaverequestservice.repository.LeaveRequestRepository;
 import com.outofoffice.leaverequestservice.service.LeaveRequestService;
 import com.outofoffice.leaverequestservice.service.LeaveTypeService;
+import com.outofoffice.leaverequestservice.requestobjects.AdminNotification;
 import com.outofoffice.leaverequestservice.requestobjects.LeaveRequestRequest;
 import com.outofoffice.leaverequestservice.requestobjects.LeaveStatusRequest;
 import com.outofoffice.leaverequestservice.requestobjects.RequestEmployee;
@@ -87,6 +88,8 @@ public class LeaveRequestController {
 			throw new RestTemplateException(uri2);
 		}  
 	    //System.out.println(response2);
+		AdminNotification adminnotif = new AdminNotification(requestRequest.getComment());
+		rabbitTemplate.convertAndSend(RabbitConfiguration.EXCHANGE, RabbitConfiguration.ROUTING_KEY5, adminnotif);
 		return LeaveRequestService.insertRequest(requestRequest, response1, response2);
 
 	
