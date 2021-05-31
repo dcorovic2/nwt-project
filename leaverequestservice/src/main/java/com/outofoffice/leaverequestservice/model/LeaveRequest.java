@@ -47,6 +47,9 @@ public class LeaveRequest {
     
     @Column(name="rest_days_num")
 	private long restDaysNum;
+    
+    @Column(name="notification_id")
+	private Long notificationId;
 	
 	public LeaveRequest() {};
 
@@ -63,6 +66,22 @@ public class LeaveRequest {
 		this.leave_status = leave_status;
 		this.notifications_type = notifications_type;
 		this.restDaysNum = restDaysNum;
+	}
+	
+	public LeaveRequest(String comment, int daysNum, Long employeeId, LocalDate startDate, LocalDate endDate,
+			LeaveType leave_type, LeaveStatus leave_status, NotificationsType notifications_type, long restDaysNum, Long notificationId) {
+		super();
+		//this.id = id;
+		this.comment = comment;
+		this.daysNum = daysNum;
+		this.employeeId = employeeId;
+		this.endDate = endDate;
+		this.startDate = startDate;
+		this.leave_type = leave_type;
+		this.leave_status = leave_status;
+		this.notifications_type = notifications_type;
+		this.restDaysNum = restDaysNum;
+		this.notificationId = notificationId;
 	}
 
 	@ManyToOne(fetch = FetchType.EAGER)
