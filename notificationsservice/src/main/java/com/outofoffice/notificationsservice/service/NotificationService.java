@@ -112,8 +112,10 @@ public class NotificationService {
 			Employee employee = new Employee();
 			NotificationsType notifType = new NotificationsType();
 			employee = employeeService.GetEmployeeById(2);
+			//System.out.println("ADMINA NADJE: " + employee.getFirstNameLastName());
 			Employee employeeName = new Employee();
 			employeeName = employeeService.GetEmployeeById(employeeId);
+			//System.out.println("RADNIKA NADJE: " + employeeName.getFirstNameLastName());
 			notifType = notificationTypeService.getById(1);
 			List<Employee> employeeList = new ArrayList<>();
 			employeeList.add(employee);
