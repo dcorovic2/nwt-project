@@ -17,7 +17,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
   }
   
-  public doSomething(event:any): void {
+  public doSomething(): void {
     this.display = !this.display;
     this.show.emit(this.display);
   }

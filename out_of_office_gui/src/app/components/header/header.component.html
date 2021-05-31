@@ -6,7 +6,7 @@
         <span>{{user.firstnameLastName}}</span>
         <span>{{user.email}}</span>
       </div>
-      <div class="notif" (click)="doSomething($event)">
+      <div class="notif" (click)="doSomething()">
           <i class="far fa-bell">
             <span *ngIf="numOfnotifications" class="badge rounded-pill badge-notification bg-danger" style="color: white;">{{numOfnotifications}}</span>
           </i>

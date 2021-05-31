@@ -11,7 +11,7 @@
             </div>
             <div class="content-right">
                 <span class="hidden-content" style="visibility: hidden;">Create new leave request</span>
-                <input [(ngModel)]="startDate"  (change)="dateSelect()" class="start-date" type="date" id="start" name="leave-start"
+                <input [(ngModel)]="endDate"  (change)="dateSelect()" class="start-date" type="date" id="start" name="leave-start"
                 value="2021-03-12"
                 min="2021-01-01" max="2021-12-31">
             </div>
@@ -30,6 +30,8 @@
               </nz-filter-trigger>
             </th>
             <th>Department</th>
+            <th>Start Date</th>
+            <th>End Date</th>
             <th>Leave Type</th>
           </tr>
         </thead>
@@ -37,6 +39,8 @@
           <tr *ngFor="let data of employees">
             <td>{{ data.employeeName }}</td>
             <td>{{ data.departmentName }}</td>
+            <td>{{data.startDate}}</td>
+            <td>{{data.endDate}}</td>
             <td>{{data.leaveType}}</td>
           </tr>
         </tbody>
@@ -52,8 +56,6 @@
           </div>
         </div>
       </nz-dropdown-menu>
-
-
     <app-requestform *ngIf="show"></app-requestform>
     
 

@@ -1,5 +1,5 @@
 <div class="popup-overlay" *ngIf="hide">
-    <div class="popup-window">
+    <div class="popup-window view">
         <div class="user">
             <i class="far fa-user-circle fa-8x"></i>
             <div class="user-info">
@@ -29,11 +29,11 @@
                 </div>
             </div>
     
-            <div class="commentrequest">
+            <div class="commentrequest view">
                 <textarea  type="text" id = "comment" placeholder="Leave comment"></textarea>
             </div>
     
-            <div class="buttoni">
+            <div class="buttoni view">
                 <button class="cancel" (click)="hidePopUp()">Reject</button>
                 <button class="submit" (click)="approve()">Approve</button>
                 <div class="space">

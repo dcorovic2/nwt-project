@@ -51,22 +51,37 @@ public class Notification {
 	@Column(name="dismiss")
 	private int dismiss;
 	
+	@Column(name="request_id")
+	private Long requestId;
+	
+	@Column(name="employee_name")
+	private String employeeName;
+	
+	@Column(name="request_type")
+	private String requestType;
+	
 	public Notification() {};
 
-	public Notification(OffsetDateTime create_date, Long departmentId, String text,NotificationsType notificationsTypeId, List<Employee> employees, int dismiss) {
+	public Notification(OffsetDateTime create_date, Long departmentId, String text,NotificationsType notificationsTypeId, List<Employee> employees, int dismiss, Long requestId, String employeeName, String requestType) {
 	        this.createDate = create_date;
 	        this.departmentId = departmentId;
             this.notifications_type = notificationsTypeId;
 	        this.text = text;
 	        this.dismiss = dismiss;
 	        this.employees = employees;
+	        this.requestId = requestId;
+	        this.employeeName = employeeName;
+	        this.requestType = requestType;
 	}
-	public Notification(OffsetDateTime create_date, Long departmentId, String text,NotificationsType notificationsTypeId,List<Employee> employees) {
+	public Notification(OffsetDateTime create_date, Long departmentId, String text,NotificationsType notificationsTypeId,List<Employee> employees,Long requestId,String employeeName,String requestType) {
         this.createDate = create_date;
         this.departmentId = departmentId;
         this.notifications_type = notificationsTypeId;
         this.text = text;
         this.employees = employees;
+        this.requestId = requestId;
+        this.employeeName = employeeName;
+        this.requestType = requestType;
 }
 
 	@ManyToMany()

@@ -88,8 +88,6 @@ public class LeaveRequestController {
 			throw new RestTemplateException(uri2);
 		}  
 	    //System.out.println(response2);
-		AdminNotification adminnotif = new AdminNotification(requestRequest.getComment());
-		rabbitTemplate.convertAndSend(RabbitConfiguration.EXCHANGE, RabbitConfiguration.ROUTING_KEY5, adminnotif);
 		return LeaveRequestService.insertRequest(requestRequest, response1, response2);
 
 	

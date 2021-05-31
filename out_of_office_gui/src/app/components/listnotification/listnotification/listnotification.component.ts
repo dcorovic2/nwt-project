@@ -11,16 +11,22 @@ export class ListnotificationComponent implements OnInit {
   public text: any;
   public dismis: boolean=false;
   public id : any;
+  public showR: boolean = false;
+  public showN:boolean = false;
+  public status:any;
+  public admin:any;
 
   constructor(private api: ApiserviceService, private action: ActionService) { }
 
   ngOnInit(): void {
   }
-  public showN:boolean = false;
 
-  showNoti(text:any): void{
+
+  showNoti(text:any, status:any, admin: any): void{
     this.text = text;
-    this.showN = !this.showN;
+    this.status = status;
+    this.admin = admin;
+    localStorage.getItem('role')=='ROLE_CLIENT'?this.showN = !this.showN: this.showR=!this.showR;
   }
   dismiss(id:any){
     this.id = id;

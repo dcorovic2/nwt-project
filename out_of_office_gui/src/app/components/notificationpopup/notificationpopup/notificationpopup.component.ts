@@ -6,6 +6,8 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class NotificationpopupComponent implements OnInit {
   @Input() text: any;
+  @Input()status: any;
+  @Input() admin: any;
   constructor() { }
 
   public hide:boolean = true;
