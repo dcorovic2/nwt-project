@@ -7,7 +7,8 @@
         </div>
         <div  (click)="showNoti(notification.text)" id="textDiv" style="display: inline-block;">
             <p id="approvedBy">{{notification.employee}}</p>
-            <p id="someText">{{notification.displayName}}</p>
+            <p id="someText">{{notification.displayName}}<i *ngIf="notification.displayName=='Sick leave'" class="fas fa-head-side-cough"></i>
+                                                         <i *ngIf="notification.displayName=='Vacation'" class="fas fa-plane-departure"></i></p>
         </div>
        
         <i  (click)="dismiss(notification.id);" class="fas fa-bell-slash"></i>
@@ -24,3 +25,4 @@
     </div>
 </div>
 <app-notificationpopup [text]="text" *ngIf="showN"></app-notificationpopup>
+<app-viewrequest *ngIf="showR"></app-viewrequest>

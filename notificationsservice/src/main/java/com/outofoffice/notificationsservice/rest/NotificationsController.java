@@ -49,11 +49,11 @@ public class NotificationsController {
 //
 //	}
 
-	@PostMapping(value = "/notification/{employeeId}/{notificationTypeId}")
-	public ResponseEntity<?> insertNotification(@Valid @RequestBody NotificationRequest requestNotification,
-			@PathVariable Long employeeId, @PathVariable Long notificationTypeId, Errors errors) {
-		return notificationService.insertNotification(requestNotification, employeeId, notificationTypeId);
-	}
+//	@PostMapping(value = "/notification/{employeeId}/{notificationTypeId}")
+//	public ResponseEntity<?> insertNotification(@Valid @RequestBody NotificationRequest requestNotification,
+//			@PathVariable Long employeeId, @PathVariable Long notificationTypeId, Errors errors) {
+//		return notificationService.insertNotification(requestNotification, employeeId, notificationTypeId);
+//	}
 
 	@PostMapping(value = "/notifications/{holidayTypeId}")
 	public ResponseEntity<?> insertNotificationsForHoliday(@PathVariable Long holidayTypeId) {

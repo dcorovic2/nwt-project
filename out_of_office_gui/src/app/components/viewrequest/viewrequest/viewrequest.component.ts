@@ -15,10 +15,13 @@ export class ViewrequestComponent implements OnInit {
   }
 
   hidePopUp(): void {
+    let comment = (<HTMLInputElement>document.getElementById('comment')).value;
+    this.api.patch('leaverequest/request/'+this.popupData.requestId, {}, {notificationsId: 3, reason: comment, statusId:3}).subscribe((data:any)=>console.log(data));
     this.hide=!this.hide;
   }
   approve(){
     let comment = (<HTMLInputElement>document.getElementById('comment')).value;
    this.api.patch('leaverequest/request/'+this.popupData.requestId, {}, {notificationsId: 2, reason: comment, statusId:2}).subscribe((data:any)=>console.log(data));
+   
   }
 }

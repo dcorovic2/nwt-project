@@ -69,18 +69,18 @@ public class NotificationService {
 //		return insertedNotifications;
 //	}
 
-	public ResponseEntity<?> insertNotification(NotificationRequest notif, Long employeeId, Long notificationTypeID) {
-
-		Employee employee = employeeService.GetEmployeeById(employeeId);
-		List<Employee> employeeList = new ArrayList<>();
-		employeeList.add(employee);
-		NotificationsType notificationType = notificationTypeService.getById(notificationTypeID);
-		OffsetDateTime date = OffsetDateTime.now();
-		Notification notification = new Notification(date, notif.getDepartmentId(), notif.getText(), notificationType,
-				employeeList, notif.getDismiss());
-		Notification newnotif = notificationRepository.save(notification);
-		return new ResponseEntity<>(newnotif, HttpStatus.OK);
-	}
+//	public ResponseEntity<?> insertNotification(NotificationRequest notif, Long employeeId, Long notificationTypeID) {
+//
+//		Employee employee = employeeService.GetEmployeeById(employeeId);
+//		List<Employee> employeeList = new ArrayList<>();
+//		employeeList.add(employee);
+//		NotificationsType notificationType = notificationTypeService.getById(notificationTypeID);
+//		OffsetDateTime date = OffsetDateTime.now();
+//		Notification notification = new Notification(date, notif.getDepartmentId(), notif.getText(), notificationType,
+//				employeeList, notif.getDismiss());
+//		Notification newnotif = notificationRepository.save(notification);
+//		return new ResponseEntity<>(newnotif, HttpStatus.OK);
+//	}
 
 	public Notification insertNotificationForRequest(Long requestId, Long employeeId, Long notificationTypeId,
 			String reason) {
@@ -88,6 +88,8 @@ public class NotificationService {
 			Employee employee = new Employee();
 			NotificationsType notifType = new NotificationsType();
 			employee = employeeService.GetEmployeeById(employeeId);
+			Employee employeeName = new Employee();
+			employeeName = employeeService.GetEmployeeById(2);
 			notifType = notificationTypeService.getById(notificationTypeId);
 			List<Employee> employeeList = new ArrayList<>();
 			employeeList.add(employee);
@@ -96,7 +98,7 @@ public class NotificationService {
 					+ " by admin with reason: " + reason + "!";
 
 			Notification notification = new Notification(OffsetDateTime.now(), employee.getDepartment_id(), text,
-					notifType,employeeList);
+					notifType,employeeList, requestId,employeeName.getFirstNameLastName(),null);
 			Notification newnotif = notificationRepository.save(notification);
 			return newnotif;
 		} catch (Exception e) {
@@ -105,11 +107,13 @@ public class NotificationService {
 		}
 	}
 	
-	public Notification insertNotificationForAdmin(String comment) {
+	public Notification insertNotificationForAdmin(Long employeeId, String comment,Long requestId, String displayName) {
 		try {
 			Employee employee = new Employee();
 			NotificationsType notifType = new NotificationsType();
 			employee = employeeService.GetEmployeeById(2);
+			Employee employeeName = new Employee();
+			employeeName = employeeService.GetEmployeeById(employeeId);
 			notifType = notificationTypeService.getById(1);
 			List<Employee> employeeList = new ArrayList<>();
 			employeeList.add(employee);
@@ -117,7 +121,7 @@ public class NotificationService {
 			String text = "New request created: " + comment;
 
 			Notification notification = new Notification(OffsetDateTime.now(), employee.getDepartment_id(), text,
-					notifType,employeeList);
+					notifType,employeeList, requestId,employeeName.getFirstNameLastName(),displayName);
 			Notification newnotif = notificationRepository.save(notification);
 			return newnotif;
 		} catch (Exception e) {
@@ -186,14 +190,15 @@ public class NotificationService {
 
 			List<Long> ids = response.getId();
 			Employee[] employees = restTemplate.postForObject(uriEmployee, ids, Employee[].class);
-
+			Employee employeeName = new Employee();
+			employeeName = employeeService.GetEmployeeById(2);
 			for (Employee employee : employees) {
 				OffsetDateTime date = OffsetDateTime.now();
 				List<Employee> empl = new ArrayList<>();
 				empl.add(employee);
 				employeeRepo.save(employee);
 				Notification notification1 = new Notification(date, employee.getDepartment_id(), response.getText(),
-						holidaynotificationtype, empl, 0);
+						holidaynotificationtype, empl, 0,0L,employeeName.getFirstNameLastName(),null);
 				notificationRepository.save(notification1);
 			}
 			return null;

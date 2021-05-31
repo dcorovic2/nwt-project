@@ -21,7 +21,7 @@ private final NotificationService notificationService;
 	@RabbitListener(queues = RabbitConfiguration.QUEUE5)
 	public void consumeMessageFromRequestQueue (AdminNotification adminNotification) {
 		System.out.println("Message recieved from LeaveRequest MS !");
-		Notification notification = notificationService.insertNotificationForAdmin(adminNotification.getComment());
+		Notification notification = notificationService.insertNotificationForAdmin(adminNotification.getEmployeeId(),adminNotification.getComment(), adminNotification.getRequestId(),adminNotification.getDisplayName());
 		System.out.println("Notification(for ADMIN) created!");
 	}
 }

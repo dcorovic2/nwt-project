@@ -30,8 +30,13 @@
       display: flex;
       border-bottom: 1.6px solid #4d094d;
       padding-bottom: 10px;
+      background: url("../../../assets/img/—Pngtree—purple gradient low polygon background_1266092.jpg");
+      color: white;
+      background-repeat: round;
       .fa-user-circle {
-        color: rgb(104, 35, 139);
+        color: white;
+        padding-left: 20px;
+    padding-top: 10px;
       }
 
       .fa-bell {
@@ -45,10 +50,10 @@
         display: flex;
         flex-direction: column;
         text-align: left;
-        font-size: 20px;
-        padding-top: 21px;
+        font-size: 30px;
+        padding-top: 25px;
         padding-left: 20px;
-        color: #626262;
+        color: white;
         span {
           &:first-child {
             font-size: 30px;

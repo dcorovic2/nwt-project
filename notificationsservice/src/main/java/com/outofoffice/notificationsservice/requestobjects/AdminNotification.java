@@ -1,26 +1,39 @@
 package com.outofoffice.notificationsservice.requestobjects;
 
 public class AdminNotification {
-	//private Long employeeId;
+	private Long employeeId;
 	private String comment;
-	//private Long requestId;
+	private Long requestId;
+	private String displayName;
 	
-	public AdminNotification() {}
 	
-	public AdminNotification(String comment) {
-		super();
-		//this.employeeId = employeeId;
-		this.comment = comment;
-		//this.requestId = requestId;
+	
+	public String getDisplayName() {
+		return displayName;
 	}
 
-//	public Long getEmployeeId() {
-//		return employeeId;
-//	}
-//
-//	public void setEmployeeId(Long employeeId) {
-//		this.employeeId = employeeId;
-//	}
+	public void setDisplayName(String displayName) {
+		this.displayName = displayName;
+	}
+
+	public AdminNotification() {}
+	
+	public AdminNotification(Long employeeId, String comment, Long requestId, String displayName) {
+		super();
+		this.employeeId = employeeId;
+		this.comment = comment;
+		this.requestId = requestId;
+		this.displayName = displayName;
+		
+	}
+
+	public Long getEmployeeId() {
+		return employeeId;
+	}
+
+	public void setEmployeeId(Long employeeId) {
+		this.employeeId = employeeId;
+	}
 
 	public String getComment() {
 		return comment;
@@ -30,15 +43,13 @@ public class AdminNotification {
 		this.comment = comment;
 	}
 
-//	public Long getRequestId() {
-//		return requestId;
-//	}
-//
-//	public void setRequestId(Long requestId) {
-//		this.requestId = requestId;
-//	}
-	
-	
+	public Long getRequestId() {
+		return requestId;
+	}
+
+	public void setRequestId(Long requestId) {
+		this.requestId = requestId;
+	}
 	
 	
 }
