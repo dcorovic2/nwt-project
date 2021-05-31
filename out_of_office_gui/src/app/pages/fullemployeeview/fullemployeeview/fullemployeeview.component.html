@@ -26,10 +26,20 @@
         </div>
             </div>
             <div class="content-right">
-                <span class="title">Calendar</span>
-                <mwl-calendar-month-view
-                [viewDate]="viewDate"
-                [events]="events"> 
-              </mwl-calendar-month-view> 
+                <span class="title">List of holidays</span>
+                    <nz-list nzItemLayout="horizontal" [nzLoading]="loading" [nzBordered]=true>
+                    <nz-list-item *ngFor="let item of data">
+                        <nz-list-item-meta
+                        
+                        nzDescription="Holiday scope: {{ item.type }}"
+                        >
+                        
+                        <nz-list-item-meta-title>
+                            <p>{{ item.title }}</p>
+                        </nz-list-item-meta-title>
+                        </nz-list-item-meta>
+                    </nz-list-item>
+                    <nz-list-empty *ngIf="data.length === 0" [nzNoResult]="'There is no holidays for this employee'"></nz-list-empty>
+                    </nz-list>
             </div>
         </div>

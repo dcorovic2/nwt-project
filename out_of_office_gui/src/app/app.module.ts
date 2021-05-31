@@ -52,7 +52,9 @@ import { HolidaytypelistComponent } from './pages/holidaytypelist/holidaytypelis
 import { CreateholidayComponent } from './pages/createholiday/createholiday/createholiday.component';
 import { NewholidayComponent } from './pages/newholiday/newholiday/newholiday.component';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
+import { NzListModule } from 'ng-zorro-antd/list';
 import { LayoutComponent } from './pages/layout/layout/layout.component';
+
 
 registerLocaleData(fi);
 
@@ -108,6 +110,7 @@ registerLocaleData(fi);
     NzMessageModule,
     NzPaginationModule,
     NzToolTipModule,
+    NzListModule,
     MatProgressSpinnerModule
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },ApiserviceService,MatDatepickerModule, AuthService, { provide: NZ_I18N, useValue: fi_FI } 

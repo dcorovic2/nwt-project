@@ -27,7 +27,7 @@ export class PendingComponent implements OnInit {
         });
         this.api
           .get('leaverequest/requests/employee', { employeeId: this.user.id })
-          .subscribe((data) => (this.requests = data));
+          .subscribe((data) => {this.requests = data; console.log(this.requests)});
       });
   }
 
@@ -38,5 +38,12 @@ export class PendingComponent implements OnInit {
 
   search(): void {
     this.visible = false;
+  }
+
+  deleteRequest(): void {
+    let requestId
+    this.api.delete('leaverequest/request/' + requestId, {}, {}).subscribe(data => {
+
+    });
   }
 }

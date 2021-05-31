@@ -48,10 +48,9 @@ export class ListofemployeesComponent implements OnInit {
 
   constructor(private route:Router, private api: ApiserviceService, private action: ActionService) { }
 
-  fullPage(username:string): void {
-    this.route.navigate(['layout/employeeview'], {queryParams:{username: username}});
+  fullPage(username:string, id: number): void {
+    this.route.navigate(['layout/employeeview'], {queryParams:{username: username, id: id}});
   }
-
 
   ngOnInit(): void {
     this.action.set('getEmployees', ()=>{
@@ -61,6 +60,7 @@ export class ListofemployeesComponent implements OnInit {
       Object.assign(this.user, {firstnameLastName:data.firstnameLastName, email: data.email});
      })
      this.api.get('employee/allemployees').subscribe((data)=>{this.employees = data; this.loading=false; this.employees2 = [...this.employees]});
+
   }
 
   searchValue = '';

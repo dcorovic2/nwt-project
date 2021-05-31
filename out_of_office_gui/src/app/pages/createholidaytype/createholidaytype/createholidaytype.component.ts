@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ApiserviceService } from 'src/app/shared/services/apiservice.service';
 import { ActionService } from 'src/app/shared/services/action.service';
 import { HttpParams } from '@angular/common/http';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-createholidaytype',
@@ -17,22 +18,43 @@ export class CreateholidaytypeComponent implements OnInit {
       this.isLoadingOne = false;
     }, 5000);
   }
-  
-  resetinputs(): void{
-    (<HTMLInputElement>document.getElementById('code')).value = "";
-    (<HTMLInputElement>document.getElementById('displayname')).value = "";
-    (<HTMLInputElement>document.getElementById('text')).value = "";
-    (<HTMLInputElement>document.getElementById('type')).value = "";
-  
-  }
+
+
   @Input() user = {};
   public addemp = true;
   public loading = true;  
   public employees: any;
   public employees2: any;
   public employeeId: any;
+  public codeError: boolean = false;
+  public codeError2: boolean = false;
+  public displayNameError: boolean = false;
+  public textError: boolean = false;
+  public typeError: boolean = false;
+  public newholiyday: boolean = false;
+  validateForm: FormGroup;
 
-  constructor(private route:Router, private api: ApiserviceService, private action: ActionService) { }
+  resetinputs(): void{
+    (<HTMLInputElement>document.getElementById('code')).value = "";
+    (<HTMLInputElement>document.getElementById('displayname')).value = "";
+    (<HTMLInputElement>document.getElementById('text')).value = "";
+    (<HTMLInputElement>document.getElementById('type')).value = "";
+
+   // this.codeError = false;
+   // this.codeError2 = false;
+   // this.displayNameError = false;
+   // this.textError = false;
+   // this.typeError = false;
+  }
+
+  constructor(private route:Router, private api: ApiserviceService, private action: ActionService, private fb: FormBuilder) {
+    this.validateForm = this.fb.group({
+      code: ['', [Validators.required]],
+      displayname: ['', [Validators.required]],
+      text: ['', [Validators.required]],
+      type: ['', [Validators.required]]
+    });
+  }
 
   ngOnInit(): void {
     this.api.get('employee/employee/username', {username: localStorage.getItem('username')}).subscribe((data:any)=>{
@@ -41,22 +63,35 @@ export class CreateholidaytypeComponent implements OnInit {
   }
 
   submitForm(): void { 
-    let code = (<HTMLInputElement>document.getElementById('code')).value;
-    let text = (<HTMLInputElement>document.getElementById('text')).value;
-    let type = (<HTMLInputElement>document.getElementById('type')).value;
-    let displayname = (<HTMLInputElement>document.getElementById('displayname')).value;
-    let params: HttpParams = new HttpParams();
-    let jsonObj = {
-      "code": code,
-      "displayName": text,
-      "text": type,
-      "type": displayname
+    if (this.validateForm.valid) {
+      let code = (<HTMLInputElement>document.getElementById('code')).value;
+      let text = (<HTMLInputElement>document.getElementById('text')).value;
+      let type = (<HTMLInputElement>document.getElementById('type')).value;
+      let displayname = (<HTMLInputElement>document.getElementById('displayname')).value;
+
+      if(code != "For all" && code != "Not for all") {
+        this.codeError2 = true;
+        this.codeError = false;
+      } else {
+        let params: HttpParams = new HttpParams();
+        let jsonObj = {
+          "code": code,
+          "displayName": text,
+          "text": type,
+          "type": displayname
+        }
+
+        //pozivanje holiday type post apija
+          this.api.post('holiday/holidayType', {}, {"code": code, "displayName": text, "text": type, "type": displayname}).subscribe(data=>{
+            console.log(data);
+            this.newholiyday = true;
+          });
+      }
+    } else {
+      if((<HTMLInputElement>document.getElementById('code')).value.length == 0) this.codeError = true;
+      if((<HTMLInputElement>document.getElementById('text')).value.length == 0) this.displayNameError = true;
+      if((<HTMLInputElement>document.getElementById('type')).value.length == 0) this.textError = true;
+      if((<HTMLInputElement>document.getElementById('displayname')).value.length == 0) this.typeError = true;
     }
-
-    //pozivanje holiday type post apija
-      this.api.post('holiday/holidayType', {}, {"code": code, "displayName": text, "text": type, "type": displayname}).subscribe(data=>{
-         console.log(data);
-
-      });
   }
 }

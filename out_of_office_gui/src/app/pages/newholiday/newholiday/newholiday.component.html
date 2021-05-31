@@ -1,17 +1,23 @@
     <div class="content-settings">
       <div class="form-background">
         <div class="help-form-background">
-          <form class="settings-form" (ngSubmit)="submitForm()">
+          <form class="settings-form" (ngSubmit)="submitForm()" [formGroup]="validateForm">
             <div class="settings-name">
               <span class="change-pass"> Add new holiday </span>
+              <p *ngIf="newholii" style="color: green; font-size: 15px;">New holiday is successfully added!</p>
             </div>
 
             <div class="conf-new-class">
-              <input type="date" id="date1" placeholder="Code" />
+              <label style="padding-right: 18px;">Start date:</label>
+              <input type="date" id="date1" placeholder="Code" [formControlName]="'date1'"/>
             </div>
 
             <div class="conf-new-class">
-              <input type="date" id="date2" placeholder="Display name" />
+              <label style="padding-right: 18px;">End date:</label>
+              <input type="date" id="date2" placeholder="Display name" [formControlName]="'date2'"/>
+              <div *ngIf="date1Error" style="color: red; float: left; font-size: 15px;">
+                Incorrect date range!
+              </div>
             </div>
 
             <div class="conf-new-class">
@@ -25,6 +31,9 @@
                   {{ type.displayName }}
                 </option>
               </select>
+              <div *ngIf="option1Error" style="color: red; float: left; font-size: 15px;">
+                Option cannot be empty
+              </div>
             </div>
 
             <div class="conf-new-class">
@@ -35,6 +44,9 @@
                   Not for all
                 </option>
               </select>
+              <div *ngIf="option2Error" style="color: red; float: left; font-size: 15px;">
+                Option cannot be empty
+              </div>
             </div>
 
             <div class="settigns-buttons">
