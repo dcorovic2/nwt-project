@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ApiserviceService } from 'src/app/shared/services/apiservice.service';
 
 @Component({
   selector: 'app-header',
@@ -7,15 +8,17 @@ import { Component, Input, OnInit } from '@angular/core';
 export class HeaderComponent implements OnInit {
   @Input() settings: any;
   @Input() user: any;
-
-  public show:boolean = false;
-  constructor() { }
+  @Input()  notif = [];
+  @Input()  numOfnotifications: any; 
+  @Output() show = new EventEmitter<boolean>();
+  public display = false;
+  constructor(private api: ApiserviceService) { }
 
   ngOnInit(): void {
-    console.log(this.user.firstnameLastName);
   }
   
   public doSomething(): void {
-    this.show = !this.show;
+    this.display = !this.display;
+    this.show.emit(this.display);
   }
 }

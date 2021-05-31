@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginformComponent } from './pages/loginform/loginform.component';
@@ -53,6 +53,8 @@ import { CreateholidayComponent } from './pages/createholiday/createholiday/crea
 import { NewholidayComponent } from './pages/newholiday/newholiday/newholiday.component';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { NzListModule } from 'ng-zorro-antd/list';
+import { LayoutComponent } from './pages/layout/layout/layout.component';
+
 
 registerLocaleData(fi);
 
@@ -80,7 +82,8 @@ registerLocaleData(fi);
     CreateholidaytypeComponent,
     HolidaytypelistComponent,
     CreateholidayComponent,
-    NewholidayComponent 
+    NewholidayComponent,
+    LayoutComponent 
   ],
   imports: [
     BrowserModule,
@@ -107,7 +110,8 @@ registerLocaleData(fi);
     NzMessageModule,
     NzPaginationModule,
     NzToolTipModule,
-    NzListModule
+    NzListModule,
+    MatProgressSpinnerModule
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },ApiserviceService,MatDatepickerModule, AuthService, { provide: NZ_I18N, useValue: fi_FI } 
   ],

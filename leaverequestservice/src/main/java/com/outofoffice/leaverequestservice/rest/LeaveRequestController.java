@@ -35,6 +35,7 @@ import com.outofoffice.leaverequestservice.model.LeaveType;
 import com.outofoffice.leaverequestservice.repository.LeaveRequestRepository;
 import com.outofoffice.leaverequestservice.service.LeaveRequestService;
 import com.outofoffice.leaverequestservice.service.LeaveTypeService;
+import com.outofoffice.leaverequestservice.requestobjects.AdminNotification;
 import com.outofoffice.leaverequestservice.requestobjects.LeaveRequestRequest;
 import com.outofoffice.leaverequestservice.requestobjects.LeaveStatusRequest;
 import com.outofoffice.leaverequestservice.requestobjects.RequestEmployee;

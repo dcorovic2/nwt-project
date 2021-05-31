@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiserviceService } from 'src/app/shared/services/apiservice.service';
 import { ActionService } from 'src/app/shared/services/action.service';
+import * as moment from 'moment';
 
 interface DataItem {
   name: string;
@@ -40,6 +41,8 @@ export class AdminDashboardComponent implements OnInit {
   public employees: any;
   public employees2: any;
   public employeeId: any;
+  public startDate : any;
+  public endDate: any;
   
   public show:boolean = false;
 
@@ -57,30 +60,6 @@ export class AdminDashboardComponent implements OnInit {
 
   searchValue = '';
   visible = false;
-  listOfData: DataItem[] = [
-    {
-      name: 'John Brown',
-      department: 'IT',
-      
-    },
-    {
-      name: 'Jim Green',
-      department: 'Testing',
-      
-    },
-    {
-      name: 'Joe Black',
-      department: 'HR',
-     
-    },
-    {
-      name: 'Jim Red',
-      department: 'iOS',
-     
-    }
-  ];
-  listOfDisplayData = [...this.listOfData];
-
 
   reset(): void {
     this.searchValue = '';
@@ -91,5 +70,17 @@ export class AdminDashboardComponent implements OnInit {
   search(): void {
     this.visible = false;
     this.employees = this.employees2.filter((item: any) => item.firstnameLastName.indexOf(this.searchValue) !== -1);
+  }
+
+  dateSelect(){
+    let dateString = '02/05/2020';  
+    let momentVariable = moment(dateString, 'MM-DD-YYYY');  
+    let stringvalue = momentVariable.format('YYYY-MM-DD');   
+    console.log(typeof stringvalue); 
+    this.employees = this.employees2.filter((item: any) => 
+    (moment(item.startDate).isAfter(this.startDate)&&moment(this.endDate).isBefore(item.endDate))
+    ||(moment(item.startDate).isSame(this.startDate)&&moment(this.endDate).isBefore(item.endDate))
+    ||(moment(item.startDate).isAfter(this.startDate)&&moment(item.endDate).isSame(this.endDate)));
+    console.log(this.employees, this.employees2);
   }
 }

@@ -71,9 +71,6 @@ public class EmployeeController {
 	@PostMapping(value = "/employee")
 	public ResponseEntity<Employee> insertEmployee(@Valid @RequestBody EmployeeRequest requestEmployee) {
 		Employee employee = employeeService.insertEmployee(requestEmployee);
-		AddedEmployee addedEmployee = new AddedEmployee(employee.getId(), requestEmployee.getAllowance(), 
-				requestEmployee.getDepartmentId(), requestEmployee.getEmail(), requestEmployee.getFirstnameLastName());
-		rabbitTemplate.convertAndSend(RabbitConfiguration.EXCHANGE, RabbitConfiguration.ROUTING_KEY3, addedEmployee);
 		
 		NewUser user = new NewUser(requestEmployee.getUsername(), requestEmployee.getEmail(), requestEmployee.getPassword());
 		rabbitTemplate.convertAndSend(RabbitConfiguration.EXCHANGE, RabbitConfiguration.ROUTING_KEY4, user);

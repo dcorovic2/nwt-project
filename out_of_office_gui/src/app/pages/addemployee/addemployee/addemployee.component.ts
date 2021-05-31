@@ -85,7 +85,7 @@ export class AddemployeeComponent implements OnInit {
       let  jobrole= (<HTMLInputElement>document.getElementById('jobrole')).value;
       let  tel= (<HTMLInputElement>document.getElementById('tel')).value;
       let  username= (<HTMLInputElement>document.getElementById('username')).value;
-      let  alowance= (<HTMLInputElement>document.getElementById('alowance')).value;
+      let  allowance= (<HTMLInputElement>document.getElementById('alowance')).value;
       let  jmbg= (<HTMLInputElement>document.getElementById('jmbg')).value;
       let  email= (<HTMLInputElement>document.getElementById('email')).value;
       let  department= (<HTMLInputElement>document.getElementById('department')).value;
@@ -104,16 +104,24 @@ export class AddemployeeComponent implements OnInit {
       this.passError = false;
       this.confpassError = false;
 
-        this.api.get('users/' + username).subscribe((data)=>{
-          if(data != null){
-            //OVDJE POZVATI NOVI API ZA SUBMIT!
+      this.api.get('users/' + username).subscribe((data)=>{
             this.usernameError = true;
-
-          }else{
-              
-          }
-
-        });
+          });
+      this.usernameError?true:       
+        this.api.post('employee/employee',{}, {
+          allowance: allowance,
+          departmentId: 2,
+          email: email,
+          firstnameLastName: firstname,
+          hireDate: new Date(),
+          jmbg: jmbg,
+          jobRole: jobrole,
+          password: pass,
+          phoneNumber: tel,
+          remainingDays: allowance,
+          roleId: 2,
+          username: username
+        }).subscribe((data)=>console.log(data)); 
 
     }else{
       if((<HTMLInputElement>document.getElementById('firstname')).value.length == 0) this.firstnameError = true;
@@ -133,7 +141,7 @@ export class AddemployeeComponent implements OnInit {
       else this.usernameError = false;
       if((<HTMLInputElement>document.getElementById('alowance')).value.length == 0) this.alowanceError = true;
       else{
-        var y: number = +alowance;
+        var y: number = +allowance;
         if(y < 21) {
           this.alowanceError = true;
         }else{

@@ -1,0 +1,12 @@
+<app-listnotification  [notif]="notif" *ngIf="show"></app-listnotification>
+<div class="content-wrap">
+    <app-menu [role]="role"></app-menu>
+    <div class="main-content">
+        <app-header (show)="event($event)"[numOfnotifications] = "numOfnotifications" [notif] = "notif" [user]="user" *ngIf="user"></app-header>
+            <router-outlet></router-outlet>
+    </div>
+    </div>
+
+
+
+    

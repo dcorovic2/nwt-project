@@ -54,6 +54,9 @@
     width: calc(100% - 57px);
     position: relative;
     overflow-y: auto;
+   app-dashboard{
+     height: 75%;
+   }
     .value{
       span {
         color: gray;
@@ -149,6 +152,7 @@
       padding: 20px;
       display: flex;
       height: 100%;
+      padding-right: 55px;
       &.calendars {
         height: 20% !important;
       }
@@ -212,7 +216,7 @@
         span {
           color: gray;
           font-size: 25px;
-          padding-right: 30px;
+          padding-right: 6px;
           &.active {
             color: blue;
             font-weight: 800;
@@ -377,7 +381,7 @@
 
       .content-left,
       .content-right {
-        width: 100%;
+        width: 54%;
         display: flex;
         flex-direction: column;
         input {
@@ -481,16 +485,17 @@
             background: url("../../../assets/img/sticker.jpg") !important;
             background-repeat: no-repeat !important;
             background-position: center !important;
-            height: 970px !important;
+            height: 1130px!important;
           }
           &.second {
-            padding-top: 50px;
+            padding-top: 22px;
           }
           .stat-contents {
-            padding-top: 10px;
-            width: 182px !important;
+            padding-top: 5px;
+            width: 196px !important;
             margin: auto;
             margin-top: 0px;
+            padding-bottom: 20px;
             > span {
               overflow-wrap: break-word;
               word-break: break-all;
@@ -499,9 +504,9 @@
           }
           .number {
             font-size: 88px;
-            padding-top: 90px;
             font-family: cursive;
             height: 200px;
+            padding-top: 70px;
           }
           .head {
             font-size: 80px;

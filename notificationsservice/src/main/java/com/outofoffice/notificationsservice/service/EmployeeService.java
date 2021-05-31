@@ -49,8 +49,10 @@ public class EmployeeService {
 
 	public Employee GetEmployeeById(long employeeID) {
 		String id_string = employeeID + "";
-		Employee empl = employeeRepository.findById(employeeID)
-				.orElseThrow(() -> new NotFoundException(id_string, "Employee", "ID", ""));
+		System.out.println(id_string);
+		Employee empl = employeeRepository.getEmployeeByEmployeeID(employeeID);
+		System.out.println(empl.getId());
+				//.orElseThrow(() -> new NotFoundException(id_string, "Employee", "ID", ""));
 		return empl;
 	}
 

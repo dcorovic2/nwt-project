@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.HttpStatus;
@@ -24,12 +25,14 @@ import com.outofoffice.leaverequestservice.model.NotificationsType;
 import com.outofoffice.leaverequestservice.repository.LeaveRequestRepository;
 import com.outofoffice.leaverequestservice.repository.LeaveStatusRepository;
 import com.outofoffice.leaverequestservice.service.LeaveTypeService;
+import com.outofoffice.leaverequestservice.requestobjects.AdminNotification;
 import com.outofoffice.leaverequestservice.requestobjects.LeaveRequestRequest;
 import com.outofoffice.leaverequestservice.requestobjects.LeaveStatusRequest;
 import com.outofoffice.leaverequestservice.responseobjects.EmployeesOnLeaveResponse;
 import com.outofoffice.leaverequestservice.responseobjects.LeaveRequestResponse;
 import com.outofoffice.leaverequestservice.responseobjects.LeaveRequestResponse2;
 import com.outofoffice.leaverequestservice.responseobjects.LeaveStatusResponse;
+import com.outofoffice.leaverequestservice.configuration.RabbitConfiguration;
 import com.outofoffice.leaverequestservice.error.ErrorMessage;
 import com.outofoffice.leaverequestservice.errorhandling.NoDataException;
 import com.outofoffice.leaverequestservice.errorhandling.NotFoundException;
@@ -44,6 +47,10 @@ public class LeaveRequestService {
 	
 	@Autowired
 	RestTemplate restTemplate; 
+	
+	@Autowired
+	RabbitTemplate rabbitTemplate;
+
 
 	public LeaveRequestService(LeaveRequestRepository leaveRequestRepository) {
 		this.leaveRequestRepository = leaveRequestRepository;
@@ -91,6 +98,8 @@ public class LeaveRequestService {
 			LeaveRequest request = new LeaveRequest(req.getComment(), req.getDaysNum(), req.getEmployeeId(),
 					req.getStartDate(), end, typeId, statusId, notification, rest_days);
 			LeaveRequest newreq = leaveRequestRepository.save(request);
+			AdminNotification adminnotif = new AdminNotification(newreq.getEmployeeId(),newreq.getComment(),newreq.getId(),newreq.getLeave_type().getDisplayName());
+			rabbitTemplate.convertAndSend(RabbitConfiguration.EXCHANGE, RabbitConfiguration.ROUTING_KEY5, adminnotif);
 			return new ResponseEntity<>(newreq, HttpStatus.OK);
 		}
 	}

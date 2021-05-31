@@ -12,6 +12,7 @@ import { CreateholidaytypeComponent } from './pages/createholidaytype/createholi
 import { HolidaytypelistComponent } from './pages/holidaytypelist/holidaytypelist/holidaytypelist.component';
 import { CreateholidayComponent } from './pages/createholiday/createholiday/createholiday.component';
 import { NewholidayComponent } from './pages/newholiday/newholiday/newholiday.component';
+import { LayoutComponent } from './pages/layout/layout/layout.component';
 
 const routes: Routes = [
   {
@@ -20,61 +21,66 @@ const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: 'dashboard',
-    component: DashboardComponent,
-    pathMatch: 'full',
+    path: "layout",
+    component: LayoutComponent,
+    children: [
+      {
+        path: 'dashboard',
+        component: DashboardComponent
+      },
+      {
+        path: 'settings',
+        component: SettingsComponent,
+        pathMatch: 'full',
+    
+      },
+      {
+        path: 'pending',
+        component: PendingComponent,
+        pathMatch: 'full'
+      },
+      {
+        path: 'addemployee',
+        component: AddemployeeComponent,
+        pathMatch: 'full'
+      },
+      {
+        path: 'listofemployees',
+        component: ListofemployeesComponent,
+        pathMatch: 'full',
+      },
+      {
+        path: 'listofrequests',
+        component: RequestslistComponent,
+        pathMatch: 'full'
+      },
+      {
+        path: 'employeeview',
+        component: FullemployeeviewComponent,
+        pathMatch: 'full'
+      },
+      {
+        path: 'createholidaytype',
+        component: CreateholidaytypeComponent,
+        pathMatch: 'full'
+      },
+      {
+        path: 'listofholidaytypes',
+        component: HolidaytypelistComponent,
+        pathMatch: 'full'
+      },
+      {
+        path: 'createholiday',
+        component: CreateholidayComponent,
+        pathMatch: 'full'
+      },
+      {
+        path: 'newholi',
+        component: NewholidayComponent,
+        pathMatch: 'full'
+      }
+    ],
   },
-  {
-    path: 'settings',
-    component: SettingsComponent,
-    pathMatch: 'full',
-
-  },
-  {
-    path: 'pending',
-    component: PendingComponent,
-    pathMatch: 'full'
-  },
-  {
-    path: 'addemployee',
-    component: AddemployeeComponent,
-    pathMatch: 'full'
-  },
-  {
-    path: 'listofemployees',
-    component: ListofemployeesComponent,
-    pathMatch: 'full',
-  },
-  {
-    path: 'listofrequests',
-    component: RequestslistComponent,
-    pathMatch: 'full'
-  },
-  {
-    path: 'employeeview',
-    component: FullemployeeviewComponent,
-    pathMatch: 'full'
-  },
-  {
-    path: 'createholidaytype',
-    component: CreateholidaytypeComponent,
-    pathMatch: 'full'
-  },
-  {
-    path: 'listofholidaytypes',
-    component: HolidaytypelistComponent,
-    pathMatch: 'full'
-  },
-  {
-    path: 'createholiday',
-    component: CreateholidayComponent,
-    pathMatch: 'full'
-  },
-  {
-    path: 'newholi',
-    component: NewholidayComponent,
-    pathMatch: 'full'
-  }
 ];
 
 @NgModule({

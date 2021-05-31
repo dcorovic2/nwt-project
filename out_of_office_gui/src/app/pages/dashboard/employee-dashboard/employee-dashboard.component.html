@@ -1,57 +1,86 @@
-<div class="content-wrap">
-    <app-menu [role]="'employee'"></app-menu>
-    <div class="main-content">
-        <app-header *ngIf="user"  [user]="user"></app-header>
         <div class="content">
             <div class="content-left">
                 <span class="title">Statistics</span>
                <div class="statistics first">
-                   <span class="number">{{info.remainingDays}}</span>
+                   <span class="number">{{info.allowance}}</span>
                    <div class="stat-contents">
-                   <span>Days remaining out of {{info.allowance}} in Allowance</span>
+                   <span>Days remaining out of {{info.remainingDays}} in Allowance</span>
                 </div>
                </div>
                <div class="statistics second">
                 <span class="head">Used so far</span>
                 <div class="types">
             <div class="types-left">
-                <span>Holiday:</span>
-                <span>Sick leave:</span>
+              <span style="font-size: 21px">Holiday:</span>
+              <span style="font-size: 21px">Sick leave:</span>
             </div>
             <div class="types-right">
-                <span>7</span>
-                <span>4</span>
+              <span>7</span>
+              <span>4</span>
             </div>
-            </div>
+          </div>
         </div>
-            </div >
-            <form class="settings-form" (ngSubmit)="submitForm()">
-                <div class="settings-name">
-                  <span class="change-pass"> Holidays: </span>
-                </div>
-    
-                <div class="conf-new-class">
-                  <label style="padding-right: 18px;">Choose holiday type:</label>
-                  <select style="min-width: 111px;" [formControl]="selectControl" name="demo" id="#" [disabled]="tmpDisabled">
-                    <option 
-                      *ngFor="let type of types"
-                      selected="selected"
-                      value="{{ type.id }}"
-                    >
-                      {{ type.holidayType.displayName }}
-                    </option>
-                  </select>
-                </div>
-    <!--matTooltip="The holiday is already chosen!"-->
-                <div class="settigns-buttons">
-                  <button nzType="primary" class="submit" [disabled]="tmpDisabled">Submit</button>
-                </div>
-              </form>
-            </div>
-        <div (click)="doSomething()" class="plusbutton">
-            <i class="fas fa-plus-circle"></i>
+      </div>
+
+      <form
+        class="settings-form"
+        (ngSubmit)="submitForm()"
+        style="
+          text-align: center;
+          margin: auto;
+          width: 30%;
+          margin-top: 75px;
+          background-color: rgb(255 255 255);
+          box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;
+        "
+      >
+        <div
+          class="settings-name"
+          style="padding-bottom: 30px; padding-top: 30px"
+        >
+          <span class="change-pass" style="padding-bottom: 30px">
+            Holidays:
+          </span>
         </div>
+
+        <div class="conf-new-class" style="display: flex;
+        flex-direction: column;">
+          <label style="padding-right: 18px; font-size: 18px; color: gray"
+            >Choose holiday type:</label
+          >
+          <select
+            style="min-width: 111px; height: 35px; border-radius: 9px; border: 1px solid gray;
+            font-size: 16px; width: 200px; margin:auto"
+            [formControl]="selectControl"
+            name="demo"
+            id="#"
+            [disabled]="tmpDisabled"
+          >
+            <option
+              *ngFor="let type of types"
+              selected="selected"
+              value="{{ type.id }}"
+            >
+              {{ type.holidayType.displayName }}
+            </option>
+          </select>
+        </div>
+        <!--matTooltip="The holiday is already chosen!"-->
+        <div class="settigns-buttons" style="padding-top: 40px; padding-bottom: 40px;">
+          <button nzType="primary" class="submit" [disabled]="tmpDisabled" style=" border-color: 	 gold;
+          text-align: center; background-color: white;
+            background-size: 200% auto;
+            color:rgb(138, 128, 71);            
+            box-shadow: 0 0 20px white;
+            border-radius: 10px; width: 180px;
+            height: 35px;">
+            Submit
+          </button>
+        </div>
+      </form>
     </div>
+    <div (click)="doSomething()" class="plusbutton">
+      <i class="fas fa-plus-circle"></i>
     </div>
     <app-requestform *ngIf="show" [id]="user.id" [allowance]="info.allowance"></app-requestform>
-    
+

@@ -14,10 +14,12 @@ public class RabbitConfiguration {
 
     public static final String QUEUE = "request_notification_queue";
     public static final String QUEUE2 = "request_employee_queue";
+    public static final String QUEUE5 = "admin_notification_queue";
     public static final String EXCHANGE = "request_notification_exchange";
     public static final String EXCHANGE2 = "request_employee_exchange";
     public static final String ROUTING_KEY = "request_notification_routingKey";
     public static final String ROUTING_KEY2 = "request_employee_routingKey";
+    public static final String ROUTING_KEY5 = "admin_notification_routingKey";
 
     @Bean
     public Queue queue1() {
@@ -26,6 +28,10 @@ public class RabbitConfiguration {
     @Bean
     public Queue queue2() {
         return new Queue(QUEUE2);
+    }
+    @Bean
+    public Queue queue5() {
+        return new Queue(QUEUE5);
     }
 
     @Bean
@@ -40,6 +46,10 @@ public class RabbitConfiguration {
     @Bean
     public Binding binding2(TopicExchange exchange) {
         return BindingBuilder.bind(queue2()).to(exchange).with(ROUTING_KEY2);
+    }
+    @Bean
+    public Binding binding5(TopicExchange exchange) {
+        return BindingBuilder.bind(queue5()).to(exchange).with(ROUTING_KEY5);
     }
 
 
