@@ -13,6 +13,8 @@ export class ListnotificationComponent implements OnInit {
   public id : any;
   public showR: boolean = false;
   public showN:boolean = false;
+  public status:any;
+  public admin:any;
 
   constructor(private api: ApiserviceService, private action: ActionService) { }
 
@@ -20,8 +22,10 @@ export class ListnotificationComponent implements OnInit {
   }
 
 
-  showNoti(text:any): void{
+  showNoti(text:any, status:any, admin: any): void{
     this.text = text;
+    this.status = status;
+    this.admin = admin;
     localStorage.getItem('role')=='ROLE_CLIENT'?this.showN = !this.showN: this.showR=!this.showR;
   }
   dismiss(id:any){

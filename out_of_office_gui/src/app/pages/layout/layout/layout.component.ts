@@ -36,7 +36,8 @@ export class LayoutComponent implements OnInit {
           return localStorage.getItem('role')=='ROLE_CLIENT'?{displayName: notification.notifications_type.displayName,
                   employee: notification.employees[0].firstNameLastName,
                   text: notification.text,
-                  id: notification.id
+                  id: notification.id,
+                  admin: notification.employeeName
   
           } :{
             displayName: notification.requestType,

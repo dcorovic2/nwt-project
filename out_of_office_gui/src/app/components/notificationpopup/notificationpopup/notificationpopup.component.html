@@ -1,17 +1,19 @@
 <div class="popup-overlay" *ngIf="hide">
 <div class="notPopUp">
-    <div id="part1"> 
+    <div class="part1" [ngClass]="{approved:status=='Approved', rejected:status=='Rejected'} "> 
         <div class="container2">
             <div class="tmpdiv">
-                <i class="fas fa-check-circle" style="font-size:120px;color:white"></i>
+                <i *ngIf="status=='Approved'" class="fas fa-check-circle" style="font-size:120px;color:white"></i>
+                <i *ngIf="status=='Rejected'" class="far fa-times-circle" style="font-size:120px;color:white"></i>
             </div>
             <div (click)="hidePopUp()">
                 <i class="far fa-times-circle" style="color: white;"></i>
             </div>
         </div>
-        <div class="container1"> 
-            <p id="action" style="color: white;">Approved by: </p>
-            <p id="admin_name" style="color: white;">Dalila Corovic</p>
+        <div class="container1" > 
+            <p id="action" *ngIf="status=='Approved'" style="color: white;">Approved by: </p>
+            <p id="action" *ngIf="status=='Rejected'" style="color: white;">Rejected by: </p>
+            <p id="admin_name" style="color: white;">{{admin}}</p>
         </div>
     </div>
     <div id="part2">
