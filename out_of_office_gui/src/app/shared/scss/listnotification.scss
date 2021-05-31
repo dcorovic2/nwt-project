@@ -1,13 +1,16 @@
+.fixniDiv{
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    padding-top: 60px;
+}
 .outerDiv{
     position: fixed;
-    right: -112px;
-    top: 175px;
-    transform: translate(-50%, -50%);
-    -webkit-transform: translate(-50%, -50%);
-    -moz-transform: translate(-50%, -50%);
-    -o-transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
+    right: 62px;
+    display: flex;
+    flex-direction: column;
     font-size: 20px;
+    top: 100px;
     z-index: 100;
     background-color: white;
     padding: 20px;
@@ -15,15 +18,113 @@
     border-radius: 15px;
     box-shadow: 2px 2px 9px -1px #000;
     border-radius: 15px;
+    .col-3{
+    position: absolute;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 200px;
+    /* margin-bottom: 25px; */
+    margin-top: -38px;
+    }
+    &.opac{
+        opacity: 0.5;
+    }
+    .dot-pulse {
+        position: relative;
+        left: -9999px;
+        width: 10px;
+        height: 10px;
+        border-radius: 5px;
+        background-color: #9880ff;
+        color: #9880ff;
+        box-shadow: 9999px 0 0 -5px #9880ff;
+        animation: dotPulse 1.5s infinite linear;
+        animation-delay: .25s;
+      }
+      
+      .dot-pulse::before, .dot-pulse::after {
+        content: '';
+        display: inline-block;
+        position: absolute;
+        top: 0;
+        width: 10px;
+        height: 10px;
+        border-radius: 5px;
+        background-color: #9880ff;
+        color: #9880ff;
+      }
+      
+      .dot-pulse::before {
+        box-shadow: 9984px 0 0 -5px #9880ff;
+        animation: dotPulseBefore 1.5s infinite linear;
+        animation-delay: 0s;
+      }
+      
+      .dot-pulse::after {
+        box-shadow: 10014px 0 0 -5px #9880ff;
+        animation: dotPulseAfter 1.5s infinite linear;
+        animation-delay: .5s;
+      }
+      
+      @keyframes dotPulseBefore {
+        0% {
+          box-shadow: 9984px 0 0 -5px #9880ff;
+        }
+        30% {
+          box-shadow: 9984px 0 0 2px #9880ff;
+        }
+        60%,
+        100% {
+          box-shadow: 9984px 0 0 -5px #9880ff;
+        }
+      }
+      
+      @keyframes dotPulse {
+        0% {
+          box-shadow: 9999px 0 0 -5px #9880ff;
+        }
+        30% {
+          box-shadow: 9999px 0 0 2px #9880ff;
+        }
+        60%,
+        100% {
+          box-shadow: 9999px 0 0 -5px #9880ff;
+        }
+      }
+      
+      @keyframes dotPulseAfter {
+        0% {
+          box-shadow: 10014px 0 0 -5px #9880ff;
+        }
+        30% {
+          box-shadow: 10014px 0 0 2px #9880ff;
+        }
+        60%,
+        100% {
+          box-shadow: 10014px 0 0 -5px #9880ff;
+        }
+      }
+      
     p {
         font-weight: bold;
     }
-
+    .fa-bell-slash{
+        float: right;
+        font-size: 15px;
+        padding-top: 10px;
+    }
     .particularNotification:hover{
         border-bottom: 0.5px solid lightgray;
         background-color: rgb(240, 240, 240);
     }
-
+ .nonews{
+    font-size: small;
+    font-weight: lighter;
+    font-style: italic;
+            color: gray;
+            margin-top: 0;
+            margin-bottom: 0;
+ }
     #textDiv{
         font-size: small;
         font-weight: lighter;

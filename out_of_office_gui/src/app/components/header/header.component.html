@@ -6,7 +6,7 @@
         <span>{{user.firstnameLastName}}</span>
         <span>{{user.email}}</span>
       </div>
-      <div class="notif" (click)="doSomething()">
+      <div class="notif" (click)="doSomething($event)">
           <i class="far fa-bell">
             <span *ngIf="numOfnotifications" class="badge rounded-pill badge-notification bg-danger" style="color: white;">{{numOfnotifications}}</span>
           </i>
@@ -14,4 +14,4 @@
   </div>
 </div>
 
-<app-listnotification  [notif]="notif" *ngIf="show"></app-listnotification>
+

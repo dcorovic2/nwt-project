@@ -145,9 +145,7 @@ public class NotificationService {
 	public ResponseEntity<?> getLastNotificationsByEmployeeId(long employeeID, int dismiss) {
 		List<Notification> notificationlist = notificationRepository
 				.findByEmployeesIdAndDismissOrderByCreateDateDesc(employeeID, dismiss);
-		if (notificationlist.isEmpty())
-			throw new NoDataException();
-		else
+		
 			return new ResponseEntity<>(notificationlist, HttpStatus.OK);
 	}
 

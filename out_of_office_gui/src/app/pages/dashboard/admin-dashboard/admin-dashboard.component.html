@@ -1,11 +1,8 @@
-<div class="content-wrap">
-    <app-menu [role]="'admin'"></app-menu>
-    <div class="main-content">
-        <app-header *ngIf="user"  [user]="user"></app-header>
+
         <div class="content calendars">
             <div class="content-left">
                 <span class="admin-title" >Employees leave records</span>
-                <input class="start-date" type="date" id="start" name="leave-start"
+                <input class="start-date" [(ngModel)]="startDate" (change)="dateSelect()" type="date" id="start" name="leave-start"
                 value="2021-07-22"
                 min="2021-01-01" max="2021-12-31">
             </div>
@@ -14,7 +11,7 @@
             </div>
             <div class="content-right">
                 <span class="hidden-content" style="visibility: hidden;">Create new leave request</span>
-                <input class="start-date" type="date" id="start" name="leave-start"
+                <input [(ngModel)]="startDate"  (change)="dateSelect()" class="start-date" type="date" id="start" name="leave-start"
                 value="2021-03-12"
                 min="2021-01-01" max="2021-12-31">
             </div>
@@ -23,7 +20,7 @@
             </div>
     </div>
     <div class="table">
-        <nz-table #nzTable [nzData]="listOfDisplayData" [nzLoading]='loading' nzTableLayout="fixed" [nzScroll]="{ y: '440px' }" [nzFrontPagination]="false">
+        <nz-table #nzTable [nzData]="employees" [nzLoading]='loading' nzTableLayout="fixed" [nzScroll]="{ y: '440px' }" [nzFrontPagination]="false">
             <thead>
             <tr>
                 <th nzCustomFilter>
@@ -55,8 +52,8 @@
           </div>
         </div>
       </nz-dropdown-menu>
-    </div>
-    </div>
+
+
     <app-requestform *ngIf="show"></app-requestform>
     
 

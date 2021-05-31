@@ -49,7 +49,7 @@ export class ListofemployeesComponent implements OnInit {
   constructor(private route:Router, private api: ApiserviceService, private action: ActionService) { }
 
   fullPage(username:string): void {
-    this.route.navigate(['employeeview'], {queryParams:{username: username}});
+    this.route.navigate(['layout/employeeview'], {queryParams:{username: username}});
   }
 
 
