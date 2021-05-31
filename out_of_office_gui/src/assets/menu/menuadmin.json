@@ -4,56 +4,56 @@
       "label": "Dashboard",
       "icon": "fas fa-home",
       "category": "global",
-      "route": "dashboard"
+      "route": "layout/dashboard"
     },
     {
         "name": "employees",
         "label": "Employees",
         "icon": "fas fa-users",
         "category": "global",
-        "route": "listofemployees"
+        "route": "layout/listofemployees"
       },
       {
         "name": "addemployee",
         "label": "Add employee",
         "icon": "fas fa-user-plus",
         "category": "global",
-        "route": "addemployee"
+        "route": "layout/addemployee"
       },
       {
         "name": "requests",
         "label": "Requests",
         "icon": "fas fa-plus-square",
         "category": "global",
-        "route": "listofrequests"
+        "route": "layout/listofrequests"
       },
       {
         "name": "createholitype",
         "label": "Create holiday type",
         "icon": "fas fa-calendar-plus",
         "category": "global",
-        "route": "createholidaytype"
+        "route": "layout/createholidaytype"
       },
       {
         "name": "holidaytypelist",
         "label": "Holiday type list",
         "icon": "fas fa-list",
         "category": "global",
-        "route": "listofholidaytypes"
+        "route": "layout/listofholidaytypes"
       },
       {
         "name": "holidaylist",
         "label": "Holiday list",
         "icon": "far fa-plus-square",
         "category": "global",
-        "route": "createholiday"
+        "route": "layout/createholiday"
       },
       {
         "name": "newholi",
         "label": "Create holiday",
         "icon": "fas fa-external-link-alt",
         "category": "global",
-        "route": "newholi"
+        "route": "layout/newholi"
       },
       {
         "name": "logout",

@@ -1,8 +1,4 @@
-<div class="content-wrap">
-  <app-menu></app-menu>
-  <div class="main-content">
-    <app-header *ngIf="user" [user]="user"></app-header>
-    <div class="name">
+ <div class="name">
       <span class="title">Active Leave Requests</span>
     </div>
         <div class="table">
@@ -71,56 +67,5 @@
             </div>
           </nz-dropdown-menu>
         </div>
-        <!--  <div class="request-table">
-          <div class="table-header">
-                  <span class="column">Type</span>
-                  <span class="column">Dates</span>
-                  <span class="column">Status</span>
-                  <span class="column">Action</span>
-              </div>
-              <div class=table-header>
-                  <span class="value">Sick leave</span>
-                  <span class="value">From 13.04.2021 to 15.04.2021</span>
-                  <div class="value status pending"><span>Pending</span> <i class="fas fa-hourglass-start"></i></div>
-                  <div  class="value actions"><span class="enabled">Edit</span><span>Cancel</span> <span class="disabled">Comment</span></div>
-              </div>
-              <div class=table-header>
-                  <span class="value">Holiday</span>
-                  <span class="value">From 01.01.2021 to 15.01.2021</span>
-                  <div class="value status approved"><span>Approved</span> <i class="fas fa-check-circle"></i></div>
-                  <div  class="value actions"><span class="disabled">Edit</span> <span class="disabled">Cancel</span> <span class="enabled">Comment</span></div>
-              </div>
-              <div class=table-header>
-                  <span class="value">Sick leave</span>
-                  <span class="value">From 08.02.2021 to 12.02.2021</span>
-                  <div class="value status approved"><span>Approved</span> <i class="fas fa-check-circle"></i></div>
-                  <div  class="value actions"><span class="disabled">Edit</span> <span class="disabled">Cancel</span> <span class="enabled">Comment</span></div>
-              </div>
-              <div class=table-header>
-                  <span class="value">Holiday</span>
-                  <span class="value">From 15.02.2021 to 15.05.2021</span>
-                  <div class="value status rejected"><span>Rejected</span><i class="fas fa-times-circle"></i></div>
-                  <div  class="value actions"><span class="disabled">Edit</span> <span class="disabled">Cancel</span> <span class="enabled">Comment</span></div>
-              </div>
-              <div class=table-header>
-                  <span class="value">Sick leave</span>
-                  <span class="value">From 13.04.2021 to 15.04.2021</span>
-                  <div class="value status pending"><span>Pending</span><i class="fas fa-hourglass-start"></i></div>
-                  <div  class="value actions"><span class="enabled">Edit</span> <span>Cancel</span><span class="disabled">Comment</span></div>
-              </div>
-              <div class=table-header>
-                  <span class="value">Holiday</span>
-                  <span class="value">From 17.08.2021 to 17.12.2021</span>
-                  <div class="value status rejected"><span>Rejected</span><i class="fas fa-times-circle"></i></div>
-                  <div  class="value actions"><span class="disabled">Edit</span> <span class="disabled">Cancel</span> <span class="enabled">Comment</span></div>
-              </div>
-          </div>
-      </div>
-      </div>
-      <div class="plusbutton">
-          <i class="fas fa-plus-circle"></i>
-      </div>
-  -->
-  </div>
-</div>
+
 <app-viewrequest [popupData]="popupData" *ngIf="show"></app-viewrequest>

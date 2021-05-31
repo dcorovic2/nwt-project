@@ -1,15 +1,26 @@
 <div class="outerDiv">
     <p>Notifications</p>
 
-    <div *ngFor="let notification of notif" class="particularNotification" (click)="showNoti(notification.text)">
-        <div id="iconDiv" style="display: inline-block;">
+    <div *ngFor="let notification of notif" [ngClass]="{opac: dismis}" class="particularNotification">
+        <div (click)="showNoti(notification.text)" id="iconDiv" style="display: inline-block;">
             <i class="fas fa-users" style="color: lightgray;"></i>
         </div>
-        <div id="textDiv" style="display: inline-block;">
+        <div  (click)="showNoti(notification.text)" id="textDiv" style="display: inline-block;">
             <p id="approvedBy">{{notification.employee}}</p>
             <p id="someText">{{notification.displayName}}</p>
         </div>
+       
+        <i  (click)="dismiss(notification.id);" class="fas fa-bell-slash"></i>
+        <div class="col-3" *ngIf="dismis&&id==notification.id">
+            <div class="snippet" data-title=".dot-pulse">
+              <div class="stage">
+                <div class="dot-pulse"></div>
+              </div>
+            </div>
+          </div>
+    </div>
+    <div  *ngIf="!notif.length" [ngClass]="{opac: dismis}" class="particularNotification">
+       <p class="nonews">No notifications.</p>
     </div>
 </div>
-
 <app-notificationpopup [text]="text" *ngIf="showN"></app-notificationpopup>

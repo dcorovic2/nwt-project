@@ -1,8 +1,4 @@
-<div class="content-wrap">
-    <app-menu></app-menu>
-    <div class="main-content">
-        <app-header *ngIf="user" [user]="user"></app-header>
-        <div class="content settings">
+  <div class="content settings">
                     <span style="padding-bottom: 20px;">List of holiday type</span>
                     <nz-table #editRowTable nzBordered [nzData]="listOfData" [nzLoading]='loading' nzTableLayout="fixed" [nzScroll]="{ y: '440px' }" [nzFrontPagination]="false">
                         <thead>
@@ -39,5 +35,4 @@
                           </tr>
                         </tbody>
                       </nz-table>
-    </div>
-</div>
+        </div>
