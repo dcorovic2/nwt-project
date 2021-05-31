@@ -73,7 +73,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .antMatchers(HttpMethod.POST, "/leaverequest/request").hasRole("CLIENT")
         .antMatchers(HttpMethod.PATCH, "/leaverequest/request").hasRole("CLIENT")
         .antMatchers(HttpMethod.PATCH, "/leaverequest/request/{id}").hasRole("ADMIN")
-        .antMatchers(HttpMethod.DELETE, "/leaverequest/request/{id}").hasRole("ADMIN")
+        .antMatchers(HttpMethod.DELETE, "/leaverequest/request/{id}").hasRole("CLIENT")
        // .antMatchers(HttpMethod.GET).hasRole("ADMIN")
         .antMatchers(HttpMethod.GET, "/leaverequest/request/{id}").hasRole("ADMIN")
         

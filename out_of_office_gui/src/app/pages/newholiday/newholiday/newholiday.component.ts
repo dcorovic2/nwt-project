@@ -21,10 +21,15 @@ export class NewholidayComponent implements OnInit {
   }
 
   resetinputs(): void {
-    (<HTMLInputElement>document.getElementById('code')).value = '';
-    (<HTMLInputElement>document.getElementById('displayname')).value = '';
-    (<HTMLInputElement>document.getElementById('#')).value = ' ';
-    (<HTMLInputElement>document.getElementById('#')).value = '';
+    (<HTMLInputElement>document.getElementById('date1')).value = '';
+    (<HTMLInputElement>document.getElementById('date2')).value = '';
+
+    this.date1Error = false;
+    this.option1Error = false;
+    this.option2Error = false;
+    this.newholii = false;
+
+    console.log(this.newholii);
   }
 
   @Input() user = {};
