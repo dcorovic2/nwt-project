@@ -32,6 +32,7 @@ import com.outofoffice.leaverequestservice.responseobjects.EmployeesOnLeaveRespo
 import com.outofoffice.leaverequestservice.responseobjects.LeaveRequestResponse;
 import com.outofoffice.leaverequestservice.responseobjects.LeaveRequestResponse2;
 import com.outofoffice.leaverequestservice.responseobjects.LeaveStatusResponse;
+import com.outofoffice.leaverequestservice.responseobjects.TypeResponse;
 import com.outofoffice.leaverequestservice.configuration.RabbitConfiguration;
 import com.outofoffice.leaverequestservice.error.ErrorMessage;
 import com.outofoffice.leaverequestservice.errorhandling.NoDataException;
@@ -246,6 +247,26 @@ public class LeaveRequestService {
 		request = leaveRequestRepository.findById(id)
 				.orElseThrow(() -> new NotFoundException(id_request, "Leave Request", "ID", ""));
 		return new ResponseEntity<>(request, HttpStatus.OK);
+	}
+	
+	public ResponseEntity<?> getRequestByType(Long id) {
+		List<LeaveRequest> requests;
+		requests = leaveRequestRepository.getAllRequestsForEmployee(id);
+		TypeResponse types = new TypeResponse();
+		types.setSick(0);
+		types.setVacation(0);
+		
+		requests.forEach(request -> {
+			if(request.getLeave_type().getId() == 1 && request.getLeave_status().getId() == 2
+					&& request.getEndDate().isAfter(LocalDate.now())) {
+				types.setVacation(types.getVacation()+1);
+			} else if (request.getLeave_type().getId() == 2 && request.getLeave_status().getId() == 2
+					&& request.getEndDate().isAfter(LocalDate.now())) {
+				types.setSick(types.getSick()+1);
+			}
+		});
+		
+		return new ResponseEntity<>(types, HttpStatus.OK);
 	}
 	
 	public ResponseEntity<?> getEmployeesOnRequest() {

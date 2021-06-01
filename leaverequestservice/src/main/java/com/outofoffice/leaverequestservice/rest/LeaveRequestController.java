@@ -149,9 +149,16 @@ public class LeaveRequestController {
 	public ResponseEntity<?> getRequestById(@PathVariable long id){
 		return LeaveRequestService.getRequestById(id);
 	}
+	
+	@GetMapping("/requestType/{id}")
+	public ResponseEntity<?> getNumberOfRequest(@PathVariable Long id){
+		return LeaveRequestService.getRequestByType(id);
+	}
 	@GetMapping(value="/leavetypes")
 	public ResponseEntity<List<LeaveType>> getAllTypes(){
 		List<LeaveType> types = leaveTypeService.getListOfTypes();
 		return new ResponseEntity<List<LeaveType>>(types, HttpStatus.OK);
 	}
+	
+	
 }
