@@ -15,18 +15,36 @@ export class ListnotificationComponent implements OnInit {
   public showN:boolean = false;
   public status:any;
   public admin:any;
+  public employeeName: any;
+  public popupData: any;
 
   constructor(private api: ApiserviceService, private action: ActionService) { }
 
   ngOnInit(): void {
+    this.action.set('dismissNotification',(id:any)=>this.dismiss(id))
   }
 
 
-  showNoti(text:any, status:any, admin: any): void{
-    this.text = text;
-    this.status = status;
-    this.admin = admin;
-    localStorage.getItem('role')=='ROLE_CLIENT'?this.showN = !this.showN: this.showR=!this.showR;
+  showNoti(notification:any): void{
+    this.text = notification.text;
+    this.status = notification.displayName;
+    this.admin = notification.admin;
+    console.log(notification);
+    if(notification.requestId){
+      this.api.get('leaverequest/request/'+notification.requestId).subscribe((data)=>{
+        this.popupData = {
+          employeeName: notification.employee,
+          reason: data.comment,
+          type: data.leave_type.displayName,
+          startDate: data.startDate,
+          endDate: data.endDate,
+          notificationid: notification.id,
+          requestId: notification.requestId
+        }
+        this.showR = !this.showR;
+      })
+    }
+    localStorage.getItem('role')=='ROLE_CLIENT'?this.showN = !this.showN: false;
   }
   dismiss(id:any){
     this.id = id;

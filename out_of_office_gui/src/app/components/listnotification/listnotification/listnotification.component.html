@@ -2,10 +2,10 @@
     <p>Notifications</p>
 
     <div *ngFor="let notification of notif" [ngClass]="{opac: dismis}" class="particularNotification">
-        <div (click)="showNoti(notification.text,notification.displayName,notification.admin)" id="iconDiv" style="display: inline-block;">
+        <div (click)="showNoti(notification)" id="iconDiv" style="display: inline-block;">
             <i class="fas fa-users" style="color: lightgray;"></i>
         </div>
-        <div  (click)="showNoti(notification.text,notification.displayName, notification.admin)" id="textDiv" style="display: inline-block;">
+        <div  (click)="showNoti(notification)" id="textDiv" style="display: inline-block;">
             <p id="approvedBy">{{notification.employee}}</p>
             <p id="someText">{{notification.displayName}}<i *ngIf="notification.displayName=='Sick leave'" class="fas fa-head-side-cough"></i>
                                                          <i *ngIf="notification.displayName=='Vacation'" class="fas fa-plane-departure"></i></p>
@@ -25,4 +25,4 @@
     </div>
 </div>
 <app-notificationpopup [admin]="admin" [status]="status" [text]="text" *ngIf="showN"></app-notificationpopup>
-<app-viewrequest   *ngIf="showR"></app-viewrequest>
+<app-viewrequest [popupData] = "popupData"  *ngIf="showR"></app-viewrequest>
