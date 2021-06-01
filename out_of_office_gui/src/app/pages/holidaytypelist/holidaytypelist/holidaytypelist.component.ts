@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ApiserviceService } from 'src/app/shared/services/apiservice.service';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 interface ItemData {
   id: any;
@@ -19,7 +20,7 @@ export class HolidaytypelistComponent implements OnInit {
   editCache: { [key: string]: { edit: boolean; data: ItemData } } = {};
   listOfData: ItemData[] = [];
 
-  constructor(private api: ApiserviceService) {}
+  constructor(private api: ApiserviceService, private message1: NzMessageService) {}
 
   startEdit(id: string): void {
     this.editCache[id].edit = true;
@@ -41,6 +42,7 @@ export class HolidaytypelistComponent implements OnInit {
       .delete('holiday/holidayType/' + tmp.id, {}, {})
       .subscribe((data) => {
         this.listOfData = this.listOfData.filter((d) => d.id !== id);
+        this.message1.create('success', `You deleted holiday type successfully!`);
       });
   }
 

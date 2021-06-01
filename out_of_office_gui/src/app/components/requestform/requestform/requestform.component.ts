@@ -2,12 +2,15 @@ import { Input } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ApiserviceService } from 'src/app/shared/services/apiservice.service';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
   selector: 'app-requestform',
   templateUrl: './requestform.component.html'
 })
 export class RequestformComponent implements OnInit {
+  isLoadingOne = false;
+
   public hide:boolean = true;
   public typeId: any;
   selectControl:FormControl = new FormControl()
@@ -17,7 +20,7 @@ export class RequestformComponent implements OnInit {
   public option1Error: boolean = false;
   public date1Error: boolean = false;
   public date2Error: boolean = false;
-  constructor(private api: ApiserviceService) { }
+  constructor(private api: ApiserviceService, private message1: NzMessageService) { }
 
   hidePopUp(): void {
     this.hide=!this.hide;
@@ -29,6 +32,7 @@ export class RequestformComponent implements OnInit {
 
   createRequest(){
     //resetovanje validacija
+    this.isLoadingOne = true;
     this.option1Error = false;
     this.date1Error = false;
     this.date2Error = false;
@@ -45,7 +49,11 @@ export class RequestformComponent implements OnInit {
     if(this.selectControl.value == null) {
       this.option1Error = true;
     } else {
-      this.api.post('leaverequest/request', {}, {comment:comment, daysNum: num, employeeId: this.id, startDate: start, typeId: this.selectControl.value}).subscribe((data)=>console.log(data));
+      this.api.post('leaverequest/request', {}, {comment:comment, daysNum: num, employeeId: this.id, startDate: start, typeId: this.selectControl.value})
+      .subscribe((data)=>{ 
+        this.isLoadingOne = false; 
+        this.message1.create('success', `You submitted holiday successfully!`);
+      });
     }
   }
 
