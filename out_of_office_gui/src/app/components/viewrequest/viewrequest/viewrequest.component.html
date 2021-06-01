@@ -34,8 +34,8 @@
             </div>
     
             <div class="buttoni view">
-                <button class="cancel" (click)="hidePopUp()">Reject</button>
-                <button class="submit" (click)="approve()">Approve</button>
+                <button  nz-button nzType="primary"  [nzLoading]="isLoadingOne" class="cancel" (click)="hidePopUp()">Reject</button>
+                <button nz-button nzType="primary"  [nzLoading]="isLoadingTwo" class="submit" (click)="approve()">Approve</button>
                 <div class="space">
                 </div>
             </div>

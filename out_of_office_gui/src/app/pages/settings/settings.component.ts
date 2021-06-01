@@ -80,9 +80,9 @@ export class SettingsComponent implements OnInit {
     this.api
       .post('users/password', { password: password, username: username  })
       .subscribe((data) => {
+
         if (data != null){
           this.passwordError = false;
-          console.log(data);
           data=JSON.parse(data);
           console.log(data.id);
           console.log(data.password);
@@ -97,7 +97,7 @@ export class SettingsComponent implements OnInit {
           )
           .subscribe((data) => {
               this.passwordchanged = true;
-              console.log(data.password);
+              console.log(data);
               this.passwordError = false;
               this.newpasswordError = false;
               this.confirmnewpasswordError = false;

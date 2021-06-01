@@ -64,17 +64,20 @@
               {{ type.holidayType.displayName }}
             </option>
           </select>
+          <div *ngIf="option2Error" style="color: red; float: left; font-size: 15px;">
+            Option cannot be empty
+          </div>
         </div>
         <!--matTooltip="The holiday is already chosen!"-->
         <div class="settigns-buttons" style="padding-top: 40px; padding-bottom: 40px;">
-          <button nzType="primary" class="submit" [disabled]="tmpDisabled" style=" border-color: 	 gold;
+          <button nz-button nzType="primary" [nzLoading]="isLoadingOne" nzType="primary" class="submit" [disabled]="tmpDisabled" style=" border-color: 	 gold;
           text-align: center; background-color: white;
             background-size: 200% auto;
             color:rgb(138, 128, 71);            
             box-shadow: 0 0 20px white;
             border-radius: 10px; width: 180px;
-            height: 35px;">
-            Submit
+            height: 35px; font-size: 15px;">
+            <span style="font-size: 15px;">Submit</span>
           </button>
         </div>
       </form>
