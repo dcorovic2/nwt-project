@@ -51,6 +51,7 @@ export class EmployeeDashboardComponent implements OnInit {
       }
 
       this.types = dataa1;
+      console.log(this.types);
     });
   }
 

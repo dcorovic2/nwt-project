@@ -34,12 +34,12 @@
             <td>{{ data.department.displayName }}</td>
             <td>
               <div class="buttoni">
-                <button class="view" (click)="fullPage(data.username, data.id)">
+                <button class="view" (click)="fullPage(data.username)">
                   View
                 </button>
                 <button
                   class="delete"
-                  (click)="hideDelete = !hideDelete; employeeId = data.id"
+                  (click)="hideDelete = !hideDelete;employeeId = data.id"
                 >
                   Delete
                 </button>

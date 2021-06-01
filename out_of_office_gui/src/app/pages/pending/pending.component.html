@@ -26,10 +26,17 @@
                 <td>
                   
                     <a
+                    *ngIf ="request.leave_status.code == 'P'"
                       class="enabled"
-                      style="float: left;"
+                      style="float: left"
                       (click) = "deleteRequest(request.id)"
-                      [ngClass]="{ disabled: request.leave_status.code != 'P' }"
+                      >Cancel</a>
+
+                      <a 
+                      *ngIf ="request.leave_status.code != 'P'"
+                      class="enabled"
+                      style="float: left; opacity: 0.4;"
+                      (click) = "deleteRequest(request.id)"
                       >Cancel</a>
                  
                 </td>

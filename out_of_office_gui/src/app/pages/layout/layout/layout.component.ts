@@ -11,23 +11,49 @@ export class LayoutComponent implements OnInit {
   public user  = {id:"", firstnameLastName:"", email:""};
   constructor(private api: ApiserviceService, private action: ActionService) { }
   public role: any;
+  public showDrawer: boolean = false;
   public notif: any = [];
   public numOfnotifications: any;
   public show: boolean = false;
+  public data: any;
+  public holidays:any = [];
 
   ngOnInit(): void {
+    this.action.set('changeview', ()=>{this.showDrawer=false;});
     this.action.set('getNotifications', ()=>{this.getNotifications()});
-    console.log(this.action);
+    this.action.set('showDrawer', (username:any)=>this.showDraw(username))
     switch(localStorage.getItem('role')){
       case "ROLE_ADMIN": this.role = 'admin'; break;
       case "ROLE_CLIENT": this.role = 'employee'; break;
     }
-    this.api.get('employee/employee/username', {username: localStorage.getItem('username')}).subscribe((data:any)=>{
-      Object.assign(this.user, {firstnameLastName:data.firstnameLastName, email: data.email, id:data.id});})
+    this.getEmployeeData(localStorage.getItem('username'),false);
      this.getNotifications();
   }
   event(event:any){
     this.show = event;
+  }
+
+  getEmployeeData(username:any,indicator:any){
+    this.holidays = [];
+    this.api.get('employee/employee/username', {username: username}).subscribe((data:any)=>{
+      this.data = data;
+      if (indicator) this.api.get('holiday/getlistofholidays', {}, {}).subscribe((dataa: any) =>{
+        for(let i = 0; i < dataa.length; i++) {
+          let emploteesList = dataa[i].employees;
+          for(let j = 0; j < emploteesList.length; j++) {
+            if(emploteesList[j].id == this.data.id) {
+              this.holidays.push({title: dataa[i].holidayType.displayName, type: dataa[i].holidayType.code});
+            }
+          }
+        }
+      })
+      indicator?this.showDrawer = !this.showDrawer: Object.assign(this.user, {firstnameLastName:data.firstnameLastName, email: data.email, id:data.id});
+      console.log(this.showDrawer);
+      })
+  }
+
+  showDraw(username:any){
+    this.getEmployeeData(username,true);
   }
   public getNotifications(){
     setTimeout(()=>{
@@ -48,6 +74,7 @@ export class LayoutComponent implements OnInit {
           }
         })
         this.numOfnotifications = this.notif.length;
+        this.action.setNotif(this.notif);
       });
     },3000)
   }

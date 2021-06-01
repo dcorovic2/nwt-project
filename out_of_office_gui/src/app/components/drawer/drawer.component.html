@@ -1,0 +1,54 @@
+<div class="drawer-content"  *ngIf="data" [ngClass]="{expand:showDrawer, notexpand:!showDrawer}">
+<div class="drawer-header">
+    <div  (click)="showDrawer=false; changeforview()" class="back-icon">
+        <i class="fas fa-arrow-left"></i>
+        <span>Back</span>
+    </div>
+    <div class="user-name">
+        <i class="far fa-user-circle fa-8x"></i>
+        <span>{{data.firstnameLastName}}</span>
+    </div>
+
+</div>
+<div class="small-content">
+    <div class="small-statistics">
+    <div class="statistics first">
+        <div class="remaining-info">
+        <span class="number">{{data.allowance}}</span>
+           <div class="stat-contents">
+           <span style="font-size: 14px">Days remaining out of {{data.remainingDays}} in Allowance</span>
+        </div>
+    </div>
+       </div>
+       <div class="statistics second">
+        <span class="head">Used so far</span>
+        <div class="types">
+    <div class="types-left">
+        <span>Holiday:</span>
+        <span>Sick leave:</span>
+    </div>
+    <div class="types-right">
+        <span>7</span>
+        <span>4</span>
+    </div>
+    </div>
+</div>
+</div>
+<div class="content-holiday">
+    <span class="title">List of holidays</span>
+    <nz-list nzItemLayout="horizontal" [nzLoading]="!holidays.length" [nzBordered]=true>
+    <nz-list-item *ngFor="let item of holidays">
+        <nz-list-item-meta
+        nzDescription="Holiday scope: {{ item.type }}"
+        >
+        <nz-list-item-meta-title>
+            <p>{{ item.title }}</p>
+        </nz-list-item-meta-title>
+        </nz-list-item-meta>
+    </nz-list-item>
+    <nz-list-empty *ngIf="data.length === 0" [nzNoResult]="'There is no holidays for this employee'"></nz-list-empty>
+    </nz-list>
+</div>
+</div>
+
+</div>

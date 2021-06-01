@@ -76,6 +76,11 @@
           color: blue;
           font-weight: 800;
           font-size: 15px !important;
+          &.disabled {
+            opacity: 0.3;
+            font-weight: 800;
+            font-size: 15px !important;
+          }
         }
       }
     }
@@ -460,6 +465,11 @@
                   .enabled {
                     color: blue;
                     font-weight: 800;
+                    &.disabled {
+                      opacity: 0.3;
+                      font-weight: 800;
+                      font-size: 15px !important;
+                    }
                   }
                   span {
                     flex: 1 1 100%;

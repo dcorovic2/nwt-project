@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { ApiserviceService } from 'src/app/shared/services/apiservice.service';
+import { ActionService } from 'src/app/shared/services/action.service';
 
 interface DataItem {
   name: string;
@@ -20,7 +21,7 @@ export class RequestslistComponent implements OnInit {
   searchValue = '';
   public loading = true;
   visible = false;
-  constructor(private api: ApiserviceService) {}
+  constructor(private api: ApiserviceService, private action: ActionService) {}
   public show: boolean = false;
   public popupData: any = {};
 
@@ -28,30 +29,23 @@ export class RequestslistComponent implements OnInit {
     this.show = !this.show;
   }
   ngOnInit(): void {
-    this.api
-      .get('employee/employee/username', {
-        username: localStorage.getItem('username'),
-      })
-      .subscribe((data: any) => {
-        Object.assign(this.user, {
-          firstnameLastName: data.firstnameLastName,
-          email: data.email,
-          id: data.id,
-        });
-        this.api
-          .get('leaverequest/requests', { status_id: 1 })
-          .subscribe((data) => {
-            this.requests = data;
-            this.loading = false;
-          });
-      });
+    this.getRequests();
+    this.action.set('getRequests', ()=>this.getRequests());
   }
 
   reset(): void {
     this.searchValue = '';
     this.search();
   }
-
+  getRequests(){
+    this.loading=true;
+    this.api
+    .get('leaverequest/requests', { status_id: 1 })
+    .subscribe((data) => {
+      this.requests = data;
+      this.loading = false;
+    });
+  }
   search(): void {
     this.visible = false;
     //   this.listOfDisplayData = this.listOfData.filter((item: DataItem) => item.name.indexOf(this.searchValue) !== -1);
