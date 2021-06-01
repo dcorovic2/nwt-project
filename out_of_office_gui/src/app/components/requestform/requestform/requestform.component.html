@@ -43,7 +43,7 @@
 
         <div class="buttoni request">
             <button class="cancel" (click)="hidePopUp()">Cancel</button>
-            <button class="submit" (click)="createRequest()">Submit</button>
+            <button nz-button nzType="primary" [nzLoading]="isLoadingOne" class="submit" (click)="createRequest()">Submit</button>
             <div class="space">
             </div>
         </div>

@@ -63,8 +63,8 @@ public class UserService {
 
 	public ResponseEntity<?> updatePassword(PasswordDTO password, Long employeeId) {
 		try {
-			User user = userRepository.findById(employeeId);
 			System.out.print(password.getPassword());
+			User user = userRepository.findById(employeeId);
 			user.setPassword(passwordEncoder.encode(password.getPassword()));
 			User updateduser = userRepository.save(user);
 			return new ResponseEntity<>(updateduser, HttpStatus.OK);

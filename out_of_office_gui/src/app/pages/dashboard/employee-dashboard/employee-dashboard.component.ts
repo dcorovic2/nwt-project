@@ -14,6 +14,9 @@ import { NzMessageService } from 'ng-zorro-antd/message';
   templateUrl: './employee-dashboard.component.html'
 })
 export class EmployeeDashboardComponent implements OnInit {
+  isLoadingOne = false;
+  public option2Error: boolean = false; 
+
   @ViewChild('modalContent', { static: true })
   modalContent!: TemplateRef<any>;
   @Input() user  = {id:"", firstnameLastName:"", email:""};
@@ -51,14 +54,20 @@ export class EmployeeDashboardComponent implements OnInit {
     });
   }
 
-  submitForm(): void {    
-    console.log(this.selectControl.value);
-    console.log(this.user.id);
-    console.log(this.user.firstnameLastName);
-
-    this.api.patch('holiday/holiday/' + this.selectControl.value + '/' + this.user.id + '/' + this.user.firstnameLastName, {}, {}).subscribe((dataa: any) =>{
-      this.tmpDisabled = true;
-      this.message1.create('success', `You submitted holiday successfully!`);
-    });
+  submitForm(): void {  
+    this.option2Error = false;  
+    if(this.selectControl.value == null) {
+      this.option2Error = true;
+    }else {  this.isLoadingOne = true;
+      console.log(this.selectControl.value);
+      console.log(this.user.id);
+      console.log(this.user.firstnameLastName);
+  
+      this.api.patch('holiday/holiday/' + this.selectControl.value + '/' + this.user.id + '/' + this.user.firstnameLastName, {}, {}).subscribe((dataa: any) =>{
+        this.tmpDisabled = true;
+        this.isLoadingOne = false;
+        this.message1.create('success', `You submitted new leave request successfully!`);
+      });}
+  
   }
 }

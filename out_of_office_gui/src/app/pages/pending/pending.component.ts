@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ApiserviceService } from 'src/app/shared/services/apiservice.service';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
   selector: 'app-pending',
@@ -12,7 +13,7 @@ export class PendingComponent implements OnInit {
   searchValue = '';
   visible = false;
 
-  constructor(private api: ApiserviceService) {}
+  constructor(private api: ApiserviceService, private message1: NzMessageService) {}
 
   ngOnInit(): void {
     this.api
@@ -43,6 +44,7 @@ export class PendingComponent implements OnInit {
   deleteRequest(id: string): void {
     this.api.delete('leaverequest/request/' + id, {}, {}).subscribe(data => {
       this.requests = this.requests.filter((d: any) => d.id !== id);
+      this.message1.create('success', `You canceled new leave request successfully!`);
     });
   }
 }
