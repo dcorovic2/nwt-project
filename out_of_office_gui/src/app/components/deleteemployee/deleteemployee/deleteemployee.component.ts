@@ -21,9 +21,9 @@ export class DeleteemployeeComponent implements OnInit {
   }
 
   deleteEmployee(){
-     this.api.delete('employee/employee',{id: this.employeeId}).subscribe((data)=>console.log(data));
+     this.api.delete('employee/employee',{id: this.employeeId}).subscribe((data)=>{});
      this.hide = false;
-     setTimeout(()=>{this.action.getEmployees()}, 5000); 
+     setTimeout(()=>{this.action.getEmployees()}, 1000); 
   }
 
 }

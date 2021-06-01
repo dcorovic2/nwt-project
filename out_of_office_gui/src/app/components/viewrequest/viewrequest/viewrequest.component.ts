@@ -14,9 +14,12 @@ export class ViewrequestComponent implements OnInit {
   @Input() employeeName: any;
   constructor(private api: ApiserviceService, private action: ActionService) { }
   public hide:boolean = true;
+  public notif : any;
 
   ngOnInit(): void {
-    console.log(this.popupData);
+    this.notif = this.action.getNotif();
+    console.log(this.notif);
+    console.log();
   }
 
   hidePopUp(): void {
@@ -30,14 +33,20 @@ export class ViewrequestComponent implements OnInit {
     });
   }
   approve(){
+    
     this.isLoadingTwo = true;
     let comment = (<HTMLInputElement>document.getElementById('comment')).value;
     this.api.patch('leaverequest/request/'+this.popupData.requestId, {}, {notificationsId: 2, reason: comment, statusId:2})
    .subscribe((data:any)=>{
-    this.action.dismissNotification(this.popupData.notificationid));
+     if(this.popupData.notificationid)this.action.dismissNotification(this.popupData.notificationid);
+     else {
+      this.action.getRequests();
+      this.action.dismissNotification(this.notif.find((notif:any)=> notif.requestId == this.popupData.requestId).id);
+     }
     this.isLoadingTwo = false;
     this.hide=!this.hide;
    });
+
    
   }
 

@@ -54,6 +54,7 @@ import { NewholidayComponent } from './pages/newholiday/newholiday/newholiday.co
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { NzListModule } from 'ng-zorro-antd/list';
 import { LayoutComponent } from './pages/layout/layout/layout.component';
+import { DrawerComponent } from './components/drawer/drawer.component';
 
 
 registerLocaleData(fi);
@@ -83,7 +84,8 @@ registerLocaleData(fi);
     HolidaytypelistComponent,
     CreateholidayComponent,
     NewholidayComponent,
-    LayoutComponent 
+    LayoutComponent,
+    DrawerComponent 
   ],
   imports: [
     BrowserModule,

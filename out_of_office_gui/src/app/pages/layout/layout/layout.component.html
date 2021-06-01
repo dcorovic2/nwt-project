@@ -1,12 +1,12 @@
+<div [ngClass]="{layout:role=='admin'}">
 <app-listnotification  [notif]="notif" *ngIf="show"></app-listnotification>
-<div class="content-wrap">
+<div class="content-wrap" style="position:absolute">
     <app-menu [role]="role"></app-menu>
     <div class="main-content">
         <app-header (show)="event($event)"[numOfnotifications] = "numOfnotifications" [notif] = "notif" [user]="user" *ngIf="user"></app-header>
             <router-outlet></router-outlet>
     </div>
     </div>
-
-
-
+<app-drawer [holidays]="holidays" [data]="data" [showDrawer]="showDrawer"></app-drawer>
+</div>
     

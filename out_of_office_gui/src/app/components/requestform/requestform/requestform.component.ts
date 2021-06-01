@@ -52,7 +52,8 @@ export class RequestformComponent implements OnInit {
       this.api.post('leaverequest/request', {}, {comment:comment, daysNum: num, employeeId: this.id, startDate: start, typeId: this.selectControl.value})
       .subscribe((data)=>{ 
         this.isLoadingOne = false; 
-        this.message1.create('success', `You submitted holiday successfully!`);
+        this.hide=false;
+        this.message1.create('success', `You submitted request successfully!`);
       });
     }
   }

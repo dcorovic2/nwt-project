@@ -1,0 +1,115 @@
+.drawer-content{
+    height: 100%;
+    position: absolute;
+    right: 0;
+    width: 0;
+    overflow: hidden;
+    box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;
+    background-color: white;
+    .drawer-header{
+        height: 180px;
+        background: url("../../../assets/img/—Pngtree—purple gradient low polygon background_1266092.jpg");
+        background-repeat: round;
+        .back-icon{
+            color: white;
+            font-size: 20px;
+            padding-left: 10px;
+            padding-top:5px;
+            cursor: pointer;
+            >span{
+                padding-left: 10px;
+            }
+        }
+        .user-name{
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            color: white;
+           >span{font-size: 25px;} 
+        }
+    }
+    .small-content{
+        .small-statistics{
+            display: flex;
+        }
+        .statistics {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            padding-left: 45px;
+            padding-right: 100px;
+            padding-top: 15px;
+            &.first {
+              background: url("../../../assets/img/sticker.jpg") !important;
+              background-repeat: no-repeat !important;
+              height: 230px;
+              width: 250px;
+              .remaining-info{
+                padding-top: 65px;
+                width: 103px;
+                padding-right: 25px;
+                .number{    
+                    padding-left: 69px;
+                    font-family: cursive;
+                    font-size: 54px;
+                }
+                .stat-contents{
+                    width: 200px;
+                }
+              }
+            }
+            &.second{
+                width: 100%;
+                padding-left: 50px;
+                padding-right: 50px;
+                padding-top: 95px;
+                .head{
+                    font-size: 20px;
+                    border-bottom: 1px solid black;
+                }
+                .types{
+                    display: flex;
+                    font-size: 14px;
+                    .types-left{
+                        text-align: left;
+                        display: flex;
+                        flex-direction: column;
+                        width: 100%;
+                    }
+                    .types-right{
+                        text-align: right;
+                        display: flex;
+                        flex-direction: column;
+                        width: 100%;
+                    }
+                }
+            }
+    }
+    .content-holiday{
+        padding-top: 25px;
+        font-size: 17px;
+        /* padding-right: 29px; */
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    .ant-list-items{
+        border: 1px solid #a651a6 !important;
+     }
+     >nz-list-item{
+         background-color: red;
+     }
+  
+}
+}
+.expand{
+    animation: draweropen 200ms forwards;
+}
+.notexpand{
+    animation: drawerclose 200ms forwards;
+}
+
+
+
+@keyframes draweropen { from {width: 0px;} to {width: 600px; overflow:unset;} }
+@keyframes drawerclose { from {width: 600px;} to {width: 0px; overflow: hidden;} }

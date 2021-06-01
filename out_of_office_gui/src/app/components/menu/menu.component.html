@@ -5,7 +5,7 @@
         <ul>
             <li *ngFor="let menu of menus" [ngClass]="{
             menuitemsopen: expandIndicator, menuitemsclose: !expandIndicator}" >
-               <a (click)="execMenu(menu.route);"  [ngClass]="{ active: menu.selected}">
+               <a [title]="menu.label" (click)="execMenu(menu.route);"  [ngClass]="{ active: menu.selected}">
                    <i *ngIf="menu.icon" class="{{menu.icon}} icon"></i>
                    <span>{{menu.label}}</span>
                </a>

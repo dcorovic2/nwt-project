@@ -22,12 +22,14 @@
               <tr *ngFor="let request of requests">
                 <td>{{ request.employeeName }}</td>
                 <td>{{ request.leave_type.displayName }}</td>
-                <td>From {{ request.startDate }} to {{ request.endDate }}</td>
+                <td>From {{ request.startDate }} to {{ request.endDate }} 
+                </td>
+               
                 <td>
                   <div class="value">
                     <span
                       class="active"
-                      (click)="show = !show; openPopup(request)"
+                      (click)="show = !show; openPopup(request);"
                       [ngClass]="{ disabled: request.leave_status.code != 'P' }"
                       >View</span
                     >

@@ -48,13 +48,19 @@ export class ListofemployeesComponent implements OnInit {
 
   constructor(private route:Router, private api: ApiserviceService, private action: ActionService) { }
 
-  fullPage(username:string, id: number): void {
-    this.route.navigate(['layout/employeeview'], {queryParams:{username: username, id: id}});
+  fullPage(username:string): void {
+    this.action.showDrawer(username);
+    //this.route.navigate(['layout/employeeview'], {queryParams:{username: username, id: id}});
   }
 
   ngOnInit(): void {
     this.action.set('getEmployees', ()=>{
-      this.api.get('employee/allemployees').subscribe((data)=>{this.employees = data; this.loading=false; this.employees2 = [...this.employees]});
+      this.loading = true;
+      this.api.get('employee/allemployees').subscribe((data)=>{ 
+      let dataa1 = data.filter((dataFiltered: any) => dataFiltered.role.code != "ADMIN");
+      this.employees = dataa1;  
+      this.loading=false; 
+      this.employees2 = [...this.employees]});
     });
     this.api.get('employee/employee/username', {username: localStorage.getItem('username')}).subscribe((data:any)=>{
       Object.assign(this.user, {firstnameLastName:data.firstnameLastName, email: data.email});
@@ -63,7 +69,7 @@ export class ListofemployeesComponent implements OnInit {
      this.api.get('employee/allemployees')
      .subscribe((data)=>{
       let dataa1 = data.filter((dataFiltered: any) => dataFiltered.role.code != "ADMIN");
-       this.employees = dataa1; 
+      this.employees = dataa1; 
        this.loading=false; 
        this.employees2 = [...this.employees]
       });
