@@ -11,9 +11,11 @@ export class DeleteemployeeComponent implements OnInit {
   constructor(private api: ApiserviceService, private action: ActionService) { }
   public hide:boolean = true;
   @Input() employeeId: any;
+
   hidePopUp(): void {
       this.hide=!this.hide;
-    }
+  }
+  
   ngOnInit(): void {
     console.log(this.employeeId);
   }

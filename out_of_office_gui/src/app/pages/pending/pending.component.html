@@ -24,15 +24,14 @@
                 <td>From {{ request.startDate }} to {{ request.endDate }}</td>
                 <td>{{ request.leave_status.displayName }}</td>
                 <td>
-                  <div class="value actions">
-
-                    <span
+                  
+                    <a
                       class="enabled"
                       style="float: left;"
+                      (click) = "deleteRequest(request.id)"
                       [ngClass]="{ disabled: request.leave_status.code != 'P' }"
-                      >Cancel</span
-                    >
-                  </div>
+                      >Cancel</a>
+                 
                 </td>
               </tr>
             </tbody>
@@ -45,7 +44,6 @@
                   nz-input
                   placeholder="Search name"
                   [(ngModel)]="searchValue"
-                  (click) = "deleteRequest()"
                   class="input-name"
                 />
                 <button

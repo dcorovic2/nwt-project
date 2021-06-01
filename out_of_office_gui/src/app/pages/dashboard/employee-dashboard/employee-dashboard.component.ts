@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import { ApiserviceService } from 'src/app/shared/services/apiservice.service';
 import { FormControl } from '@angular/forms';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
   selector: 'app-employee-dashboard',
@@ -30,7 +31,7 @@ export class EmployeeDashboardComponent implements OnInit {
     return this.tmpDisabled;
   }
   
-  constructor(private api: ApiserviceService){}
+  constructor(private api: ApiserviceService, private message1: NzMessageService){}
 
   ngOnInit(): void {
     this.api.get('holiday/getlistofholidays', {}, {}).subscribe((dataa: any) =>{
@@ -57,6 +58,7 @@ export class EmployeeDashboardComponent implements OnInit {
 
     this.api.patch('holiday/holiday/' + this.selectControl.value + '/' + this.user.id + '/' + this.user.firstnameLastName, {}, {}).subscribe((dataa: any) =>{
       this.tmpDisabled = true;
+      this.message1.create('success', `You submitted holiday successfully!`);
     });
   }
 }

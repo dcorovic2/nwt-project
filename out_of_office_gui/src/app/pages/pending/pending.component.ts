@@ -27,7 +27,7 @@ export class PendingComponent implements OnInit {
         });
         this.api
           .get('leaverequest/requests/employee', { employeeId: this.user.id })
-          .subscribe((data) => {this.requests = data; console.log(this.requests)});
+          .subscribe((data) => {this.requests = data;});
       });
   }
 
@@ -40,10 +40,9 @@ export class PendingComponent implements OnInit {
     this.visible = false;
   }
 
-  deleteRequest(): void {
-    let requestId
-    this.api.delete('leaverequest/request/' + requestId, {}, {}).subscribe(data => {
-
+  deleteRequest(id: string): void {
+    this.api.delete('leaverequest/request/' + id, {}, {}).subscribe(data => {
+      this.requests = this.requests.filter((d: any) => d.id !== id);
     });
   }
 }

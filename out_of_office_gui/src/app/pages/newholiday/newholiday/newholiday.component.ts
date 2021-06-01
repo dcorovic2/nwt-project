@@ -55,7 +55,8 @@ export class NewholidayComponent implements OnInit {
     private fb: FormBuilder
   ) {
     this.validateForm = this.fb.group({
-      
+      date1: ['', [Validators.required]],
+      date2: ['', [Validators.required]]
     });
   }
 
