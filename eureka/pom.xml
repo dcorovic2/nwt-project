@@ -53,6 +53,7 @@
 				<directory>src/main/webapp</directory>
 			</testResource>
 		</testResources>
+		<finalName>eureka-docker</finalName>
 	</build>
 
 </project>

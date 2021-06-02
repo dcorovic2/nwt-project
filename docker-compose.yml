@@ -1,0 +1,124 @@
+version: "3"
+services:
+  discovery:
+    container_name: eureka-docker
+    image: eureka-docker
+    restart: always
+    build:
+      context: ./eureka
+      dockerfile: Dockerfile
+    expose:
+      - 8761
+    ports:
+      - 8761:8761
+    networks:
+      - outofoffice
+  config-server: 
+    container_name: config-docker
+    image: config-docker
+    restart: always
+    build:
+      context: ./config-server
+      dockerfile: Dockerfile
+    expose:
+      - 8888
+    ports:
+      - 8888:8888
+    links:
+      - discovery:eureka-docker
+    depends_on:
+      - discovery
+    networks:
+      - outofoffice
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: rabbitmq
+    restart: on-failure
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    ports:
+      - 5672:5672
+      - 15672:15672
+    networks:
+      - outofoffice
+  api-gateway:
+    image: auth-docker
+    deploy:
+       restart_policy:
+         condition: on-failure
+         max_attempts: 3
+    container_name: auth-docker
+    build:
+      context: ./jwt-auth-service
+      dockerfile: Dockerfile
+    expose:
+      - 8089
+    ports:
+      - "8089:8089"
+    links:
+      - discovery:eureka-docker
+      - config-server:config-docker
+    depends_on:
+      - discovery
+      - config-server
+    networks:
+      - outofoffice
+    environment:
+       SPRING_RABBITMQ_HOST: rabbitmq
+#  employee-service:
+#    image: employee-docker
+#    container_name: employee-docker
+#    build:
+#      context: ./employeeservice
+#      dockerfile: Dockerfile
+#    expose:
+#      - 8081
+#    ports:
+#      - 8081:8081
+#    networks:
+#      - outofoffice
+#    restart: on-failure
+#    links:
+#      - config-server:config-docker
+#      - discovery:eureka-docker
+#      - rabbitmq:rabbitmq
+#      - api-gateway:auth-docker
+#    depends_on:
+#      - config-server
+#      - discovery
+#      - rabbitmq
+#      - api-gateway
+#    environment:
+#      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://discovery:8761/eureka
+#      SPRING_RABBITMQ_HOST: rabbitmq
+  holiday-service:
+    image: holiday-docker
+    deploy:
+       restart_policy:
+         condition: on-failure
+         max_attempts: 3
+    environment:
+       SPRING_RABBITMQ_HOST: rabbitmq
+    container_name: holiday-docker
+    build:
+      context: ./holidayservice
+      dockerfile: Dockerfile
+    expose:
+      - 8082
+    ports:
+      - "8082:8082"
+    networks:
+      - outofoffice
+    links:
+      - discovery:eureka-docker
+      - config-server:config-docker
+      - api-gateway:auth-docker
+    depends_on:
+      - discovery
+      - config-server
+      - api-gateway
+  
+networks:
+  outofoffice:
+    driver: bridge
