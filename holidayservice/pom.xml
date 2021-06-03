@@ -207,6 +207,7 @@
 				</executions>
 			</plugin>
 		</plugins>
+		<finalName>holiday-docker</finalName>
 	</build>
 
 

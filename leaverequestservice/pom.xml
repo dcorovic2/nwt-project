@@ -211,6 +211,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
+		<finalName>leave-docker</finalName>
 	</build>
 
 </project>
