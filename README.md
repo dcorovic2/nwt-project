@@ -58,6 +58,7 @@ We have tried a lot of different potentional solutions, as follows:
 6. Adding environment variables as EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka:8761/eureka and CONFIG_SERVER_URI: optional:configserver:http://config-server:8888
 
 .. and a lot of different proposed variation. This issue is a future work on this project.
+**All of the other tasks are successfully completed!**
 
 ## Demo video
 
