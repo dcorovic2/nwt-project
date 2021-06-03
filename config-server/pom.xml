@@ -50,6 +50,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
+		<finalName>config-docker</finalName>
 	</build>
 
 </project>

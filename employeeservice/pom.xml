@@ -237,5 +237,6 @@
 			</plugin>
 
 		</plugins>
+		<finalName>employee-docker</finalName>
 	</build>
 </project>
