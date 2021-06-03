@@ -21,54 +21,38 @@ export class EmployeeDashboardComponent implements OnInit {
   modalContent!: TemplateRef<any>;
   @Input() user  = {id:"", firstnameLastName:"", email:""};
   @Input() info = {allowance: "", remainingDays: ""};
+  @Input() leavehistory : any;
   public show:boolean = false;
   selectControl: FormControl = new FormControl();
   public types: any;
   public tmpDisabled:boolean = false;
 
-  public doSomething(): void {
-    this.show = !this.show;
-  }
-
-  public checkShow(): boolean {
-    return this.tmpDisabled;
-  }
   
   constructor(private api: ApiserviceService, private message1: NzMessageService){}
 
   ngOnInit(): void {
-    this.api.get('holiday/getlistofholidays', {}, {}).subscribe((dataa: any) =>{
-      let dataa1 = dataa.filter((dataFiltered: any) => dataFiltered.holidayType.code == "Not for all");
-      
-      for(let i = 0; i < dataa1.length; i++) {
-        let emploteesList = dataa1[i].employees;
-
-        for(let j = 0; j < emploteesList.length; j++) { console.log()
-          if(emploteesList[j].id == this.user.id) {
-            this.tmpDisabled = true;
-          }
-        }
+    this.api.get('holiday/getlistofholidays', {}, {}).subscribe((data: any) =>{
+      let individualHolidays = data.filter((dataFiltered: any) => dataFiltered.holidayType.code == "Not for all");
+      for(let i = 0; i < individualHolidays.length; i++) {
+        if(individualHolidays[i].employees.find((employee:any)=>{employee=this.user.id})) this.tmpDisabled = true;
       }
-
-      this.types = dataa1;
-      console.log(this.types);
+      this.types = individualHolidays;
     });
   }
 
   submitForm(): void {  
     this.option2Error = false;  
-    if(this.selectControl.value == null) {
-      this.option2Error = true;
-    }else {  this.isLoadingOne = true;
-      console.log(this.selectControl.value);
-      console.log(this.user.id);
-      console.log(this.user.firstnameLastName);
-  
-      this.api.patch('holiday/holiday/' + this.selectControl.value + '/' + this.user.id + '/' + this.user.firstnameLastName, {}, {}).subscribe((dataa: any) =>{
+    if(this.selectControl.value == null) this.option2Error = true;
+   else {  
+       this.isLoadingOne = true;
+        this.api.patch('holiday/holiday/' + this.selectControl.value + '/' + this.user.id + '/' + this.user.firstnameLastName, {}, {}).subscribe((dataa: any) =>{
         this.tmpDisabled = true;
         this.isLoadingOne = false;
         this.message1.create('success', `You submitted new leave request successfully!`);
       });}
-  
+  }
+
+  changeShow(event:any){
+    this.show = event;
   }
 }

@@ -64,14 +64,14 @@ public class LeaveRequestServiceApplication {
 			LocalDate date1 = LocalDate.now();
 			
 			
-			LeaveRequest request1 = new LeaveRequest("comment1", 10, 1L, date1, date1.plusDays(10), leavetype1, leavestatus1, notification1, 15L);
-			LeaveRequest request2 = new LeaveRequest("comment2", 20, 4L, date1, date1.plusDays(20), leavetype1, leavestatus1, notification1, 15L);
-			LeaveRequest request3 = new LeaveRequest("comment3", 14, 3L, date1, date1.plusDays(14), leavetype1, leavestatus1, notification1, 15L);
-			LeaveRequest request4 = new LeaveRequest("comment2", 20, 5L, date1, date1.plusDays(20), leavetype1, leavestatus1, notification1, 15L);
-			LeaveRequest request5 = new LeaveRequest("comment3", 14, 6L, date1, date1.plusDays(14), leavetype1, leavestatus1, notification1, 15L);
-			leaveRequestRepository.save(request1);
-			leaveRequestRepository.save(request2);
-			leaveRequestRepository.save(request3);
+//			LeaveRequest request1 = new LeaveRequest("comment1", 10, 1L, date1, date1.plusDays(10), leavetype1, leavestatus1, notification1, 15L);
+//			LeaveRequest request2 = new LeaveRequest("comment2", 20, 4L, date1, date1.plusDays(20), leavetype1, leavestatus1, notification1, 15L);
+//			LeaveRequest request3 = new LeaveRequest("comment3", 14, 3L, date1, date1.plusDays(14), leavetype1, leavestatus1, notification1, 15L);
+//			LeaveRequest request4 = new LeaveRequest("comment2", 20, 5L, date1, date1.plusDays(20), leavetype1, leavestatus1, notification1, 15L);
+//			LeaveRequest request5 = new LeaveRequest("comment3", 14, 6L, date1, date1.plusDays(14), leavetype1, leavestatus1, notification1, 15L);
+//			leaveRequestRepository.save(request1);
+//			leaveRequestRepository.save(request2);
+//			leaveRequestRepository.save(request3);
 		});
 	}
 

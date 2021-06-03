@@ -29,8 +29,9 @@
                   <div class="value">
                     <span
                       class="active"
-                      (click)="show = !show; openPopup(request);"
+                      (click)="show=!show; openPopup(request);"
                       [ngClass]="{ disabled: request.leave_status.code != 'P' }"
+                      style="cursor:pointer"
                       >View</span
                     >
                   </div>
@@ -52,7 +53,7 @@
                   nz-button
                   nzSize="small"
                   nzType="primary"
-                  (click)="search()"
+                  (click)="visible=false"
                   class="search-button"
                 >
                   Search
@@ -61,7 +62,7 @@
                   nz-button
                   class="reset"
                   nzSize="small"
-                  (click)="reset()"
+                  (click)="searchValue = ''; visible = false;"
                 >
                   Reset
                 </button>
@@ -70,4 +71,4 @@
           </nz-dropdown-menu>
         </div>
 
-<app-viewrequest [popupData]="popupData" *ngIf="show"></app-viewrequest>
+<app-viewrequest (show)="changeShow($event)" [popupData]="popupData" *ngIf="show"></app-viewrequest>

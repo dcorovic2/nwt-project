@@ -120,7 +120,7 @@ public class LeaveRequestController {
 		
 		rabbitTemplate.convertAndSend(RabbitConfiguration.EXCHANGE, RabbitConfiguration.ROUTING_KEY, reqNotification);
 		
-		rabbitTemplate.convertAndSend(RabbitConfiguration.EXCHANGE, RabbitConfiguration.ROUTING_KEY2, reqEmployee);
+		if(statusRequest.getStatusId()==2)rabbitTemplate.convertAndSend(RabbitConfiguration.EXCHANGE, RabbitConfiguration.ROUTING_KEY2, reqEmployee);
 		return LeaveRequestService.updateRequestStatus(statusRequest, id);
 	}
 

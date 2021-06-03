@@ -5,7 +5,7 @@
     <div class="table">
       <nz-table
         #nzTable
-        [nzData]="listOfDisplayData"
+        [nzData]="employees"
         [nzLoading]="loading"
         nzTableLayout="fixed"
         [nzScroll]="{ y: '440px' }"
@@ -76,5 +76,6 @@
 </div>
 <app-deleteemployee
   [employeeId]="employeeId"
+  (hide)="hide($event)"
   *ngIf="!hideDelete"
 ></app-deleteemployee>

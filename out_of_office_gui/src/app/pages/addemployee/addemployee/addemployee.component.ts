@@ -24,7 +24,7 @@ export class AddemployeeComponent implements OnInit {
   public departmentError: boolean = false;
   public passError: boolean = false;
   public confpassError: boolean = false;
-  public newemployeeadded: boolean = true;
+  public newemployeeadded: boolean = false;
 
   loadOne(): void {
     this.isLoadingOne = true;
@@ -121,7 +121,7 @@ export class AddemployeeComponent implements OnInit {
           remainingDays: allowance,
           roleId: 2,
           username: username
-        }).subscribe((data)=>console.log(data)); 
+        }).subscribe((data)=>this.newemployeeadded=true); 
 
     }else{
       if((<HTMLInputElement>document.getElementById('firstname')).value.length == 0) this.firstnameError = true;

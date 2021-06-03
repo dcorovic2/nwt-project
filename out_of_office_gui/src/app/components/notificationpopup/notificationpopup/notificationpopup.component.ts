@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-notificationpopup',
@@ -8,6 +8,7 @@ export class NotificationpopupComponent implements OnInit {
   @Input() text: any;
   @Input()status: any;
   @Input() admin: any;
+  @Output() show = new EventEmitter<boolean>();
   constructor() { }
 
   public hide:boolean = true;
@@ -15,6 +16,6 @@ export class NotificationpopupComponent implements OnInit {
   }
 
   hidePopUp(): void {
-    this.hide=false;
+    this.show.emit(false);
   }
 }

@@ -33,10 +33,6 @@ export class RequestslistComponent implements OnInit {
     this.action.set('getRequests', ()=>this.getRequests());
   }
 
-  reset(): void {
-    this.searchValue = '';
-    this.search();
-  }
   getRequests(){
     this.loading=true;
     this.api
@@ -46,9 +42,10 @@ export class RequestslistComponent implements OnInit {
       this.loading = false;
     });
   }
-  search(): void {
-    this.visible = false;
-    //   this.listOfDisplayData = this.listOfData.filter((item: DataItem) => item.name.indexOf(this.searchValue) !== -1);
+  
+  changeShow(event:any){
+      this.show = event;
+      console.log(this.show);
   }
 
   openPopup(request: any) {

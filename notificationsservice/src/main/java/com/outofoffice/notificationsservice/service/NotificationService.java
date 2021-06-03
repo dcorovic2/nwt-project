@@ -134,9 +134,6 @@ public class NotificationService {
 
 	public ResponseEntity<?> getNotificationList() {
 		List<Notification> notificationList = notificationRepository.findAll();
-		if (notificationList.isEmpty())
-			throw new NoDataException();
-		else
 			return new ResponseEntity<>(notificationList, HttpStatus.OK);
 	}
 

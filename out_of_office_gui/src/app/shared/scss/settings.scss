@@ -4,6 +4,9 @@
   width: 40%;
   background-color: #f7f7f7;
   position: fixed;
+  &.newemployee{
+    top: 22% !important;
+  }
   top: 30%;
   left: 30%;
   .form-background {
@@ -86,6 +89,9 @@
         .conf-new-class {
           padding: 15px;
           font-size: 14px;
+          &.newhol{
+            text-align: left  !important;
+          }
           input {
             height: 38px;
             padding: 12px;

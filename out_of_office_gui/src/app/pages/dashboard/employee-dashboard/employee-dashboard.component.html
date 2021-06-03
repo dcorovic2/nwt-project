@@ -15,8 +15,10 @@
               <span style="font-size: 21px">Sick leave:</span>
             </div>
             <div class="types-right">
-              <span>7</span>
-              <span>4</span>
+              <span *ngIf="!leavehistory">loading data</span>
+              <span *ngIf="!leavehistory">loading data</span>
+              <span *ngIf="leavehistory">{{leavehistory.vacation}}</span>
+              <span *ngIf="leavehistory">{{leavehistory.sick}}</span>
             </div>
           </div>
         </div>
@@ -82,8 +84,8 @@
         </div>
       </form>
     </div>
-    <div (click)="doSomething()" class="plusbutton">
+    <div (click)="show=!show" class="plusbutton">
       <i class="fas fa-plus-circle"></i>
     </div>
-    <app-requestform *ngIf="show" [id]="user.id" [allowance]="info.allowance"></app-requestform>
+    <app-requestform (show)="changeShow($event)" *ngIf="show" [id]="user.id" [allowance]="info.allowance"></app-requestform>
 

@@ -75,32 +75,11 @@ export class ListofemployeesComponent implements OnInit {
       });
 
   }
-
+public hide(event:any){
+  this.hideDelete=event;
+}
   searchValue = '';
   visible = false;
-  listOfData: DataItem[] = [
-    {
-      name: 'John Brown',
-      department: 'IT',
-      
-    },
-    {
-      name: 'Jim Green',
-      department: 'Testing',
-      
-    },
-    {
-      name: 'Joe Black',
-      department: 'HR',
-     
-    },
-    {
-      name: 'Jim Red',
-      department: 'iOS',
-     
-    }
-  ];
-  listOfDisplayData = [...this.listOfData];
 
   reset(): void {
     this.searchValue = '';

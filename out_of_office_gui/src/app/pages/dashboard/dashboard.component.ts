@@ -1,46 +1,6 @@
-import {
-  Component,
-  ChangeDetectionStrategy,
-  ViewChild,
-  TemplateRef,
-  OnInit,
-} from '@angular/core';
-import {
-  startOfDay,
-  endOfDay,
-  subDays,
-  addDays,
-  endOfMonth,
-  isSameDay,
-  isSameMonth,
-  addHours,
-} from 'date-fns';
-import { Subject } from 'rxjs';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {Component, OnInit} from '@angular/core';
 
-
-import {
-  CalendarEvent,
-  CalendarEventAction,
-  CalendarEventTimesChangedEvent,
-  CalendarView,
-} from 'angular-calendar';
 import { ApiserviceService } from 'src/app/shared/services/apiservice.service';
-
-const colors: any = {
-  red: {
-    primary: '#ad2121',
-    secondary: '#FAE3E3',
-  },
-  blue: {
-    primary: '#1e90ff',
-    secondary: '#D1E8FF',
-  },
-  yellow: {
-    primary: '#e3bc08',
-    secondary: '#FDF1BA',
-  },
-};
 
 @Component({
   selector: 'app-dashboard',
@@ -50,6 +10,7 @@ export class DashboardComponent implements OnInit {
   public user  = {id:"", firstnameLastName:"", email:""};
   public info = {allowance: "", remainingDays: ""};
   public role: any;
+  public leavehistory: any;
 
   constructor(private api: ApiserviceService){}
   ngOnInit(){
@@ -60,6 +21,9 @@ export class DashboardComponent implements OnInit {
     this.api.get('employee/employee/username', {username: localStorage.getItem('username')}).subscribe((data:any)=>{
       Object.assign(this.user, {firstnameLastName:data.firstnameLastName, email: data.email, id:data.id});
       this.info = data; 
+      this.api.get('leaverequest/requestType/'+data.id).subscribe((data:any)=>{
+        this.leavehistory = data;
+      });
      })
   }
 }

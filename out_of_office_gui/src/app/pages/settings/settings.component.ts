@@ -62,56 +62,33 @@ export class SettingsComponent implements OnInit {
   }
 
   submitForm(): void {
-    
-    if (this.validateForm.valid) {
-      console.log("USLO U METOD");
+    let newpass = (<HTMLInputElement>document.getElementById('newpassword')).value;
+    let confnewpass = (<HTMLInputElement>document.getElementById('confnewpass')).value;
+    if(newpass != confnewpass)  this.confirmnewpasswordError = true;
+    else if (this.validateForm.valid){
       let password = (<HTMLInputElement>document.getElementById('password')).value;
-      let newpass = (<HTMLInputElement>document.getElementById('newpassword')).value;
-      let confnewpass = (<HTMLInputElement>document.getElementById('confnewpass')).value;
       let username = localStorage.getItem('username');
       let params: HttpParams = new HttpParams();
       params = params.append('password', password);
       this.passwordError = false;
       this.newpasswordError = false;
       this.confirmnewpasswordError = false;
-
-      if(newpass != confnewpass)  this.confirmnewpasswordError = true;
-
-    this.api
-      .post('users/password', { password: password, username: username  })
-      .subscribe((data) => {
-
+      this.isLoadingOne = true;
+      this.api.post('users/password', { password: password, username: username}).subscribe((data) => {
         if (data != null){
+          this.isLoadingOne = false;
           this.passwordError = false;
           data=JSON.parse(data);
-          console.log(data.id);
-          console.log(data.password);
-          console.log(confnewpass);
-          this.api
-          .patch(
-          'users/' + data.id,
-          {},
-          {
-            password: confnewpass
-          }
-          )
-          .subscribe((data) => {
+          this.api.patch('users/' + data.id,{},{password: confnewpass}).subscribe((data) => {
               this.passwordchanged = true;
-              console.log(data);
               this.passwordError = false;
               this.newpasswordError = false;
               this.confirmnewpasswordError = false;
               this.passwordchanged = true;
           });
         }
-        else {
-          console.log("Uslo u else!")
-          this.passwordError = true;
-        }
-       
-        //setTimeout(()=>this.route.navigate(['dashboard']),5000);
+        else this.passwordError = true;
       });
-
     }else{
       if((<HTMLInputElement>document.getElementById('password')).value.length == 0) this.passwordError = true;
       else this.passwordError = false;

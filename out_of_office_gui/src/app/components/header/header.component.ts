@@ -14,8 +14,7 @@ export class HeaderComponent implements OnInit {
   public display = false;
   constructor(private api: ApiserviceService) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
   
   public doSomething(): void {
     this.display = !this.display;

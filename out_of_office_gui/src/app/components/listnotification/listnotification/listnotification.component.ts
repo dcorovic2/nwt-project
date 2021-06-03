@@ -20,8 +20,9 @@ export class ListnotificationComponent implements OnInit {
 
   constructor(private api: ApiserviceService, private action: ActionService) { }
 
-  ngOnInit(): void {
-    this.action.set('dismissNotification',(id:any)=>this.dismiss(id))
+  ngOnInit(): void { 
+    this.action.setNotificationList(true);
+    this.action.set('dismissNotificationList',(id:any)=>this.dismiss(id))
   }
 
 
@@ -29,7 +30,6 @@ export class ListnotificationComponent implements OnInit {
     this.text = notification.text;
     this.status = notification.displayName;
     this.admin = notification.admin;
-    console.log(notification);
     if(notification.requestId){
       this.api.get('leaverequest/request/'+notification.requestId).subscribe((data)=>{
         this.popupData = {
@@ -49,9 +49,14 @@ export class ListnotificationComponent implements OnInit {
   dismiss(id:any){
     this.id = id;
     this.dismis = true;
-    this.api.patch('notification/notifications/'+id, {dismiss: 1}). subscribe((data)=>{
-      this.action.getNotifications();
-    })
+    this.action.dismissNotification(this.id);
+  }
+
+  changeShow(event:any){
+    this.showN = event;
+  }
+  changeShowRequest(event:any){
+    this.showR = event;
   }
 
 }

@@ -11,12 +11,12 @@ export class DrawerComponent implements OnInit {
   @Input() showDrawer = true;
   @Input() data: any;
   @Input() holidays: any;
+  @Input() leavehistory: any;
   public loading: any;
   constructor(private api: ApiserviceService, private action: ActionService) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
 
-  }
   changeforview(){
     this.action.changeview();
   }

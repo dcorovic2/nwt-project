@@ -38,7 +38,8 @@ export class LoginformComponent implements OnInit {
   
 
   ngOnInit(): void {
-    setInterval(()=>this.refresh(), 300000);
+    localStorage.clear();
+    setInterval(()=>this.refresh(), 240000);
   }
 
  public refresh(){

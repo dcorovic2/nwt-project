@@ -1,6 +1,5 @@
 <div class="outerDiv">
     <p>Notifications</p>
-
     <div *ngFor="let notification of notif" [ngClass]="{opac: dismis}" class="particularNotification">
         <div (click)="showNoti(notification)" id="iconDiv" style="display: inline-block;">
             <i class="fas fa-users" style="color: lightgray;"></i>
@@ -10,7 +9,6 @@
             <p id="someText">{{notification.displayName}}<i *ngIf="notification.displayName=='Sick leave'" class="fas fa-head-side-cough"></i>
                                                          <i *ngIf="notification.displayName=='Vacation'" class="fas fa-plane-departure"></i></p>
         </div>
-       
         <i  (click)="dismiss(notification.id);" class="fas fa-bell-slash"></i>
         <div class="col-3" *ngIf="dismis&&id==notification.id">
             <div class="snippet" data-title=".dot-pulse">
@@ -24,5 +22,5 @@
        <p class="nonews">No notifications.</p>
     </div>
 </div>
-<app-notificationpopup [admin]="admin" [status]="status" [text]="text" *ngIf="showN"></app-notificationpopup>
-<app-viewrequest [popupData] = "popupData"  *ngIf="showR"></app-viewrequest>
+<app-notificationpopup (show)="changeShow($event)" [admin]="admin" [status]="status" [text]="text" *ngIf="showN"></app-notificationpopup>
+<app-viewrequest (show)="changeShowRequest($event)" [popupData] = "popupData"  *ngIf="showR"></app-viewrequest>

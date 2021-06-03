@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActionService } from 'src/app/shared/services/action.service';
 import { ApiserviceService } from 'src/app/shared/services/apiservice.service';
 
@@ -7,23 +7,20 @@ import { ApiserviceService } from 'src/app/shared/services/apiservice.service';
   templateUrl: './deleteemployee.component.html'
 })
 export class DeleteemployeeComponent implements OnInit {
+  @Input() employeeId: any;
+  @Output() hide = new EventEmitter<boolean>();
 
   constructor(private api: ApiserviceService, private action: ActionService) { }
-  public hide:boolean = true;
-  @Input() employeeId: any;
 
-  hidePopUp(): void {
-      this.hide=!this.hide;
-  }
-  
-  ngOnInit(): void {
-    console.log(this.employeeId);
-  }
+  ngOnInit(): void {}
 
   deleteEmployee(){
      this.api.delete('employee/employee',{id: this.employeeId}).subscribe((data)=>{});
-     this.hide = false;
+     this.hide.emit(true);
      setTimeout(()=>{this.action.getEmployees()}, 1000); 
   }
+
+  hidePopUp(): void {this.hide.emit(true)}
+  
 
 }

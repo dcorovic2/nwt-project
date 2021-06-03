@@ -1,4 +1,4 @@
-import { Input } from '@angular/core';
+import { EventEmitter, Input, Output } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ApiserviceService } from 'src/app/shared/services/apiservice.service';
@@ -10,7 +10,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 })
 export class RequestformComponent implements OnInit {
   isLoadingOne = false;
-
+  @Output() show = new EventEmitter<boolean>();
   public hide:boolean = true;
   public typeId: any;
   selectControl:FormControl = new FormControl()
@@ -23,15 +23,13 @@ export class RequestformComponent implements OnInit {
   constructor(private api: ApiserviceService, private message1: NzMessageService) { }
 
   hidePopUp(): void {
-    this.hide=!this.hide;
+    this.show.emit(false);
   }
   ngOnInit(): void {
     this.api.get('leaverequest/leavetypes').subscribe((data)=> this.types = data);
-    console.log(this.allowance);
   }
 
   createRequest(){
-    //resetovanje validacija
     this.isLoadingOne = true;
     this.option1Error = false;
     this.date1Error = false;
@@ -39,23 +37,19 @@ export class RequestformComponent implements OnInit {
     let num = (<HTMLInputElement>document.getElementById('num')).value;
     let start = (<HTMLInputElement>document.getElementById('start')).value;
     let comment = (<HTMLInputElement>document.getElementById('comment')).value;
-    
-    if(num == "") {
-      this.date1Error = true;
+    if(num == "") this.date1Error = true;
+    if(num > this.allowance) this.date2Error = true;
+    if(this.selectControl.value == null){
+      this.option1Error = true
+      this.isLoadingOne = false;
     }
-    if(num > this.allowance){
-      this.date2Error = true;
-    }
-    if(this.selectControl.value == null) {
-      this.option1Error = true;
-    } else {
-      this.api.post('leaverequest/request', {}, {comment:comment, daysNum: num, employeeId: this.id, startDate: start, typeId: this.selectControl.value})
-      .subscribe((data)=>{ 
+    else this.api.post('leaverequest/request', {}, 
+    {comment:comment, daysNum: num, employeeId: this.id, startDate: start, typeId: this.selectControl.value}).subscribe((data)=>{ 
         this.isLoadingOne = false; 
-        this.hide=false;
+        this.show.emit(false);
         this.message1.create('success', `You submitted request successfully!`);
       });
-    }
+    
   }
 
 }

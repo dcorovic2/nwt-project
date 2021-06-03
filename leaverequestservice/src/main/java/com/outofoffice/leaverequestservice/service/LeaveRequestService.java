@@ -214,7 +214,8 @@ public class LeaveRequestService {
 		LeaveStatus status = LeaveStatusService.getById(statusId);
 		requestList = leaveRequestRepository.getAllRequestsForStatus(status);
 		if (requestList.isEmpty()) {
-			throw new NoDataException();
+			new ResponseEntity<>(requestList, HttpStatus.OK);
+			//throw new NoDataException();
 		}
 		List<LeaveStatusResponse> response = new ArrayList<>();
 		requestList.forEach(request -> {
@@ -259,10 +260,10 @@ public class LeaveRequestService {
 		requests.forEach(request -> {
 			if(request.getLeave_type().getId() == 1 && request.getLeave_status().getId() == 2
 					&& request.getEndDate().isAfter(LocalDate.now())) {
-				types.setVacation(types.getVacation()+1);
+				types.setVacation(types.getVacation()+request.getDaysNum());
 			} else if (request.getLeave_type().getId() == 2 && request.getLeave_status().getId() == 2
 					&& request.getEndDate().isAfter(LocalDate.now())) {
-				types.setSick(types.getSick()+1);
+				types.setSick(types.getSick()+request.getDaysNum());
 			}
 		});
 		
