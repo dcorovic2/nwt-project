@@ -26,3 +26,8 @@ Run as Java application:
     - notification MS
     - holiday MS
 ```
+
+## Contributors
+<a href = "https://github.com/dcorovic2">
+  <img src = "https://contrib.rocks/image?repo = GitHub_username/repository_name"/>
+</a>
