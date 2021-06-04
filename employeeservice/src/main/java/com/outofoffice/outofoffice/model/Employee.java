@@ -1,27 +1,16 @@
 package com.outofoffice.outofoffice.model;
-
-import java.sql.Date;
 import java.time.OffsetDateTime;
-
 import javax.validation.constraints.Email;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-
 import org.hibernate.validator.constraints.Length;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -33,10 +22,8 @@ public class Employee {
     
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-//  @SequenceGenerator(name = "employee_seq_generator", sequenceName = "seq_employee", allocationSize = 1)
 	private Long id;
 	
-	//@Min(value=21, message="Allowance must be set to minimum 21 dayss")
 	@Column(name="allowance")
 	private Long allowance;
 	
@@ -62,7 +49,6 @@ public class Employee {
 	@Column(name="phone_number")
 	private String phoneNumber;
 
-   // @Min(value=0, message="Can't update remaining days to value less than 0")
 	@Column(name="remaining_days")
 	private Integer remainingDays;
 	
@@ -71,14 +57,12 @@ public class Employee {
 	
 	public Employee() {};
 	
-	@ManyToOne//(fetch = FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name = "department_id", referencedColumnName = "id")
 	private Department department;
 	
-	@ManyToOne//(fetch = FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name = "role_id", referencedColumnName = "id")
 	private Role role;
-	
-//	@OneToOne(mappedBy = "employee", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//	private Auth auth;
+
 }
