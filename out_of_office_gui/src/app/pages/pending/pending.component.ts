@@ -18,10 +18,7 @@ export class PendingComponent implements OnInit {
   constructor(private api: ApiserviceService, private message1: NzMessageService, private action: ActionService) {}
 
   ngOnInit(): void {
-    console.log(this.id);
-      this.api
-      .get('leaverequest/requests/employee', { employeeId: this.action.getId()})
-      .subscribe((data) => {this.requests = data; this.loading = false;});
+      this.api.get('leaverequest/requests/employee', { employeeId: this.action.getId()}).subscribe((data) => {this.requests = data; this.loading = false;});
   }
 
   reset(): void {

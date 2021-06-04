@@ -1,14 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { NzTableModule } from 'ng-zorro-antd/table';
-import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { ApiserviceService } from 'src/app/shared/services/apiservice.service';
 import { ActionService } from 'src/app/shared/services/action.service';
-
-interface DataItem {
-  name: string;
-  type: string;
-  dates: string;
-}
 
 @Component({
   selector: 'app-requestslist',
@@ -21,13 +13,15 @@ export class RequestslistComponent implements OnInit {
   searchValue = '';
   public loading = true;
   visible = false;
-  constructor(private api: ApiserviceService, private action: ActionService) {}
   public show: boolean = false;
   public popupData: any = {};
 
   public doSomething(): void {
     this.show = !this.show;
   }
+
+  constructor(private api: ApiserviceService, private action: ActionService) {}
+
   ngOnInit(): void {
     this.getRequests();
     this.action.set('getRequests', ()=>this.getRequests());
@@ -45,7 +39,6 @@ export class RequestslistComponent implements OnInit {
   
   changeShow(event:any){
       this.show = event;
-      console.log(this.show);
   }
 
   openPopup(request: any) {
