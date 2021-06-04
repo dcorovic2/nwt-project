@@ -11,7 +11,6 @@ import { AdminDashboardComponent } from './pages/dashboard/admin-dashboard/admin
 import { EmployeeDashboardComponent } from './pages/dashboard/employee-dashboard/employee-dashboard.component';
 import { ApiserviceService } from './shared/services/apiservice.service';
 import {AuthInterceptor}from './shared/services/authinterceptor';
-import {AuthService} from './shared/services/auth.service'
 import { ToastrModule } from 'ngx-toastr';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
@@ -115,7 +114,7 @@ registerLocaleData(fi);
     NzListModule,
     MatProgressSpinnerModule
   ],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },ApiserviceService,MatDatepickerModule, AuthService, { provide: NZ_I18N, useValue: fi_FI } 
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },ApiserviceService,MatDatepickerModule,{ provide: NZ_I18N, useValue: fi_FI } 
   ],
   bootstrap: [AppComponent]
 })
