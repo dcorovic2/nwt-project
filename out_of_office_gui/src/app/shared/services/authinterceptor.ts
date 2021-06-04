@@ -4,7 +4,7 @@ import { BehaviorSubject, throwError } from 'rxjs';
 
 import { Observable } from 'rxjs';
 
-import { AuthService } from './auth.service';
+
 import { catchError, filter, take, switchMap } from 'rxjs/operators';
 
 
@@ -12,7 +12,7 @@ import { catchError, filter, take, switchMap } from 'rxjs/operators';
 export class AuthInterceptor implements HttpInterceptor {
   private isRefreshing = false;
   private refreshTokenSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
-  constructor(private auth: AuthService)  {}   
+  constructor()  {}   
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
    // let token = this.auth.getToken();
     let token = localStorage.getItem('token');
