@@ -6,7 +6,7 @@ import { FormBuilder, FormGroup, Validators  } from '@angular/forms'
  
 import  jwt_decode from 'jwt-decode';
 import { JwtToken } from 'src/app/shared/interfaces/jwt-token';
-import { HttpClient, HttpErrorResponse, HttpParams, HttpRequest} from '@angular/common/http';
+import {HttpParams} from '@angular/common/http';
 
 
 @Component({ 
@@ -16,15 +16,6 @@ import { HttpClient, HttpErrorResponse, HttpParams, HttpRequest} from '@angular/
 
 export class LoginformComponent implements OnInit {
   isLoadingOne = false;
-
-  loadOne(): void {
-    this.isLoadingOne = true;
-    setTimeout(() => {
-      this.isLoadingOne = false;
-    }, 5000);
-  }
-
-
   validateForm: FormGroup;
   public  usernameError: boolean=false;
   public passwordError: boolean=false;
@@ -50,6 +41,13 @@ export class LoginformComponent implements OnInit {
     localStorage.setItem('role', token.auth[0].authority);
     localStorage.setItem('username', token.sub);});
   } 
+
+  loadOne(): void {
+    this.isLoadingOne = true;
+    setTimeout(() => {
+      this.isLoadingOne = false;
+    }, 5000);
+  }
 
   submitForm(): void {
     if (this.validateForm.valid) {

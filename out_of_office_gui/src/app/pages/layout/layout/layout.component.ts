@@ -21,10 +21,7 @@ export class LayoutComponent implements OnInit {
   public holidays:any = [];
   public leavehistory: any; 
 
-  ngOnInit(): void {
-    //let y : number = +localStorage.getItem('exp')!;
-    //console.log(new Date().getMilliseconds() < y);
-    //new Date().getTime() < y?true:this.refreshToken();  
+  ngOnInit(): void { 
     this.action.set('dismissNotification',(id:any)=>this.dismiss(id))
     this.action.set('changeview', ()=>{this.showDrawer=false;});
     this.action.set('getNotifications', ()=>{this.getNotifications()});
