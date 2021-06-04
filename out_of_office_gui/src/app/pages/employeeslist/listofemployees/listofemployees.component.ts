@@ -45,12 +45,14 @@ export class ListofemployeesComponent implements OnInit {
   public employeeId: any;
   public position: NzTablePaginationPosition | undefined;
   public paginationType: NzTablePaginationType | undefined;
+  searchValue = '';
+  visible = false;
+
 
   constructor(private route:Router, private api: ApiserviceService, private action: ActionService) { }
 
   fullPage(username:string): void {
     this.action.showDrawer(username);
-    //this.route.navigate(['layout/employeeview'], {queryParams:{username: username, id: id}});
   }
 
   ngOnInit(): void {
@@ -75,11 +77,9 @@ export class ListofemployeesComponent implements OnInit {
       });
 
   }
-public hide(event:any){
-  this.hideDelete=event;
-}
-  searchValue = '';
-  visible = false;
+    public hide(event:any){
+      this.hideDelete=event;
+    }
 
   reset(): void {
     this.searchValue = '';

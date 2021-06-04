@@ -22,78 +22,67 @@ export class HolidaytypelistComponent implements OnInit {
 
   constructor(private api: ApiserviceService, private message1: NzMessageService) {}
 
-  startEdit(id: string): void {
-    this.editCache[id].edit = true;
-  }
-
-  cancelEdit(id: string): void {
-    const index = this.listOfData.findIndex((item) => item.id === id);
-    this.editCache[id] = {
-      data: { ...this.listOfData[index] },
-      edit: false,
-    };
-  }
-
-  deleteHoliType(id: string): void {
-    const index = this.listOfData.findIndex((item) => item.id === id);
-    let tmp = this.editCache[id].data;
-
-    this.api
-      .delete('holiday/holidayType/' + tmp.id, {}, {})
-      .subscribe((data) => {
-        this.listOfData = this.listOfData.filter((d) => d.id !== id);
-        this.message1.create('success', `You deleted holiday type successfully!`);
-      });
-  }
-
-  saveEdit(id: string): void {
-    const index = this.listOfData.findIndex((item) => item.id === id);
-    Object.assign(this.listOfData[index], this.editCache[id].data);
-    let tmp = this.editCache[id].data;
-
-    this.api
-      .patch(
-        'holiday/holidayType/' + tmp.id,
-        {},
-        {
-          code: tmp.code,
-          displayName: tmp.text,
-          text: tmp.type,
-          type: tmp.displayName,
-        }
-      )
-      .subscribe((data) => {
-        this.editCache[id].edit = false;
-      });
-  }
-
-  updateEditCache(): void {
-    this.listOfData.forEach((item) => {
-      this.editCache[item.id] = {
-        edit: false,
-        data: { ...item },
-      };
-    });
-  }
 
   ngOnInit(): void {
-    this.api
-      .get('employee/employee/username', {
-        username: localStorage.getItem('username'),
-      })
-      .subscribe((data: any) => {
+    this.api.get('employee/employee/username', {username: localStorage.getItem('username')}).subscribe((data: any) => {
         Object.assign(this.user, {
           firstnameLastName: data.firstnameLastName,
           email: data.email,
           id: data.id,
-        });
-      });
+        })});
 
     this.api.get('holiday/listHolidayTypes', {}, {}).subscribe((dataa: any) => {
       this.listOfData = dataa;
       this.loading = false;
-      console.log(dataa);
       this.updateEditCache();
     });
   }
+
+      startEdit(id: string): void {
+        this.editCache[id].edit = true;
+      }
+
+      cancelEdit(id: string): void {
+        const index = this.listOfData.findIndex((item) => item.id === id);
+        this.editCache[id] = {
+          data: { ...this.listOfData[index] },
+          edit: false,
+        };
+      }
+
+      deleteHoliType(id: string): void {
+        const index = this.listOfData.findIndex((item) => item.id === id);
+        let tmp = this.editCache[id].data;
+
+        this.api
+          .delete('holiday/holidayType/' + tmp.id, {}, {})
+          .subscribe((data) => {
+            this.listOfData = this.listOfData.filter((d) => d.id !== id);
+            this.message1.create('success', `You deleted holiday type successfully!`);
+          });
+      }
+
+      saveEdit(id: string): void {
+        const index = this.listOfData.findIndex((item) => item.id === id);
+        Object.assign(this.listOfData[index], this.editCache[id].data);
+        let tmp = this.editCache[id].data;
+        this.api.patch('holiday/holidayType/' + tmp.id, {},
+            {
+              code: tmp.code,
+              displayName: tmp.text,
+              text: tmp.type,
+              type: tmp.displayName,
+            }
+          ).subscribe((data) => { this.editCache[id].edit = false; });
+      }
+
+      updateEditCache(): void {
+        this.listOfData.forEach((item) => {
+          this.editCache[item.id] = {
+            edit: false,
+            data: { ...item },
+          };
+        });
+      }
+
 }
