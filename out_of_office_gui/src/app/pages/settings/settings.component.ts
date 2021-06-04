@@ -10,16 +10,13 @@ import { identifierModuleUrl } from '@angular/compiler';
 })
 export class SettingsComponent implements OnInit {
   isLoadingOne = false;
+  validateForm: FormGroup;
   public settings = true;
   public user  = {id:"", firstnameLastName:"", email:""};
-
-
-  validateForm: FormGroup;
   public passwordError: boolean = false;
   public newpasswordError : boolean = false;
   public confirmnewpasswordError: boolean = false;
   public passwordchanged: boolean = false;
-
 
   constructor(
     private route: Router,
@@ -48,11 +45,7 @@ export class SettingsComponent implements OnInit {
     }, 5000);
   }
   ngOnInit(): void {
-    this.api
-      .get('employee/employee/username', {
-        username: localStorage.getItem('username'),
-      })
-      .subscribe((data: any) => {
+    this.api.get('employee/employee/username', {username: localStorage.getItem('username')}).subscribe((data: any) => {
         Object.assign(this.user, {
           firstnameLastName: data.firstnameLastName,
           email: data.email,
