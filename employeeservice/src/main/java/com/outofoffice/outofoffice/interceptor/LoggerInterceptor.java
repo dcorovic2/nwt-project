@@ -1,20 +1,14 @@
 package com.outofoffice.outofoffice.interceptor;
 import java.time.Instant;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.slf4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
-
 import com.google.protobuf.Timestamp;
-import static java.lang.System.currentTimeMillis;
-
 import java.sql.Date;
-
 import events.grpc.Events;
 import events.grpc.eventsGrpc;
 import io.grpc.ManagedChannel;

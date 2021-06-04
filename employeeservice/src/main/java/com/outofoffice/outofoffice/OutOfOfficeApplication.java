@@ -1,24 +1,12 @@
 package com.outofoffice.outofoffice;
 
-import org.hibernate.type.OffsetDateTimeType;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
-import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.Bean;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.datasource.init.ScriptException;
-import org.springframework.jdbc.datasource.init.ScriptUtils;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.web.filter.CorsFilter;
-
-import com.outofoffice.outofoffice.model.Auth;
 import com.outofoffice.outofoffice.model.Department;
 import com.outofoffice.outofoffice.model.Role;
 import com.outofoffice.outofoffice.repository.DepartmentRepository;
@@ -28,13 +16,6 @@ import com.outofoffice.outofoffice.requestobjects.LoginRequest;
 import com.outofoffice.outofoffice.service.EmployeeService;
 import com.outofoffice.outofoffice.service.LoginService;
 
-import events.grpc.Events;
-import events.grpc.eventsGrpc;
-import io.grpc.ManagedChannel;
-import io.grpc.ManagedChannelBuilder;
-import io.grpc.Metadata;
-
-import java.sql.SQLException;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -45,10 +26,6 @@ public class OutOfOfficeApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(OutOfOfficeApplication.class, args);
-
-
-	     //stub from proto file
-
 	}
 	@Bean
 	@LoadBalanced

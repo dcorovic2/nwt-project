@@ -29,7 +29,6 @@ public class RequestConsumer {
 				.orElseThrow(() -> new NotFoundException(id_string, "Employee", "id", ""));
 		try {
 			updated_employee.setAllowance(requestEmployee.getRestDays());
-			//updated_employee.setRemainingDays(requestEmployee.getRestDays());
 			employeeRepository.save(updated_employee);
 			System.out.println("Employee with ID " + requestEmployee.getEmployeeId() + " updated rest days: " + requestEmployee.getRestDays());
 		} catch (Exception e) {
