@@ -1,22 +1,15 @@
 package com.outofoffice.outofoffice.rest;
 
-import java.net.http.HttpResponse;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.validation.Valid;
-
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,13 +20,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.web.filter.CorsFilter;
-
 import com.outofoffice.outofoffice.configuration.RabbitConfiguration;
 import com.outofoffice.outofoffice.model.Employee;
-import com.outofoffice.outofoffice.requestobjects.AddedEmployee;
 import com.outofoffice.outofoffice.requestobjects.EmployeeDepartmentChange;
 import com.outofoffice.outofoffice.requestobjects.EmployeeRequest;
 import com.outofoffice.outofoffice.requestobjects.NewUser;
@@ -58,15 +46,6 @@ public class EmployeeController {
 		this.employeeService = employeeService;
 	}
 	
-
-//	@ApiOperation(value = "Insert multiple employees", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-//	@PostMapping(value = "/bulkEmployeeCreate")
-//	public ResponseEntity<List<Employee>> bulkInsert(@RequestBody List<EmployeeRequest> requestEmployees) {
-//		List<Employee> employees = employeeService.insertBulkEmployees(requestEmployees);
-//		return new ResponseEntity<List<Employee>>(employees, HttpStatus.CREATED);
-//
-//	}
-
 	@ApiOperation(value = "Insert one employee", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@PostMapping(value = "/employee")
 	public ResponseEntity<Employee> insertEmployee(@Valid @RequestBody EmployeeRequest requestEmployee) {

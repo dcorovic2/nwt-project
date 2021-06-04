@@ -1,10 +1,5 @@
 package com.outofoffice.outofoffice.requestobjects;
 
-import java.util.List;
-
-
-import io.swagger.annotations.ApiModelProperty;
-
 public class NewUser {
   
 	  private String username;
