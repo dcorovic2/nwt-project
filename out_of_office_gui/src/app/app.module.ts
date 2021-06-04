@@ -31,7 +31,7 @@ import { AddemployeeComponent } from './pages/addemployee/addemployee/addemploye
 import { RequestformComponent } from './components/requestform/requestform/requestform.component';
 import { ListofemployeesComponent } from './pages/employeeslist/listofemployees/listofemployees.component';
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
-import { fi_FI, en_US } from 'ng-zorro-antd/i18n';
+import { fi_FI} from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import fi from '@angular/common/locales/fi';
