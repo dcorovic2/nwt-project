@@ -9,11 +9,11 @@ export class NotificationpopupComponent implements OnInit {
   @Input()status: any;
   @Input() admin: any;
   @Output() show = new EventEmitter<boolean>();
+  public hide:boolean = true;
+
   constructor() { }
 
-  public hide:boolean = true;
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   hidePopUp(): void {
     this.show.emit(false);
