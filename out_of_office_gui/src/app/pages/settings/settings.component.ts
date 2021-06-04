@@ -40,9 +40,7 @@ export class SettingsComponent implements OnInit {
 
   loadOne(): void {
     this.isLoadingOne = true;
-    setTimeout(() => {
-      this.isLoadingOne = false;
-    }, 5000);
+    setTimeout(() => {this.isLoadingOne = false}, 5000);
   }
   ngOnInit(): void {
     this.api.get('employee/employee/username', {username: localStorage.getItem('username')}).subscribe((data: any) => {

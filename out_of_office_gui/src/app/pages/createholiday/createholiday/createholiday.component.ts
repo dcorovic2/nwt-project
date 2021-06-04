@@ -59,9 +59,7 @@ export class CreateholidayComponent implements OnInit {
       this.editCache[item.id] = {
         edit: false,
         data: { ...item }
-      };
-      console.log(item.holidayType.displayName);
-    });
+      }});
   }
 
   ngOnInit(): void {
@@ -71,7 +69,6 @@ export class CreateholidayComponent implements OnInit {
     this.api.get('holiday/getlistofholidays', {}, {}).subscribe((dataa: any) =>{
       this.listOfData = dataa;
       this.loading = false;
-      console.log(dataa);
       this.updateEditCache();
     });
   }

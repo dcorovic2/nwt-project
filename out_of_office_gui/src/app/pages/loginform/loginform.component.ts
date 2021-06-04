@@ -1,13 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-
 import { Router } from '@angular/router';
 import { ApiserviceService } from '../../shared/services/apiservice.service';
 import { FormBuilder, FormGroup, Validators  } from '@angular/forms'
- 
 import  jwt_decode from 'jwt-decode';
 import { JwtToken } from 'src/app/shared/interfaces/jwt-token';
 import {HttpParams} from '@angular/common/http';
-
 
 @Component({ 
   selector: 'app-loginform',
@@ -44,9 +41,7 @@ export class LoginformComponent implements OnInit {
 
   loadOne(): void {
     this.isLoadingOne = true;
-    setTimeout(() => {
-      this.isLoadingOne = false;
-    }, 5000);
+    setTimeout(() => {this.isLoadingOne = false}, 5000);
   }
 
   submitForm(): void {
@@ -54,8 +49,6 @@ export class LoginformComponent implements OnInit {
       let username = (<HTMLInputElement>document.getElementById('username')).value;
       let password = (<HTMLInputElement>document.getElementById('password')).value;
       let params: HttpParams = new HttpParams();
-      console.log(username);
-      console.log(password);
       params = params.append('username', username);
         this.api.post('users/signin', {username:username, password:password}).subscribe(data=>{
         localStorage.setItem('token', data);
@@ -70,8 +63,6 @@ export class LoginformComponent implements OnInit {
       if((<HTMLInputElement>document.getElementById('password')).value.length == 0) this.passwordError = true;
     }
   }
-      
-
 }
     
 
