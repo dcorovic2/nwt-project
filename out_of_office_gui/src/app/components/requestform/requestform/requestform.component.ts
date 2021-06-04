@@ -9,13 +9,13 @@ import { NzMessageService } from 'ng-zorro-antd/message';
   templateUrl: './requestform.component.html'
 })
 export class RequestformComponent implements OnInit {
-  isLoadingOne = false;
   @Output() show = new EventEmitter<boolean>();
-  public hide:boolean = true;
-  public typeId: any;
-  selectControl:FormControl = new FormControl()
   @Input() id: any;
   @Input() allowance: any;
+  isLoadingOne = false;
+  public hide:boolean = true;
+  public typeId: any;
+  selectControl:FormControl = new FormControl();
   public types: any;
   public option1Error: boolean = false;
   public date1Error: boolean = false;
@@ -49,7 +49,6 @@ export class RequestformComponent implements OnInit {
         this.show.emit(false);
         this.message1.create('success', `You submitted request successfully!`);
       });
-    
   }
 
 }
