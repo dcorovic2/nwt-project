@@ -75,7 +75,6 @@ export class CreateholidaytypeComponent implements OnInit {
           "type": displayname
         }
           this.api.post('holiday/holidayType', {}, {"code": code, "displayName": text, "text": type, "type": displayname}).subscribe(data=>{
-            console.log(data);
             this.newholiyday = true;
           });
       }

@@ -76,11 +76,9 @@ export class AdminDashboardComponent implements OnInit {
     let dateString = '02/05/2020';  
     let momentVariable = moment(dateString, 'MM-DD-YYYY');  
     let stringvalue = momentVariable.format('YYYY-MM-DD');   
-    console.log(typeof stringvalue); 
     this.employees = this.employees2.filter((item: any) => 
     (moment(item.startDate).isAfter(this.startDate)&&moment(this.endDate).isBefore(item.endDate))
     ||(moment(item.startDate).isSame(this.startDate)&&moment(this.endDate).isBefore(item.endDate))
     ||(moment(item.startDate).isAfter(this.startDate)&&moment(item.endDate).isSame(this.endDate)));
-    console.log(this.employees, this.employees2);
   }
 }

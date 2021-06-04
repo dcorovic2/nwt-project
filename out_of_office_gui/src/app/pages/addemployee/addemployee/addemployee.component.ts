@@ -34,8 +34,6 @@ export class AddemployeeComponent implements OnInit {
   }
   
   resetinputs(): void{
-    console.log(this.firstnameError);
-
     (<HTMLInputElement>document.getElementById('firstname')).value = "";
     (<HTMLInputElement>document.getElementById('jobrole')).value = "";
     (<HTMLInputElement>document.getElementById('tel')).value = "";

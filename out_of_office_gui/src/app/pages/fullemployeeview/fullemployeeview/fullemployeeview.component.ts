@@ -41,7 +41,7 @@ export class FullemployeeviewComponent implements OnInit {
     this.api.get('holiday/getlistofholidays', {}, {}).subscribe((dataa: any) =>{
       for(let i = 0; i < dataa.length; i++) {
         let emploteesList = dataa[i].employees;
-        for(let j = 0; j < emploteesList.length; j++) { console.log()
+        for(let j = 0; j < emploteesList.length; j++) {
           if(emploteesList[j].id == employeeId) {
             this.data.push({title: dataa[i].holidayType.displayName, type: dataa[i].holidayType.code});
           }
