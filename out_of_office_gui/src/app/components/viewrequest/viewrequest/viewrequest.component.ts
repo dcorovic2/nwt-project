@@ -23,9 +23,7 @@ export class ViewrequestComponent implements OnInit {
   hidePopUp(): void {
     this.isLoadingOne = true;
     let comment = (<HTMLInputElement>document.getElementById('comment')).value;
-    this.api.patch('leaverequest/request/'+this.popupData.requestId, {}, {notificationsId: 3, reason: comment, statusId:3})
-    .subscribe((data:any)=>
-    {
+    this.api.patch('leaverequest/request/'+this.popupData.requestId, {}, {notificationsId: 3, reason: comment, statusId:3}).subscribe((data:any)=>{
       this.isLoadingOne = false;
       this.hide=!this.hide;
       this.show.emit(false);
@@ -33,8 +31,7 @@ export class ViewrequestComponent implements OnInit {
       else {
        this.action.getRequests();
        this.action.getNotificationList()?this.action.dismissNotificationList(this.notif.find((notif:any)=> notif.requestId == this.popupData.requestId).id):this.action.dismissNotification(this.notif.find((notif:any)=> notif.requestId == this.popupData.requestId).id);
-      }
-    });
+      }});
   }
 
   emit(){

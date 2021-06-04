@@ -39,12 +39,6 @@ export class CreateholidaytypeComponent implements OnInit {
     (<HTMLInputElement>document.getElementById('displayname')).value = "";
     (<HTMLInputElement>document.getElementById('text')).value = "";
     (<HTMLInputElement>document.getElementById('type')).value = "";
-
-   // this.codeError = false;
-   // this.codeError2 = false;
-   // this.displayNameError = false;
-   // this.textError = false;
-   // this.typeError = false;
   }
 
   constructor(private route:Router, private api: ApiserviceService, private action: ActionService, private fb: FormBuilder) {
@@ -80,8 +74,6 @@ export class CreateholidaytypeComponent implements OnInit {
           "text": type,
           "type": displayname
         }
-
-        //pozivanje holiday type post apija
           this.api.post('holiday/holidayType', {}, {"code": code, "displayName": text, "text": type, "type": displayname}).subscribe(data=>{
             console.log(data);
             this.newholiyday = true;
