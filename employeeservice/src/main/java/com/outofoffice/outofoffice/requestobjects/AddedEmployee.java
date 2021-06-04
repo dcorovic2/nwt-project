@@ -1,10 +1,5 @@
 package com.outofoffice.outofoffice.requestobjects;
 
-import java.time.OffsetDateTime;
-
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
-
 public class AddedEmployee {
 
 	private Long id;

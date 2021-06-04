@@ -1,12 +1,8 @@
 package com.outofoffice.outofoffice.repository;
-
 import javax.persistence.EntityManager;
-
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.stereotype.Repository;
-
 import com.outofoffice.outofoffice.model.Department;
-import com.outofoffice.outofoffice.model.Employee;
 
 @Repository
 public class DepartmentRepository extends SimpleJpaRepository<Department, Long>{

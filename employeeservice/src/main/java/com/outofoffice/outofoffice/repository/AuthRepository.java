@@ -1,14 +1,9 @@
 package com.outofoffice.outofoffice.repository;
-
 import javax.persistence.EntityManager;
-
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.stereotype.Repository;
-
-import com.google.common.base.Optional;
 import com.outofoffice.outofoffice.errorhandling.NotFoundException;
 import com.outofoffice.outofoffice.model.Auth;
-import com.outofoffice.outofoffice.model.Employee;
 
 @Repository
 public class AuthRepository  extends SimpleJpaRepository<Auth, Long> {

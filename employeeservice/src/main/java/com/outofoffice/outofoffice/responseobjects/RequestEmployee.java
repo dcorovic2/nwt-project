@@ -1,7 +1,5 @@
 package com.outofoffice.outofoffice.responseobjects;
 
-
-
 public class RequestEmployee {
 	private Long employeeId;
 	private long restDays;
