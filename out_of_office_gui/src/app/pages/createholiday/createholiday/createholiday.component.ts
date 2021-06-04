@@ -38,7 +38,6 @@ export class CreateholidayComponent implements OnInit {
   deleteHoliType(id: string): void {
     const index = this.listOfData.findIndex(item => item.id === id);
     let tmp = this.editCache[id].data;
-
     this.api.delete('holiday/holiday/' + tmp.id, {}, {}).subscribe(data=>{
       this.listOfData = this.listOfData.filter(d => d.id !== id);
       this.message1.create('success', `You deleted holiday successfully!`);
@@ -49,7 +48,6 @@ export class CreateholidayComponent implements OnInit {
     const index = this.listOfData.findIndex(item => item.id === id);
     Object.assign(this.listOfData[index], this.editCache[id].data);
     let tmp = this.editCache[id].data;
-
     this.api.patch('holiday/holiday/' + tmp.id, {}, {"startDate": tmp.startDate, "endDate": tmp.endDate}).subscribe(data=>{
       this.editCache[id].edit = false;
       this.message1.create('success', `You edited holiday successfully!`);
@@ -70,7 +68,6 @@ export class CreateholidayComponent implements OnInit {
     this.api.get('employee/employee/username', {username: localStorage.getItem('username')}).subscribe((data:any)=>{
       Object.assign(this.user, {firstnameLastName:data.firstnameLastName, email: data.email, id:data.id});
      })
-     
     this.api.get('holiday/getlistofholidays', {}, {}).subscribe((dataa: any) =>{
       this.listOfData = dataa;
       this.loading = false;
