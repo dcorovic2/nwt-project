@@ -62,8 +62,7 @@ We have tried a lot of different potentional solutions, as follows:
 
 ## Demo video
 
-1. Link 1: https://drive.google.com/file/d/1kg5n_fRdQwxsGO4msPcS47x9w9TTTeHi/view?usp=sharing
-2. Link 2: 
+Link: https://drive.google.com/file/d/1R1PI3_cmBs6gUIL53H4soysgqGu8bR-R/view?usp=sharing
 
 ## Contributors
 - Dalila Ćorović
